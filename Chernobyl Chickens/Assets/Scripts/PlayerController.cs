@@ -2,13 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController : MonoBehaviour
+public class Movement : MonoBehaviour
 {
-    float playerNumber;
+
     private Rigidbody rb;
     private float dirX;
     public float mSpeed, jumpForce;
-    Vector3 respawnPoint;
     
     
     
@@ -17,7 +16,7 @@ public class PlayerController : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         mSpeed = 5f;
-        respawnPoint = transform.position;
+        //jumpForce = 20f;
         
     }
 
@@ -33,23 +32,13 @@ public class PlayerController : MonoBehaviour
             rb.AddForce(Vector3.up * jumpForce);
         }
 
-        
+        Debug.Log("velocity is " + rb.velocity);
 
     }
     private void FixedUpdate()
     {
         
     }
-     void OnTriggerEnter(Collider coll)
-    {
 
-
-        //Moves player back to position they started at if they hit a killbox.
-        if (coll.gameObject.tag == "KillBox")
-        {
-            transform.position = respawnPoint;
-            
-        }
-    }
 
 }

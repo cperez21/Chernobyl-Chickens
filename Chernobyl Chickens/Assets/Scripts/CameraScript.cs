@@ -7,6 +7,7 @@ public class CameraScript : MonoBehaviour
     GameObject[] players;
     Vector3 averageP, totalP;
     private float minX, minY, maxX, maxY;
+    public float x, y, w, h;
     Camera cam;
     
     
@@ -24,7 +25,7 @@ public class CameraScript : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         //Resets Total x and y values from calculating average
         totalP = Vector3.zero;
@@ -58,8 +59,7 @@ public class CameraScript : MonoBehaviour
 
         }
 
-        Debug.Log("minX is " + minX);
-        Debug.Log("maxX value is " + maxX);
+       
 
         //Grabs average of total x and y coordinates of players and assigns camera to the average position
         averageP.x = totalP.x / players.Length;
@@ -68,7 +68,7 @@ public class CameraScript : MonoBehaviour
         transform.position = averageP;
 
 
-        cam.rect = new Rect((minX + 5) / maxX, (maxY + 5) / maxY, minX - maxX, minY - maxY);
+       //cam.rect = new Rect(0,0,0,0);
         
             
              
