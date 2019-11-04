@@ -5,26 +5,40 @@ using UnityEngine.SceneManagement;
 
 public class MenuScript : MonoBehaviour
 {
-
-    SceneManager sceneM;
+    Scene currentScene;
+    
     
     
     
     // Start is called before the first frame update
     void Start()
     {
+        currentScene = SceneManager.GetActiveScene();
         
     }
 
     // Update is called once per frame
     void Update()
     {
-        
-    }
+        //Exits game by hitting Esc
+        if (Input.GetButtonDown("Exit"))
+        {
+            Application.Quit();
+        }
 
-public void LoadScene()
+        //Loads Main Menu
+        if (Input.GetButtonDown("MainMenu") && currentScene.name != "MenuScene")
+        {
+            //SceneManager.UnloadSceneAsync(currentScene);
+            SceneManager.LoadScene("MenuScene");
+            Debug.Log("Loaded scene");
+        }
+
+    }
+    
+public void LoadScene(string sceneName)
     {
-        SceneManager.LoadScene("levelwhitebox");
+        SceneManager.LoadScene(sceneName);
     }
 
 
