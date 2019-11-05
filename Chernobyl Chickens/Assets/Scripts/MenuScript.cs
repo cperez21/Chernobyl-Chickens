@@ -16,7 +16,7 @@ public class MenuScript : MonoBehaviour
     void Awake()
     {
         currentScene = SceneManager.GetActiveScene();
-        
+        //DontDestroyOnLoad(this.gameObject);
         
     }
 
@@ -25,7 +25,7 @@ public class MenuScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        timer += Time.deltaTime;
+        //timer += Time.deltaTime;
         
         //Exits game by hitting Esc
         if (Input.GetButtonDown("Exit"))
@@ -39,15 +39,28 @@ public class MenuScript : MonoBehaviour
         //Loads Main Menu
         if (Input.GetButtonDown("MainMenu") && currentScene.name != "MenuScene")
         {
-            objects = currentScene.GetRootGameObjects();
+
+
+
+           //timer += Time.deltaTime;
+            
+            
+            //Not currently being used, was used to move objects from staying in the background after loading new scene.
+           /* objects = currentScene.GetRootGameObjects();
             for(int x = 0; x < objects.Length; x++)
             {
-                objects[x].transform.position = Vector3.up * 1000;
+                Destroy(objects[x]);
             }
-
-            SceneManager.LoadSceneAsync("MenuScene",LoadSceneMode.Single);
-           
+            */
             
+            SceneManager.LoadSceneAsync("MenuScene", LoadSceneMode.Single);
+            SceneManager.UnloadSceneAsync(currentScene);
+
+
+
+
+
+
         }
        
     }
