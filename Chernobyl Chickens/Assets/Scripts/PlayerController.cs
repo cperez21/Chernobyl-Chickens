@@ -4,14 +4,23 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
-    float playerNumber;
+    public int playerNumber; //The GameManager script sets this value.
     private Rigidbody rb;
     private float dirX;
     public float moveSpeed, jumpForce;
-    public LayerMask groundLayer;
+    public int health = 100;
+    public bool haveControls; //Currently used for testing
+    public bool dead;
+    public LayerMask groundLayer; //needs to stay set to the ground layer.
     Vector3 respawnPoint;
     
-    
+    public enum PlayerState
+    {
+        DEFAULT,
+        DEAD
+    }
+
+    public PlayerState state;
     
     // Start is called before the first frame update
     void Start()
@@ -25,17 +34,38 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        dirX = Input.GetAxis("Horizontal") * moveSpeed;
-        //dirY = Input.GetAxis("Vertical");
-        rb.velocity = new Vector3(dirX, rb.velocity.y, 0);
 
-        if(Input.GetButton("Jump"))
+        if(health <= 0)
         {
-            Jump();
+            state = PlayerState.DEAD;
+        }
+
+
+        if (haveControls)
+        {
+            //controls for moving left and right
+            dirX = Input.GetAxis("Horizontal") * moveSpeed;
+            rb.velocity = new Vector3(dirX, rb.velocity.y, 0);
+
+            //Jump controls
+            if (Input.GetButtonDown("Jump"))
+            {
+                Jump();
+            }
+
         }
         
-        
-        //Debug.DrawRay(transform.position, Vector3.down, Color.blue, );
+        switch (state)
+        {
+            case PlayerState.DEFAULT:
+                
+            break;
+
+            case PlayerState.DEAD:
+                haveControls = false;
+                break;
+        }
+
 
     }
     private void FixedUpdate()
@@ -52,6 +82,9 @@ public class PlayerController : MonoBehaviour
             return;
     }
 
+   
+    
+    //tells if player is in the air or not. Used for preventing infinite jumps.
     bool isGrounded()
     {
         RaycastHit hit;
