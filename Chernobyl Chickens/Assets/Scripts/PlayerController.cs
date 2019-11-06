@@ -7,7 +7,8 @@ public class PlayerController : MonoBehaviour
     float playerNumber;
     private Rigidbody rb;
     private float dirX;
-    public float mSpeed, jumpForce;
+    public float moveSpeed, jumpForce;
+    public LayerMask groundLayer;
     Vector3 respawnPoint;
     
     
@@ -16,7 +17,7 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
-        mSpeed = 5f;
+        moveSpeed = 5f;
         respawnPoint = transform.position;
         
     }
@@ -24,23 +25,49 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        dirX = Input.GetAxis("Horizontal") * mSpeed;
+        dirX = Input.GetAxis("Horizontal") * moveSpeed;
         //dirY = Input.GetAxis("Vertical");
         rb.velocity = new Vector3(dirX, rb.velocity.y, 0);
 
-        if (Input.GetButtonDown("Jump"))
+        if(Input.GetButton("Jump"))
         {
-            rb.AddForce(Vector3.up * jumpForce);
+            Jump();
         }
-
         
+        
+        //Debug.DrawRay(transform.position, Vector3.down, Color.blue, );
 
     }
     private void FixedUpdate()
     {
         
     }
-     void OnTriggerEnter(Collider coll)
+
+    void Jump()
+    {
+
+        if (isGrounded())
+            rb.AddForce(Vector3.up * jumpForce);
+        else
+            return;
+    }
+
+    bool isGrounded()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 1.0f,groundLayer))
+        {
+            
+            return true;
+        }
+        else
+            return false;
+
+
+        
+    }
+
+    void OnTriggerEnter(Collider coll)
     {
 
 
