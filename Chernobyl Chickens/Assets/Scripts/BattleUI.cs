@@ -22,13 +22,14 @@ public class BattleUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         //for player1
-        player1 = GameObject.Find("Player1");
-        print("p1found");
+        player1 = GameObject.Find("Clunk");
+        //print(player1);
 
         //for player2
-        player2 = GameObject.Find("Player2");
-        print("p2found");
+        player2 = GameObject.Find("Legolas");
+        //print(player2);
         
     
         
@@ -47,7 +48,6 @@ public class BattleUI : MonoBehaviour
         currentHealth2 = player2.GetComponent<PlayerController>().health;
         healthText2.text = "Player 2 :" + currentHealth2.ToString();
 
-        print(currentHealth1);
 
         if(currentHealth1 <= 0) {
             dialoguepanel.SetActive(true);
