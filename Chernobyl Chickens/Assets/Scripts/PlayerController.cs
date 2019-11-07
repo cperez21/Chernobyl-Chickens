@@ -53,6 +53,13 @@ public class PlayerController : MonoBehaviour
                 Jump();
             }
 
+            //CEASAR ADDED FOR TESTING OF UI
+            if (Input.GetKeyDown(KeyCode.Space))
+            {
+                health -= 10;
+
+            }
+
         }
         
         switch (state)
