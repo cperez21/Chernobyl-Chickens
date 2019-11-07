@@ -52,6 +52,10 @@ public class BattleUI : MonoBehaviour
         if(currentHealth1 <= 0) {
             dialoguepanel.SetActive(true);
         }
+        else if(currentHealth2 <=0)
+        {
+            dialoguepanel.SetActive(true);
+        }
 
 
 

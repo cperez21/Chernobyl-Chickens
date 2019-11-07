@@ -18,9 +18,9 @@ public class PlayerController : MonoBehaviour
 
     //ceasar added for combat cooldown
     private float cooldown = 0;
-    private const float interval = 1f;
+    private const float interval = 0.5f;
     //used to knock back opponenet
-    public float knockBackForce = 1;
+    public float knockBackForce;
 
     public enum PlayerState
     {
@@ -39,7 +39,8 @@ public class PlayerController : MonoBehaviour
         moveSpeed = 5f;
         jumpForce = 50f;
         respawnPoint = transform.position;
-        
+        knockBackForce = 1;
+
     }
 
     // Update is called once per frame
@@ -165,7 +166,6 @@ public class PlayerController : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
 
-
         //Moves player back to position they started at if they hit a killbox.
         if (other.gameObject.tag == "KillBox")
         {
@@ -197,11 +197,10 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    //WIP - will knock back 
     public void KnockBack()
     {
-        print(knockBackForce);
-        //knockBackCounter = knockBackTime;
-        rb.AddForce(transform.forward * knockBackForce);
+        
 
     }
 
