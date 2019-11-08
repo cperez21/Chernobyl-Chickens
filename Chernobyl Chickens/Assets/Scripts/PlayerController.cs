@@ -10,6 +10,7 @@ public class PlayerController : MonoBehaviour
     public float moveSpeed, jumpForce;
     public int health = 100;
     public bool willHurt;
+    public bool isPlayer2; //currently used for 2 player only prototype
     public bool haveControls; //Currently used for testing
     public LayerMask groundLayer; //needs to stay set to the ground layer.
     Vector3 respawnPoint, moveVelocity;
@@ -21,6 +22,13 @@ public class PlayerController : MonoBehaviour
     private const float interval = 0.5f;
     //used to knock back opponenet
     public float knockBackForce;
+
+
+    //used to declare controls
+    private string HorizontalControl;
+    private string JumpControl;
+    private string StrikeControl;
+ 
 
     public enum PlayerState
     {
@@ -37,9 +45,25 @@ public class PlayerController : MonoBehaviour
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         moveSpeed = 5f;
-        jumpForce = 50f;
+        jumpForce = 0f;
         respawnPoint = transform.position;
         knockBackForce = 1;
+
+        if(isPlayer2)
+        {
+            HorizontalControl = "Horizontal_P2";
+            JumpControl = "Jump_P2";
+            StrikeControl = "Strike_P2";
+        }
+        else
+        {
+            HorizontalControl = "Horizontal_P1";
+            JumpControl = "Jump_P1";
+            StrikeControl = "Strike_P1";
+
+        }
+
+
 
     }
 
@@ -60,7 +84,7 @@ public class PlayerController : MonoBehaviour
         if (haveControls)
         {
             //controls for moving left and right
-            dirX = Input.GetAxis("Horizontal") * moveSpeed;
+            dirX = Input.GetAxis(HorizontalControl) * moveSpeed;
             Vector3 moveInput = new Vector3(dirX, 0, 0);
             moveVelocity = moveInput.normalized * moveSpeed;
             
@@ -83,7 +107,7 @@ public class PlayerController : MonoBehaviour
             
             
             //Jump controls
-            if (Input.GetButtonDown("Jump"))
+            if (Input.GetButtonDown(JumpControl))
             {
                 Jump();
             }
@@ -94,7 +118,7 @@ public class PlayerController : MonoBehaviour
                 health -= 10;
 
             }
-            if(Input.GetButtonDown("Strike")) 
+            if(Input.GetButtonDown(StrikeControl)) 
             //if (Input.GetKeyDown(KeyCode.X))
             {
                 anim.SetTrigger("Strike");
@@ -151,7 +175,7 @@ public class PlayerController : MonoBehaviour
     bool isGrounded()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, 10.0f,groundLayer))
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 0.7f,groundLayer))
         {
             
             return true;
@@ -188,6 +212,10 @@ public class PlayerController : MonoBehaviour
             cooldown = interval;
         }
     }
+
+
+   
+
 
     //damage function - edit later
     void TakeDamage()
