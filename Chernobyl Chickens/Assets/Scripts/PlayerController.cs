@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
     public int playerNumber; //The GameManager script sets this value.
     private Rigidbody rb;
     private float dirX;
+    private float dirZ;
     public float moveSpeed, jumpForce;
     public int health = 100;
     public bool willHurt;
@@ -26,6 +27,7 @@ public class PlayerController : MonoBehaviour
 
     //used to declare controls
     private string HorizontalControl;
+    private string VerticalControl;
     private string JumpControl;
     private string StrikeControl;
  
@@ -52,12 +54,14 @@ public class PlayerController : MonoBehaviour
         if(isPlayer2)
         {
             HorizontalControl = "Horizontal_P2";
+            VerticalControl = "Vertical_P2";
             JumpControl = "Jump_P2";
             StrikeControl = "Strike_P2";
         }
         else
         {
             HorizontalControl = "Horizontal_P1";
+            VerticalControl = "Vertical_P1";
             JumpControl = "Jump_P1";
             StrikeControl = "Strike_P1";
 
@@ -85,7 +89,8 @@ public class PlayerController : MonoBehaviour
         {
             //controls for moving left and right
             dirX = Input.GetAxis(HorizontalControl) * moveSpeed;
-            Vector3 moveInput = new Vector3(dirX, 0, 0);
+            dirZ = Input.GetAxis(VerticalControl) * moveSpeed;
+            Vector3 moveInput = new Vector3(dirX, 0, dirZ);
             moveVelocity = moveInput.normalized * moveSpeed;
             
             //sets to walk animation when moving
