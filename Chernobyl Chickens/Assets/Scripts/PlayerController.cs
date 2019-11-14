@@ -11,7 +11,7 @@ public class PlayerController : MonoBehaviour
     Vector3 moveInput;
     public float moveSpeed, jumpForce;
     public int health = 100;
-    public bool willHurt;
+    //public bool willHurt;
     public bool isPlayer2; //currently used for 2 player only prototype
     public bool haveControls; //Currently used for testing
     public LayerMask groundLayer; //needs to stay set to the ground layer.
@@ -40,6 +40,7 @@ public class PlayerController : MonoBehaviour
     {
         DEFAULT,
         STRIKE,
+        HURT,
         DEAD
     }
 
@@ -119,7 +120,7 @@ public class PlayerController : MonoBehaviour
             }
         }
     
-        //CEASAR MOVED THIS FROM UNDER PlayerState.Strike, it was causing willHurt to not switch repeatedly.
+       /* //CEASAR MOVED THIS FROM UNDER PlayerState.Strike, it was causing willHurt to not switch repeatedly.
         if (anim.GetCurrentAnimatorStateInfo(0).IsName("Strike"))
         {
             willHurt = true;
@@ -129,7 +130,7 @@ public class PlayerController : MonoBehaviour
            // state = PlayerState.DEFAULT;
             willHurt = false;
         }
-
+*/
         //state switch system
         switch (state)
         {
@@ -172,6 +173,11 @@ public class PlayerController : MonoBehaviour
               
                
                 break;
+            case PlayerState.HURT:
+                
+                Debug.Log("I hit a hurtbox ouch");
+                state = PlayerState.DEFAULT;
+                break;
             case PlayerState.DEAD:
                 haveControls = false;
                 break;
@@ -205,7 +211,7 @@ public class PlayerController : MonoBehaviour
     bool isGrounded()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, 0.7f,groundLayer))
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 1f,groundLayer))
         {
             
             return true;
@@ -217,9 +223,11 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    void OnTriggerEnter(Collider other)
+    void OnCollisionStay(Collision other)
     {
-
+        PlayerController enemy = other.gameObject.GetComponent<PlayerController>();
+        Collider hurtBox = enemy.transform.GetChild(2).GetComponent<BoxCollider>();
+        
         //Moves player back to position they started at if they hit a killbox.
         if (other.gameObject.tag == "KillBox")
         {
@@ -228,14 +236,33 @@ public class PlayerController : MonoBehaviour
         }
         if(other.gameObject.tag == "HurtBox")
         {
-            health -= 10;
+           
+            Vector3 dir = other.GetContact(0).point - transform.position;
+            dir = -dir.normalized;
+            rb.AddForce(dir * enemy.knockBackForce);
+            
+
+
+
         }
     }
 
     //used currently for damaging enemy
-    void OnTriggerStay(Collider other)
+    void OnTriggerEnter(Collider other)
     {
-        //checks if player is punching(willhurt - true), checks if cooldown is in effect, if not, deals damage and resets cooldown
+        PlayerController enemy = other.gameObject.GetComponent<PlayerController>();
+        if (other.gameObject.tag == "HurtBox")
+        {
+            Debug.Log("lmao this worked Im a collider");
+            TakeDamage(10);
+            state = PlayerState.HURT;
+        }
+        
+
+
+
+
+        /* //checks if player is punching(willhurt - true), checks if cooldown is in effect, if not, deals damage and resets cooldown
         if (other.gameObject.tag == "Player" && willHurt == true)
         {
             if (cooldown > 0)
@@ -244,17 +271,16 @@ public class PlayerController : MonoBehaviour
             other.gameObject.GetComponent<PlayerController>().KnockBack();
             cooldown = interval;
         }
+    */
     }
     
 
-   
-
 
     //damage function - edit later
-    void TakeDamage()
+    void TakeDamage(int damage)
     {
         print("damagesent");
-        health -= 10;
+        health -= damage;
 
     }
 
