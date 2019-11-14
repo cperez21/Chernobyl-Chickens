@@ -8,6 +8,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rb;
     private float dirX;
     private float dirZ;
+    Vector3 moveInput;
     public float moveSpeed, jumpForce;
     public int health = 100;
     public bool willHurt;
@@ -17,12 +18,15 @@ public class PlayerController : MonoBehaviour
     Vector3 respawnPoint, moveVelocity;
     Animator anim;
     private float animTimer = 0.0f;
+    
 
     //ceasar added for combat cooldown
     private float cooldown = 0;
     private const float interval = 0.5f;
     //used to knock back opponenet
     public float knockBackForce;
+    public int strikePower;
+    private BoxCollider attackBox;
 
 
     //used to declare controls
@@ -44,14 +48,16 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        state = PlayerState.DEFAULT;
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
         moveSpeed = 5f;
         jumpForce = 0f;
         respawnPoint = transform.position;
         knockBackForce = 1;
+         attackBox = transform.GetChild(2).GetComponent<BoxCollider>();
 
-        if(isPlayer2)
+        if (isPlayer2)
         {
             HorizontalControl = "Horizontal_P2";
             VerticalControl = "Vertical_P2";
@@ -90,35 +96,13 @@ public class PlayerController : MonoBehaviour
             //controls for moving left and right
             dirX = Input.GetAxis(HorizontalControl) * moveSpeed;
             dirZ = Input.GetAxis(VerticalControl) * moveSpeed;
-            Vector3 moveInput = new Vector3(dirX, 0, dirZ);
+             moveInput = new Vector3(dirX, 0, dirZ);
             moveVelocity = moveInput.normalized * moveSpeed;
             
-            //sets to walk animation when moving
-            if(moveInput != Vector3.zero)
-            {
-                rb.MovePosition(rb.position + moveVelocity * Time.deltaTime);
-                rb.rotation = Quaternion.LookRotation(moveInput);
-
-                anim.SetTrigger("Walk");
-                anim.ResetTrigger("Idle");
-            }
-            //else sets to idle
-            else
-            {
-                rb.velocity = Vector3.zero;
-                anim.SetTrigger("Idle");
-                anim.ResetTrigger("Walk");
-            }
-            
-            
-            //Jump controls
-            if (Input.GetButtonDown(JumpControl))
-            {
-                Jump();
-            }
+           
 
             //CEASAR ADDED FOR TESTING OF UI
-            if (Input.GetKeyDown(KeyCode.H)) //Changed to different key
+            if (Input.GetKeyDown(KeyCode.H)) 
             {
                 health -= 10;
 
@@ -126,8 +110,12 @@ public class PlayerController : MonoBehaviour
             if(Input.GetButtonDown(StrikeControl)) 
             //if (Input.GetKeyDown(KeyCode.X))
             {
+                
                 anim.SetTrigger("Strike");
                 state = PlayerState.STRIKE;
+
+
+
             }
         }
     
@@ -138,7 +126,7 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
-            state = PlayerState.DEFAULT;
+           // state = PlayerState.DEFAULT;
             willHurt = false;
         }
 
@@ -146,11 +134,43 @@ public class PlayerController : MonoBehaviour
         switch (state)
         {
             case PlayerState.DEFAULT:
-                
-            break;
+
+                //sets to walk animation when moving
+                if (moveInput != Vector3.zero)
+                {
+                    rb.MovePosition(rb.position + moveVelocity * Time.deltaTime);
+                    rb.rotation = Quaternion.LookRotation(moveInput);
+
+                    anim.SetTrigger("Walk");
+                    anim.ResetTrigger("Idle");
+                }
+                //else sets to idle
+                else
+                {
+                    rb.velocity = Vector3.zero;
+                    anim.SetTrigger("Idle");
+                    anim.ResetTrigger("Walk");
+                }
+
+
+                //Jump controls
+                if (Input.GetButtonDown(JumpControl))
+                {
+                    Jump();
+                }
+
+                break;
 
             case PlayerState.STRIKE:
                 
+                if(attackBox.enabled == true)
+                {
+                    state = PlayerState.DEFAULT;
+                    anim.ResetTrigger("Strike");
+                    attackBox.enabled = false;
+                }
+              
+               
                 break;
             case PlayerState.DEAD:
                 haveControls = false;
@@ -173,7 +193,12 @@ public class PlayerController : MonoBehaviour
         else
             return;
     }
+    void Strike() //This is an animation event from Clunk's 'Punch' animation.
+    {
+        attackBox.enabled = true; //This is the 'HurtTransforms' box collider.
+        
 
+    }
    
     
     //tells if player is in the air or not. Used for preventing infinite jumps.
@@ -201,7 +226,10 @@ public class PlayerController : MonoBehaviour
             transform.position = respawnPoint;
 
         }
-
+        if(other.gameObject.tag == "HurtBox")
+        {
+            health -= 10;
+        }
     }
 
     //used currently for damaging enemy
@@ -217,7 +245,7 @@ public class PlayerController : MonoBehaviour
             cooldown = interval;
         }
     }
-
+    
 
    
 
