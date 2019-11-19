@@ -6,6 +6,8 @@ public class PlayerController : MonoBehaviour
 {
     public int playerNumber; //The GameManager script sets this value.
     private Rigidbody rb;
+    public float animBlend;
+    private float timer;
     private float dirX;
     private float dirZ;
     Vector3 moveInput;
@@ -24,8 +26,8 @@ public class PlayerController : MonoBehaviour
     private float cooldown = 0;
     private const float interval = 0.5f;
     //used to knock back opponenet
-    public float knockBackForce;
-    public int strikePower;
+    public float strikeForce;
+    public int strikeDamage;
     private BoxCollider attackBox;
 
 
@@ -55,7 +57,7 @@ public class PlayerController : MonoBehaviour
         moveSpeed = 5f;
         jumpForce = 0f;
         respawnPoint = transform.position;
-        knockBackForce = 1;
+        strikeForce = 1;
          attackBox = transform.GetChild(2).GetComponent<BoxCollider>();
 
         if (isPlayer2)
@@ -84,6 +86,16 @@ public class PlayerController : MonoBehaviour
         //combat cooldown. Referenced in OntriggerStay
         cooldown -= Time.deltaTime;
 
+        timer += Time.deltaTime;
+
+        if(timer >= animBlend)
+        {
+            timer = 0f;
+            //anim.enabled = !anim.enabled;
+        }
+      
+        
+        
         
         //when health is 0, set playerstate to DEAD
         if(health <= 0)
@@ -99,9 +111,35 @@ public class PlayerController : MonoBehaviour
             dirZ = Input.GetAxis(VerticalControl) * moveSpeed;
              moveInput = new Vector3(dirX, 0, dirZ);
             moveVelocity = moveInput.normalized * moveSpeed;
-            
-           
 
+            //sets to walk animation when moving
+            if (moveInput != Vector3.zero)
+            {
+                rb.MovePosition(rb.position + moveVelocity * Time.deltaTime);
+                rb.rotation = Quaternion.LookRotation(moveInput);
+
+                anim.SetTrigger("Walk");
+                anim.ResetTrigger("Idle");
+            }
+            //else sets to idle
+            else
+            {
+                rb.velocity = Vector3.zero;
+                anim.SetTrigger("Idle");
+                anim.ResetTrigger("Walk");
+            }
+
+
+            //Jump controls
+            if (Input.GetButtonDown(JumpControl))
+            {
+                Jump();
+            }
+
+            if(Input.GetKeyDown(KeyCode.R))
+            {
+                ReOrient();
+            }
             //CEASAR ADDED FOR TESTING OF UI
             if (Input.GetKeyDown(KeyCode.H)) 
             {
@@ -136,29 +174,7 @@ public class PlayerController : MonoBehaviour
         {
             case PlayerState.DEFAULT:
 
-                //sets to walk animation when moving
-                if (moveInput != Vector3.zero)
-                {
-                    rb.MovePosition(rb.position + moveVelocity * Time.deltaTime);
-                    rb.rotation = Quaternion.LookRotation(moveInput);
-
-                    anim.SetTrigger("Walk");
-                    anim.ResetTrigger("Idle");
-                }
-                //else sets to idle
-                else
-                {
-                    rb.velocity = Vector3.zero;
-                    anim.SetTrigger("Idle");
-                    anim.ResetTrigger("Walk");
-                }
-
-
-                //Jump controls
-                if (Input.GetButtonDown(JumpControl))
-                {
-                    Jump();
-                }
+              
 
                 break;
 
@@ -225,8 +241,7 @@ public class PlayerController : MonoBehaviour
 
     void OnCollisionStay(Collision other)
     {
-        PlayerController enemy = other.gameObject.GetComponent<PlayerController>();
-        Collider hurtBox = enemy.transform.GetChild(2).GetComponent<BoxCollider>();
+       
         
         //Moves player back to position they started at if they hit a killbox.
         if (other.gameObject.tag == "KillBox")
@@ -234,27 +249,24 @@ public class PlayerController : MonoBehaviour
             transform.position = respawnPoint;
 
         }
-        if(other.gameObject.tag == "HurtBox")
-        {
-           
-            Vector3 dir = other.GetContact(0).point - transform.position;
-            dir = -dir.normalized;
-            rb.AddForce(dir * enemy.knockBackForce);
-            
-
-
-
-        }
+        
     }
 
     //used currently for damaging enemy
     void OnTriggerEnter(Collider other)
     {
         PlayerController enemy = other.gameObject.GetComponent<PlayerController>();
+        Collider enemyHurtBox = enemy.transform.GetChild(2).GetComponent<BoxCollider>();
+        
         if (other.gameObject.tag == "HurtBox")
         {
-            Debug.Log("lmao this worked Im a collider");
-            TakeDamage(10);
+            Debug.Log("hurtbox hit me");
+            Vector3 dir = enemyHurtBox.transform.position - transform.position;
+            dir = -dir.normalized;
+            rb.AddForce(dir * enemy.strikeForce);
+
+
+            TakeDamage(enemy.strikeDamage);
             state = PlayerState.HURT;
         }
         
@@ -282,6 +294,12 @@ public class PlayerController : MonoBehaviour
         print("damagesent");
         health -= damage;
 
+    }
+
+    void ReOrient()//Resets player rotation if capsized
+    {
+        transform.rotation = Quaternion.LookRotation(Vector3.zero);
+       
     }
 
     //WIP - will knock back 
