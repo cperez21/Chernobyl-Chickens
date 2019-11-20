@@ -62,26 +62,26 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\AF_SFIK\AnimFollow\Scripts\CameraScripts\CameraMovement_AF.cs" />
-    <Compile Include="Assets\AF_SFIK\AnimFollow\Scripts\CameraScripts\CameraMovement1_AF.cs" />
-    <Compile Include="Assets\AF_SFIK\AnimFollow\Scripts\CameraScripts\ToggleSlomo_AF.cs" />
-    <Compile Include="Assets\AF_SFIK\AnimFollow\Scripts\MasterScripts\HashIDs_AF.cs" />
-    <Compile Include="Assets\AF_SFIK\AnimFollow\Scripts\MasterScripts\PlayerMovement_AF.cs" />
-    <Compile Include="Assets\AF_SFIK\AnimFollow\Scripts\RagdollScripts\AnimFollow_AF.cs" />
-    <Compile Include="Assets\AF_SFIK\AnimFollow\Scripts\RagdollScripts\Limb_AF.cs" />
-    <Compile Include="Assets\AF_SFIK\AnimFollow\Scripts\RagdollScripts\RagdollControl_AF.cs" />
-    <Compile Include="Assets\AF_SFIK\AnimFollow\Scripts\RagdollScripts\ReplaceJoints_AF.cs" />
-    <Compile Include="Assets\AF_SFIK\AnimFollow\Scripts\RagdollScripts\ResizeProfiles_AF.cs" />
-    <Compile Include="Assets\AF_SFIK\AnimFollow\Scripts\SimpleFootIKScripts_AF\IK_PositionFeet_AF.cs" />
-    <Compile Include="Assets\AF_SFIK\AnimFollow\Scripts\SimpleFootIKScripts_AF\IK_Properties_AF.cs" />
-    <Compile Include="Assets\AF_SFIK\AnimFollow\Scripts\SimpleFootIKScripts_AF\IK_Setup_AF.cs" />
-    <Compile Include="Assets\AF_SFIK\AnimFollow\Scripts\SimpleFootIKScripts_AF\IK_ShootRays_AF.cs" />
-    <Compile Include="Assets\AF_SFIK\AnimFollow\Scripts\SimpleFootIKScripts_AF\SimpleFootIK_AF.cs" />
-    <Compile Include="Assets\AF_SFIK\AnimFollow\Scripts\TestScripts\BallTest_AF.cs" />
-    <Compile Include="Assets\AF_SFIK\AnimFollow\Scripts\TestScripts\BoxHitByBullet_AF.cs" />
-    <Compile Include="Assets\AF_SFIK\AnimFollow\Scripts\TestScripts\BulletHitInfo_AF.cs" />
-    <Compile Include="Assets\AF_SFIK\AnimFollow\Scripts\TestScripts\ragdollHitByBullet_AF.cs" />
-    <Compile Include="Assets\AF_SFIK\AnimFollow\Scripts\TestScripts\ShootStuff_AF.cs" />
+    <Compile Include="Assets\AnimFollow\Scripts\CameraScripts\CameraMovement_AF.cs" />
+    <Compile Include="Assets\AnimFollow\Scripts\CameraScripts\CameraMovement1_AF.cs" />
+    <Compile Include="Assets\AnimFollow\Scripts\CameraScripts\ToggleSlomo_AF.cs" />
+    <Compile Include="Assets\AnimFollow\Scripts\MasterScripts\HashIDs_AF.cs" />
+    <Compile Include="Assets\AnimFollow\Scripts\MasterScripts\PlayerMovement_AF.cs" />
+    <Compile Include="Assets\AnimFollow\Scripts\RagdollScripts\AnimFollow_AF.cs" />
+    <Compile Include="Assets\AnimFollow\Scripts\RagdollScripts\Limb_AF.cs" />
+    <Compile Include="Assets\AnimFollow\Scripts\RagdollScripts\RagdollControl_AF.cs" />
+    <Compile Include="Assets\AnimFollow\Scripts\RagdollScripts\ReplaceJoints_AF.cs" />
+    <Compile Include="Assets\AnimFollow\Scripts\RagdollScripts\ResizeProfiles_AF.cs" />
+    <Compile Include="Assets\AnimFollow\Scripts\SimpleFootIKScripts_AF\IK_PositionFeet_AF.cs" />
+    <Compile Include="Assets\AnimFollow\Scripts\SimpleFootIKScripts_AF\IK_Properties_AF.cs" />
+    <Compile Include="Assets\AnimFollow\Scripts\SimpleFootIKScripts_AF\IK_Setup_AF.cs" />
+    <Compile Include="Assets\AnimFollow\Scripts\SimpleFootIKScripts_AF\IK_ShootRays_AF.cs" />
+    <Compile Include="Assets\AnimFollow\Scripts\SimpleFootIKScripts_AF\SimpleFootIK_AF.cs" />
+    <Compile Include="Assets\AnimFollow\Scripts\TestScripts\BallTest_AF.cs" />
+    <Compile Include="Assets\AnimFollow\Scripts\TestScripts\BoxHitByBullet_AF.cs" />
+    <Compile Include="Assets\AnimFollow\Scripts\TestScripts\BulletHitInfo_AF.cs" />
+    <Compile Include="Assets\AnimFollow\Scripts\TestScripts\ragdollHitByBullet_AF.cs" />
+    <Compile Include="Assets\AnimFollow\Scripts\TestScripts\ShootStuff_AF.cs" />
     <Compile Include="Assets\Scripts\BattleUI.cs" />
     <Compile Include="Assets\Scripts\CameraScript.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
@@ -101,6 +101,9 @@
     <Reference Include="Unity.VSCode.Editor">
       <HintPath>C:/Users/Gail/Documents/GMU/Chernobyl Chickens/Chernobyl Chickens/Library/ScriptAssemblies/Unity.VSCode.Editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.ProBuilder.AssetIdRemapUtility">
+      <HintPath>C:/Users/Gail/Documents/GMU/Chernobyl Chickens/Chernobyl Chickens/Library/ScriptAssemblies/Unity.ProBuilder.AssetIdRemapUtility.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.TextMeshPro.Editor">
       <HintPath>C:/Users/Gail/Documents/GMU/Chernobyl Chickens/Chernobyl Chickens/Library/ScriptAssemblies/Unity.TextMeshPro.Editor.dll</HintPath>
     </Reference>
@@ -119,17 +122,14 @@
     <Reference Include="com.unity.cinemachine.editor">
       <HintPath>C:/Users/Gail/Documents/GMU/Chernobyl Chickens/Chernobyl Chickens/Library/ScriptAssemblies/com.unity.cinemachine.editor.dll</HintPath>
     </Reference>
+    <Reference Include="Unity.ProBuilder.AddOns.Editor">
+      <HintPath>C:/Users/Gail/Documents/GMU/Chernobyl Chickens/Chernobyl Chickens/Library/ScriptAssemblies/Unity.ProBuilder.AddOns.Editor.dll</HintPath>
+    </Reference>
     <Reference Include="Unity.TextMeshPro">
       <HintPath>C:/Users/Gail/Documents/GMU/Chernobyl Chickens/Chernobyl Chickens/Library/ScriptAssemblies/Unity.TextMeshPro.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>C:/Users/Gail/Documents/GMU/Chernobyl Chickens/Chernobyl Chickens/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.ProBuilder.AssetIdRemapUtility">
-      <HintPath>C:/Users/Gail/Documents/GMU/Chernobyl Chickens/Chernobyl Chickens/Library/ScriptAssemblies/Unity.ProBuilder.AssetIdRemapUtility.dll</HintPath>
-    </Reference>
-    <Reference Include="Unity.ProBuilder.AddOns.Editor">
-      <HintPath>C:/Users/Gail/Documents/GMU/Chernobyl Chickens/Chernobyl Chickens/Library/ScriptAssemblies/Unity.ProBuilder.AddOns.Editor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.AIModule">
       <HintPath>C:/Program Files/Unity2017/Editor/Data/Managed/UnityEngine/UnityEngine.AIModule.dll</HintPath>
