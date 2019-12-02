@@ -1348,7 +1348,6 @@ GameObject:
   - component: {fileID: 222653096898826268}
   - component: {fileID: 1825422239450055372}
   - component: {fileID: 1825422239450055373}
-  - component: {fileID: 1537511763142276402}
   m_Layer: 0
   m_Name: Bip001 L Hand
   m_TagString: Untagged
@@ -1399,41 +1398,6 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.025
   m_Center: {x: -0.02, y: 0.007, z: 0}
---- !u!59 &1537511763142276402
-HingeJoint:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6197301699926696954}
-  m_ConnectedBody: {fileID: 5716210135856770196}
-  m_Anchor: {x: 0, y: 0, z: 0}
-  m_Axis: {x: 0, y: 0, z: -1}
-  m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.07565588, y: 0, z: -0.000000028320796}
-  m_UseSpring: 0
-  m_Spring:
-    spring: 0
-    damper: 0
-    targetPosition: 0
-  m_UseMotor: 0
-  m_Motor:
-    targetVelocity: 0
-    force: 0
-    freeSpin: 0
-  m_UseLimits: 1
-  m_Limits:
-    min: -178.02423
-    max: -80.35822
-    bounciness: 0
-    bounceMinVelocity: 0.2
-    contactDistance: 0
-  m_BreakForce: Infinity
-  m_BreakTorque: Infinity
-  m_EnableCollision: 0
-  m_EnablePreprocessing: 1
-  m_MassScale: 1
-  m_ConnectedMassScale: 1
 --- !u!1 &6312271437151706013
 GameObject:
   m_ObjectHideFlags: 0
