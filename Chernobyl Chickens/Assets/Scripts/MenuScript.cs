@@ -71,6 +71,11 @@ public void LoadScene(string sceneName)
     }
 
 
-
+public void QuitGame()
+    {
+        Application.Quit();
+    }
 
 }
+
+
