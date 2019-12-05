@@ -6,7 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public int playerNumber; //The GameManager script sets this value.
     private Rigidbody rb;
-    public float animBlend;
+    
     private float timer;
     private float dirX;
     private float dirZ;
@@ -46,7 +46,7 @@ public class PlayerController : MonoBehaviour
         DEAD
     }
 
-    public PlayerState state;
+     public PlayerState state;
     
     // Start is called before the first frame update
     void Start()
@@ -58,10 +58,11 @@ public class PlayerController : MonoBehaviour
         jumpForce = 0f;
         respawnPoint = transform.position;
         strikeForce = 1;
-         attackBox = transform.GetChild(2).GetComponent<BoxCollider>();
+         //attackBox = transform.GetChild(2).GetComponent<BoxCollider>();
 
         if (isPlayer2)
         {
+            Debug.Log("Player Controls are set to Player2");
             HorizontalControl = "Horizontal_P2";
             VerticalControl = "Vertical_P2";
             JumpControl = "Jump_P2";
@@ -69,6 +70,8 @@ public class PlayerController : MonoBehaviour
         }
         else
         {
+            Debug.Log("Player Controls are set to Player1");
+
             HorizontalControl = "Horizontal_P1";
             VerticalControl = "Vertical_P1";
             JumpControl = "Jump_P1";
@@ -76,7 +79,7 @@ public class PlayerController : MonoBehaviour
 
         }
 
-
+        
 
     }
 
@@ -88,11 +91,7 @@ public class PlayerController : MonoBehaviour
 
         timer += Time.deltaTime;
 
-        if(timer >= animBlend)
-        {
-            timer = 0f;
-            //anim.enabled = !anim.enabled;
-        }
+       
       
         
         
@@ -107,9 +106,9 @@ public class PlayerController : MonoBehaviour
         if (haveControls)
         {
             //controls for moving left and right
-            dirX = Input.GetAxis(HorizontalControl) * moveSpeed;
-            dirZ = Input.GetAxis(VerticalControl) * moveSpeed;
-             moveInput = new Vector3(dirX, 0, dirZ);
+            dirX = Input.GetAxisRaw(HorizontalControl) * moveSpeed;
+            dirZ = Input.GetAxisRaw(VerticalControl) * moveSpeed;
+             moveInput = new Vector3(dirX, rb.velocity.y, dirZ);
             moveVelocity = moveInput.normalized * moveSpeed;
 
             //sets to walk animation when moving
@@ -174,7 +173,7 @@ public class PlayerController : MonoBehaviour
         {
             case PlayerState.DEFAULT:
 
-              
+                Debug.Log("help im stuck in default");
 
                 break;
 
@@ -255,7 +254,7 @@ public class PlayerController : MonoBehaviour
     //used currently for damaging enemy
     void OnTriggerEnter(Collider other)
     {
-        PlayerController enemy = other.gameObject.GetComponent<PlayerController>();
+      /*  PlayerController enemy = other.gameObject.GetComponent<PlayerController>();
         Collider enemyHurtBox = enemy.transform.GetChild(2).GetComponent<BoxCollider>();
         
         if (other.gameObject.tag == "HurtBox")
@@ -268,8 +267,9 @@ public class PlayerController : MonoBehaviour
 
             TakeDamage(enemy.strikeDamage);
             state = PlayerState.HURT;
-        }
         
+        }
+        */
 
 
 
