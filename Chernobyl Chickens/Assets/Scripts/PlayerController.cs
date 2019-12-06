@@ -6,6 +6,7 @@ public class PlayerController : MonoBehaviour
 {
     public int playerNumber; //The GameManager script sets this value.
     private Rigidbody rb;
+    public ParticleSystem particles;
     
     private float timer;
     private float dirX;
@@ -54,6 +55,7 @@ public class PlayerController : MonoBehaviour
         state = PlayerState.DEFAULT;
         rb = GetComponent<Rigidbody>();
         anim = GetComponent<Animator>();
+       // particles = GetComponent<ParticleSystem>();
         moveSpeed = 5f;
         jumpForce = 0f;
         respawnPoint = transform.position;
@@ -108,7 +110,7 @@ public class PlayerController : MonoBehaviour
             //controls for moving left and right
             dirX = Input.GetAxisRaw(HorizontalControl) * moveSpeed;
             dirZ = Input.GetAxisRaw(VerticalControl) * moveSpeed;
-             moveInput = new Vector3(dirX, rb.velocity.y, dirZ);
+             moveInput = new Vector3(dirX, 0, dirZ);
             moveVelocity = moveInput.normalized * moveSpeed;
 
             //sets to walk animation when moving
@@ -148,8 +150,12 @@ public class PlayerController : MonoBehaviour
             if(Input.GetButtonDown(StrikeControl)) 
             //if (Input.GetKeyDown(KeyCode.X))
             {
-                
+
+
                 anim.SetTrigger("Strike");
+
+                Instantiate(particles);
+                
                 state = PlayerState.STRIKE;
 
 
@@ -179,11 +185,12 @@ public class PlayerController : MonoBehaviour
 
             case PlayerState.STRIKE:
                 
-                if(attackBox.enabled == true)
+                if (attackBox.enabled == true)
                 {
                     state = PlayerState.DEFAULT;
                     anim.ResetTrigger("Strike");
                     attackBox.enabled = false;
+                   
                 }
               
                
@@ -243,9 +250,11 @@ public class PlayerController : MonoBehaviour
        
         
         //Moves player back to position they started at if they hit a killbox.
-        if (other.gameObject.tag == "KillBox")
+        if (other.gameObject.tag == "Player")
         {
-            transform.position = respawnPoint;
+            
+
+            
 
         }
         
@@ -254,7 +263,15 @@ public class PlayerController : MonoBehaviour
     //used currently for damaging enemy
     void OnTriggerEnter(Collider other)
     {
-      /*  PlayerController enemy = other.gameObject.GetComponent<PlayerController>();
+      if(other.gameObject.tag == "HurtBox")
+        {
+             
+            //particles.Play();
+        }
+        
+        
+        
+        /*  PlayerController enemy = other.gameObject.GetComponent<PlayerController>();
         Collider enemyHurtBox = enemy.transform.GetChild(2).GetComponent<BoxCollider>();
         
         if (other.gameObject.tag == "HurtBox")
@@ -298,7 +315,7 @@ public class PlayerController : MonoBehaviour
 
     void ReOrient()//Resets player rotation if capsized
     {
-        transform.rotation = Quaternion.LookRotation(Vector3.zero);
+        //transform.rotation = Quaternion.LookRotation(Vector3.zero);
        
     }
 

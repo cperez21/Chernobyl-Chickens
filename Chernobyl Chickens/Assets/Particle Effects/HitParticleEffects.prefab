@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6686794505555052133}
   - component: {fileID: 2061951961561115936}
   m_Layer: 0
-  m_Name: Feather On Hit Particle Effects
+  m_Name: HitParticleEffects
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -46,7 +46,7 @@ ParticleSystem:
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
-  looping: 1
+  looping: 0
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -4708,7 +4708,7 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 99e175af341d3e44590d1e9efda8ce4d, type: 2}
+  - {fileID: 2100000, guid: 0fede261efff5f6438f25657d164e38e, type: 2}
   - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
