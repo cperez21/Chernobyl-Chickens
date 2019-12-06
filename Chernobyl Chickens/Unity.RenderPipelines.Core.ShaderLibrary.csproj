@@ -5,9 +5,9 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{6E2AEC81-8B40-973A-8381-AA153A2DFB86}</ProjectGuid>
+    <ProjectGuid>{21FE3B2C-E13B-425A-BFBA-789779C1B460}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <AssemblyName>Unity.ProBuilder.dll</AssemblyName>
+    <AssemblyName>Unity.RenderPipelines.Core.ShaderLibrary.dll</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
@@ -642,14 +642,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Unity.ProBuilder.Poly2Tri.csproj">
-      <Project>{C2040568-B8B1-C506-5297-5109C597CE5F}</Project>
-      <Name>Unity.ProBuilder.Poly2Tri</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.ProBuilder.KdTree.csproj">
-      <Project>{3C96D0E2-F773-5E1F-6AD6-254290CC2294}</Project>
-      <Name>Unity.ProBuilder.KdTree</Name>
-    </ProjectReference>
     <ProjectReference Include="UnityEditor.UI.csproj">
       <Project>{3BB3FA27-B9AA-7EC6-4E7C-EE51EC3271F7}</Project>
       <Name>UnityEditor.UI</Name>
@@ -660,105 +652,7 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\ActionResult.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\ArrayUtility.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\AssemblyInfo.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\AutoUnwrapSettings.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\BezierPoint.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\BezierShape.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\Bounds2D.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\BuiltinMaterials.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\Changelog.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\Clipping.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\ColliderBehaviour.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\ColorPalette.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\ColorUtility.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\Edge.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\EdgeLookup.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\EdgeUtility.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\Entity.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\EntityBehaviour.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\Face.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\FaceRebuildData.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\HandleConstraint2D.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\HandleOrientation.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\HandleUtility.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\IHasDefault.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\InternalUtility.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\IntVec2.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\IntVec3.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\IntVec4.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\Log.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\MaterialUtility.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\Math.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\MeshHandle.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\MeshHandles.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\MeshUtility.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\Normal.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\Normals.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\ObjectPool.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\PivotPoint.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\PolyShape.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\PreferenceDictionary.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\PreferenceKeys.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\ProBuilderEnum.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\ProBuilderMesh.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\ProBuilderMeshFunction.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\ProBuilderMeshSelection.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\ProGridsIgnoreSnap.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\Projection.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\RaycastHit.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\SelectionModifierBehaviour.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\SelectionPicker.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\SelectionPickerRenderer.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\SelectionPickerSettings.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\SemVer.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\ShapeGenerator.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\SharedVertex.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\Shortcut.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\SimpleTuple.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\Smoothing.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\Snapping.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\Spline.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\Submesh.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\Transform2D.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\TransformUtility.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\TriggerBehaviour.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\UnwrapParameters.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\VectorHash.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\VectorMask.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\Version.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\Vertex.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\VertexPositioning.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\WingedEdge.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\Core\WingedEdgeEnumerator.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\MeshOperations\AppendElements.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\MeshOperations\AssemblyInfo.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\MeshOperations\Bevel.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\MeshOperations\CombineMeshes.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\MeshOperations\ConnectElements.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\MeshOperations\CSG\Classes\CSG_Model.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\MeshOperations\CSG\Classes\CSG_Node.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\MeshOperations\CSG\Classes\CSG_Plane.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\MeshOperations\CSG\Classes\CSG_Polygon.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\MeshOperations\CSG\Classes\CSG_Vertex.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\MeshOperations\CSG\Classes\CSG_VertexUtility.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\MeshOperations\CSG\CSG.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\MeshOperations\DeleteElements.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\MeshOperations\ElementSelection.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\MeshOperations\ExtrudeElements.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\MeshOperations\InternalMeshUtility.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\MeshOperations\MergeElements.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\MeshOperations\MeshImporter.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\MeshOperations\MeshTransform.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\MeshOperations\Subdivision.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\MeshOperations\SurfaceTopology.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\MeshOperations\Triangulation.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\MeshOperations\UV\AutoUvConversion.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\MeshOperations\UV\TextureStitching.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\MeshOperations\UV\UVEditing.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\MeshOperations\UV\UvUnwrapping.cs" />
-    <Compile Include="Packages\com.unity.probuilder\Runtime\MeshOperations\VertexEditing.cs" />
+    <Compile Include="Packages\com.unity.render-pipelines.core\ShaderLibrary\DummyShaderLibrary.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\LowPolyWater_Pack\LowPoly Island\Credits.txt" />
