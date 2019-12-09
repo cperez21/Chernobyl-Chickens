@@ -5,7 +5,7 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public int playerNumber; //The GameManager script sets this value.
-    private Rigidbody rb;
+    
     public ParticleSystem particles;
     
     private float timer;
@@ -21,7 +21,11 @@ public class PlayerController : MonoBehaviour
     Vector3 respawnPoint, moveVelocity;
     Animator anim;
     private float animTimer = 0.0f;
-    
+
+    public GameObject puppetMaster;
+    Rigidbody[] pmRigidbodies;
+    int pmNumChildren;
+
 
     //ceasar added for combat cooldown
     private float cooldown = 0;
@@ -53,7 +57,11 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         state = PlayerState.DEFAULT;
-        rb = GetComponent<Rigidbody>();
+
+        pmNumChildren = puppetMaster.GetComponent<Transform>().childCount;
+        //pmRigidbodies[].GetComponentInChildren<Rigidbody>();
+        
+       
         anim = GetComponent<Animator>();
        // particles = GetComponent<ParticleSystem>();
         moveSpeed = 5f;
@@ -116,16 +124,18 @@ public class PlayerController : MonoBehaviour
             //sets to walk animation when moving
             if (moveInput != Vector3.zero)
             {
-                rb.MovePosition(rb.position + moveVelocity * Time.deltaTime);
-                rb.rotation = Quaternion.LookRotation(moveInput);
-
+                for (int x = 0; x < pmNumChildren; x++)
+                {
+                    pmRigidbodies[x].MovePosition(pmRigidbodies[x].position + moveVelocity * Time.deltaTime);
+                    pmRigidbodies[x].rotation = Quaternion.LookRotation(moveInput);
+                }
                 anim.SetTrigger("Walk");
                 anim.ResetTrigger("Idle");
             }
             //else sets to idle
             else
             {
-                rb.velocity = Vector3.zero;
+                //pmRigidbodies[x].velocity = Vector3.zero;
                 anim.SetTrigger("Idle");
                 anim.ResetTrigger("Walk");
             }
@@ -217,7 +227,8 @@ public class PlayerController : MonoBehaviour
     {
 
         if (isGrounded())
-            rb.AddForce(Vector3.up * jumpForce);
+            //pmRigidbodies[x].AddForce(Vector3.up * jumpForce);
+            return;
         else
             return;
     }
