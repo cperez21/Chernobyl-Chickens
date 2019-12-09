@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Grass_Toon
+  m_Name: Green_Crate_Toon
   m_Shader: {fileID: -6465566751694194690, guid: be49884f79da68949a592e5177cbde5e,
     type: 3}
   m_ShaderKeywords: 
@@ -21,7 +21,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_8D3A4557:
-        m_Texture: {fileID: 2800000, guid: 488253ec23fafa445b60e5b0fe5f0a04, type: 3}
+        m_Texture: {fileID: 2800000, guid: 6405139beec15fe45a71509c395d189a, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
@@ -54,7 +54,7 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Floats:
     - Vector1_6FCEF1D2: 0
-    - Vector1_9AB3F732: 0
+    - Vector1_9AB3F732: 0.005
     - Vector1_C2EF274F: 0
     - Vector1_D5BDD1E3: 0
     - _AlphaClip: 0
@@ -85,7 +85,7 @@ Material:
     - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
---- !u!114 &8082525564465357264
+--- !u!114 &5316405075225525013
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
