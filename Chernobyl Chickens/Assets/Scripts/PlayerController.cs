@@ -13,7 +13,9 @@ public class PlayerController : MonoBehaviour
     private float timer;
     private float dirX;
     private float dirZ;
+    public bool canJump = false;
     Vector3 moveInput;
+    Vector3 startOrientation;
     public float moveSpeed, jumpForce;
     public int health = 100; //Health set to be between 0.0 and 1.0 because of puppet master settings. -cullen
     private float healthF = 1.0f;
@@ -39,7 +41,20 @@ public class PlayerController : MonoBehaviour
     private string VerticalControl;
     private string JumpControl;
     private string StrikeControl;
- 
+
+    IEnumerator Stunned()
+    {
+        Debug.Log("Stunned");
+        haveControls = false;
+        puppet.state = RootMotion.Dynamics.PuppetMaster.State.Dead;
+       
+        yield return new WaitForSeconds(1.5f);
+        // Quaternion.LookRotation(startOrientation);
+        
+        puppet.state = RootMotion.Dynamics.PuppetMaster.State.Alive;
+        transform.GetChild(0).transform.position.Set(puppet.gameObject.transform.position.x, transform.position.y, puppet.gameObject.transform.position.z); //bip 001
+        haveControls = true;
+    }
 
     public enum PlayerState
     {
@@ -54,6 +69,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        startOrientation = transform.rotation.eulerAngles;
         state = PlayerState.DEFAULT;
         rb = gameObject.GetComponent<Rigidbody>();
         puppet = transform.parent.GetChild(1).GetComponent<RootMotion.Dynamics.PuppetMaster>(); //Good god
@@ -61,7 +77,7 @@ public class PlayerController : MonoBehaviour
         //rbPuppet = transform.parent.GetChild(1).GetComponentsInChildren<Rigidbody>(); //rbPuppet[7] is the head.
         anim = GetComponent<Animator>();
         moveSpeed = 5f;
-        jumpForce = 0f;
+        
         respawnPoint = transform.position;
         strikeForce = 1;
          //attackBox = transform.GetChild(2).GetComponent<BoxCollider>();
@@ -98,7 +114,7 @@ public class PlayerController : MonoBehaviour
         timer += Time.deltaTime;
 
         DamageCheck();
-        puppet.pinWeight = healthF;
+        //puppet.pinWeight = healthF;
       
         
         
@@ -140,7 +156,9 @@ public class PlayerController : MonoBehaviour
             //Jump controls
             if (Input.GetButtonDown(JumpControl))
             {
+                Debug.Log("hullo someone hit the jump key");
                 Jump();
+                
             }
 
             if(Input.GetKeyDown(KeyCode.R))
@@ -208,23 +226,23 @@ public class PlayerController : MonoBehaviour
                 break;
             case PlayerState.DEAD:
                 haveControls = false;
+                puppet.state = RootMotion.Dynamics.PuppetMaster.State.Dead;
                 break;
         }
 
 
 
     }
-    private void FixedUpdate()
-    {
-        
-    }
+   
 
     void Jump()
     {
 
-        if (isGrounded())
-            //rb.AddForce(Vector3.up * jumpForce);
-            return;
+        if (canJump == true)
+        { 
+            Debug.Log("Attemped to jump");
+            rb.AddForce(Vector3.up * jumpForce);
+         }  
         else
             return;
     }
@@ -240,7 +258,7 @@ public class PlayerController : MonoBehaviour
     bool isGrounded()
     {
         RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, 1f,groundLayer))
+        if (Physics.Raycast(transform.position, Vector3.down, out hit, 2f,groundLayer))
         {
             
             return true;
@@ -252,7 +270,7 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    void OnCollisionEnter(Collision other)
+    void OnCollisionStay(Collision other)
     {
        
        if(other.relativeVelocity.magnitude > 0.1f)
@@ -261,14 +279,16 @@ public class PlayerController : MonoBehaviour
             //feathers.transform.position = other.GetContact(0).point;
             //feathers.Play();
             
-           
-
         }
-      
-        
+        if (other.gameObject.tag == "Environment")
+        {
+            canJump = true;
+        }
+        else
+            canJump = false;
         
     }
-
+    
     //used currently for damaging enemy
     void OnTriggerEnter(Collider other)
     {
@@ -326,7 +346,11 @@ public class PlayerController : MonoBehaviour
                 Debug.Log(limbs[x].name + " Damage Check found a hit");
                 feathers.transform.position = limbs[x].transform.position;
                 feathers.Play();
-                healthF -= limbs[x].totalNormalizedDamage;
+                health -= (int)limbs[x].totalNormalizedDamage;
+                if(limbs[x].magnitude > 10.0f)
+                {
+                    StartCoroutine(Stunned());
+                }
                 limbs[x].gotHit = false;
             }
         }

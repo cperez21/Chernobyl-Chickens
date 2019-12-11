@@ -12,6 +12,7 @@ public class LimbDamage : MonoBehaviour
    // public Vector3 impulseVectorNormalized;
    // public float totalImpulseAverage;
     public float magnitude = 0f;
+    public float magnitudeThreshold = 1f; //How much velocity the collision will have to actually take damage.
     public float totalDamage = 0f;
     public float totalNormalizedDamage = 0f;
     
@@ -22,19 +23,22 @@ public class LimbDamage : MonoBehaviour
 
         if (bodyPart.Contains("Head"))
         {
-            baseDamage = 50f;
+            baseDamage = 5f;
+            magnitudeThreshold = 2.0f;
         }
         else if(bodyPart.Contains("arm"))
         {
-            baseDamage = 10f;
+            baseDamage = 1f;
+            magnitudeThreshold = 8.0f;
         }
        else if(bodyPart.Contains("Thigh") || bodyPart.Contains("Calf"))
         {
-            baseDamage = 10f;
+            baseDamage = 1f;
         }
         else if(bodyPart.Contains("Pelvis"))
         {
-            baseDamage = 25;
+            baseDamage = 2.5f;
+            magnitudeThreshold = 5.0f;
         }
        else
         {
@@ -52,14 +56,15 @@ public class LimbDamage : MonoBehaviour
         //impulseVector = collision.impulse;
         //totalImpulseAverage = (impulseVector.x + impulseVector.y + impulseVector.z) / 3f; //+ impulseVector.y + impulseVector.z;
         magnitude = collision.relativeVelocity.magnitude;
-        if(magnitude < 4.0)
+
+        if (magnitude <= magnitudeThreshold)
         {
             magnitude = 0.0f;
         }
-        totalDamage = baseDamage * magnitude;
-        totalNormalizedDamage = (totalDamage / 2000);
-
-        if (totalNormalizedDamage >= 0.01)
+            totalDamage = baseDamage * magnitude;
+        totalNormalizedDamage = (totalDamage / 20);
+        
+        if (totalNormalizedDamage >= 1f)
         {
             gotHit = true;
            

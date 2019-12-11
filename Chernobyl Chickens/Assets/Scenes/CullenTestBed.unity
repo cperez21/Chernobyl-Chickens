@@ -135,7 +135,7 @@ GameObject:
   - component: {fileID: 273106902}
   m_Layer: 0
   m_Name: Cube
-  m_TagString: Untagged
+  m_TagString: Environment
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -556,7 +556,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh19840
+  m_Name: pb_Mesh19902
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -834,7 +834,39 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 134061374, guid: 5bbb1e4823d665343b74ac4a35057041, type: 3}
+      propertyPath: jumpForce
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006650426331425160, guid: 5bbb1e4823d665343b74ac4a35057041,
+        type: 3}
+      propertyPath: muscleWeight
+      value: 0.912
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006650426331425160, guid: 5bbb1e4823d665343b74ac4a35057041,
+        type: 3}
+      propertyPath: pinWeight
+      value: 0.928
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006650426331425160, guid: 5bbb1e4823d665343b74ac4a35057041,
+        type: 3}
+      propertyPath: mappingWeight
+      value: 0.928
+      objectReference: {fileID: 0}
+    - target: {fileID: 4006650426331425160, guid: 5bbb1e4823d665343b74ac4a35057041,
+        type: 3}
+      propertyPath: muscleSpring
+      value: 50
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 492299460, guid: 5bbb1e4823d665343b74ac4a35057041, type: 3}
+    - {fileID: 345298784, guid: 5bbb1e4823d665343b74ac4a35057041, type: 3}
+    - {fileID: 1196193864, guid: 5bbb1e4823d665343b74ac4a35057041, type: 3}
+    - {fileID: 345956088, guid: 5bbb1e4823d665343b74ac4a35057041, type: 3}
+    - {fileID: 1529026870, guid: 5bbb1e4823d665343b74ac4a35057041, type: 3}
+    - {fileID: 1389464610, guid: 5bbb1e4823d665343b74ac4a35057041, type: 3}
+    - {fileID: 1678787450, guid: 5bbb1e4823d665343b74ac4a35057041, type: 3}
+    - {fileID: 1595137385, guid: 5bbb1e4823d665343b74ac4a35057041, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5bbb1e4823d665343b74ac4a35057041, type: 3}
 --- !u!1 &705507993
 GameObject:
@@ -909,7 +941,7 @@ Light:
   m_BounceIntensity: 1
   m_ColorTemperature: 6570
   m_UseColorTemperature: 0
-  m_BoundingSphereOverride: {x: 4.627e-42, y: 6e-44, z: 0, w: 4e-45}
+  m_BoundingSphereOverride: {x: 0.0390625, y: 0.1015625, z: 0.02734375, w: -0.03125}
   m_UseBoundingSphereOverride: 0
   m_ShadowRadius: 0
   m_ShadowAngle: 0
@@ -1716,5 +1748,13 @@ PrefabInstance:
       propertyPath: playerNumber
       value: 2
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    - target: {fileID: 134061374, guid: 5bbb1e4823d665343b74ac4a35057041, type: 3}
+      propertyPath: jumpForce
+      value: 150
+      objectReference: {fileID: 0}
+    m_RemovedComponents:
+    - {fileID: 345298784, guid: 5bbb1e4823d665343b74ac4a35057041, type: 3}
+    - {fileID: 492299460, guid: 5bbb1e4823d665343b74ac4a35057041, type: 3}
+    - {fileID: 1196193864, guid: 5bbb1e4823d665343b74ac4a35057041, type: 3}
+    - {fileID: 345956088, guid: 5bbb1e4823d665343b74ac4a35057041, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 5bbb1e4823d665343b74ac4a35057041, type: 3}
