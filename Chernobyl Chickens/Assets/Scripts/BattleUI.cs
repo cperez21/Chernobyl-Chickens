@@ -18,13 +18,14 @@ public class BattleUI : MonoBehaviour
     public GameObject player2;
     public Text healthText2;
 
-    //WIN/LOSEdialogue
-    //public GameObject dialoguepanel;
+    //winmenu
+    public GameObject winMenu;
 
 
     //pausemenu variables
     public static bool GamePaused = false;
     public GameObject pauseMenu;
+    public GameObject uiBoxes;
 
     // Start is called before the first frame update
     void Start()
@@ -47,24 +48,25 @@ public class BattleUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //for player1 *********************************************************UNCOMMMENT LATER
+        //for player1 
         currentHealth1 = player1.GetComponent<PlayerController>().health;
-        healthText1.text = "Player 1 :" + currentHealth1.ToString();
+        healthText1.text = "Clunk :" + currentHealth1.ToString();
 
-        //for player2 *********************************************************UNCOMMMENT LATER
+        //for player2 
         currentHealth2 = player2.GetComponent<PlayerController>().health;
-        healthText2.text = "Player 2 :" + currentHealth2.ToString();
+        healthText2.text = "Legolas:" + currentHealth2.ToString();
 
+        //winMenu logic - when someone dies it shows
+        if (currentHealth1 <= 0)
+        {
+            winMenu.SetActive(true);
+        }
+        else if (currentHealth2 <= 0)
+        {
+            winMenu.SetActive(true);
+        }
 
-        //if(currentHealth1 <= 0) {
-        //    dialoguepanel.SetActive(true);
-        //}
-        //else if(currentHealth2 <=0)
-        //{
-        //    dialoguepanel.SetActive(true);
-        //}
-
-        //pause menu logic
+        //pause menu logic - COMPLETE
         if (Input.GetKeyDown(KeyCode.Escape))
         {
             //Debug.Log("read");
@@ -81,11 +83,19 @@ public class BattleUI : MonoBehaviour
         }
 
 
+        //TESTING ZONE BELOW
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            Debug.Log("pow");
+            pow();
+        }
+
     }
 
     public void Resume()
     {
         pauseMenu.SetActive(false);
+        uiBoxes.SetActive(true);
         Time.timeScale = 1f;
         GamePaused = false;
     }
@@ -93,8 +103,16 @@ public class BattleUI : MonoBehaviour
     public void Pause()
     {
         pauseMenu.SetActive(true);
+        uiBoxes.SetActive(false);
         Time.timeScale = 0f;
         GamePaused = true;
+    }
+
+    //for testing
+    public void pow()
+    {
+        player2.GetComponent<PlayerController>().health -= 10;
+        Debug.Log(currentHealth2);
     }
 
 }
