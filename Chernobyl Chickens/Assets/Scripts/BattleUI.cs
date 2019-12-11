@@ -48,12 +48,12 @@ public class BattleUI : MonoBehaviour
     void Update()
     {
         //for player1 *********************************************************UNCOMMMENT LATER
-        //currentHealth1 = player1.GetComponent<PlayerController>().health;
-        //healthText1.text = "Player 1 :" + currentHealth1.ToString();
+        currentHealth1 = player1.GetComponent<PlayerController>().health;
+        healthText1.text = "Player 1 :" + currentHealth1.ToString();
 
         //for player2 *********************************************************UNCOMMMENT LATER
-        //currentHealth2 = player2.GetComponent<PlayerController>().health;
-        //healthText2.text = "Player 2 :" + currentHealth2.ToString();
+        currentHealth2 = player2.GetComponent<PlayerController>().health;
+        healthText2.text = "Player 2 :" + currentHealth2.ToString();
 
 
         //if(currentHealth1 <= 0) {
