@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class BattleUI : MonoBehaviour
 {
+    //NOTE - make sure event manager has input for horizontal and vertical crap present
+
+
     //creates variables for Player1
     public int currentHealth1;
     public GameObject player1;
@@ -16,8 +19,12 @@ public class BattleUI : MonoBehaviour
     public Text healthText2;
 
     //WIN/LOSEdialogue
-    public GameObject dialoguepanel;
+    //public GameObject dialoguepanel;
 
+
+    //pausemenu variables
+    public static bool GamePaused = false;
+    public GameObject pauseMenu;
 
     // Start is called before the first frame update
     void Start()
@@ -40,26 +47,54 @@ public class BattleUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //for player1
-        currentHealth1 = player1.GetComponent<PlayerController>().health;
-        healthText1.text = "Player 1 :" + currentHealth1.ToString();
+        //for player1 *********************************************************UNCOMMMENT LATER
+        //currentHealth1 = player1.GetComponent<PlayerController>().health;
+        //healthText1.text = "Player 1 :" + currentHealth1.ToString();
 
-        //for player2
-        currentHealth2 = player2.GetComponent<PlayerController>().health;
-        healthText2.text = "Player 2 :" + currentHealth2.ToString();
+        //for player2 *********************************************************UNCOMMMENT LATER
+        //currentHealth2 = player2.GetComponent<PlayerController>().health;
+        //healthText2.text = "Player 2 :" + currentHealth2.ToString();
 
 
-        if(currentHealth1 <= 0) {
-            dialoguepanel.SetActive(true);
-        }
-        else if(currentHealth2 <=0)
+        //if(currentHealth1 <= 0) {
+        //    dialoguepanel.SetActive(true);
+        //}
+        //else if(currentHealth2 <=0)
+        //{
+        //    dialoguepanel.SetActive(true);
+        //}
+
+        //pause menu logic
+        if (Input.GetKeyDown(KeyCode.Escape))
         {
-            dialoguepanel.SetActive(true);
+            //Debug.Log("read");
+            if (GamePaused)
+            {
+                //Debug.Log("resume");
+                Resume();
+            }
+            else
+            {
+                //Debug.Log("pause");
+                Pause();
+            }
         }
-
 
 
     }
 
+    public void Resume()
+    {
+        pauseMenu.SetActive(false);
+        Time.timeScale = 1f;
+        GamePaused = false;
+    }
+
+    public void Pause()
+    {
+        pauseMenu.SetActive(true);
+        Time.timeScale = 0f;
+        GamePaused = true;
+    }
 
 }
