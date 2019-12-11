@@ -27,6 +27,10 @@ public class BattleUI : MonoBehaviour
     public GameObject pauseMenu;
     public GameObject uiBoxes;
 
+    //STYLIZATION
+    //var speed = 1.0f; //how fast it shakes
+    //var amount = 1.0f; //how much it shakes
+
     // Start is called before the first frame update
     void Start()
     {
@@ -56,7 +60,7 @@ public class BattleUI : MonoBehaviour
         currentHealth2 = player2.GetComponent<PlayerController>().health;
         healthText2.text = "Legolas:" + currentHealth2.ToString();
 
-        //winMenu logic - when someone dies it shows
+        //winMenu logic - when someone dies it shows - COMPLETE
         if (currentHealth1 <= 0)
         {
             winMenu.SetActive(true);
@@ -82,6 +86,8 @@ public class BattleUI : MonoBehaviour
             }
         }
 
+        //STYLIZATION - WIP
+        //transform.position.x = Mathf.Sin(Time.time * speed) * amount;
 
         //TESTING ZONE BELOW
         if (Input.GetKeyDown(KeyCode.L))

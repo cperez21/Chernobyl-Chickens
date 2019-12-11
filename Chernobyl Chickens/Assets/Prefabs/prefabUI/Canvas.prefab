@@ -101,7 +101,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 81d83fcf0d00e954a9ef36dc640f5d8f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: f6d6b76041e9bf94195b5709856280ec, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1212,6 +1212,7 @@ MonoBehaviour:
   currentHealth2: 0
   player2: {fileID: 0}
   healthText2: {fileID: 0}
+  winMenu: {fileID: 0}
   pauseMenu: {fileID: 1249552328809883179}
   uiBoxes: {fileID: 0}
 --- !u!1 &9058429010472907274
@@ -1226,7 +1227,7 @@ GameObject:
   - component: {fileID: 3087354195653255163}
   - component: {fileID: 7900111531626282203}
   m_Layer: 0
-  m_Name: Image
+  m_Name: Icon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1279,7 +1280,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: d32ae9f5b461ced49a1dc8743a2433da, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 48094fbdc857efb4b99c14ed88f7e8d3, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
