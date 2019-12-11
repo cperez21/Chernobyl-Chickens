@@ -5,15 +5,18 @@ using UnityEngine;
 public class PlayerController : MonoBehaviour
 {
     public int playerNumber; //The GameManager script sets this value.
-    
-   // public ParticleSystem particles;
+    RootMotion.Dynamics.PuppetMaster puppet;
+    LimbDamage[] limbs;
+    public ParticleSystem feathers;
+    private Rigidbody[] rbPuppet;
     private Rigidbody rb;
     private float timer;
     private float dirX;
     private float dirZ;
     Vector3 moveInput;
     public float moveSpeed, jumpForce;
-    public int health = 100;
+    public int health = 100; //Health set to be between 0.0 and 1.0 because of puppet master settings. -cullen
+    private float healthF = 1.0f;
     //public bool willHurt;
     public bool isPlayer2; //currently used for 2 player only prototype
     public bool haveControls; //Currently used for testing
@@ -53,12 +56,10 @@ public class PlayerController : MonoBehaviour
     {
         state = PlayerState.DEFAULT;
         rb = gameObject.GetComponent<Rigidbody>();
-        
-        
-        
-       
+        puppet = transform.parent.GetChild(1).GetComponent<RootMotion.Dynamics.PuppetMaster>(); //Good god
+        limbs = transform.parent.GetChild(1).GetComponentsInChildren<LimbDamage>();
+        //rbPuppet = transform.parent.GetChild(1).GetComponentsInChildren<Rigidbody>(); //rbPuppet[7] is the head.
         anim = GetComponent<Animator>();
-       // particles = GetComponent<ParticleSystem>();
         moveSpeed = 5f;
         jumpForce = 0f;
         respawnPoint = transform.position;
@@ -96,7 +97,8 @@ public class PlayerController : MonoBehaviour
 
         timer += Time.deltaTime;
 
-       
+        DamageCheck();
+        puppet.pinWeight = healthF;
       
         
         
@@ -250,18 +252,20 @@ public class PlayerController : MonoBehaviour
         
     }
 
-    void OnCollisionStay(Collision other)
+    void OnCollisionEnter(Collision other)
     {
        
-        
-        //Moves player back to position they started at if they hit a killbox.
-        if (other.gameObject.tag == "Player")
+       if(other.relativeVelocity.magnitude > 0.1f)
         {
+            //Debug.Log("I got Hit");
+            //feathers.transform.position = other.GetContact(0).point;
+            //feathers.Play();
             
-
-            
+           
 
         }
+      
+        
         
     }
 
@@ -310,11 +314,28 @@ public class PlayerController : MonoBehaviour
     
 
 
-    //damage function - edit later
-    void TakeDamage(int damage)
+    //damage function - 
+    void DamageCheck()
     {
-        print("damagesent");
-        health -= damage;
+        
+       
+        for(int x = 0; x < limbs.Length; x++)
+        {
+            if(limbs[x].gotHit)
+            {
+                Debug.Log(limbs[x].name + " Damage Check found a hit");
+                feathers.transform.position = limbs[x].transform.position;
+                feathers.Play();
+                healthF -= limbs[x].totalNormalizedDamage;
+                limbs[x].gotHit = false;
+            }
+        }
+        
+        
+        
+        
+        // print("damagesent");
+        //health -= damage;
 
     }
 
