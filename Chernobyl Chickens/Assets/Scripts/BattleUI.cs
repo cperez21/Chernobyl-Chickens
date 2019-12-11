@@ -20,7 +20,8 @@ public class BattleUI : MonoBehaviour
 
     //winmenu
     public GameObject winMenu;
-
+    public GameObject victory1;
+    public GameObject victory2;
 
     //pausemenu variables
     public static bool GamePaused = false;
@@ -64,24 +65,26 @@ public class BattleUI : MonoBehaviour
         if (currentHealth1 <= 0)
         {
             winMenu.SetActive(true);
+            victory2.SetActive(true);
+            uiBoxes.SetActive(false);
         }
         else if (currentHealth2 <= 0)
         {
             winMenu.SetActive(true);
+            victory1.SetActive(true);
+            uiBoxes.SetActive(false);
         }
 
         //pause menu logic - COMPLETE
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            //Debug.Log("read");
+
             if (GamePaused)
             {
-                //Debug.Log("resume");
                 Resume();
             }
             else
             {
-                //Debug.Log("pause");
                 Pause();
             }
         }
@@ -101,7 +104,7 @@ public class BattleUI : MonoBehaviour
     public void Resume()
     {
         pauseMenu.SetActive(false);
-        uiBoxes.SetActive(true);
+        //uiBoxes.SetActive(true);
         Time.timeScale = 1f;
         GamePaused = false;
     }
@@ -109,7 +112,7 @@ public class BattleUI : MonoBehaviour
     public void Pause()
     {
         pauseMenu.SetActive(true);
-        uiBoxes.SetActive(false);
+        //uiBoxes.SetActive(false);
         Time.timeScale = 0f;
         GamePaused = true;
     }
