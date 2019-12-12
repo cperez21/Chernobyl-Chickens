@@ -7,7 +7,7 @@ public class LimbDamage : MonoBehaviour
     public string bodyPart;
     [Header("Do not adjust these settings. For Debug only.")]
     public bool gotHit = false;
-    public float baseDamage = 50f;
+    public float baseDamage = 0f;
    // public Vector3 impulseVector;
    // public Vector3 impulseVectorNormalized;
    // public float totalImpulseAverage;
@@ -35,7 +35,7 @@ public class LimbDamage : MonoBehaviour
         {
             baseDamage = 1f;
         }
-        else if(bodyPart.Contains("Pelvis"))
+        else if(bodyPart.Contains("Pelvis") || bodyPart.Contains("Spine"))
         {
             baseDamage = 2.5f;
             magnitudeThreshold = 5.0f;
@@ -61,7 +61,7 @@ public class LimbDamage : MonoBehaviour
         {
             magnitude = 0.0f;
         }
-            totalDamage = baseDamage * magnitude;
+            totalDamage = (baseDamage * magnitude) *2;
         totalNormalizedDamage = (totalDamage / 20);
         
         if (totalNormalizedDamage >= 1f)

@@ -13,6 +13,14 @@ public class PlayerController : MonoBehaviour
     private float timer;
     private float dirX;
     private float dirZ;
+
+ // [Header("Audio Section")]
+
+    public AudioClip slap1, slap2, slap3, slap4, slap5;
+
+    private AudioSource audioS;
+    
+
     public bool canJump = false;
     Vector3 moveInput;
     Vector3 startOrientation;
@@ -26,6 +34,11 @@ public class PlayerController : MonoBehaviour
     Vector3 respawnPoint, moveVelocity;
     Animator anim;
     private float animTimer = 0.0f;
+    RaycastHit hit; //Used to check for jumps
+
+    
+
+
 
     //ceasar added for combat cooldown
     private float cooldown = 0;
@@ -44,15 +57,15 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator Stunned()
     {
+        puppet.pinDistanceFalloff = 40f;
         Debug.Log("Stunned");
         haveControls = false;
-        puppet.state = RootMotion.Dynamics.PuppetMaster.State.Dead;
+         //puppet.state = RootMotion.Dynamics.PuppetMaster.State.Dead;
        
-        yield return new WaitForSeconds(1.5f);
-        // Quaternion.LookRotation(startOrientation);
-        
-        puppet.state = RootMotion.Dynamics.PuppetMaster.State.Alive;
-        transform.GetChild(0).transform.position.Set(puppet.gameObject.transform.position.x, transform.position.y, puppet.gameObject.transform.position.z); //bip 001
+        yield return new WaitForSeconds(0.5f);
+       
+        //puppet.state = RootMotion.Dynamics.PuppetMaster.State.Alive;
+       
         haveControls = true;
     }
 
@@ -63,13 +76,22 @@ public class PlayerController : MonoBehaviour
         HURT,
         DEAD
     }
+    public enum PlayerCharacter
+    {
+        CLUNK,
+        LEGOLAS
+    }
 
+
+    public PlayerCharacter character;
      public PlayerState state;
     
     // Start is called before the first frame update
     void Start()
     {
         startOrientation = transform.rotation.eulerAngles;
+        audioS = GetComponent<AudioSource>();
+        
         state = PlayerState.DEFAULT;
         rb = gameObject.GetComponent<Rigidbody>();
         puppet = transform.parent.GetChild(1).GetComponent<RootMotion.Dynamics.PuppetMaster>(); //Good god
@@ -109,18 +131,24 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         //combat cooldown. Referenced in OntriggerStay
-        cooldown -= Time.deltaTime;
+        cooldown += Time.deltaTime;
 
         timer += Time.deltaTime;
 
         DamageCheck();
         //puppet.pinWeight = healthF;
-      
-        
-        
-        
+
+        if(puppet.pinDistanceFalloff >=5f)
+        {
+            puppet.pinDistanceFalloff -= 0.1f;
+        }
+        else
+        {
+            puppet.pinDistanceFalloff = 5f;
+        }
+
         //when health is 0, set playerstate to DEAD
-        if(health <= 0)
+        if (health <= 0)
         {
             state = PlayerState.DEAD;
         }
@@ -139,7 +167,7 @@ public class PlayerController : MonoBehaviour
             {
                 
                     rb.MovePosition(rb.position + moveVelocity * Time.deltaTime);
-                    rb.rotation = Quaternion.LookRotation(moveInput);
+                    transform.rotation = Quaternion.LookRotation(moveInput);
                 
                 anim.SetTrigger("Walk");
                 anim.ResetTrigger("Idle");
@@ -156,8 +184,21 @@ public class PlayerController : MonoBehaviour
             //Jump controls
             if (Input.GetButtonDown(JumpControl))
             {
-                Debug.Log("hullo someone hit the jump key");
-                Jump();
+               
+                //Debug.DrawRay(transform.position, Vector3.down, Color.blue, Mathf.Infinity);
+                if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Vector3.down, out hit,  1f, groundLayer))
+                {
+                    Debug.Log("raycast hit " + hit.collider.name);
+                    Jump();
+                    
+                    
+                }
+                else
+                {
+                    return;
+                }
+
+               
                 
             }
 
@@ -175,9 +216,22 @@ public class PlayerController : MonoBehaviour
             //if (Input.GetKeyDown(KeyCode.X))
             {
 
-
-                anim.SetTrigger("Strike");
-
+                if (character == PlayerCharacter.LEGOLAS)
+                {
+                    if(cooldown >= 1.0f)
+                    {
+                        anim.SetTrigger("Strike");
+                        cooldown = 0f;
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+                else
+                {
+                    anim.SetTrigger("Strike");
+                }
                //Instantiate(particles);
                 
                 state = PlayerState.STRIKE;
@@ -203,7 +257,7 @@ public class PlayerController : MonoBehaviour
         {
             case PlayerState.DEFAULT:
 
-                Debug.Log("help im stuck in default");
+               
 
                 break;
 
@@ -240,7 +294,8 @@ public class PlayerController : MonoBehaviour
 
         if (canJump == true)
         { 
-            Debug.Log("Attemped to jump");
+            
+            anim.SetTrigger("Jump");
             rb.AddForce(Vector3.up * jumpForce);
          }  
         else
@@ -257,14 +312,9 @@ public class PlayerController : MonoBehaviour
     //tells if player is in the air or not. Used for preventing infinite jumps.
     bool isGrounded()
     {
-        RaycastHit hit;
-        if (Physics.Raycast(transform.position, Vector3.down, out hit, 2f,groundLayer))
-        {
-            
-            return true;
-        }
-        else
-            return false;
+       
+        Debug.DrawRay(transform.position, Vector3.down, Color.blue,Mathf.Infinity);
+        return true;
 
 
         
@@ -343,12 +393,19 @@ public class PlayerController : MonoBehaviour
         {
             if(limbs[x].gotHit)
             {
+                AudioClip[] slapArray = { slap1, slap2, slap3, slap4, slap5 };
+                audioS.clip = slapArray[Random.Range(0, 4)];
+                audioS.Play();
+
                 Debug.Log(limbs[x].name + " Damage Check found a hit");
-                feathers.transform.position = limbs[x].transform.position;
-                feathers.Play();
+                
+               
+                
                 health -= (int)limbs[x].totalNormalizedDamage;
                 if(limbs[x].magnitude > 10.0f)
                 {
+                    feathers.transform.position = limbs[x].transform.position;
+                    feathers.Play();
                     StartCoroutine(Stunned());
                 }
                 limbs[x].gotHit = false;
