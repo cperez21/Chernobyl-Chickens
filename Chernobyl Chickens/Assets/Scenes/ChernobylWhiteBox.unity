@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.14940408, g: 0.68216956, b: 0.95185095, a: 1}
+  m_IndirectSpecularColor: {r: 0.14947739, g: 0.6821653, b: 0.95197743, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 1
+  m_UseShadowmask: 0
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -11554,7 +11554,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 9
   m_Type: 1
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 1, g: 0.8723147, b: 0.8392157, a: 1}
   m_Intensity: 0.82
   m_Range: 10
   m_SpotAngle: 30
@@ -12039,7 +12039,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 714810344}
-  m_LocalRotation: {x: 0.07037353, y: -0.120553516, z: 0.008567988, w: 0.99017227}
+  m_LocalRotation: {x: 0.07037353, y: -0.120553516, z: 0.008567989, w: 0.99017227}
   m_LocalPosition: {x: -5.199999, y: 9.8, z: -45.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -15801,7 +15801,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 963194225}
-  m_LocalRotation: {x: 0.07037353, y: -0.120553516, z: 0.008567988, w: 0.99017227}
+  m_LocalRotation: {x: 0.07037353, y: -0.120553516, z: 0.008567989, w: 0.99017227}
   m_LocalPosition: {x: -5.199999, y: 9.8, z: -45.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -15892,7 +15892,7 @@ AudioSource:
   m_PlayOnAwake: 1
   m_Volume: 0.633
   m_Pitch: 1
-  Loop: 0
+  Loop: 1
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
@@ -25559,6 +25559,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: CC_AnimeFerrisWheel
       objectReference: {fileID: 0}
+    - target: {fileID: -6057140222963153312, guid: 3006fa4fc300b67428b90f0d627125ee,
+        type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: cd3f5f9ff58ecec47badbfc6b13c7068, type: 2}
     - target: {fileID: -4216859302048453862, guid: 3006fa4fc300b67428b90f0d627125ee,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -25629,11 +25634,6 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.5705826
       objectReference: {fileID: 0}
-    - target: {fileID: -6057140222963153312, guid: 3006fa4fc300b67428b90f0d627125ee,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: cd3f5f9ff58ecec47badbfc6b13c7068, type: 2}
     - target: {fileID: 3798693334037246181, guid: 3006fa4fc300b67428b90f0d627125ee,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
