@@ -46,7 +46,8 @@ public class PlayerController : MonoBehaviour
     //used to knock back opponenet
     public float strikeForce;
     public int strikeDamage;
-    private BoxCollider attackBox;
+    private float attackBonus = 0f;
+   private float attackTimer = 0f;
 
 
     //used to declare controls
@@ -55,9 +56,16 @@ public class PlayerController : MonoBehaviour
     private string JumpControl;
     private string StrikeControl;
 
+    IEnumerator Attacking()
+    {
+        attackBonus = 2f;
+        yield return new WaitForSeconds(1.0f);
+        attackBonus = 0f;
+    }
+
     IEnumerator Stunned()
     {
-        puppet.pinDistanceFalloff = 40f;
+        puppet.pinDistanceFalloff += 30f;
         Debug.Log("Stunned");
         haveControls = false;
          //puppet.state = RootMotion.Dynamics.PuppetMaster.State.Dead;
@@ -98,7 +106,7 @@ public class PlayerController : MonoBehaviour
         limbs = transform.parent.GetChild(1).GetComponentsInChildren<LimbDamage>();
         //rbPuppet = transform.parent.GetChild(1).GetComponentsInChildren<Rigidbody>(); //rbPuppet[7] is the head.
         anim = GetComponent<Animator>();
-        moveSpeed = 5f;
+        //moveSpeed = 5f;
         
         respawnPoint = transform.position;
         strikeForce = 1;
@@ -140,7 +148,7 @@ public class PlayerController : MonoBehaviour
 
         if(puppet.pinDistanceFalloff >=5f)
         {
-            puppet.pinDistanceFalloff -= 0.1f;
+            puppet.pinDistanceFalloff -= 0.5f;
         }
         else
         {
@@ -185,10 +193,11 @@ public class PlayerController : MonoBehaviour
             if (Input.GetButtonDown(JumpControl))
             {
                
-                //Debug.DrawRay(transform.position, Vector3.down, Color.blue, Mathf.Infinity);
-                if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Vector3.down, out hit,  1f, groundLayer))
+                Debug.DrawRay(transform.position, Vector3.down, Color.blue, Mathf.Infinity);
+                if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Vector3.down, out hit,  2.5f, groundLayer))
                 {
                     Debug.Log("raycast hit " + hit.collider.name);
+                    
                     Jump();
                     
                     
@@ -215,11 +224,12 @@ public class PlayerController : MonoBehaviour
             if(Input.GetButtonDown(StrikeControl)) 
             //if (Input.GetKeyDown(KeyCode.X))
             {
-
+                
                 if (character == PlayerCharacter.LEGOLAS)
                 {
                     if(cooldown >= 1.0f)
                     {
+                        rb.AddForce(Vector3.up * 300); //the perfect amount of force on the first try fuck yes -cullen 8:09am
                         anim.SetTrigger("Strike");
                         cooldown = 0f;
                     }
@@ -232,9 +242,9 @@ public class PlayerController : MonoBehaviour
                 {
                     anim.SetTrigger("Strike");
                 }
-               //Instantiate(particles);
-                
-                state = PlayerState.STRIKE;
+
+                //StartCoroutine(Attacking());
+                //state = PlayerState.STRIKE;
 
 
 
@@ -262,14 +272,24 @@ public class PlayerController : MonoBehaviour
                 break;
 
             case PlayerState.STRIKE:
-                
-                if (attackBox.enabled == true)
+                attackBonus = 1.5f;
+               if(attackTimer >= 1f)
                 {
+                    attackBonus = 0f;
                     state = PlayerState.DEFAULT;
-                    anim.ResetTrigger("Strike");
-                    attackBox.enabled = false;
-                   
+
                 }
+               else
+                {
+                    attackTimer += Time.deltaTime;
+                }
+
+
+                    
+                    anim.ResetTrigger("Strike");
+                   
+                   
+                
               
                
                 break;
@@ -292,18 +312,14 @@ public class PlayerController : MonoBehaviour
     void Jump()
     {
 
-        if (canJump == true)
-        { 
-            
+      
             anim.SetTrigger("Jump");
             rb.AddForce(Vector3.up * jumpForce);
-         }  
-        else
-            return;
+         
     }
     void Strike() //This is an animation event from Clunk's 'Punch' animation.
     {
-        attackBox.enabled = true; //This is the 'HurtTransforms' box collider.
+        //attackBox.enabled = true; //This is the 'HurtTransforms' box collider.
         
 
     }
@@ -398,11 +414,11 @@ public class PlayerController : MonoBehaviour
                 audioS.Play();
 
                 Debug.Log(limbs[x].name + " Damage Check found a hit");
-                
-               
+
+                limbs[x].magnitude += attackBonus;
                 
                 health -= (int)limbs[x].totalNormalizedDamage;
-                if(limbs[x].magnitude > 10.0f)
+                if(limbs[x].magnitude > 8.0f)
                 {
                     feathers.transform.position = limbs[x].transform.position;
                     feathers.Play();
