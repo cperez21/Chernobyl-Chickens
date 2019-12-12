@@ -4,12 +4,12 @@ using UnityEngine;
 
 public class CameraScript : MonoBehaviour
 {
-    GameObject[] players;
-    Vector3 averageP, totalP;
+    public GameObject[] players;
+    public Vector3 averageP, totalP;
     private float minX, minY, maxX, maxY;
     public float x, y, w, h;
-    Camera cam;
-    
+    public Camera cam;
+
     
     
     
@@ -20,8 +20,9 @@ public class CameraScript : MonoBehaviour
         players = GameObject.FindGameObjectsWithTag("Player");
         Debug.Log(players);
         cam = GetComponent<Camera>();
-        
-        
+
+
+
     }
 
     // Update is called once per frame
