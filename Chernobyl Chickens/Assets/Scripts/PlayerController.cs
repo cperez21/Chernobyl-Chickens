@@ -17,7 +17,6 @@ public class PlayerController : MonoBehaviour
  // [Header("Audio Section")]
 
     public AudioClip slap1, slap2, slap3, slap4, slap5;
-
     private AudioSource audioS;
     
 
@@ -106,11 +105,11 @@ public class PlayerController : MonoBehaviour
         limbs = transform.parent.GetChild(1).GetComponentsInChildren<LimbDamage>();
         //rbPuppet = transform.parent.GetChild(1).GetComponentsInChildren<Rigidbody>(); //rbPuppet[7] is the head.
         anim = GetComponent<Animator>();
-        //moveSpeed = 5f;
+        
         
         respawnPoint = transform.position;
         strikeForce = 1;
-         //attackBox = transform.GetChild(2).GetComponent<BoxCollider>();
+         
 
         if (isPlayer2)
         {
@@ -146,7 +145,8 @@ public class PlayerController : MonoBehaviour
         DamageCheck();
         //puppet.pinWeight = healthF;
 
-        if(puppet.pinDistanceFalloff >=5f)
+        //Stun recovery. Snaps the character back into shape over time.
+        if (puppet.pinDistanceFalloff >=5f)
         {
             puppet.pinDistanceFalloff -= 0.5f;
         }
@@ -155,6 +155,9 @@ public class PlayerController : MonoBehaviour
             puppet.pinDistanceFalloff = 5f;
         }
 
+       
+        
+        
         //when health is 0, set playerstate to DEAD
         if (health <= 0)
         {
@@ -183,7 +186,7 @@ public class PlayerController : MonoBehaviour
             //else sets to idle
             else
             {
-                //rb.velocity = Vector3.zero;
+                
                 anim.SetTrigger("Idle");
                 anim.ResetTrigger("Walk");
             }
@@ -211,10 +214,7 @@ public class PlayerController : MonoBehaviour
                 
             }
 
-            if(Input.GetKeyDown(KeyCode.R))
-            {
-                ReOrient();
-            }
+           
             //CEASAR ADDED FOR TESTING OF UI
             if (Input.GetKeyDown(KeyCode.H)) 
             {
@@ -222,12 +222,12 @@ public class PlayerController : MonoBehaviour
 
             }
             if(Input.GetButtonDown(StrikeControl)) 
-            //if (Input.GetKeyDown(KeyCode.X))
             {
                 
                 if (character == PlayerCharacter.LEGOLAS)
                 {
-                    if(cooldown >= 1.0f)
+                    //Used for Legolas's jump kick. Adds force upwards because he kept going b o n k
+                    if (cooldown >= 1.0f)
                     {
                         rb.AddForce(Vector3.up * 300); //the perfect amount of force on the first try fuck yes -cullen 8:09am
                         anim.SetTrigger("Strike");
@@ -238,13 +238,13 @@ public class PlayerController : MonoBehaviour
                         return;
                     }
                 }
+                //Regular strike for other characters
                 else
                 {
                     anim.SetTrigger("Strike");
                 }
 
-                //StartCoroutine(Attacking());
-                //state = PlayerState.STRIKE;
+             
 
 
 
@@ -272,7 +272,7 @@ public class PlayerController : MonoBehaviour
                 break;
 
             case PlayerState.STRIKE:
-                attackBonus = 1.5f;
+                attackBonus = 1.5f; //Attack bonus needs to be replaced with a bool allowing damage to be given or not.
                if(attackTimer >= 1f)
                 {
                     attackBonus = 0f;
@@ -293,7 +293,7 @@ public class PlayerController : MonoBehaviour
               
                
                 break;
-            case PlayerState.HURT:
+            case PlayerState.HURT: //This is probably not needed
                 
                 Debug.Log("I hit a hurtbox ouch");
                 state = PlayerState.DEFAULT;
@@ -311,16 +311,12 @@ public class PlayerController : MonoBehaviour
 
     void Jump()
     {
-
-      
             anim.SetTrigger("Jump");
             rb.AddForce(Vector3.up * jumpForce);
-         
     }
     void Strike() //This is an animation event from Clunk's 'Punch' animation.
     {
-        //attackBox.enabled = true; //This is the 'HurtTransforms' box collider.
-        
+        //Maybe replace this with 'do damage' bool for allowing damage when striking
 
     }
    
@@ -331,8 +327,6 @@ public class PlayerController : MonoBehaviour
        
         Debug.DrawRay(transform.position, Vector3.down, Color.blue,Mathf.Infinity);
         return true;
-
-
         
     }
 
@@ -346,7 +340,7 @@ public class PlayerController : MonoBehaviour
             //feathers.Play();
             
         }
-        if (other.gameObject.tag == "Environment")
+        if (other.gameObject.tag == "Environment") //needs to be removed, Environment physics should not hurt the players?
         {
             canJump = true;
         }
@@ -355,56 +349,12 @@ public class PlayerController : MonoBehaviour
         
     }
     
-    //used currently for damaging enemy
-    void OnTriggerEnter(Collider other)
-    {
-      if(other.gameObject.tag == "HurtBox")
-        {
-             
-            //particles.Play();
-        }
-        
-        
-        
-        /*  PlayerController enemy = other.gameObject.GetComponent<PlayerController>();
-        Collider enemyHurtBox = enemy.transform.GetChild(2).GetComponent<BoxCollider>();
-        
-        if (other.gameObject.tag == "HurtBox")
-        {
-            Debug.Log("hurtbox hit me");
-            Vector3 dir = enemyHurtBox.transform.position - transform.position;
-            dir = -dir.normalized;
-            rb.AddForce(dir * enemy.strikeForce);
 
-
-            TakeDamage(enemy.strikeDamage);
-            state = PlayerState.HURT;
-        
-        }
-        */
-
-
-
-
-        /* //checks if player is punching(willhurt - true), checks if cooldown is in effect, if not, deals damage and resets cooldown
-        if (other.gameObject.tag == "Player" && willHurt == true)
-        {
-            if (cooldown > 0)
-                return;
-            other.gameObject.GetComponent<PlayerController>().TakeDamage();
-            other.gameObject.GetComponent<PlayerController>().KnockBack();
-            cooldown = interval;
-        }
-    */
-    }
-    
-
-
-    //damage function - 
+    //Checks all limbs for any damage
     void DamageCheck()
     {
         
-       
+       //checks all bip01 body parts for the limbdamage script
         for(int x = 0; x < limbs.Length; x++)
         {
             if(limbs[x].gotHit)
@@ -436,17 +386,7 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    void ReOrient()//Resets player rotation if capsized
-    {
-        //transform.rotation = Quaternion.LookRotation(Vector3.zero);
-       
-    }
-
-    //WIP - will knock back 
-    public void KnockBack()
-    {
-        
-
-    }
+   
+    
 
 }
