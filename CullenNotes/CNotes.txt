@@ -1,0 +1,25 @@
+List of tasks needed to be done:
+-Adjust camera
+	-find best possible angle
+	-every player is being followed
+	-not clipping everywhere / going too far away or close
+-Sweep through assets folders and make sure it is as organized as possible
+	-Not having 6 different clunk models and not knowing which ones are which
+	-Maybe putting all of the character stuff in one folder. Not having models and character prefabs separate
+-Clean playerController script
+	-Was out of control from last time I worked on this
+-Revisit documentation
+	-Log how things are programmed and the systems etc.
+	-ex: the limb damage system.
+-Combat
+	-Only deal actual damage if performing attack animation (anim event bool?, anim event on first idle frame resetting it)
+	-Look at damage values and continue tweaking
+
+
+
+
+
+
+-switch strike to attacking state
+-player attacking launched anim event bool saying they are attacking
+-player being hit checks on collision of the bool is true, and if so, will lose health.

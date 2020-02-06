@@ -7,6 +7,8 @@ public class LimbDamage : MonoBehaviour
     public string bodyPart;
     [Header("Do not adjust these settings. For Debug only.")]
     public bool gotHit = false;
+    public bool canHurt = false;
+    public PlayerController selfController;
     public float baseDamage = 0f;
    // public Vector3 impulseVector;
    // public Vector3 impulseVectorNormalized;
@@ -19,6 +21,8 @@ public class LimbDamage : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
+        
         bodyPart = gameObject.name;
 
         if (bodyPart.Contains("Head"))
@@ -49,28 +53,31 @@ public class LimbDamage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (selfController.canHurt)
+            canHurt = true;
+        else
+            canHurt = false;
     }
     void OnCollisionEnter(Collision collision)
     {
-        //impulseVector = collision.impulse;
-        //totalImpulseAverage = (impulseVector.x + impulseVector.y + impulseVector.z) / 3f; //+ impulseVector.y + impulseVector.z;
+        if (collision.gameObject.GetComponent<LimbDamage>().canHurt) //checks if the opponenet is actually attacking
+        { 
         magnitude = collision.relativeVelocity.magnitude;
 
-        if (magnitude <= magnitudeThreshold)
-        {
+            if (magnitude <= magnitudeThreshold)
+            {
             magnitude = 0.0f;
-        }
-            totalDamage = (baseDamage * magnitude) *2;
-        totalNormalizedDamage = (totalDamage / 20);
-        
-        if (totalNormalizedDamage >= 1f)
-        {
+            }
+            totalDamage = (baseDamage * magnitude) * 2;
+            totalNormalizedDamage = (totalDamage / 20);
+
+            if (totalNormalizedDamage >= 1f)
+            {
             gotHit = true;
-           
-            
+
+
+            }
         }
-        
     }
      void OnCollisionExit(Collision collision)
     {
