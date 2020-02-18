@@ -5,9 +5,9 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{CBEC4DCB-1B2B-E03B-0387-393C59967E8B}</ProjectGuid>
+    <ProjectGuid>{081D0753-14B8-D9F4-B14D-A93DA63B7927}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <AssemblyName>Unity.Postprocessing.Editor.dll</AssemblyName>
+    <AssemblyName>Unity.Polybrush.Editor.dll</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
@@ -615,9 +615,13 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Unity.Postprocessing.Runtime.csproj">
-      <Project>{49FCAFB7-7D0A-B3F6-2171-B4248A94EC21}</Project>
-      <Name>Unity.Postprocessing.Runtime</Name>
+    <ProjectReference Include="Unity.Polybrush.csproj">
+      <Project>{85169048-64D1-CE79-A506-4B1A495B4C03}</Project>
+      <Name>Unity.Polybrush</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Settings.Editor.csproj">
+      <Project>{62BE0A9F-569A-29C7-9F1B-2055AE73FF61}</Project>
+      <Name>Unity.Settings.Editor</Name>
     </ProjectReference>
     <ProjectReference Include="UnityEditor.UI.csproj">
       <Project>{3BB3FA27-B9AA-7EC6-4E7C-EE51EC3271F7}</Project>
@@ -637,41 +641,62 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Attributes\DecoratorAttribute.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Attributes\PostProcessEditorAttribute.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\BaseEditor.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Decorators\AttributeDecorator.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Decorators\Decorators.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Decorators\TrackballDecorator.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\EffectListEditor.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Effects\AmbientOcclusionEditor.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Effects\AutoExposureEditor.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Effects\BloomEditor.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Effects\ChromaticAberrationEditor.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Effects\ColorGradingEditor.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Effects\DefaultPostProcessEffectEditor.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Effects\DepthOfFieldEditor.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Effects\LensDistortionEditor.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Effects\ScreenSpaceReflectionsEditor.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Effects\VignetteEditor.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\PostProcessDebugEditor.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\PostProcessEffectBaseEditor.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\PostProcessEffectEditor.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\PostProcessLayerEditor.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\PostProcessProfileEditor.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\PostProcessVolumeEditor.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Tools\CubeLutAssetFactory.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Tools\CubeLutAssetImporter.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Tools\DefineSetter.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Tools\ProfileFactory.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Tools\ResourceAssetFactory.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Tools\VolumeFactory.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Utils\CurveEditor.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Utils\EditorUtilities.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Utils\GlobalSettings.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Utils\PostProcessShaderIncludePath.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Utils\SerializedParameterOverride.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Utils\Styling.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\AssemblyInfo.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Brush Modes\BrushMode.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Brush Modes\BrushModeMesh.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Brush Modes\BrushModePaint.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Brush Modes\BrushModePrefab.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Brush Modes\BrushModeRaiseLower.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Brush Modes\BrushModeSculpt.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Brush Modes\BrushModeSmooth.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Brush Modes\BrushModeTexture.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Classes\AttributeLayout.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Classes\BrushSettings.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Classes\BrushTarget.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Classes\ColorPalette.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Classes\EditableObject.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Classes\LoadoutInfo.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Classes\MirrorSettingsEditor.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Classes\PolyAsset.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Classes\PolybrushSettings.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Classes\PolybrushSettingsProvider.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Classes\Pref.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Classes\PrefabAndSettings.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Classes\PrefabPalette.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Classes\PreferenceDictionary.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Classes\ProBuilderInterface.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Classes\RaycastHit.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Classes\ShaderMetaDataUtility.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Classes\SplatSet.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Classes\SplatWeight.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Enum\BrushTool.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Interface\AttributeLayoutJsonEditor.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Interface\BrushSettingsEditor.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Interface\ColorPaletteEditor.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Interface\MenuItems.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Interface\PolybrushMeshEditor.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Interface\PolyEditor.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Interface\PrefabLoadoutEditor.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Interface\PrefabPaletteEditor.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Interface\PreferenceDictionaryEditor.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Interface\SplatWeightEditor.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Interface\ZoomOverrideEditor.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\ProBuilderIntegration\ProBuilderBridge.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Utility\BakeAdditionalVertexStreams.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Utility\Debug.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Utility\EditorUtility.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Utility\Handles.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Utility\IconImporter.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Utility\IconUtility.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Utility\MeshPreview.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Utility\PolyGUI.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Utility\PolyGUILayout.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Utility\PostProcessPrefabs.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Utility\PrefUtility.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Utility\PreviewDatabase.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Utility\ReflectionUtility.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Utility\SceneUtility.cs" />
+    <Compile Include="Packages\com.unity.polybrush\Editor\Utility\ShaderUtil.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Models\Map Assets\Chernobyl\Cartoony Spruces\Shaders\AlphaTest-Diffuse.shader" />
