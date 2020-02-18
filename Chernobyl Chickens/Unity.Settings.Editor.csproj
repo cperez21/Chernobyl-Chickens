@@ -5,9 +5,9 @@
     <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
     <ProductVersion>10.0.20506</ProductVersion>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>{CBEC4DCB-1B2B-E03B-0387-393C59967E8B}</ProjectGuid>
+    <ProjectGuid>{62BE0A9F-569A-29C7-9F1B-2055AE73FF61}</ProjectGuid>
     <OutputType>Library</OutputType>
-    <AssemblyName>Unity.Postprocessing.Editor.dll</AssemblyName>
+    <AssemblyName>Unity.Settings.Editor.dll</AssemblyName>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
@@ -615,10 +615,6 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Unity.Postprocessing.Runtime.csproj">
-      <Project>{49FCAFB7-7D0A-B3F6-2171-B4248A94EC21}</Project>
-      <Name>Unity.Postprocessing.Runtime</Name>
-    </ProjectReference>
     <ProjectReference Include="UnityEditor.UI.csproj">
       <Project>{3BB3FA27-B9AA-7EC6-4E7C-EE51EC3271F7}</Project>
       <Name>UnityEditor.UI</Name>
@@ -637,41 +633,17 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Attributes\DecoratorAttribute.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Attributes\PostProcessEditorAttribute.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\BaseEditor.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Decorators\AttributeDecorator.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Decorators\Decorators.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Decorators\TrackballDecorator.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\EffectListEditor.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Effects\AmbientOcclusionEditor.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Effects\AutoExposureEditor.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Effects\BloomEditor.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Effects\ChromaticAberrationEditor.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Effects\ColorGradingEditor.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Effects\DefaultPostProcessEffectEditor.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Effects\DepthOfFieldEditor.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Effects\LensDistortionEditor.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Effects\ScreenSpaceReflectionsEditor.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Effects\VignetteEditor.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\PostProcessDebugEditor.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\PostProcessEffectBaseEditor.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\PostProcessEffectEditor.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\PostProcessLayerEditor.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\PostProcessProfileEditor.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\PostProcessVolumeEditor.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Tools\CubeLutAssetFactory.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Tools\CubeLutAssetImporter.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Tools\DefineSetter.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Tools\ProfileFactory.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Tools\ResourceAssetFactory.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Tools\VolumeFactory.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Utils\CurveEditor.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Utils\EditorUtilities.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Utils\GlobalSettings.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Utils\PostProcessShaderIncludePath.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Utils\SerializedParameterOverride.cs" />
-    <Compile Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Utils\Styling.cs" />
+    <Compile Include="Packages\com.unity.settings-manager\Editor\Attributes.cs" />
+    <Compile Include="Packages\com.unity.settings-manager\Editor\ISettingsRepository.cs" />
+    <Compile Include="Packages\com.unity.settings-manager\Editor\PackageSettingsRepository.cs" />
+    <Compile Include="Packages\com.unity.settings-manager\Editor\Settings.cs" />
+    <Compile Include="Packages\com.unity.settings-manager\Editor\SettingsDictionary.cs" />
+    <Compile Include="Packages\com.unity.settings-manager\Editor\SettingsGUILayout.cs" />
+    <Compile Include="Packages\com.unity.settings-manager\Editor\UserSetting.cs" />
+    <Compile Include="Packages\com.unity.settings-manager\Editor\UserSettings.cs" />
+    <Compile Include="Packages\com.unity.settings-manager\Editor\UserSettingsProvider.cs" />
+    <Compile Include="Packages\com.unity.settings-manager\Editor\UserSettingsRepository.cs" />
+    <Compile Include="Packages\com.unity.settings-manager\Editor\ValueWrapper.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Models\Map Assets\Chernobyl\Cartoony Spruces\Shaders\AlphaTest-Diffuse.shader" />

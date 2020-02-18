@@ -639,6 +639,14 @@
       <Project>{F37EB8D3-595B-2A8E-9D57-98253E4F534B}</Project>
       <Name>Unity.VSCode.Editor</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.Polybrush.csproj">
+      <Project>{85169048-64D1-CE79-A506-4B1A495B4C03}</Project>
+      <Name>Unity.Polybrush</Name>
+    </ProjectReference>
+    <ProjectReference Include="Unity.Polybrush.Editor.csproj">
+      <Project>{081D0753-14B8-D9F4-B14D-A93DA63B7927}</Project>
+      <Name>Unity.Polybrush.Editor</Name>
+    </ProjectReference>
     <ProjectReference Include="Unity.RenderPipelines.Core.Editor.csproj">
       <Project>{A1B3D246-CBF8-5C7A-7D07-73F07D9A0972}</Project>
       <Name>Unity.RenderPipelines.Core.Editor</Name>
@@ -748,12 +756,10 @@
     <Compile Include="Assets\Plugins\RootMotion\Editor\Shared Scripts\SerializedContent.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets\LowPolyWater_Pack\LowPoly Island\Credits.txt" />
-    <None Include="Assets\LowPolyWater_Pack\Shaders\WaterShaded.shader" />
-    <None Include="Assets\Models\Cartoony Spruces\Shaders\AlphaTest-Diffuse.shader" />
-    <None Include="Assets\Models\Cartoony Spruces\Shaders\AlphaTest-Glossy.shader" />
-    <None Include="Assets\Models\Cartoony Spruces\Shaders\Standard.shader" />
-    <None Include="Assets\Models\Cartoony Spruces\Shaders\StandardSpecular.shader" />
+    <None Include="Assets\Models\Map Assets\Chernobyl\Cartoony Spruces\Shaders\AlphaTest-Diffuse.shader" />
+    <None Include="Assets\Models\Map Assets\Chernobyl\Cartoony Spruces\Shaders\AlphaTest-Glossy.shader" />
+    <None Include="Assets\Models\Map Assets\Chernobyl\Cartoony Spruces\Shaders\Standard.shader" />
+    <None Include="Assets\Models\Map Assets\Chernobyl\Cartoony Spruces\Shaders\StandardSpecular.shader" />
     <None Include="Assets\shader\mainlight.hlsl" />
     <None Include="Assets\shader\mainlight.hlsl (1).txt" />
     <None Include="Assets\shader\mainlight.txt" />
@@ -775,6 +781,14 @@
     <None Include="Packages\com.unity.ext.nunit\net35\unity-custom\nunit.framework.xml" />
     <None Include="Packages\com.unity.ide.rider\Rider\Editor\com.unity.ide.rider.asmdef" />
     <None Include="Packages\com.unity.ide.vscode\Editor\Unity.com.unity.vscode.Editor.asmdef" />
+    <None Include="Packages\com.unity.polybrush\Content\Shader\Hidden\Overlay.shader" />
+    <None Include="Packages\com.unity.polybrush\Content\Shader\Hidden\VertexBillboard.shader" />
+    <None Include="Packages\com.unity.polybrush\Content\ThirdPartyLicenses.txt" />
+    <None Include="Packages\com.unity.polybrush\Editor\Unity.Polybrush.Editor.asmdef" />
+    <None Include="Packages\com.unity.polybrush\Runtime\Unity.Polybrush.asmdef" />
+    <None Include="Packages\com.unity.polybrush\Tests\Editor\Unity.Polybrush.Editor.Tests.asmdef" />
+    <None Include="Packages\com.unity.polybrush\Tests\Shader\TestShaderWithMeta.shader" />
+    <None Include="Packages\com.unity.polybrush\Tests\Shader\TestShaderWithNoMeta.shader" />
     <None Include="Packages\com.unity.postprocessing\PostProcessing\Editor\Unity.Postprocessing.Editor.asmdef" />
     <None Include="Packages\com.unity.postprocessing\PostProcessing\Runtime\Unity.Postprocessing.Runtime.asmdef" />
     <None Include="Packages\com.unity.postprocessing\PostProcessing\Shaders\ACES.hlsl" />
@@ -1011,6 +1025,8 @@
     <None Include="Packages\com.unity.render-pipelines.lightweight\Shaders\Utils\ScreenSpaceShadows.shader" />
     <None Include="Packages\com.unity.render-pipelines.lightweight\Tests\Editor\Unity.RenderPipelines.Core.Editor.Tests.asmdef" />
     <None Include="Packages\com.unity.render-pipelines.lightweight\Tests\Runtime\Unity.RenderPipelines.Lightweight.Runtime.Tests.asmdef" />
+    <None Include="Packages\com.unity.settings-manager\Editor\Unity.Settings.Editor.asmdef" />
+    <None Include="Packages\com.unity.settings-manager\Tests\Editor\Unity.Settings.Editor.Tests.asmdef" />
     <None Include="Packages\com.unity.shadergraph\Editor\Resources\Shaders\BlitNoAlpha.shader" />
     <None Include="Packages\com.unity.shadergraph\Editor\Resources\Shaders\Checkerboard.shader" />
     <None Include="Packages\com.unity.shadergraph\Editor\Resources\Styles\Blackboard.uss" />
