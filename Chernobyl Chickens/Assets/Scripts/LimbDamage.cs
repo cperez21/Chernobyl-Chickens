@@ -7,7 +7,7 @@ public class LimbDamage : MonoBehaviour
     public string bodyPart;
     [Header("Do not adjust these settings. For Debug only.")]
     public bool gotHit = false;
-    public bool canHurt = false;
+    public bool canHurt = false; //canHurt version for the limbs. Playercontroller object does not physically collide with the limbs.
     public PlayerController selfController;
     public float baseDamage = 0f;
    // public Vector3 impulseVector;
@@ -33,7 +33,7 @@ public class LimbDamage : MonoBehaviour
         else if(bodyPart.Contains("arm"))
         {
             baseDamage = 1f;
-            magnitudeThreshold = 8.0f;
+            magnitudeThreshold = 2.0f;
         }
        else if(bodyPart.Contains("Thigh") || bodyPart.Contains("Calf"))
         {
@@ -42,7 +42,7 @@ public class LimbDamage : MonoBehaviour
         else if(bodyPart.Contains("Pelvis") || bodyPart.Contains("Spine"))
         {
             baseDamage = 2.5f;
-            magnitudeThreshold = 5.0f;
+            magnitudeThreshold = 2.0f;
         }
        else
         {
@@ -53,14 +53,14 @@ public class LimbDamage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (selfController.canHurt)
+        if (selfController.canHurt) //if player is in attacking state
             canHurt = true;
         else
             canHurt = false;
     }
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.GetComponent<LimbDamage>().canHurt) //checks if the opponenet is actually attacking
+        if (collision.gameObject.GetComponent<LimbDamage>().canHurt) //checks if the opponenet is actually attacking and limbs take damage
         { 
         magnitude = collision.relativeVelocity.magnitude;
 
