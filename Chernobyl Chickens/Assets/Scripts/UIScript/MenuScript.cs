@@ -35,7 +35,7 @@ public class MenuScript : MonoBehaviour
 
 
 
-        Debug.Log("current scene is " + currentScene.name);
+        //Debug.Log("current scene is " + currentScene.name);
         //Loads Main Menu
         if (Input.GetButtonDown("MainMenu") && currentScene.name != "MenuScene")
         {
@@ -67,7 +67,8 @@ public class MenuScript : MonoBehaviour
     
 public void LoadScene(string sceneName)
     {
-        SceneManager.LoadScene(sceneName, LoadSceneMode.Single);
+        SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Single);
+        SceneManager.UnloadSceneAsync(currentScene);
     }
 
 

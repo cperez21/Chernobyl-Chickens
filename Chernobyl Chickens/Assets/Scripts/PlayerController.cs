@@ -50,8 +50,9 @@ public class PlayerController : MonoBehaviour
     public float strikeForce;
     public int strikeDamage;
     private float attackBonus = 0f;
-   
-
+    //Ceasar added - for radiation
+    public float radiationCount = 0;
+    public bool supersized;
 
     //used to declare controls
     private string HorizontalControl;
@@ -107,7 +108,7 @@ public class PlayerController : MonoBehaviour
     {
         startOrientation = transform.rotation.eulerAngles;
         audioS = GetComponent<AudioSource>();
-       
+        
         state = PlayerState.DEFAULT;
         rb = gameObject.GetComponent<Rigidbody>();
         puppet = transform.parent.GetChild(1).GetComponent<RootMotion.Dynamics.PuppetMaster>(); //Good god
@@ -140,7 +141,8 @@ public class PlayerController : MonoBehaviour
 
         }
 
-
+        //CEASAR ZONE
+        supersized = false;
 
     }
 
@@ -149,7 +151,6 @@ public class PlayerController : MonoBehaviour
     {
         //combat cooldown. Referenced in OntriggerStay
         cooldown += Time.deltaTime;
-
         timer += Time.deltaTime;
 
         DamageCheck();
@@ -160,8 +161,6 @@ public class PlayerController : MonoBehaviour
         {
             puppet.targetRoot.position = getUpPosition.transform.position;
         }
-
-
 
         //when health is 0, set playerstate to DEAD
         if (health <= 0)
@@ -294,7 +293,12 @@ public class PlayerController : MonoBehaviour
                 break;
         }
 
-
+        //Ceasar added - scaling for radiation
+        if (radiationCount >= 100 && supersized == false)
+        {
+            this.transform.localScale += new Vector3(2, 2, 2);
+            supersized = true;
+        }
 
     }
 
@@ -352,6 +356,7 @@ public class PlayerController : MonoBehaviour
         }
         else
             canJump = false;
+       
 
     }
 
