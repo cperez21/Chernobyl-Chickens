@@ -1,0 +1,20 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+using UnityEngine.SceneManagement;
+
+public class MapCellScript : MonoBehaviour
+{
+    public string sceneToLoad;
+
+    void Start()
+    {
+        Debug.Log(sceneToLoad);
+    }
+
+    public void LoadScene()
+    {
+        SceneManager.LoadScene(sceneToLoad, LoadSceneMode.Single);
+    }
+
+}
