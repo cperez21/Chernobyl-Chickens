@@ -62,17 +62,21 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\FollowRoot.cs" />
-    <Compile Include="Assets\Scripts\BattleUI.cs" />
     <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\Scripts\getStatsDebug.cs" />
     <Compile Include="Assets\Scripts\Imported Scripts\HingeJointTarget.cs" />
     <Compile Include="Assets\Scripts\KillScript.cs" />
     <Compile Include="Assets\Scripts\LimbDamage.cs" />
-    <Compile Include="Assets\Scripts\MenuScript.cs" />
     <Compile Include="Assets\Scripts\PlayerController.cs" />
     <Compile Include="Assets\Scripts\PrintTransform.cs" />
     <Compile Include="Assets\Scripts\scripts that have been bad\CameraScript.cs" />
+    <Compile Include="Assets\Scripts\UIScript\BattleUI.cs" />
+    <Compile Include="Assets\Scripts\UIScript\Character.cs" />
+    <Compile Include="Assets\Scripts\UIScript\CharacterSelectorScript.cs" />
+    <Compile Include="Assets\Scripts\UIScript\Map.cs" />
+    <Compile Include="Assets\Scripts\UIScript\MapCellScript.cs" />
+    <Compile Include="Assets\Scripts\UIScript\MapSelectorScript.cs" />
+    <Compile Include="Assets\Scripts\UIScript\MenuScript.cs" />
     <Compile Include="Assets\shader\GetJointComponents.cs" />
     <None Include="Assets\shader\mainlight.hlsl (1).txt" />
     <None Include="Assets\Models\Map Assets\Chernobyl\Cartoony Spruces\Shaders\AlphaTest-Diffuse.shader" />
