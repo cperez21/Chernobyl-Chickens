@@ -95,7 +95,9 @@ public class PlayerController : MonoBehaviour
     public enum PlayerCharacter
     {
         CLUNK,
-        LEGOLAS
+        LEGOLAS,
+        COSPLAY,
+        TSO
     }
 
 
