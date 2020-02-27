@@ -2822,7 +2822,7 @@ Animator:
   m_Controller: {fileID: 9100000, guid: 148ff6f6f9e90a349965184401f510e2, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
-  m_ApplyRootMotion: 0
+  m_ApplyRootMotion: 1
   m_LinearVelocityBlending: 0
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
@@ -2852,7 +2852,7 @@ MonoBehaviour:
   canJump: 0
   moveSpeed: 10
   jumpForce: 500
-  health: 100
+  health: 300
   canHurt: 0
   isPlayer2: 1
   haveControls: 1
@@ -2863,6 +2863,8 @@ MonoBehaviour:
   defaultMoveSpeed: 0
   strikeForce: 0
   strikeDamage: 0
+  radiationCount: 0
+  supersized: 0
   character: 1
   state: 0
 --- !u!54 &4738321634265808885
@@ -2892,9 +2894,9 @@ CapsuleCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   m_Radius: 0.5
-  m_Height: 3.4627728
+  m_Height: 3.6398475
   m_Direction: 1
-  m_Center: {x: 0, y: 1.9471862, z: 0}
+  m_Center: {x: 0, y: 1.858662, z: 0}
 --- !u!82 &4738321634265808884
 AudioSource:
   m_ObjectHideFlags: 0

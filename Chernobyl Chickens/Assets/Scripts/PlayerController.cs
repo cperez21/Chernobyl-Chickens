@@ -25,9 +25,10 @@ public class PlayerController : MonoBehaviour
     Vector3 moveInput;
     Vector3 startOrientation;
     public float moveSpeed, jumpForce;
-    public int health = 100; //Health set to be between 0.0 and 1.0 because of puppet master settings. -cullen
+    public int health = 300; //Health set to be between 0.0 and 1.0 because of puppet master settings. -cullen
     private float healthF = 1.0f;
-   
+
+    private bool recoverEnabled; //called every frame to slowly recover the floppiness and anim/movespeed slow down from being stunned.
     public bool canHurt;
     public bool isPlayer2; //currently used for 2 player only prototype
     public bool haveControls; //Currently used for testing
@@ -44,7 +45,8 @@ public class PlayerController : MonoBehaviour
 
 
     //ceasar added for combat cooldown
-    private float cooldown = 0;
+    private float Attackcooldown = 0; //attack frequency cooldown
+    private float gotHitcooldown = 0; //used to prevent too many registered hits per attack
     private const float interval = 0.5f;
     //used to knock back opponenet
     public float strikeForce;
@@ -65,24 +67,29 @@ public class PlayerController : MonoBehaviour
     IEnumerator Stunned()
     {
         puppet.state = RootMotion.Dynamics.PuppetMaster.State.Dead;
-        puppet.pinDistanceFalloff += 30f;
-        moveSpeed *= stunAmount;
-        anim.speed *= stunAmount;
+        
+
         Debug.Log("Stunned");
         haveControls = false;
-
-       
+        //recoverEnabled = true;
+        state = PlayerState.STUNNED;
 
         yield return new WaitForSeconds(2.5f);
+       
         
-        puppet.state = RootMotion.Dynamics.PuppetMaster.State.Alive;
-        puppet.targetRoot.position = getUpPosition.transform.position;
-        haveControls = true;
-        moveSpeed *= stunAmount;
-        anim.speed *= stunAmount;
+        // rb.velocity = Vector3.zero;
+
+        
+        //moveSpeed *= stunAmount;    temp disabled by cullen
+         //anim.speed *= stunAmount;
 
         //Vector3 y = Vector3.Project(puppet.targetRoot.position - rb.position, puppet.targetRoot.up);
         //puppet.targetRoot.position += y;
+
+        
+
+
+
        
     }
 
@@ -91,6 +98,7 @@ public class PlayerController : MonoBehaviour
         DEFAULT,
         ATTACKING,
         HURT,
+        STUNNED,
         DEAD
     }
     public enum PlayerCharacter
@@ -151,13 +159,14 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //combat cooldown. Referenced in OntriggerStay
-        cooldown += Time.deltaTime;
+        //combat Attackcooldown. Referenced in OntriggerStay
+        Attackcooldown += Time.deltaTime;
+        gotHitcooldown += Time.deltaTime;
         timer += Time.deltaTime;
 
-        DamageCheck();
-        //Recover();
-        //puppet.pinWeight = healthF;
+        if(gotHitcooldown > 1f)
+        DamageCheck(enabled);
+       
 
         if(Input.GetKeyDown(KeyCode.T))
         {
@@ -233,11 +242,11 @@ public class PlayerController : MonoBehaviour
                 if (character == PlayerCharacter.LEGOLAS)
                 {
                     //Used for Legolas's jump kick. Adds force upwards because he kept going b o n k
-                    if (cooldown >= 1.0f)
+                    if (Attackcooldown >= 1.0f)
                     {
                         rb.AddForce(Vector3.up * 300); //the perfect amount of force on the first try fuck yes -cullen 8:09am
                         anim.SetTrigger("Strike");
-                        cooldown = 0f;
+                        Attackcooldown = 0f;
                     }
                     else
                     {
@@ -272,8 +281,28 @@ public class PlayerController : MonoBehaviour
         switch (state)
         {
             case PlayerState.DEFAULT:
+                Recover(0.05f); //default recovery amount, method only does something if pinfalloff distance is 5>. MUST be a postive number entered here.
+                if (puppet.pinDistanceFalloff > 35f)
+                {
+                    StartCoroutine(Stunned());
+                    
+                }
 
 
+                break;
+
+            case PlayerState.STUNNED:
+                Recover(0.2f); //currently only affecting ragdoll mechanics
+                
+                
+                if (puppet.pinDistanceFalloff <= 5f)
+                {
+                    puppet.targetRoot.position = new Vector3(getUpPosition.transform.position.x, puppet.targetRoot.position.y, getUpPosition.transform.position.z);
+                    puppet.state = RootMotion.Dynamics.PuppetMaster.State.Alive;
+                    haveControls = true;
+                    state = PlayerState.DEFAULT;
+                    
+                }
 
                 break;
 
@@ -362,63 +391,72 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    void Recover()
+    void Recover(float x)
     {
+        
         //Stun recovery. Snaps the character back into shape over time.
         if (puppet.pinDistanceFalloff >= 5f)
         {
-            puppet.pinDistanceFalloff -= 0.5f;
+            puppet.pinDistanceFalloff -= x;
         }
         else
         {
             puppet.pinDistanceFalloff = 5f;
+           // recoverEnabled = false;
         }
 
+        /*
+                if(moveSpeed < defaultMoveSpeed) //movement speed recovery
+                {
+                    moveSpeed = 1f;
+                    // moveSpeed = (moveSpeed * stunAmount) + moveSpeed;
+                }
 
-        if(moveSpeed < defaultMoveSpeed) //movement speed recovery
-        {
-            moveSpeed = 1f;
-            // moveSpeed = (moveSpeed * stunAmount) + moveSpeed;
-        }
+                if(anim.speed < defaultAnimSpeed) //movement speed recovery
+                {
+                    moveSpeed = 1f;
+                    //anim.speed = (anim.speed * stunAmount) + anim.speed;
+                }
+        */
 
-        if(anim.speed < defaultAnimSpeed) //movement speed recovery
-        {
-            moveSpeed = 1f;
-            //anim.speed = (anim.speed * stunAmount) + anim.speed;
-        }
 
     }
 
     //Checks all limbs for any damage
-    void DamageCheck()
+    void DamageCheck(bool enabled)
     {
-
-        //checks all bip01 body parts for the limbdamage script
-        for (int x = 0; x < limbs.Length; x++)
+        if (enabled == true)
         {
-            if (limbs[x].gotHit)
+
+            //checks all bip01 body parts for the limbdamage script
+            for (int x = 0; x < limbs.Length; x++)
             {
-                AudioClip[] slapArray = { slap1, slap2, slap3, slap4, slap5 };
-                audioS.clip = slapArray[Random.Range(0, 4)];
-                audioS.Play();
-
-                Debug.Log(limbs[x].name + " Damage Check found a hit");
-
-                limbs[x].magnitude += attackBonus;
-
-                health -= (int)limbs[x].totalNormalizedDamage;
-                if (limbs[x].magnitude > 8.0f)
+                if (limbs[x].gotHit)
                 {
-                    feathers.transform.position = limbs[x].transform.position;
-                    feathers.Play();
-                    StartCoroutine(Stunned());
+                    AudioClip[] slapArray = { slap1, slap2, slap3, slap4, slap5 };
+                    audioS.clip = slapArray[Random.Range(0, 4)];
+                    audioS.Play();
+                    puppet.pinDistanceFalloff += 1f;
+                    Debug.Log(limbs[x].name + " Damage Check found a hit");
+
+                    limbs[x].magnitude += attackBonus;
+
+                    health -= (int)limbs[x].totalNormalizedDamage;
+                    if (limbs[x].magnitude > 8.0f)
+                    {
+                        puppet.pinDistanceFalloff += 3f;
+                        feathers.transform.position = limbs[x].transform.position;
+                        feathers.Play();
+                        //StartCoroutine(Stunned());
+                    }
+                    limbs[x].gotHit = false;
+                    enabled = false;
                 }
-                limbs[x].gotHit = false;
+
             }
+
+
         }
-
-
-
 
        
 
