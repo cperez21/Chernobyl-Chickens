@@ -25,6 +25,7 @@ public class RadiationScript : MonoBehaviour
             if (cooldown >= 1.0f)
             {
                 other.gameObject.GetComponent<PlayerController>().radiationCount += 30;
+                other.gameObject.GetComponent<PlayerController>().health += 10;
                 cooldown = 0f;
             }
             else
