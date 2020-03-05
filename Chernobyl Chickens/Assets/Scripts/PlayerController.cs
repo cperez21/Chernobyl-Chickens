@@ -15,7 +15,7 @@ public class PlayerController : MonoBehaviour
     private float dirX;
     private float dirZ;
     public float stunAmount;
-
+    
     // [Header("Audio Section")]
 
     public AudioClip slap1, slap2, slap3, slap4, slap5;
@@ -60,6 +60,7 @@ public class PlayerController : MonoBehaviour
     Vector2 i_movement;
     Vector3 movement;
     float movespeed = 10f;
+    public Vector3 Spawn;
     //used to declare controls
     private string HorizontalControl;
     private string VerticalControl;
@@ -125,11 +126,12 @@ public class PlayerController : MonoBehaviour
         audioS = GetComponent<AudioSource>();
         
         state = PlayerState.DEFAULT;
-        rb = gameObject.GetComponent<Rigidbody>();
-        puppet = transform.parent.GetChild(1).GetComponent<RootMotion.Dynamics.PuppetMaster>(); //Good god
-        limbs = transform.parent.GetChild(1).GetComponentsInChildren<LimbDamage>();
+        rb = gameObject.GetComponentInChildren<Rigidbody>();
+        puppet = transform.GetChild(1).GetComponent<RootMotion.Dynamics.PuppetMaster>(); //Good god
+        Debug.Log(puppet);
+        limbs = transform.GetChild(1).GetComponentsInChildren<LimbDamage>();
         //rbPuppet = transform.parent.GetChild(1).GetComponentsInChildren<Rigidbody>(); //rbPuppet[7] is the head.
-        anim = GetComponent<Animator>();
+        anim = GetComponentInChildren<Animator>();
         defaultAnimSpeed = anim.speed;
         defaultMoveSpeed = moveSpeed;
 
@@ -158,6 +160,7 @@ public class PlayerController : MonoBehaviour
 
         //CEASAR ZONE
         supersized = false;
+        transform.position = Spawn;
     }
 
     // Update is called once per frame

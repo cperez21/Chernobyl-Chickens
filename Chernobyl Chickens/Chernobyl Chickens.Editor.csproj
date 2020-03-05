@@ -749,6 +749,10 @@
       <Project>{3BB3FA27-B9AA-7EC6-4E7C-EE51EC3271F7}</Project>
       <Name>UnityEditor.UI</Name>
     </ProjectReference>
+    <ProjectReference Include="Unity.InputSystem.Recorder.csproj">
+      <Project>{CD140C56-6ACF-E993-8EF2-B4C48D64B634}</Project>
+      <Name>Unity.InputSystem.Recorder</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\Samples\Input System\1.0.0-preview.5\EditorWindow Demo\Editor\EditorWindowDemo.cs" />
@@ -758,6 +762,7 @@
     <None Include="Assets\Models\Map Assets\Chernobyl\Cartoony Spruces\Shaders\AlphaTest-Glossy.shader" />
     <None Include="Assets\Models\Map Assets\Chernobyl\Cartoony Spruces\Shaders\Standard.shader" />
     <None Include="Assets\Models\Map Assets\Chernobyl\Cartoony Spruces\Shaders\StandardSpecular.shader" />
+    <None Include="Assets\Samples\Input System\1.0.0-preview.5\Input Recorder\Unity.InputSystem.Recorder.asmdef" />
     <None Include="Assets\Samples\Input System\1.0.0-preview.5\Visualizers\Unity.InputSystem.Visualizers.asmdef" />
     <None Include="Assets\shader\mainlight.hlsl" />
     <None Include="Assets\shader\mainlight.hlsl (1).txt" />
