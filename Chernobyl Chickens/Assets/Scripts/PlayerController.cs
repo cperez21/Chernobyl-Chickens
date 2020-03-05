@@ -106,6 +106,7 @@ public class PlayerController : MonoBehaviour
         CLUNK,
         LEGOLAS,
         COSPLAY,
+        JERRY,
         TSO
     }
 
