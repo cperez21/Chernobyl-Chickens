@@ -6,23 +6,15 @@
             "id": "1c4cda16-360d-43f2-b326-617bdbbbc5df",
             "actions": [
                 {
-                    "name": "MoveUp",
+                    "name": "Move",
                     "type": "Button",
                     "id": "893f9458-44ae-4e34-8fee-9d9c909d31e1",
-                    "expectedControlType": "",
+                    "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
                 },
                 {
-                    "name": "MoveDown",
-                    "type": "Button",
-                    "id": "e6513e3f-a0fd-444a-b688-08abc8b8b3db",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": ""
-                },
-                {
-                    "name": "MoveLeft",
+                    "name": "Jump",
                     "type": "Button",
                     "id": "fcded49b-e0fd-44a1-8355-414d5f00cca1",
                     "expectedControlType": "",
@@ -30,7 +22,7 @@
                     "interactions": ""
                 },
                 {
-                    "name": "MoveRight",
+                    "name": "Attack",
                     "type": "Button",
                     "id": "a40f5c86-caaf-46f9-8293-42bc61b9cbd7",
                     "expectedControlType": "",
@@ -42,65 +34,46 @@
                 {
                     "name": "",
                     "id": "4a59606b-0be3-4e55-b54d-6521ee04d2a7",
-                    "path": "<XInputController>/leftStick/up",
+                    "path": "<XInputController>/leftStick",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MoveUp",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "e70f4f34-e3ca-4318-ad3e-46963f25f17d",
-                    "path": "<XInputController>/leftStick/down",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "MoveDown",
+                    "action": "Move",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "97171f0d-1178-4e65-8a97-7c3c2cc43f49",
-                    "path": "<XInputController>/leftStick/left",
+                    "path": "<XInputController>/buttonSouth",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MoveLeft",
+                    "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
                     "id": "ef0f136f-37e3-402e-911e-a0a0fb42dffd",
-                    "path": "<XInputController>/leftStick/right",
+                    "path": "<XInputController>/rightTrigger",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "MoveRight",
+                    "action": "Attack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
             ]
         },
         {
-            "name": "UI",
-            "id": "6c3d9edb-820f-4592-bab0-941cd46e4ca0",
+            "name": "GameManager",
+            "id": "5592ee31-13d6-4033-b58d-cc16fef34dae",
             "actions": [
-                {
-                    "name": "New action",
-                    "type": "Button",
-                    "id": "8aa3ebcb-3f28-4298-b914-dbbbb1105a1a",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": ""
-                },
                 {
                     "name": "Join",
                     "type": "Button",
-                    "id": "d7d65049-7510-4dbc-95a6-e20f85b15b2d",
+                    "id": "46f61d39-80d1-42f0-bb9a-d1d746b204f9",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
@@ -109,18 +82,7 @@
             "bindings": [
                 {
                     "name": "",
-                    "id": "8c6fae4b-9d0d-4da7-ab9c-dcd813f3fbed",
-                    "path": "",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "New action",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "c84941ce-92b2-4ad7-9fad-8fbac9736bf7",
+                    "id": "8df5ba27-3cf5-400b-a5a6-d511adfb3f54",
                     "path": "<XInputController>/start",
                     "interactions": "",
                     "processors": "",

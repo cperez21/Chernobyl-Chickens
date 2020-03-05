@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerController : MonoBehaviour
 {
@@ -55,7 +56,10 @@ public class PlayerController : MonoBehaviour
     //Ceasar added - for radiation
     public float radiationCount = 0;
     public bool supersized;
-
+    //CEASAR ADDED FOR NEW CONTROLS
+    Vector2 i_movement;
+    Vector3 movement;
+    float movespeed = 10f;
     //used to declare controls
     private string HorizontalControl;
     private string VerticalControl;
@@ -154,7 +158,6 @@ public class PlayerController : MonoBehaviour
 
         //CEASAR ZONE
         supersized = false;
-
     }
 
     // Update is called once per frame
@@ -183,86 +186,92 @@ public class PlayerController : MonoBehaviour
 
         if (haveControls)
         {
-            //controls for moving left and right
-            dirX = Input.GetAxisRaw(HorizontalControl) * moveSpeed;
-            dirZ = Input.GetAxisRaw(VerticalControl) * moveSpeed;
-            moveInput = new Vector3(dirX, 0, dirZ);
-            moveVelocity = moveInput.normalized * moveSpeed;
+            Move();
+            //OLD CONTROLS ------------------------------------------------------------------------------------------------------------------------------
+            ////controls for moving left and right
+            //dirX = Input.GetAxisRaw(HorizontalControl) * moveSpeed;
+            //dirZ = Input.GetAxisRaw(VerticalControl) * moveSpeed;
+            //moveInput = new Vector3(dirX, 0, dirZ);
+            //moveVelocity = moveInput.normalized * moveSpeed;
+            ////sets to walk animation when moving
+            //if (moveInput != Vector3.zero)
+            //{
 
-            //sets to walk animation when moving
-            if (moveInput != Vector3.zero)
-            {
+            //    rb.MovePosition(rb.position + moveVelocity * Time.deltaTime);
+            //    transform.rotation = Quaternion.LookRotation(moveInput);
 
-                rb.MovePosition(rb.position + moveVelocity * Time.deltaTime);
-                transform.rotation = Quaternion.LookRotation(moveInput);
+            //    anim.SetTrigger("Walk");
+            //    anim.ResetTrigger("Idle");
+            //}
+            ////else sets to idle
+            //else
+            //{
 
-                anim.SetTrigger("Walk");
-                anim.ResetTrigger("Idle");
-            }
-            //else sets to idle
-            else
-            {
+            //    anim.SetTrigger("Idle");
+            //    anim.ResetTrigger("Walk");
+            //}
+            ////Jump controls
+            //if (Input.GetButtonDown(JumpControl))
+            //{
 
-                anim.SetTrigger("Idle");
-                anim.ResetTrigger("Walk");
-            }
+            //    Debug.DrawRay(transform.position, Vector3.down, Color.blue, Mathf.Infinity);
+            //    if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Vector3.down, out hit, 2.5f, groundLayer))
+            //    {
+            //        Debug.Log("raycast hit " + hit.collider.name);
 
-
-            //Jump controls
-            if (Input.GetButtonDown(JumpControl))
-            {
-
-                Debug.DrawRay(transform.position, Vector3.down, Color.blue, Mathf.Infinity);
-                if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Vector3.down, out hit, 2.5f, groundLayer))
-                {
-                    Debug.Log("raycast hit " + hit.collider.name);
-
-                    Jump();
-
-
-                }
-                else
-                {
-                    return;
-                }
+            //        Jump();
 
 
+            //    }
+            //    else
+            //    {
+            //        return;
+            //    }
 
-            }
+
+
+            //}
+
+            //if (Input.GetButtonDown(StrikeControl))
+            //{
+
+            //    if (character == PlayerCharacter.LEGOLAS)
+            //    {
+            //        //Used for Legolas's jump kick. Adds force upwards because he kept going b o n k
+            //        if (Attackcooldown >= 1.0f)
+            //        {
+            //            rb.AddForce(Vector3.up * 300); //the perfect amount of force on the first try fuck yes -cullen 8:09am
+            //            anim.SetTrigger("Strike");
+            //            Attackcooldown = 0f;
+            //        }
+            //        else
+            //        {
+            //            return;
+            //        }
+            //    }
+            //    //Regular strike for other characters
+            //    else
+            //    {
+            //        anim.SetTrigger("Strike");
+            //    }
+
+
+
+
+
+            //}
+
+            //OLD CONTROLS ------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
 
 
             //CEASAR ADDED FOR TESTING OF UI
             if (Input.GetKeyDown(KeyCode.H))
             {
                 health -= 10;
-
-            }
-            if (Input.GetButtonDown(StrikeControl))
-            {
-
-                if (character == PlayerCharacter.LEGOLAS)
-                {
-                    //Used for Legolas's jump kick. Adds force upwards because he kept going b o n k
-                    if (Attackcooldown >= 1.0f)
-                    {
-                        rb.AddForce(Vector3.up * 300); //the perfect amount of force on the first try fuck yes -cullen 8:09am
-                        anim.SetTrigger("Strike");
-                        Attackcooldown = 0f;
-                    }
-                    else
-                    {
-                        return;
-                    }
-                }
-                //Regular strike for other characters
-                else
-                {
-                    anim.SetTrigger("Strike");
-                }
-
-
-
-
 
             }
         }
@@ -334,12 +343,89 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    //NEW CONTROLS ------------------------------------------------------------------------------------------------------------------------------
+    private void OnMove(InputValue value)
+    {
+        i_movement = value.Get<Vector2>();
+        //Debug.Log("imove = " + i_movement);
+    }
+    private void Move()
+    {
+        Vector3 movement = new Vector3(i_movement.x, 0, i_movement.y) * moveSpeed * Time.deltaTime;
+        //Debug.Log("move = " + movement);
 
-    void Jump()
+        //controls for moving left and right
+        dirX = i_movement.x;
+        dirZ = i_movement.y;
+        moveVelocity = movement.normalized * moveSpeed;
+        //sets to walk animation when moving
+        if (movement != Vector3.zero)
+        {
+
+            rb.MovePosition(rb.position + moveVelocity * Time.deltaTime);
+            transform.rotation = Quaternion.LookRotation(movement);
+
+            anim.SetTrigger("Walk");
+            anim.ResetTrigger("Idle");
+        }
+        //else sets to idle
+        else
+        {
+            anim.SetTrigger("Idle");
+            anim.ResetTrigger("Walk");
+        }
+    }
+    private void OnAttack()
+    {
+        Debug.Log("attack ");
+        if (character == PlayerCharacter.LEGOLAS)
+        {
+            //Used for Legolas's jump kick. Adds force upwards because he kept going b o n k
+            if (Attackcooldown >= 1.0f)
+            {
+                rb.AddForce(Vector3.up * 300); //the perfect amount of force on the first try fuck yes -cullen 8:09am
+                anim.SetTrigger("Strike");
+                Attackcooldown = 0f;
+            }
+            else
+            {
+                return;
+            }
+        }
+        //Regular strike for other characters
+        else
+        {
+            anim.SetTrigger("Strike");
+        }
+    }
+    private void OnJump()
+    {
+        Debug.DrawRay(transform.position, Vector3.down, Color.blue, Mathf.Infinity);
+        if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Vector3.down, out hit, 2.5f, groundLayer))
+        {
+            Debug.Log("raycast hit " + hit.collider.name);
+
+            Jump();
+
+
+        }
+        else
+        {
+            return;
+        }
+    }
+    private void Jump()
     {
         anim.SetTrigger("Jump");
         rb.AddForce(Vector3.up * jumpForce);
     }
+    //NEW CONTROLS ------------------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
 
     //tells if player is in the air or not. Used for preventing infinite jumps.
     bool isGrounded()
