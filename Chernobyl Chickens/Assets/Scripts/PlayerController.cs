@@ -17,6 +17,7 @@ public class PlayerController : MonoBehaviour
     public Renderer rend;
     float normalShadowSize, finalShadowSize, shadowRecoverRate, currentShadowSize;
 
+
     // [Header("Audio Section")]
 
     public AudioClip slap1, slap2, slap3, slap4, slap5;
@@ -79,21 +80,21 @@ public class PlayerController : MonoBehaviour
         yield return new WaitForSeconds(2.5f);
 
 
-        // rb.velocity = Vector3.zero;
-
-
-        //moveSpeed *= stunAmount;    temp disabled by cullen
-        //anim.speed *= stunAmount;
-
-        //Vector3 y = Vector3.Project(puppet.targetRoot.position - rb.position, puppet.targetRoot.up);
-        //puppet.targetRoot.position += y;
-
-
-
-
-
-
     }
+    IEnumerator AirStunned()
+    {
+        puppet.state = RootMotion.Dynamics.PuppetMaster.State.Dead;
+
+
+        Debug.Log("AirStunned");
+        haveControls = false;
+        //recoverEnabled = true;
+        
+
+        yield return new WaitUntil(() => canJump == true);
+        state = PlayerState.STUNNED;
+    }
+
 
     public enum PlayerState
     {
@@ -170,8 +171,20 @@ public class PlayerController : MonoBehaviour
         if (gotHitcooldown > 1f)
             DamageCheck(enabled);
 
-        //Damage Flash Recovery begin
-        if (rend.material.GetFloat("Vector1_9AB3F732") <= normalShadowSize)
+        //checks for jumping ability
+        if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Vector3.down, out hit, 2.5f, groundLayer))
+        {
+            canJump = true;
+        }
+        else
+        {
+            canJump = false;
+        }
+
+       
+       
+            //Damage Flash Recovery begin
+            if (rend.material.GetFloat("Vector1_9AB3F732") <= normalShadowSize)
         {
             rend.material.SetColor("Color_C2BC5537", Color.black);
             rend.material.SetFloat("Vector1_9AB3F732", normalShadowSize);
@@ -231,7 +244,7 @@ public class PlayerController : MonoBehaviour
             {
 
                 Debug.DrawRay(transform.position, Vector3.down, Color.blue, Mathf.Infinity);
-                if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Vector3.down, out hit, 2.5f, groundLayer))
+                if (canJump)
                 {
                     Debug.Log("raycast hit " + hit.collider.name);
 
@@ -249,7 +262,7 @@ public class PlayerController : MonoBehaviour
             }
 
 
-            //CEASAR ADDED FOR TESTING OF UI
+            //CEASAR ADDED FOR TESTING OF UI // Testing damage flash -cullen
             if (Input.GetKeyDown(KeyCode.H))
             {
                 DamageFlash();
@@ -391,25 +404,7 @@ public class PlayerController : MonoBehaviour
 
 
     }
-    void OnCollisionStay(Collision other)
-    {
-
-        if (other.relativeVelocity.magnitude > 0.1f)
-        {
-            //Debug.Log("I got Hit");
-            //feathers.transform.position = other.GetContact(0).point;
-            //feathers.Play();
-
-        }
-        if (other.gameObject.tag == "Environment") //needs to be removed, Environment physics should not hurt the players?
-        {
-            canJump = true;
-        }
-        else
-            canJump = false;
-
-
-    }
+   
 
     void Recover(float x)
     {
@@ -463,6 +458,12 @@ public class PlayerController : MonoBehaviour
                     limbs[x].magnitude += attackBonus;
 
                     health -= (int)limbs[x].totalNormalizedDamage;
+
+                    if (!canJump)
+                    {
+                        StartCoroutine(AirStunned());
+                    }
+
                     if (limbs[x].magnitude > 8.0f)
                     {
                         puppet.pinDistanceFalloff += 3f;
