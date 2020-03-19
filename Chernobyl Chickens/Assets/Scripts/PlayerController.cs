@@ -183,7 +183,7 @@ public class PlayerController : MonoBehaviour
 
        
        
-            //Damage Flash Recovery begin
+        /*    //Damage Flash Recovery begin
             if (rend.material.GetFloat("Vector1_9AB3F732") <= normalShadowSize)
         {
             rend.material.SetColor("Color_C2BC5537", Color.black);
@@ -196,7 +196,7 @@ public class PlayerController : MonoBehaviour
             rend.material.SetFloat("Vector1_9AB3F732", currentShadowSize - shadowRecoverRate);
 
         }
-        
+        */
         //Damage Flash Recovery End
 
         if (Input.GetKeyDown(KeyCode.T))
@@ -486,7 +486,7 @@ public class PlayerController : MonoBehaviour
 
     void DamageFlash() //Player flashes red when taking a hit.
     {
-
+/*
        
         shadowRecoverRate = 0.05f;
         normalShadowSize = 0.25f;
@@ -496,7 +496,7 @@ public class PlayerController : MonoBehaviour
         rend.material.SetFloat("Vector1_9AB3F732", finalShadowSize); //sets character to all red (max setting).
         currentShadowSize = rend.material.GetFloat("Vector1_9AB3F732");
 
-        
+        */
 
 
     }
