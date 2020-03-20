@@ -6,11 +6,14 @@ public class FeathersScript : MonoBehaviour
 {
     ParticleSystem feathers;
     ParticleCollisionEvent[] colEvents;
+    ParticleSystem.VelocityOverLifetimeModule feathersVelocity;
+    
     
     // Start is called before the first frame update
     void Start()
     {
         feathers = gameObject.GetComponent<ParticleSystem>();
+        feathersVelocity = feathers.velocityOverLifetime;
         colEvents = new ParticleCollisionEvent[8]; //set to any size for default
     }
 
@@ -22,6 +25,15 @@ public class FeathersScript : MonoBehaviour
 
     private void OnParticleCollision(GameObject other)
     {
+
+        
+        
+
+
+
+
+        /*
+        
         int collcount = feathers.GetSafeCollisionEventSize(); //gets the amount of particle collisions on this frame
 
         if(collcount > colEvents.Length)
@@ -30,6 +42,14 @@ public class FeathersScript : MonoBehaviour
         }
 
         int eventCount = feathers.GetCollisionEvents(other, colEvents);
+
+        for(int x = 0; x < eventCount; x++)
+        {
+            colEvents[x]
+        }
+        */
+
+        
     }
 
 

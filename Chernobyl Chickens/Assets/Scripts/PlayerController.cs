@@ -120,9 +120,9 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        
         startOrientation = transform.rotation.eulerAngles;
         audioS = GetComponent<AudioSource>();
-
         state = PlayerState.DEFAULT;
         rb = gameObject.GetComponent<Rigidbody>();
         puppet = transform.parent.GetChild(1).GetComponent<RootMotion.Dynamics.PuppetMaster>(); //Good god
@@ -183,7 +183,7 @@ public class PlayerController : MonoBehaviour
 
        
        
-        /*    //Damage Flash Recovery begin
+            //Damage Flash Recovery begin
             if (rend.material.GetFloat("Vector1_9AB3F732") <= normalShadowSize)
         {
             rend.material.SetColor("Color_C2BC5537", Color.black);
@@ -196,12 +196,13 @@ public class PlayerController : MonoBehaviour
             rend.material.SetFloat("Vector1_9AB3F732", currentShadowSize - shadowRecoverRate);
 
         }
-        */
+        
         //Damage Flash Recovery End
 
         if (Input.GetKeyDown(KeyCode.T))
         {
-            puppet.targetRoot.position = getUpPosition.transform.position;
+            Instantiate(feathers, transform);
+            
         }
 
         //when health is 0, set playerstate to DEAD
@@ -326,7 +327,7 @@ public class PlayerController : MonoBehaviour
 
             case PlayerState.STUNNED:
                 Recover(0.2f); //currently only affecting ragdoll mechanics
-
+                
 
                 if (puppet.pinDistanceFalloff <= 5f)
                 {
@@ -446,18 +447,24 @@ public class PlayerController : MonoBehaviour
             //checks all bip01 body parts for the limbdamage script
             for (int x = 0; x < limbs.Length; x++)
             {
-                if (limbs[x].gotHit)
+                if (limbs[x].gotHit && state != PlayerState.STUNNED)
                 {
+                    
+
+
                     AudioClip[] slapArray = { slap1, slap2, slap3, slap4, slap5 };
                     audioS.clip = slapArray[Random.Range(0, 4)];
                     audioS.Play();
-                    puppet.pinDistanceFalloff += 1f;
+                    puppet.pinDistanceFalloff += 0.75f;
                     Debug.Log(limbs[x].name + " Damage Check found a hit");
                     DamageFlash();
 
                     limbs[x].magnitude += attackBonus;
 
                     health -= (int)limbs[x].totalNormalizedDamage;
+
+
+
 
                     if (!canJump)
                     {
@@ -466,9 +473,14 @@ public class PlayerController : MonoBehaviour
 
                     if (limbs[x].magnitude > 8.0f)
                     {
-                        puppet.pinDistanceFalloff += 3f;
-                        feathers.transform.position = limbs[x].transform.position;
-                        feathers.Play();
+                        puppet.pinDistanceFalloff += 1.5f;
+                        Vector3 featherSpawn = limbs[x].transform.position;
+                        featherSpawn.y = limbs[x].transform.position.y + 2f;
+                        featherSpawn.z = limbs[x].transform.position.z + 2f;
+                        
+                        Instantiate(feathers, featherSpawn, Quaternion.identity);
+                       // feathers.transform.position = limbs[x].transform.position;
+                        //feathers.Play();
                         //StartCoroutine(Stunned());
                     }
                     limbs[x].gotHit = false;
@@ -486,7 +498,7 @@ public class PlayerController : MonoBehaviour
 
     void DamageFlash() //Player flashes red when taking a hit.
     {
-/*
+
        
         shadowRecoverRate = 0.05f;
         normalShadowSize = 0.25f;
@@ -496,7 +508,7 @@ public class PlayerController : MonoBehaviour
         rend.material.SetFloat("Vector1_9AB3F732", finalShadowSize); //sets character to all red (max setting).
         currentShadowSize = rend.material.GetFloat("Vector1_9AB3F732");
 
-        */
+        
 
 
     }
