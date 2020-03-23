@@ -11,13 +11,16 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
-    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
-    <TargetFrameworkProfile></TargetFrameworkProfile>
-    <CompilerResponseFile></CompilerResponseFile>
+    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
+    <CompilerResponseFile>
+    </CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2019.2.3f1</UnityVersion>
-    <RootNamespace></RootNamespace>
+    <RootNamespace>
+    </RootNamespace>
     <LangVersion>6</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
@@ -606,17 +609,9 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="Chernobyl Chickens.Plugins.csproj">
-      <Project>{E76A04DA-8C96-FEFD-9711-C1AF596BB6D4}</Project>
-      <Name>Chernobyl Chickens.Plugins</Name>
-    </ProjectReference>
     <ProjectReference Include="Unity.Timeline.Editor.csproj">
       <Project>{7C87BE25-0A2E-FC58-1E14-37330F289AA3}</Project>
       <Name>Unity.Timeline.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="Cinemachine.csproj">
-      <Project>{D9EEBEDB-DFC3-5129-AB48-409427AE8119}</Project>
-      <Name>Cinemachine</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.VSCode.Editor.csproj">
       <Project>{F37EB8D3-595B-2A8E-9D57-98253E4F534B}</Project>
@@ -634,29 +629,13 @@
       <Project>{C5787DEC-881B-2C00-2475-6C021075DC12}</Project>
       <Name>Unity.ProBuilder.AssetIdRemapUtility</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.RenderPipelines.Core.Runtime.csproj">
-      <Project>{DF88BCE8-B64F-969D-3C39-F0C65EF04F6B}</Project>
-      <Name>Unity.RenderPipelines.Core.Runtime</Name>
-    </ProjectReference>
     <ProjectReference Include="Unity.TextMeshPro.Editor.csproj">
       <Project>{3A848AB7-9891-EDDA-D555-BF184C2F81F4}</Project>
       <Name>Unity.TextMeshPro.Editor</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.RenderPipelines.Lightweight.Runtime.csproj">
-      <Project>{FCBD67EC-29CD-1CFA-DD5A-DE23C045E679}</Project>
-      <Name>Unity.RenderPipelines.Lightweight.Runtime</Name>
-    </ProjectReference>
     <ProjectReference Include="Unity.RenderPipelines.Lightweight.Editor.csproj">
       <Project>{EDC54531-1C68-9C68-05EA-89DE05B39F96}</Project>
       <Name>Unity.RenderPipelines.Lightweight.Editor</Name>
-    </ProjectReference>
-    <ProjectReference Include="UnityEngine.UI.csproj">
-      <Project>{BA355BDC-D9AC-4DF0-CBE7-0822160BAB0E}</Project>
-      <Name>UnityEngine.UI</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.Timeline.csproj">
-      <Project>{6940CB9D-2F64-7CD4-BA0F-5610D5AB47B0}</Project>
-      <Name>Unity.Timeline</Name>
     </ProjectReference>
     <ProjectReference Include="Unity.CollabProxy.Editor.csproj">
       <Project>{C12CEEC6-100C-58A2-DE36-314E4DE5E40B}</Project>
@@ -674,10 +653,6 @@
       <Project>{114AAB78-0DA4-48AB-A359-9E0515221173}</Project>
       <Name>Unity.RenderPipelines.ShaderGraph.ShaderGraphLibrary</Name>
     </ProjectReference>
-    <ProjectReference Include="Unity.Postprocessing.Runtime.csproj">
-      <Project>{49FCAFB7-7D0A-B3F6-2171-B4248A94EC21}</Project>
-      <Name>Unity.Postprocessing.Runtime</Name>
-    </ProjectReference>
     <ProjectReference Include="com.unity.cinemachine.editor.csproj">
       <Project>{E4396B10-1675-7219-C2C9-4057D50DD6CC}</Project>
       <Name>com.unity.cinemachine.editor</Name>
@@ -693,10 +668,6 @@
     <ProjectReference Include="Unity.RenderPipelines.Core.ShaderLibrary.csproj">
       <Project>{21FE3B2C-E13B-425A-BFBA-789779C1B460}</Project>
       <Name>Unity.RenderPipelines.Core.ShaderLibrary</Name>
-    </ProjectReference>
-    <ProjectReference Include="Unity.TextMeshPro.csproj">
-      <Project>{07A21C90-D344-AE1A-8456-9910C203B41A}</Project>
-      <Name>Unity.TextMeshPro</Name>
     </ProjectReference>
     <ProjectReference Include="InputSystem.Samples.Visualizers.csproj">
       <Project>{77E78075-4210-44F5-91BC-CBD1AB587E18}</Project>

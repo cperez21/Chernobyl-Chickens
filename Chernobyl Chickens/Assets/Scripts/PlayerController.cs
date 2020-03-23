@@ -15,7 +15,10 @@ public class PlayerController : MonoBehaviour
     private float dirX;
     private float dirZ;
     public float stunAmount;
-    
+    public Renderer rend;
+    float normalShadowSize, finalShadowSize, shadowRecoverRate, currentShadowSize;
+
+
     // [Header("Audio Section")]
 
     public AudioClip slap1, slap2, slap3, slap4, slap5;
@@ -38,7 +41,7 @@ public class PlayerController : MonoBehaviour
     Animator anim;
     private float animTimer = 0.0f;
     public float defaultAnimSpeed, defaultMoveSpeed;
-   
+
     RaycastHit hit; //Used to check for jumps
 
 
@@ -56,23 +59,19 @@ public class PlayerController : MonoBehaviour
     //Ceasar added - for radiation
     public float radiationCount = 0;
     public bool supersized;
-    //CEASAR ADDED FOR NEW CONTROLS
-    Vector2 i_movement;
-    Vector3 movement;
-    float movespeed = 10f;
-    public Vector3 Spawn;
+
     //used to declare controls
     private string HorizontalControl;
     private string VerticalControl;
     private string JumpControl;
     private string StrikeControl;
 
-    
+
 
     IEnumerator Stunned()
     {
         puppet.state = RootMotion.Dynamics.PuppetMaster.State.Dead;
-        
+
 
         Debug.Log("Stunned");
         haveControls = false;
@@ -80,23 +79,23 @@ public class PlayerController : MonoBehaviour
         state = PlayerState.STUNNED;
 
         yield return new WaitForSeconds(2.5f);
-       
-        
-        // rb.velocity = Vector3.zero;
-
-        
-        //moveSpeed *= stunAmount;    temp disabled by cullen
-         //anim.speed *= stunAmount;
-
-        //Vector3 y = Vector3.Project(puppet.targetRoot.position - rb.position, puppet.targetRoot.up);
-        //puppet.targetRoot.position += y;
-
-        
 
 
-
-       
     }
+    IEnumerator AirStunned()
+    {
+        puppet.state = RootMotion.Dynamics.PuppetMaster.State.Dead;
+
+
+        Debug.Log("AirStunned");
+        haveControls = false;
+        //recoverEnabled = true;
+
+
+        yield return new WaitUntil(() => canJump == true);
+        state = PlayerState.STUNNED;
+    }
+
 
     public enum PlayerState
     {
@@ -122,16 +121,15 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+
         startOrientation = transform.rotation.eulerAngles;
         audioS = GetComponent<AudioSource>();
-        
         state = PlayerState.DEFAULT;
-        rb = gameObject.GetComponentInChildren<Rigidbody>();
-        puppet = transform.GetChild(1).GetComponent<RootMotion.Dynamics.PuppetMaster>(); //Good god
-        Debug.Log(puppet);
-        limbs = transform.GetChild(1).GetComponentsInChildren<LimbDamage>();
+        rb = gameObject.GetComponent<Rigidbody>();
+        puppet = transform.parent.GetChild(1).GetComponent<RootMotion.Dynamics.PuppetMaster>(); //Good god
+        limbs = transform.parent.GetChild(1).GetComponentsInChildren<LimbDamage>();
         //rbPuppet = transform.parent.GetChild(1).GetComponentsInChildren<Rigidbody>(); //rbPuppet[7] is the head.
-        anim = GetComponentInChildren<Animator>();
+        anim = GetComponent<Animator>();
         defaultAnimSpeed = anim.speed;
         defaultMoveSpeed = moveSpeed;
 
@@ -160,7 +158,7 @@ public class PlayerController : MonoBehaviour
 
         //CEASAR ZONE
         supersized = false;
-        transform.position = Spawn;
+
     }
 
     // Update is called once per frame
@@ -171,13 +169,41 @@ public class PlayerController : MonoBehaviour
         gotHitcooldown += Time.deltaTime;
         timer += Time.deltaTime;
 
-        if(gotHitcooldown > 1f)
-        DamageCheck(enabled);
-       
+        if (gotHitcooldown > 1f)
+            DamageCheck(enabled);
 
-        if(Input.GetKeyDown(KeyCode.T))
+        //checks for jumping ability
+        if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Vector3.down, out hit, 2.5f, groundLayer))
         {
-            puppet.targetRoot.position = getUpPosition.transform.position;
+            canJump = true;
+        }
+        else
+        {
+            canJump = false;
+        }
+
+
+
+        //Damage Flash Recovery begin
+        if (rend.material.GetFloat("Vector1_9AB3F732") <= normalShadowSize)
+        {
+            rend.material.SetColor("Color_C2BC5537", Color.black);
+            rend.material.SetFloat("Vector1_9AB3F732", normalShadowSize);
+
+        }
+        else
+        {
+            currentShadowSize = rend.material.GetFloat("Vector1_9AB3F732"); //This is some shit
+            rend.material.SetFloat("Vector1_9AB3F732", currentShadowSize - shadowRecoverRate);
+
+        }
+
+        //Damage Flash Recovery End
+
+        if (Input.GetKeyDown(KeyCode.T))
+        {
+            Instantiate(feathers, transform);
+
         }
 
         //when health is 0, set playerstate to DEAD
@@ -187,94 +213,90 @@ public class PlayerController : MonoBehaviour
         }
 
 
+
         if (haveControls)
         {
-            Move();
-            //OLD CONTROLS ------------------------------------------------------------------------------------------------------------------------------
-            ////controls for moving left and right
-            //dirX = Input.GetAxisRaw(HorizontalControl) * moveSpeed;
-            //dirZ = Input.GetAxisRaw(VerticalControl) * moveSpeed;
-            //moveInput = new Vector3(dirX, 0, dirZ);
-            //moveVelocity = moveInput.normalized * moveSpeed;
-            ////sets to walk animation when moving
-            //if (moveInput != Vector3.zero)
-            //{
+            //controls for moving left and right
+            dirX = Input.GetAxisRaw(HorizontalControl) * moveSpeed;
+            dirZ = Input.GetAxisRaw(VerticalControl) * moveSpeed;
+            moveInput = new Vector3(dirX, 0, dirZ);
+            moveVelocity = moveInput.normalized * moveSpeed;
 
-            //    rb.MovePosition(rb.position + moveVelocity * Time.deltaTime);
-            //    transform.rotation = Quaternion.LookRotation(moveInput);
+            //sets to walk animation when moving
+            if (moveInput != Vector3.zero)
+            {
 
-            //    anim.SetTrigger("Walk");
-            //    anim.ResetTrigger("Idle");
-            //}
-            ////else sets to idle
-            //else
-            //{
+                rb.MovePosition(rb.position + moveVelocity * Time.deltaTime);
+                transform.rotation = Quaternion.LookRotation(moveInput);
 
-            //    anim.SetTrigger("Idle");
-            //    anim.ResetTrigger("Walk");
-            //}
-            ////Jump controls
-            //if (Input.GetButtonDown(JumpControl))
-            //{
+                anim.SetTrigger("Walk");
+                anim.ResetTrigger("Idle");
+            }
+            //else sets to idle
+            else
+            {
 
-            //    Debug.DrawRay(transform.position, Vector3.down, Color.blue, Mathf.Infinity);
-            //    if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Vector3.down, out hit, 2.5f, groundLayer))
-            //    {
-            //        Debug.Log("raycast hit " + hit.collider.name);
-
-            //        Jump();
+                anim.SetTrigger("Idle");
+                anim.ResetTrigger("Walk");
+            }
 
 
-            //    }
-            //    else
-            //    {
-            //        return;
-            //    }
+            //Jump controls
+            if (Input.GetButtonDown(JumpControl))
+            {
+
+                Debug.DrawRay(transform.position, Vector3.down, Color.blue, Mathf.Infinity);
+                if (canJump)
+                {
+                    Debug.Log("raycast hit " + hit.collider.name);
+
+                    Jump();
 
 
-
-            //}
-
-            //if (Input.GetButtonDown(StrikeControl))
-            //{
-
-            //    if (character == PlayerCharacter.LEGOLAS)
-            //    {
-            //        //Used for Legolas's jump kick. Adds force upwards because he kept going b o n k
-            //        if (Attackcooldown >= 1.0f)
-            //        {
-            //            rb.AddForce(Vector3.up * 300); //the perfect amount of force on the first try fuck yes -cullen 8:09am
-            //            anim.SetTrigger("Strike");
-            //            Attackcooldown = 0f;
-            //        }
-            //        else
-            //        {
-            //            return;
-            //        }
-            //    }
-            //    //Regular strike for other characters
-            //    else
-            //    {
-            //        anim.SetTrigger("Strike");
-            //    }
+                }
+                else
+                {
+                    return;
+                }
 
 
 
+            }
 
 
-            //}
-
-            //OLD CONTROLS ------------------------------------------------------------------------------------------------------------------------------
-
-
-
-
-
-
-            //CEASAR ADDED FOR TESTING OF UI
+            //CEASAR ADDED FOR TESTING OF UI // Testing damage flash -cullen
             if (Input.GetKeyDown(KeyCode.H))
             {
-                health -= 10;
+                DamageFlash();
+                // health -= 10;
+
+            }
+            if (Input.GetButtonDown(StrikeControl))
+            {
+
+                if (character == PlayerCharacter.LEGOLAS)
+                {
+                    //Used for Legolas's jump kick. Adds force upwards because he kept going b o n k
+                    if (Attackcooldown >= 1.0f)
+                    {
+                        rb.AddForce(Vector3.up * 300); //the perfect amount of force on the first try fuck yes -cullen 8:09am
+                        anim.SetTrigger("Strike");
+                        Attackcooldown = 0f;
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+                //Regular strike for other characters
+                else
+                {
+                    anim.SetTrigger("Strike");
+                }
+
+
+
+
 
             }
         }
@@ -298,7 +320,7 @@ public class PlayerController : MonoBehaviour
                 if (puppet.pinDistanceFalloff > 35f)
                 {
                     StartCoroutine(Stunned());
-                    
+
                 }
 
 
@@ -306,15 +328,15 @@ public class PlayerController : MonoBehaviour
 
             case PlayerState.STUNNED:
                 Recover(0.2f); //currently only affecting ragdoll mechanics
-                
-                
+
+
                 if (puppet.pinDistanceFalloff <= 5f)
                 {
                     puppet.targetRoot.position = new Vector3(getUpPosition.transform.position.x, puppet.targetRoot.position.y, getUpPosition.transform.position.z);
                     puppet.state = RootMotion.Dynamics.PuppetMaster.State.Alive;
                     haveControls = true;
                     state = PlayerState.DEFAULT;
-                    
+
                 }
 
                 break;
@@ -346,89 +368,12 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    //NEW CONTROLS ------------------------------------------------------------------------------------------------------------------------------
-    private void OnMove(InputValue value)
-    {
-        i_movement = value.Get<Vector2>();
-        //Debug.Log("imove = " + i_movement);
-    }
-    private void Move()
-    {
-        Vector3 movement = new Vector3(i_movement.x, 0, i_movement.y) * moveSpeed * Time.deltaTime;
-        //Debug.Log("move = " + movement);
 
-        //controls for moving left and right
-        dirX = i_movement.x;
-        dirZ = i_movement.y;
-        moveVelocity = movement.normalized * moveSpeed;
-        //sets to walk animation when moving
-        if (movement != Vector3.zero)
-        {
-
-            rb.MovePosition(rb.position + moveVelocity * Time.deltaTime);
-            transform.rotation = Quaternion.LookRotation(movement);
-
-            anim.SetTrigger("Walk");
-            anim.ResetTrigger("Idle");
-        }
-        //else sets to idle
-        else
-        {
-            anim.SetTrigger("Idle");
-            anim.ResetTrigger("Walk");
-        }
-    }
-    private void OnAttack()
-    {
-        Debug.Log("attack ");
-        if (character == PlayerCharacter.LEGOLAS)
-        {
-            //Used for Legolas's jump kick. Adds force upwards because he kept going b o n k
-            if (Attackcooldown >= 1.0f)
-            {
-                rb.AddForce(Vector3.up * 300); //the perfect amount of force on the first try fuck yes -cullen 8:09am
-                anim.SetTrigger("Strike");
-                Attackcooldown = 0f;
-            }
-            else
-            {
-                return;
-            }
-        }
-        //Regular strike for other characters
-        else
-        {
-            anim.SetTrigger("Strike");
-        }
-    }
-    private void OnJump()
-    {
-        Debug.DrawRay(transform.position, Vector3.down, Color.blue, Mathf.Infinity);
-        if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Vector3.down, out hit, 2.5f, groundLayer))
-        {
-            Debug.Log("raycast hit " + hit.collider.name);
-
-            Jump();
-
-
-        }
-        else
-        {
-            return;
-        }
-    }
-    private void Jump()
+    void Jump()
     {
         anim.SetTrigger("Jump");
         rb.AddForce(Vector3.up * jumpForce);
     }
-    //NEW CONTROLS ------------------------------------------------------------------------------------------------------------------------------
-
-
-
-
-
-
 
     //tells if player is in the air or not. Used for preventing infinite jumps.
     bool isGrounded()
@@ -461,29 +406,11 @@ public class PlayerController : MonoBehaviour
 
 
     }
-    void OnCollisionStay(Collision other)
-    {
 
-        if (other.relativeVelocity.magnitude > 0.1f)
-        {
-            //Debug.Log("I got Hit");
-            //feathers.transform.position = other.GetContact(0).point;
-            //feathers.Play();
-
-        }
-        if (other.gameObject.tag == "Environment") //needs to be removed, Environment physics should not hurt the players?
-        {
-            canJump = true;
-        }
-        else
-            canJump = false;
-       
-
-    }
 
     void Recover(float x)
     {
-        
+
         //Stun recovery. Snaps the character back into shape over time.
         if (puppet.pinDistanceFalloff >= 5f)
         {
@@ -492,7 +419,7 @@ public class PlayerController : MonoBehaviour
         else
         {
             puppet.pinDistanceFalloff = 5f;
-           // recoverEnabled = false;
+            // recoverEnabled = false;
         }
 
         /*
@@ -521,22 +448,40 @@ public class PlayerController : MonoBehaviour
             //checks all bip01 body parts for the limbdamage script
             for (int x = 0; x < limbs.Length; x++)
             {
-                if (limbs[x].gotHit)
+                if (limbs[x].gotHit && state != PlayerState.STUNNED)
                 {
+
+
+
                     AudioClip[] slapArray = { slap1, slap2, slap3, slap4, slap5 };
                     audioS.clip = slapArray[Random.Range(0, 4)];
                     audioS.Play();
-                    puppet.pinDistanceFalloff += 1f;
+                    puppet.pinDistanceFalloff += 0.75f;
                     Debug.Log(limbs[x].name + " Damage Check found a hit");
+                    DamageFlash();
 
                     limbs[x].magnitude += attackBonus;
 
                     health -= (int)limbs[x].totalNormalizedDamage;
+
+
+
+
+                    if (!canJump)
+                    {
+                        StartCoroutine(AirStunned());
+                    }
+
                     if (limbs[x].magnitude > 8.0f)
                     {
-                        puppet.pinDistanceFalloff += 3f;
-                        feathers.transform.position = limbs[x].transform.position;
-                        feathers.Play();
+                        puppet.pinDistanceFalloff += 1.5f;
+                        Vector3 featherSpawn = limbs[x].transform.position;
+                        featherSpawn.y = limbs[x].transform.position.y + 2f;
+                        featherSpawn.z = limbs[x].transform.position.z + 2f;
+
+                        Instantiate(feathers, featherSpawn, Quaternion.identity);
+                        // feathers.transform.position = limbs[x].transform.position;
+                        //feathers.Play();
                         //StartCoroutine(Stunned());
                     }
                     limbs[x].gotHit = false;
@@ -548,12 +493,26 @@ public class PlayerController : MonoBehaviour
 
         }
 
-       
+
 
     }
 
-    
-   
-    
+    void DamageFlash() //Player flashes red when taking a hit.
+    {
+
+
+        shadowRecoverRate = 0.05f;
+        normalShadowSize = 0.25f;
+        finalShadowSize = 1f;
+
+        rend.material.SetColor("Color_C2BC5537", Color.red); //changes toon shading to red.
+        rend.material.SetFloat("Vector1_9AB3F732", finalShadowSize); //sets character to all red (max setting).
+        currentShadowSize = rend.material.GetFloat("Vector1_9AB3F732");
+
+
+
+
+    }
 
 }
+

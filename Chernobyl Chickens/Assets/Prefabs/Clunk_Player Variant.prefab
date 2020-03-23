@@ -44,7 +44,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7794280862023831310}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 25d6e6ceb4fee6c41af6511f21ee8f08, type: 3}
   m_Name: 
@@ -52,6 +52,7 @@ MonoBehaviour:
   playerNumber: 1
   feathers: {fileID: 1881899946801277126}
   stunAmount: 0.8
+  rend: {fileID: 0}
   slap1: {fileID: 8300000, guid: a57e7a630a11c41459441c5e64630f22, type: 3}
   slap2: {fileID: 8300000, guid: 1720740201758174b985a5b71920c1ec, type: 3}
   slap3: {fileID: 8300000, guid: 7d347667ff88d1043a8d70ec5bec5aa4, type: 3}
@@ -74,7 +75,6 @@ MonoBehaviour:
   strikeDamage: 10
   radiationCount: 0
   supersized: 0
-  Spawn: {x: -27.35659, y: 6, z: 10}
   character: 0
   state: 0
 --- !u!1001 &3135237559132641646
@@ -362,7 +362,7 @@ PrefabInstance:
     - target: {fileID: 5163448266319291446, guid: ec03b9dfd421da14d8433a24ff2711b0,
         type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ec03b9dfd421da14d8433a24ff2711b0, type: 3}
