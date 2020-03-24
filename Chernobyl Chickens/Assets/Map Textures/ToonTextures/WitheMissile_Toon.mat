@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: BumperCar_Blue_Toon
+  m_Name: WitheMissile_Toon
   m_Shader: {fileID: -6465566751694194690, guid: be49884f79da68949a592e5177cbde5e,
     type: 3}
   m_ShaderKeywords: 
@@ -21,7 +21,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - Texture2D_8D3A4557:
-        m_Texture: {fileID: 2800000, guid: 63191d59b1a7eda4ca402dfb1544ba48, type: 3}
+        m_Texture: {fileID: 2800000, guid: 8d6f35637939c924cb2b981840d1fc6d, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _BaseMap:
@@ -53,10 +53,10 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Floats:
-    - Vector1_6FCEF1D2: 0
-    - Vector1_9AB3F732: 0.15
-    - Vector1_C2EF274F: 0
-    - Vector1_D5BDD1E3: 0.101
+    - Vector1_6FCEF1D2: 0.053
+    - Vector1_9AB3F732: 0.18
+    - Vector1_C2EF274F: 0.205
+    - Vector1_D5BDD1E3: 0.134
     - _AlphaClip: 0
     - _Blend: 0
     - _BumpScale: 1
@@ -79,13 +79,13 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
-    - Color_AAFEA574: {r: 0, g: 0, b: 0, a: 0}
+    - Color_AAFEA574: {r: 0.7229886, g: 0.7264151, b: 0.7231339, a: 0}
     - Color_C2BC5537: {r: 0, g: 0, b: 0, a: 0}
     - _BaseColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _Color: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}
---- !u!114 &5064942757866237695
+--- !u!114 &5316405075225525013
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
