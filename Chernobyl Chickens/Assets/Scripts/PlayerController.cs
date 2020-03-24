@@ -455,7 +455,7 @@ public class PlayerController : MonoBehaviour
                     AudioClip[] slapArray = { slap1, slap2, slap3, slap4, slap5 };
                     audioS.clip = slapArray[Random.Range(0, 4)];
                     audioS.Play();
-                    puppet.pinDistanceFalloff += 0.75f;
+                    puppet.pinDistanceFalloff += 0.40f;
                     Debug.Log(limbs[x].name + " Damage Check found a hit");
                     DamageFlash();
 
@@ -473,12 +473,12 @@ public class PlayerController : MonoBehaviour
 
                     if (limbs[x].magnitude > 8.0f)
                     {
-                        puppet.pinDistanceFalloff += 1.5f;
+                        puppet.pinDistanceFalloff += 1.0f;
                         Vector3 featherSpawn = limbs[x].transform.position;
                         featherSpawn.y = limbs[x].transform.position.y + 2f;
                         featherSpawn.z = limbs[x].transform.position.z + 2f;
                         
-                        Instantiate(feathers, featherSpawn, Quaternion.identity);
+                        Instantiate(feathers, featherSpawn, Quaternion.LookRotation(Vector3.zero,Vector3.up));
                        // feathers.transform.position = limbs[x].transform.position;
                         //feathers.Play();
                         //StartCoroutine(Stunned());
