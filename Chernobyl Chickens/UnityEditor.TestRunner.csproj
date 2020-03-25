@@ -11,16 +11,13 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkProfile></TargetFrameworkProfile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Editor:5</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2019.2.3f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion>6</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
@@ -630,6 +627,12 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="UnityEngine.TestRunner.csproj">
+      <Project>{E08C0643-0A13-BF9B-F68E-2FDBBB855F02}</Project>
+      <Name>UnityEngine.TestRunner</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
     <Compile Include="Packages\com.unity.test-framework\UnityEditor.TestRunner\Api\CallbacksDelegator.cs" />
     <Compile Include="Packages\com.unity.test-framework\UnityEditor.TestRunner\Api\CallbacksDelegatorListener.cs" />
     <Compile Include="Packages\com.unity.test-framework\UnityEditor.TestRunner\Api\CallbacksHolder.cs" />
@@ -771,6 +774,7 @@
     <None Include="Assets\Models\Map Assets\Chernobyl\Cartoony Spruces\Shaders\Standard.shader" />
     <None Include="Assets\Models\Map Assets\Chernobyl\Cartoony Spruces\Shaders\StandardSpecular.shader" />
     <None Include="Assets\Samples\Input System\1.0.0-preview.5\Input Recorder\Unity.InputSystem.Recorder.asmdef" />
+    <None Include="Assets\Samples\Input System\1.0.0-preview.5\Rebinding UI\Unity.InputSystem.RebindingUI.asmdef" />
     <None Include="Assets\Samples\Input System\1.0.0-preview.5\Visualizers\Unity.InputSystem.Visualizers.asmdef" />
     <None Include="Assets\shader\mainlight.hlsl" />
     <None Include="Assets\shader\mainlight.hlsl (1).txt" />

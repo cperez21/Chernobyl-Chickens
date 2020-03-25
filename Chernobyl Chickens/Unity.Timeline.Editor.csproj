@@ -11,16 +11,13 @@
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
-    <TargetFrameworkVersion>v4.6.1</TargetFrameworkVersion>
-    <TargetFrameworkProfile>
-    </TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <TargetFrameworkVersion>v4.6</TargetFrameworkVersion>
+    <TargetFrameworkProfile></TargetFrameworkProfile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Editor:5</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2019.2.3f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion>6</LangVersion>
   </PropertyGroup>
   <PropertyGroup>
@@ -636,13 +633,25 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="Unity.Timeline.csproj">
+      <Project>{6940CB9D-2F64-7CD4-BA0F-5610D5AB47B0}</Project>
+      <Name>Unity.Timeline</Name>
+    </ProjectReference>
     <ProjectReference Include="UnityEditor.UI.csproj">
       <Project>{3BB3FA27-B9AA-7EC6-4E7C-EE51EC3271F7}</Project>
       <Name>UnityEditor.UI</Name>
     </ProjectReference>
+    <ProjectReference Include="UnityEngine.UI.csproj">
+      <Project>{BA355BDC-D9AC-4DF0-CBE7-0822160BAB0E}</Project>
+      <Name>UnityEngine.UI</Name>
+    </ProjectReference>
     <ProjectReference Include="UnityEditor.TestRunner.csproj">
       <Project>{01729BEB-38B3-94D0-873E-F22C19EB806A}</Project>
       <Name>UnityEditor.TestRunner</Name>
+    </ProjectReference>
+    <ProjectReference Include="UnityEngine.TestRunner.csproj">
+      <Project>{E08C0643-0A13-BF9B-F68E-2FDBBB855F02}</Project>
+      <Name>UnityEngine.TestRunner</Name>
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
@@ -880,6 +889,7 @@
     <None Include="Assets\Models\Map Assets\Chernobyl\Cartoony Spruces\Shaders\Standard.shader" />
     <None Include="Assets\Models\Map Assets\Chernobyl\Cartoony Spruces\Shaders\StandardSpecular.shader" />
     <None Include="Assets\Samples\Input System\1.0.0-preview.5\Input Recorder\Unity.InputSystem.Recorder.asmdef" />
+    <None Include="Assets\Samples\Input System\1.0.0-preview.5\Rebinding UI\Unity.InputSystem.RebindingUI.asmdef" />
     <None Include="Assets\Samples\Input System\1.0.0-preview.5\Visualizers\Unity.InputSystem.Visualizers.asmdef" />
     <None Include="Assets\shader\mainlight.hlsl" />
     <None Include="Assets\shader\mainlight.hlsl (1).txt" />
