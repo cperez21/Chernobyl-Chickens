@@ -61,7 +61,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -0, y: -0, z: -1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.20010671, y: 0.00000080093554, z: -0.0000003427259}
+  m_ConnectedAnchor: {x: -0.20010689, y: 0.00000092014454, z: -0.00000031292365}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 0
@@ -333,6 +333,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bodyPart: 
+  hurtOnly: 0
   gotHit: 0
   canHurt: 0
   selfController: {fileID: 8020005545295361898}
@@ -717,7 +718,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 1, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.20010734, y: 0.0000006894116, z: 0.000000042137742}
+  m_ConnectedAnchor: {x: -0.20010732, y: 0.0000008062344, z: 0.00000004213778}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 0, z: 1}
   m_XMotion: 0
@@ -875,7 +876,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -0, y: -0, z: -1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.19918431, y: 0.00022219114, z: -0.521938}
+  m_ConnectedAnchor: {x: -0.19918431, y: 0.00022214644, z: -0.5219385}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 0
@@ -1032,7 +1033,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -0, y: -1, z: -0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.2001064, y: 0.00000016379636, z: -0.00000033784968}
+  m_ConnectedAnchor: {x: -0.20010623, y: 0.00000013026875, z: 0.00000010639012}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 0, z: -1}
   m_XMotion: 0
@@ -1349,7 +1350,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -0, y: -0, z: -1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.20010687, y: 0.0000008270133, z: -0.00000042095678}
+  m_ConnectedAnchor: {x: -0.20010705, y: 0.0000008270133, z: -0.0000008647309}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 0
@@ -2241,7 +2242,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 5.7162323, y: 1.0159681, z: 19.635353}
+  m_ConnectedAnchor: {x: 3.977983, y: 1.0159681, z: -2.2925282}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 2
@@ -2352,6 +2353,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bodyPart: 
+  hurtOnly: 0
   gotHit: 0
   canHurt: 0
   selfController: {fileID: 8020005545295361898}
@@ -2580,7 +2582,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -0, y: -0, z: -1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.23475963, y: 0.00019063048, z: 0.52514195}
+  m_ConnectedAnchor: {x: -0.23475963, y: 0.00019051127, z: 0.52514195}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 0
@@ -3432,29 +3434,25 @@ MonoBehaviour:
     type: 3}
   stunAmount: 0.8
   rend: {fileID: 8020005544481673872}
+  slapSwing: {fileID: 8300000, guid: 5a1405c2d8754ae448f7037c979766fb, type: 3}
   slap1: {fileID: 8300000, guid: fe3954a9d5669b842b936e491278c0ba, type: 3}
   slap2: {fileID: 8300000, guid: 74e8d947950d05f41ab7aa27d59f1eb2, type: 3}
   slap3: {fileID: 8300000, guid: 39891d63ee3f3e542951da3482187263, type: 3}
-  slap4: {fileID: 8300000, guid: b0772ee19d8bd7f44b6388253b3ce8d7, type: 3}
-  slap5: {fileID: 8300000, guid: 12498f0d55f2d6044b7b287025f09a5a, type: 3}
+  death: {fileID: 0}
   getUpPosition: {fileID: 8020005544655895564}
   canJump: 0
   moveSpeed: 10
-  jumpForce: 500
-  health: 300
+  jumpForce: 200
+  health: 100
   canHurt: 0
   isPlayer2: 1
   haveControls: 1
   groundLayer:
     serializedVersion: 2
     m_Bits: 1
-  defaultAnimSpeed: 0
-  defaultMoveSpeed: 0
-  strikeForce: 0
-  strikeDamage: 0
   radiationCount: 0
   supersized: 0
-  character: 3
+  character: 4
   state: 0
 --- !u!54 &8020005545295361813
 Rigidbody:
@@ -4185,7 +4183,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -0, y: -0, z: -1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.75969523, y: -0.00022682338, z: 0.000000032730874}
+  m_ConnectedAnchor: {x: -0.75969523, y: -0.00022696398, z: -0.00000019373316}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 0
@@ -4282,6 +4280,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   bodyPart: 
+  hurtOnly: 0
   gotHit: 0
   canHurt: 0
   selfController: {fileID: 8020005545295361898}

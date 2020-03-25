@@ -6,6 +6,7 @@ public class LimbDamage : MonoBehaviour
 {
     public string bodyPart;
     [Header("Do not adjust these settings. For Debug only.")]
+    public bool hurtOnly = false; //Will prevent limb from taking damage and only giving damage. Ex: limbs you want to attack only with like fists, feet, etc.
     public bool gotHit = false;
     public bool canHurt = false; //canHurt version for the limbs. Playercontroller object does not physically collide with the limbs.
     public PlayerController selfController;
@@ -60,24 +61,35 @@ public class LimbDamage : MonoBehaviour
     }
     void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.GetComponent<LimbDamage>().canHurt) //checks if the opponenet is actually attacking and limbs take damage
-        { 
-        magnitude = collision.relativeVelocity.magnitude;
-
-            if (magnitude <= magnitudeThreshold)
-            {
-            magnitude = 0.0f;
-            }
-            totalDamage = (baseDamage * magnitude) * 2;
-            totalNormalizedDamage = (totalDamage / 20);
-
-            if (totalNormalizedDamage >= 1f)
-            {
-            gotHit = true;
-
-
-            }
+        if (hurtOnly == true)
+        {
+            return;
         }
+        else
+        {
+
+            if (collision.gameObject.GetComponent<LimbDamage>().canHurt) //checks if the opponenet is actually attacking and limbs take damage
+            {
+                magnitude = collision.relativeVelocity.magnitude;
+
+                if (magnitude <= magnitudeThreshold)
+                {
+                    magnitude = 0.0f;
+                }
+                totalDamage = (baseDamage * magnitude) * 2;
+                totalNormalizedDamage = (totalDamage / 20);
+
+                if (totalNormalizedDamage >= 1f)
+                {
+                    gotHit = true;
+
+
+                }
+            }
+
+        }
+
+        
     }
      void OnCollisionExit(Collision collision)
     {

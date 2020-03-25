@@ -37,7 +37,7 @@ public class TargetGroupExtraSettingsScript : MonoBehaviour //This is used to st
 
                 int originalTargetsLength = tg.m_Targets.Length; //variable made so the loop doesn't hurt itself in confusion -Cullen
 
-               for( int x = tg.m_Targets.Length -1; x >= 0 ; x--) //Clears out Target group
+               for( int x = tg.m_Targets.Length -1; x >= 0 ; x--) //Clears out existing Target group
                 {
                    
                     if(x == 0) //Final part
@@ -51,12 +51,13 @@ public class TargetGroupExtraSettingsScript : MonoBehaviour //This is used to st
                 }
 
                 var characters = GameObject.FindObjectsOfType<PlayerController>(); //Finds Player Controllers
+                
 
                 for(int x = 0; x < characters.Length; x++)
                 {
                     if(x == 0)
                     {
-                        tg.m_Targets[x].target = characters[x].gameObject.transform.GetChild(0);
+                        tg.m_Targets[x].target = characters[x].gameObject.transform.GetChild(0); //sets the final one instead of adding one more
                     }
                     else
                     tg.AddMember(characters[x].gameObject.transform.GetChild(0),1,0); //Adds Players to target group.
@@ -80,20 +81,15 @@ public class TargetGroupExtraSettingsScript : MonoBehaviour //This is used to st
     // Update is called once per frame
     void Update()
     {
-        pcs.Clear(); //Resets every frame to prevent adding millions of clunks to List;
-
-        for (int x = 0; x < tg.m_Targets.Length; x++) //tg.m_Targets refers to the 'Target' list in the Cinemachine Target Group Script.
+       
+        for(int x = 0; x < tg.m_Targets.Length; x++)
         {
-            pcs.Add(tg.m_Targets[x].target.gameObject.GetComponentInParent<PlayerController>()); //Adds 
-
-            if (pcs[x].state == PlayerController.PlayerState.DEAD)
+            if(tg.m_Targets[x].target.GetComponentInParent<PlayerController>().state == PlayerController.PlayerState.DEAD)
             {
-                tg.RemoveMember(tg.m_Targets[x].target);
+                tg.m_Targets[x].target = null;
             }
-            
-            
-             
         }
-        
+       
     }
+
 }

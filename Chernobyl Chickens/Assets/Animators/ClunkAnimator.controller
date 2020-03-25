@@ -58,13 +58,13 @@ AnimatorStateMachine:
   m_ChildStates:
   - serializedVersion: 1
     m_State: {fileID: 8311732292203993126}
-    m_Position: {x: -160, y: 110, z: 0}
+    m_Position: {x: -200, y: 70, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 6788815952675607117}
     m_Position: {x: -260, y: -10, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5528502357557389875}
-    m_Position: {x: -160, y: 210, z: 0}
+    m_Position: {x: -60, y: 170, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 5802277291726735921}
     m_Position: {x: -30, y: -10, z: 0}
@@ -234,7 +234,7 @@ AnimatorState:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Jump
-  m_Speed: 1
+  m_Speed: 0.8
   m_CycleOffset: 0
   m_Transitions:
   - {fileID: -8198952468945557924}

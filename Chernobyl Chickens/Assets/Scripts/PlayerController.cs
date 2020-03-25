@@ -20,7 +20,7 @@ public class PlayerController : MonoBehaviour
 
     // [Header("Audio Section")]
 
-    public AudioClip slap1, slap2, slap3, slap4, slap5;
+    public AudioClip slapSwing, slap1, slap2, slap3, death;
     private AudioSource audioS;
     [Tooltip("this should be bip01 Pelvis under the Non-Puppet master")]
     public GameObject getUpPosition;
@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour
     Vector3 respawnPoint, moveVelocity;
     Animator anim;
     private float animTimer = 0.0f;
-    public float defaultAnimSpeed, defaultMoveSpeed;
+    
 
     RaycastHit hit; //Used to check for jumps
 
@@ -52,8 +52,7 @@ public class PlayerController : MonoBehaviour
     private float gotHitcooldown = 0; //used to prevent too many registered hits per attack
     private const float interval = 0.5f;
     //used to knock back opponenet
-    public float strikeForce;
-    public int strikeDamage;
+   
     private float attackBonus = 0f;
     //Ceasar added - for radiation
     public float radiationCount = 0;
@@ -129,11 +128,10 @@ public class PlayerController : MonoBehaviour
         limbs = transform.parent.GetChild(1).GetComponentsInChildren<LimbDamage>();
         //rbPuppet = transform.parent.GetChild(1).GetComponentsInChildren<Rigidbody>(); //rbPuppet[7] is the head.
         anim = GetComponent<Animator>();
-        defaultAnimSpeed = anim.speed;
-        defaultMoveSpeed = moveSpeed;
+        
 
         respawnPoint = transform.position;
-        strikeForce = 1;
+        
 
 
         if (isPlayer2)
@@ -163,6 +161,25 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //Damage Flash Recovery begin
+        if (rend.material.GetFloat("Vector1_9AB3F732") <= normalShadowSize)
+        {
+            rend.material.SetColor("Color_C2BC5537", Color.black);
+            rend.material.SetFloat("Vector1_9AB3F732", normalShadowSize);
+
+        }
+        else
+        {
+            currentShadowSize = rend.material.GetFloat("Vector1_9AB3F732"); //This is some shit
+            rend.material.SetFloat("Vector1_9AB3F732", currentShadowSize - shadowRecoverRate);
+
+        }
+
+        if (state == PlayerState.DEAD) //skips Update logic if player is dead. (prevents further damage from being taken and sounds)
+        {
+            return;
+        }
+        
         //combat Attackcooldown. Referenced in OntriggerStay
         Attackcooldown += Time.deltaTime;
         gotHitcooldown += Time.deltaTime;
@@ -183,32 +200,20 @@ public class PlayerController : MonoBehaviour
 
        
        
-            //Damage Flash Recovery begin
-            if (rend.material.GetFloat("Vector1_9AB3F732") <= normalShadowSize)
-        {
-            rend.material.SetColor("Color_C2BC5537", Color.black);
-            rend.material.SetFloat("Vector1_9AB3F732", normalShadowSize);
-
-        }
-        else
-        {
-            currentShadowSize = rend.material.GetFloat("Vector1_9AB3F732"); //This is some shit
-            rend.material.SetFloat("Vector1_9AB3F732", currentShadowSize - shadowRecoverRate);
-
-        }
+      
         
         //Damage Flash Recovery End
 
         if (Input.GetKeyDown(KeyCode.T))
         {
-            Instantiate(feathers, transform);
-            
+            state = PlayerState.DEAD;
         }
 
         //when health is 0, set playerstate to DEAD
         if (health <= 0)
         {
             state = PlayerState.DEAD;
+            
         }
 
 
@@ -245,7 +250,7 @@ public class PlayerController : MonoBehaviour
             {
 
                 Debug.DrawRay(transform.position, Vector3.down, Color.blue, Mathf.Infinity);
-                if (canJump)
+                if (canJump && moveInput == Vector3.zero)
                 {
                     Debug.Log("raycast hit " + hit.collider.name);
 
@@ -253,15 +258,19 @@ public class PlayerController : MonoBehaviour
 
 
                 }
-                else
+                else if(canJump && moveInput != Vector3.zero)
                 {
-                    return;
+                    rb.AddForce(moveInput * 5);
+                    Jump();
                 }
 
 
 
             }
-
+            else if(Input.GetButtonDown(JumpControl) && moveInput != Vector3.zero)
+            {
+                Jump();
+            }
 
             //CEASAR ADDED FOR TESTING OF UI // Testing damage flash -cullen
             if (Input.GetKeyDown(KeyCode.H))
@@ -355,6 +364,11 @@ public class PlayerController : MonoBehaviour
             case PlayerState.DEAD:
                 haveControls = false;
                 puppet.state = RootMotion.Dynamics.PuppetMaster.State.Dead;
+                haveControls = false;
+
+                DamageCheck(false);
+                audioS.clip = death;
+                audioS.Play();
                 break;
         }
 
@@ -388,7 +402,8 @@ public class PlayerController : MonoBehaviour
 
         if (x == 1) //beginning of attack animation
         {
-
+            audioS.clip = slapSwing;
+            audioS.Play();
             state = PlayerState.ATTACKING;
             canHurt = true;
             //returns true when called so damage can be given. returns false at end of attacking playerstate
@@ -418,24 +433,9 @@ public class PlayerController : MonoBehaviour
         else
         {
             puppet.pinDistanceFalloff = 5f;
-            // recoverEnabled = false;
+            
         }
-
-        /*
-                if(moveSpeed < defaultMoveSpeed) //movement speed recovery
-                {
-                    moveSpeed = 1f;
-                    // moveSpeed = (moveSpeed * stunAmount) + moveSpeed;
-                }
-
-                if(anim.speed < defaultAnimSpeed) //movement speed recovery
-                {
-                    moveSpeed = 1f;
-                    //anim.speed = (anim.speed * stunAmount) + anim.speed;
-                }
-        */
-
-
+        
     }
 
     //Checks all limbs for any damage
@@ -452,8 +452,8 @@ public class PlayerController : MonoBehaviour
                     
 
 
-                    AudioClip[] slapArray = { slap1, slap2, slap3, slap4, slap5 };
-                    audioS.clip = slapArray[Random.Range(0, 4)];
+                    AudioClip[] slapArray = { slap1, slap2, slap3};
+                    audioS.clip = slapArray[Random.Range(0, 2)];
                     audioS.Play();
                     puppet.pinDistanceFalloff += 0.40f;
                     Debug.Log(limbs[x].name + " Damage Check found a hit");
@@ -513,4 +513,8 @@ public class PlayerController : MonoBehaviour
 
     }
 
+    void Die()
+    {
+        
+    }
 }

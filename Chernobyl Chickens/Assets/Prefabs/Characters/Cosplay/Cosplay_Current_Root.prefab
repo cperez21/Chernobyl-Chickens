@@ -2715,28 +2715,23 @@ MonoBehaviour:
   playerNumber: 1
   feathers: {fileID: 6497170728889403077, guid: 5d015548a7a42aa4db726c08dfdd9cc7,
     type: 3}
-  stunAmount: 0
-  rend: {fileID: 0}
-  slap1: {fileID: 8300000, guid: 1720740201758174b985a5b71920c1ec, type: 3}
-  slap2: {fileID: 8300000, guid: 7d347667ff88d1043a8d70ec5bec5aa4, type: 3}
-  slap3: {fileID: 8300000, guid: 686726d059386c34fb0cf2a024c21d4c, type: 3}
-  slap4: {fileID: 8300000, guid: 3d7f1b144cff61e45ad1bde79b02ffc8, type: 3}
-  slap5: {fileID: 8300000, guid: a57e7a630a11c41459441c5e64630f22, type: 3}
+  stunAmount: 0.8
+  rend: {fileID: 3769228558958760457}
+  slap1: {fileID: 8300000, guid: e39ec4189bbf35c47982ff1330fb977c, type: 3}
+  slap2: {fileID: 8300000, guid: 3c4ab27d753caea42afb54a87a0744d6, type: 3}
+  slap3: {fileID: 8300000, guid: de86538ae086a2b479ddc1ab43dd5995, type: 3}
+  death: {fileID: 8300000, guid: 1b549cea6e6b76e45bbbeac2b6a1cf85, type: 3}
   getUpPosition: {fileID: 3769228559040258099}
   canJump: 1
   moveSpeed: 10
-  jumpForce: 500
-  health: 300
+  jumpForce: 200
+  health: 100
   canHurt: 0
   isPlayer2: 0
   haveControls: 1
   groundLayer:
     serializedVersion: 2
     m_Bits: 1
-  defaultAnimSpeed: 1
-  defaultMoveSpeed: 10
-  strikeForce: 1
-  strikeDamage: 0
   radiationCount: 0
   supersized: 0
   character: 2
