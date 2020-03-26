@@ -15,6 +15,7 @@ public class PlayerInput : MonoBehaviour
     //setsplayername
     public GameObject[] players;
     public int PlayerCount;
+    
     public bool p_joined;
 
 
@@ -23,6 +24,14 @@ public class PlayerInput : MonoBehaviour
     public GameObject CharacterSelector;
     public Character SelectedCharacter;
 
+
+    //for gameplay
+    public bool spawned;
+    Vector2 i_movement;
+    public GameObject ThisObject;
+    public GameObject PlayerCharacter;
+    public GameObject Player;
+    public GameObject spawnPoint;
 
     void Start()
     {
@@ -35,6 +44,7 @@ public class PlayerInput : MonoBehaviour
             PlayerCount += 1;
         }
         this.name = "Player" + PlayerCount;
+        ThisObject = GameObject.Find("Player" + PlayerCount);
         p_joined = false;
         ready = false;
 
@@ -65,6 +75,16 @@ public class PlayerInput : MonoBehaviour
             //Debug.Log("WE IN FAM");
             p_joined = true;
         }
+
+        spawnPoint = GameObject.Find("SpawnPoint");
+        if(spawnPoint != null && spawned == false)
+        {
+            //GameObject NewPlayer =
+            Player = Instantiate(PlayerCharacter, spawnPoint.transform.position, Quaternion.identity, ThisObject.transform);
+            //NewPlayer.transform.parent = ThisObject.transform;
+            spawned = true;
+        }
+
     }
     //CONTROLS----------------------------------------------------------------------------------------------------------------------------
     void OnLeft()
@@ -107,11 +127,24 @@ public class PlayerInput : MonoBehaviour
         }
     }
 
+    void OnMove(InputValue value)
+    {
+        i_movement = value.Get<Vector2>();
+        Player.SendMessage("Move", i_movement);
+        Debug.Log("imove = " + i_movement);
+    }
+
     //MISC FUNCTIONS -----------------------------------------------------------------------------------------------------------------------
     void SetCharacter(Character character)
     {
         Debug.Log(character);
         SelectedCharacter = character;
+        PlayerCharacter = character.characterModel;
         ready = true;
+    }
+
+    void SpawnCharacter()
+    {
+
     }
 }
