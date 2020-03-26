@@ -6,17 +6,20 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/PersistentScene.unity
+    guid: cba6b55a3d5b92542bf7b1107ed0833c
+  - enabled: 1
     path: Assets/Scenes/MenuScene.unity
     guid: 80ce4b935034b094890611443c33ef51
-  - enabled: 1
-    path: Assets/Scenes/ChernobylWhiteBox.unity
-    guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
     path: Assets/Scenes/CharacterSelect.unity
     guid: 3d998f1ff307cb944931a31ab29c1de6
   - enabled: 1
     path: Assets/Scenes/MapSelect.unity
     guid: 2abbb552ace52be41a06147274cb59b7
+  - enabled: 1
+    path: Assets/Scenes/ChernobylWhiteBox.unity
+    guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 1
     path: Assets/Scenes/OsloWhitebox.unity
     guid: 06833a4fed6aef2469bf423c5d56020d
@@ -26,4 +29,6 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/YuccaMtnWhitebox.unity
     guid: db9d64c27a297b4429c22c8608726d45
-  m_configObjects: {}
+  m_configObjects:
+    com.unity.input.settings: {fileID: 11400000, guid: 07e6967d432d11d4ba5b8d8ceace3cb6,
+      type: 2}

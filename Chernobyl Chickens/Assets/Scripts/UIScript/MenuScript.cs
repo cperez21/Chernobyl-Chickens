@@ -13,12 +13,12 @@ public class MenuScript : MonoBehaviour
    
     
     // Start is called before the first frame update
-    void Awake()
-    {
-        currentScene = SceneManager.GetActiveScene();
+    //void Awake()
+    //{
+        //currentScene = SceneManager.GetActiveScene();
         //DontDestroyOnLoad(this.gameObject);
         
-    }
+    //}
 
    
     
