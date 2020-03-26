@@ -32,6 +32,8 @@ public class MapSelectorScript : MonoBehaviour
         MapCellScript MCScript = mapCell.transform.GetComponent<MapCellScript>();
         MCScript.sceneToLoad = map.sceneToLoad;
 
+        Image icon = mapCell.transform.Find("Icon").GetComponent<Image>();
+        icon.sprite = map.mapSprite;
     }
 
 
