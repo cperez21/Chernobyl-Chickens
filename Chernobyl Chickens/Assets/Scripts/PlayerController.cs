@@ -63,7 +63,8 @@ public class PlayerController : MonoBehaviour
     private string VerticalControl;
     private string JumpControl;
     private string StrikeControl;
-
+    //ceasar added for new controls
+    public Vector3 i_movement;
     
 
     IEnumerator Stunned()
@@ -133,25 +134,25 @@ public class PlayerController : MonoBehaviour
         respawnPoint = transform.position;
         
 
+        
+        //if (isPlayer2)
+        //{
+        //    Debug.Log("Player Controls are set to Player2");
+        //    HorizontalControl = "Horizontal_P2";
+        //    VerticalControl = "Vertical_P2";
+        //    JumpControl = "Jump_P2";
+        //    StrikeControl = "Strike_P2";
+        //}
+        //else
+        //{
+        //    Debug.Log("Player Controls are set to Player1");
 
-        if (isPlayer2)
-        {
-            Debug.Log("Player Controls are set to Player2");
-            HorizontalControl = "Horizontal_P2";
-            VerticalControl = "Vertical_P2";
-            JumpControl = "Jump_P2";
-            StrikeControl = "Strike_P2";
-        }
-        else
-        {
-            Debug.Log("Player Controls are set to Player1");
+        //    HorizontalControl = "Horizontal_P1";
+        //    VerticalControl = "Vertical_P1";
+        //    JumpControl = "Jump_P1";
+        //    StrikeControl = "Strike_P1";
 
-            HorizontalControl = "Horizontal_P1";
-            VerticalControl = "Vertical_P1";
-            JumpControl = "Jump_P1";
-            StrikeControl = "Strike_P1";
-
-        }
+        //}
 
         //CEASAR ZONE
         supersized = false;
@@ -161,7 +162,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //Move();
+        Move();
         //Damage Flash Recovery begin
         if (rend.material.GetFloat("Vector1_9AB3F732") <= normalShadowSize)
         {
@@ -381,11 +382,11 @@ public class PlayerController : MonoBehaviour
     //    i_movement = value.Get<Vector2>();
     //    //Debug.Log("imove = " + i_movement);
     //}
-    private void Move(Vector2 i_movement)
+    public void Move()
     {
         Vector3 movement = new Vector3(i_movement.x, 0, i_movement.y) * moveSpeed * Time.deltaTime;
-        //Debug.Log("move = " + movement);
-        transform.Translate(movement);
+        Debug.Log("move = " + movement);
+        //transform.Translate(movement);
 
 
         //controls for moving left and right
@@ -409,50 +410,50 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    //private void OnAttack()
-    //{
-    //    Debug.Log("attack ");
-    //    if (character == PlayerCharacter.LEGOLAS)
-    //    {
-    //        //Used for Legolas's jump kick. Adds force upwards because he kept going b o n k
-    //        if (Attackcooldown >= 1.0f)
-    //        {
-    //            rb.AddForce(Vector3.up * 300); //the perfect amount of force on the first try fuck yes -cullen 8:09am
-    //            anim.SetTrigger("Strike");
-    //            Attackcooldown = 0f;
-    //        }
-    //        else
-    //        {
-    //            return;
-    //        }
-    //    }
-    //    //Regular strike for other characters
-    //    else
-    //    {
-    //        anim.SetTrigger("Strike");
-    //    }
-    //}
-    //private void OnJump()
-    //{
-    //    Debug.DrawRay(transform.position, Vector3.down, Color.blue, Mathf.Infinity);
-    //    if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Vector3.down, out hit, 2.5f, groundLayer))
-    //    {
-    //        Debug.Log("raycast hit " + hit.collider.name);
+    public void Attack()
+    {
+        Debug.Log("attack ");
+        if (character == PlayerCharacter.LEGOLAS)
+        {
+            //Used for Legolas's jump kick. Adds force upwards because he kept going b o n k
+            if (Attackcooldown >= 1.0f)
+            {
+                rb.AddForce(Vector3.up * 300); //the perfect amount of force on the first try fuck yes -cullen 8:09am
+                anim.SetTrigger("Strike");
+                Attackcooldown = 0f;
+            }
+            else
+            {
+                return;
+            }
+        }
+        //Regular strike for other characters
+        else
+        {
+            anim.SetTrigger("Strike");
+        }
+    }
+    private void JumpPrep()
+    {
+        Debug.DrawRay(transform.position, Vector3.down, Color.blue, Mathf.Infinity);
+        if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Vector3.down, out hit, 2.5f, groundLayer))
+        {
+            Debug.Log("raycast hit " + hit.collider.name);
 
-    //        Jump();
+            Jump();
 
 
-    //    }
-    //    else
-    //    {
-    //        return;
-    //    }
-    //}
-    //private void Jump()
-    //{
-    //    anim.SetTrigger("Jump");
-    //    rb.AddForce(Vector3.up * jumpForce);
-    //}
+        }
+        else
+        {
+            return;
+        }
+    }
+    private void Jump()
+    {
+        anim.SetTrigger("Jump");
+        rb.AddForce(Vector3.up * jumpForce);
+    }
 
 
     /*NEW CONTROLS---------------------------------------------------------------------------------------------------------------------------------*/

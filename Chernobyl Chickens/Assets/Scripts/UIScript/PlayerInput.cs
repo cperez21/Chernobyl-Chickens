@@ -27,10 +27,11 @@ public class PlayerInput : MonoBehaviour
 
     //for gameplay
     public bool spawned;
-    Vector2 i_movement;
+    Vector2 movement;
     public GameObject ThisObject;
     public GameObject PlayerCharacter;
     public GameObject Player;
+    PlayerController PlayerScript;
     public GameObject spawnPoint;
 
     void Start()
@@ -80,7 +81,9 @@ public class PlayerInput : MonoBehaviour
         if(spawnPoint != null && spawned == false)
         {
             //GameObject NewPlayer =
-            Player = Instantiate(PlayerCharacter, spawnPoint.transform.position, Quaternion.identity, ThisObject.transform);
+            GameObject plyr = Instantiate(PlayerCharacter, spawnPoint.transform.position, Quaternion.identity, ThisObject.transform);
+            Player = plyr.transform.Find("Model").gameObject;
+            PlayerScript = Player.GetComponent<PlayerController>();
             //NewPlayer.transform.parent = ThisObject.transform;
             spawned = true;
         }
@@ -107,7 +110,7 @@ public class PlayerInput : MonoBehaviour
     }
     void OnPlayerSelect()
     {
-        Debug.Log("ping");
+        
         if (CurrentScene == "CharacterSelect" && ready == false)
         {
             //Debug.Log(CharacterSelector);
@@ -129,9 +132,23 @@ public class PlayerInput : MonoBehaviour
 
     void OnMove(InputValue value)
     {
-        i_movement = value.Get<Vector2>();
-        Player.SendMessage("Move", i_movement);
-        Debug.Log("imove = " + i_movement);
+        if(Player != null)
+        {
+            movement = value.Get<Vector2>();
+            PlayerScript.i_movement = movement;
+            //Player.SendMessage("Move", i_movement);
+            Debug.Log("imove = " + movement);
+        }
+        
+    }
+
+    void OnAttack()
+    {
+        Player.SendMessage("Attack");
+    }
+    void OnJump()
+    {
+        Player.SendMessage("JumpPrep");
     }
 
     //MISC FUNCTIONS -----------------------------------------------------------------------------------------------------------------------
