@@ -8,7 +8,6 @@ public class ButtonScript : MonoBehaviour
 {
 
     public string ButtonAction;
-    public string CurrentScene;
     public string SceneToLoad;
     public GameObject highlight;
     public bool toggleHL;
@@ -33,12 +32,7 @@ public class ButtonScript : MonoBehaviour
 
     public void ButtonLoad()
     {
-
-        object[] tempArray = new object[2];
-        tempArray[0] = SceneToLoad;
-        tempArray[1] = CurrentScene;
-
-        GameManager.SendMessage(ButtonAction, tempArray);
+        GameManager.SendMessage(ButtonAction, SceneToLoad);
     }
 
     //TEST

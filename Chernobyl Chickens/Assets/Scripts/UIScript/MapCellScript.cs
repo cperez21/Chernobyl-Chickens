@@ -7,9 +7,11 @@ public class MapCellScript : MonoBehaviour
 {
     public string sceneToLoad;
 
+
     void Start()
     {
         Debug.Log(sceneToLoad);
+
     }
 
     public void LoadScene()

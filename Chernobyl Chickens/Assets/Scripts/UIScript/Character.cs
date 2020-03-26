@@ -10,4 +10,5 @@ public class Character : ScriptableObject
     public Sprite characterSprite;
     public Sprite characterIcon;
     public float zoom = 1;
+    public GameObject characterModel;
 }

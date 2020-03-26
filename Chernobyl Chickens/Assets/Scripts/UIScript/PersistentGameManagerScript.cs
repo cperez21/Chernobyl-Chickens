@@ -1,24 +1,50 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
-public class GameManagerScript : MonoBehaviour
+public class PersistentGameManagerScript : MonoBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
+    public static PersistentGameManagerScript instance;
+    public string LoadedScene;
+    public string SelectedMap;
+
+    private void Awake()
     {
-        
+        instance = this;
+        SceneManager.LoadSceneAsync((int)SceneIndexes.MenuScene, LoadSceneMode.Additive);
     }
 
-    // Update is called once per frame
-    void Update()
+    public void GoToCharSelect()
     {
-        
+        Debug.Log("Gone");
+        SceneManager.UnloadSceneAsync((int)SceneIndexes.MenuScene);
+        SceneManager.LoadSceneAsync((int)SceneIndexes.CharSelect, LoadSceneMode.Additive);
+        LoadedScene = "CharacterSelect";
     }
 
-    private void OnJoin()
+    public void GoToMapSelect()
     {
+        SceneManager.UnloadSceneAsync(LoadedScene);
+        SceneManager.LoadSceneAsync((int)SceneIndexes.MapSelect, LoadSceneMode.Additive);
+        LoadedScene = "MapSelect";
     }
+
+    public void ChangeScene(string sceneName)
+    {
+
+        SceneManager.UnloadSceneAsync(LoadedScene);
+        SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+        LoadedScene = sceneName;
+
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
 }
 

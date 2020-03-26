@@ -7,15 +7,21 @@ using UnityEngine.InputSystem;
 
 public class PlayerInput : MonoBehaviour
 {
+    //sets gamemanager and script
     public GameObject GameManager;
-    public Character SelectedCharacter;
+    PersistentGameManagerScript GameManagerScript;
+    //Grabs current scene
+    public string CurrentScene;
+    //setsplayername
     public GameObject[] players;
     public int PlayerCount;
     public bool p_joined;
-    public string CurrentScene;
-    PersistentGameManagerScript GameManagerScript;
 
+
+    //for character selectorscreen
+    public bool ready;
     public GameObject CharacterSelector;
+    public Character SelectedCharacter;
 
 
     void Start()
@@ -30,6 +36,7 @@ public class PlayerInput : MonoBehaviour
         }
         this.name = "Player" + PlayerCount;
         p_joined = false;
+        ready = false;
 
 
         //CSS = GameObject.Find("PlayerCharacterSelect" + PlayerCount)
@@ -81,10 +88,22 @@ public class PlayerInput : MonoBehaviour
     void OnPlayerSelect()
     {
         Debug.Log("ping");
-        if (CurrentScene == "CharacterSelect")
+        if (CurrentScene == "CharacterSelect" && ready == false)
         {
             //Debug.Log(CharacterSelector);
             CharacterSelector.SendMessage("SelectChar");
+        }
+        else if (CurrentScene == "CharacterSelect" && ready == true)
+        {
+            GameManagerScript.SendMessage("GoToMapSelect");
+        }
+    }
+
+    void OnPlayerBack()
+    {
+        if (CurrentScene == "CharacterSelect" && ready == true)
+        {
+            ready = false;
         }
     }
 
@@ -93,5 +112,6 @@ public class PlayerInput : MonoBehaviour
     {
         Debug.Log(character);
         SelectedCharacter = character;
+        ready = true;
     }
 }

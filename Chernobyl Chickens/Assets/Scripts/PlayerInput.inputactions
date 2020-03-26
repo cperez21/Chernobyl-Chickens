@@ -7,15 +7,15 @@
             "actions": [
                 {
                     "name": "Move",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "fcded49b-e0fd-44a1-8355-414d5f00cca1",
-                    "expectedControlType": "",
+                    "expectedControlType": "Vector2",
                     "processors": "",
                     "interactions": ""
                 },
                 {
                     "name": "Jump",
-                    "type": "Button",
+                    "type": "PassThrough",
                     "id": "893f9458-44ae-4e34-8fee-9d9c909d31e1",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -57,6 +57,14 @@
                     "name": "PlayerSelect",
                     "type": "Button",
                     "id": "9f273291-79ff-485f-a993-1a24e70c5068",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": ""
+                },
+                {
+                    "name": "PlayerBack",
+                    "type": "Button",
+                    "id": "59cdcd63-4727-4f40-a460-f8fce3e6490b",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": ""
@@ -335,6 +343,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "PlayerSelect",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "684dfea6-214d-44f0-b515-678dd47e3571",
+                    "path": "<XInputController>/buttonEast",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PlayerBack",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "a8be9458-57d5-4522-8808-774729ca4e09",
+                    "path": "<Keyboard>/backspace",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "PlayerBack",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

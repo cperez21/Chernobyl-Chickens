@@ -201,13 +201,7 @@ public class PlayerController : MonoBehaviour
        
        
       
-        
-        //Damage Flash Recovery End
 
-        if (Input.GetKeyDown(KeyCode.T))
-        {
-            state = PlayerState.DEAD;
-        }
 
         //when health is 0, set playerstate to DEAD
         if (health <= 0)
@@ -271,14 +265,7 @@ public class PlayerController : MonoBehaviour
             {
                 Jump();
             }
-
-            //CEASAR ADDED FOR TESTING OF UI // Testing damage flash -cullen
-            if (Input.GetKeyDown(KeyCode.H))
-            {
-                DamageFlash();
-                // health -= 10;
-
-            }
+            //ATTACK
             if (Input.GetButtonDown(StrikeControl))
             {
 
@@ -380,7 +367,11 @@ public class PlayerController : MonoBehaviour
         }
 
     }
+    /*NEW CONTROLS---------------------------------------------------------------------------------------------------------------------------------*/
 
+
+
+    /*NEW CONTROLS---------------------------------------------------------------------------------------------------------------------------------*/
 
     void Jump()
     {

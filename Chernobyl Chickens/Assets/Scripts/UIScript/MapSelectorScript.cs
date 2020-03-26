@@ -9,13 +9,16 @@ public class MapSelectorScript : MonoBehaviour
     public List<Map> maps = new List<Map>();
     public GameObject mapCellPrefab;
 
+
     void Start()
     {
+
         foreach (Map map in maps)
         {
             SpawnMapCell(map);
             
         }
+
     }
 
 
