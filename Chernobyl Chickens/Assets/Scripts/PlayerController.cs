@@ -364,7 +364,8 @@ public class PlayerController : MonoBehaviour
         //Ceasar added - scaling for radiation
         if (radiationCount >= 100 && supersized == false)
         {
-            this.transform.localScale += new Vector3(2, 2, 2);
+            this.transform.parent.position += Vector3.up * 10;
+            this.transform.parent.localScale += new Vector3(2, 2, 2);
             supersized = true;
         }
 

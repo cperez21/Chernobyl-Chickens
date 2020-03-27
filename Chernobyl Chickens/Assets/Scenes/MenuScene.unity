@@ -97,7 +97,7 @@ LightmapSettings:
     m_ExportTrainingData: 0
     m_TrainingDataDestination: TrainingData
   m_LightingDataAsset: {fileID: 0}
-  m_UseShadowmask: 0
+  m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
   serializedVersion: 2
@@ -723,8 +723,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1450796127}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -36, y: 180, z: 0}
-  m_LocalScale: {x: 55.722107, y: 55.722107, z: 55.722107}
+  m_LocalPosition: {x: 0, y: 0, z: 14}
+  m_LocalScale: {x: 59.4, y: 64.5, z: 55.722107}
   m_Children: []
   m_Father: {fileID: 806232701}
   m_RootOrder: 0
@@ -767,7 +767,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0d7a411c1dfbf0e4888c9d9c8ae3dcd5, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d1eac0ea8347e1341bb2da5a465b48af, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1063,7 +1063,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ButtonAction: QuitGame
-  CurrentScene: MenuScene
   SceneToLoad: CharacterSelect
   highlight: {fileID: 2144811066}
   toggleHL: 0

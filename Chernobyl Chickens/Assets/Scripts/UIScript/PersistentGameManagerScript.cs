@@ -8,13 +8,28 @@ using UnityEngine.InputSystem;
 public class PersistentGameManagerScript : MonoBehaviour
 {
     public static PersistentGameManagerScript instance;
+    PersistentGameManagerScript gameManager;
     public string LoadedScene;
     public string SelectedMap;
+    PlayerController[] players;
 
     private void Awake()
     {
         instance = this;
         SceneManager.LoadSceneAsync((int)SceneIndexes.MenuScene, LoadSceneMode.Additive);
+        gameManager = GameObject.FindWithTag("GameManager").GetComponent<PersistentGameManagerScript>();
+        players = GameObject.FindObjectsOfType<PlayerController>();
+    }
+
+    private void Update()
+    {
+        for (int x = 0; x < players.Length; x++)
+        {
+            if (players[x].state == PlayerController.PlayerState.DEAD)
+            {
+                gameManager.SendMessage("GoToMenuScene");
+            }
+        }
     }
 
     public void GoToCharSelect()
