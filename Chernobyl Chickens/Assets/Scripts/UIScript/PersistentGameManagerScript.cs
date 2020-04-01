@@ -16,7 +16,11 @@ public class PersistentGameManagerScript : MonoBehaviour
     private void Awake()
     {
         instance = this;
-        SceneManager.LoadSceneAsync((int)SceneIndexes.MenuScene, LoadSceneMode.Additive);
+        Scene scene = SceneManager.GetActiveScene();
+        if (!scene.name.Contains("Test")) // I put this in so I can still use my testbed without complications. -Cullen 3/31
+        {
+            SceneManager.LoadSceneAsync((int)SceneIndexes.MenuScene, LoadSceneMode.Additive);
+        }
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<PersistentGameManagerScript>();
         players = GameObject.FindObjectsOfType<PlayerController>();
     }
