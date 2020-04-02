@@ -15,7 +15,8 @@ public class PlayerController : MonoBehaviour
     private float dirZ;
     public float stunAmount;
     public Renderer rend;
-    float normalShadowSize, finalShadowSize, shadowRecoverRate, currentShadowSize;
+
+   
 
 
     // [Header("Audio Section")]
@@ -55,7 +56,7 @@ public class PlayerController : MonoBehaviour
    
     private float attackBonus = 0f;
     //Ceasar added - for radiation
-    public float radiationCount = 0;
+    public float radiationCount = 0f;
     public bool supersized;
 
     //used to declare controls
@@ -163,19 +164,7 @@ public class PlayerController : MonoBehaviour
     void Update()
     {
         Move();
-        //Damage Flash Recovery begin
-        if (rend.material.GetFloat("Vector1_9AB3F732") <= normalShadowSize)
-        {
-            rend.material.SetColor("Color_C2BC5537", Color.black);
-            rend.material.SetFloat("Vector1_9AB3F732", normalShadowSize);
-
-        }
-        else
-        {
-            currentShadowSize = rend.material.GetFloat("Vector1_9AB3F732"); //This is some shit
-            rend.material.SetFloat("Vector1_9AB3F732", currentShadowSize - shadowRecoverRate);
-
-        }
+       
 
         if (state == PlayerState.DEAD) //skips Update logic if player is dead. (prevents further damage from being taken and sounds)
         {
@@ -194,6 +183,7 @@ public class PlayerController : MonoBehaviour
         if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Vector3.down, out hit, 2.5f, groundLayer))
         {
             canJump = true;
+            
         }
         else
         {
@@ -362,7 +352,7 @@ public class PlayerController : MonoBehaviour
         }
 
         //Ceasar added - scaling for radiation
-        if (radiationCount >= 100 && supersized == false)
+        if (radiationCount >= 1f && supersized == false) //changed to 1. Makes it easier to work with shader 0.00 - 1.00 settings. -cullen
         {
             this.transform.parent.position += Vector3.up * 10;
             this.transform.parent.localScale += new Vector3(2, 2, 2);
@@ -408,6 +398,7 @@ public class PlayerController : MonoBehaviour
         {
             anim.SetTrigger("Idle");
             anim.ResetTrigger("Walk");
+           // anim.ResetTrigger("Jump");
         }
     }
 
@@ -436,24 +427,27 @@ public class PlayerController : MonoBehaviour
     }
     private void JumpPrep()
     {
-        Debug.DrawRay(transform.position, Vector3.down, Color.blue, Mathf.Infinity);
-        if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Vector3.down, out hit, 2.5f, groundLayer))
-        {
-            Debug.Log("raycast hit " + hit.collider.name);
-
+        //Debug.DrawRay(transform.position, Vector3.down, Color.blue, Mathf.Infinity);
+       // if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Vector3.down, out hit, 2.0f, groundLayer))
+        //{
+           // Debug.Log("raycast hit " + hit.collider.name);
+        if (canJump)
             Jump();
-
-
-        }
         else
-        {
             return;
-        }
+
+
+        //}
+        //else
+        //{
+          //  return;
+        //}
     }
     private void Jump()
     {
         anim.SetTrigger("Jump");
         rb.AddForce(Vector3.up * jumpForce);
+        
     }
 
 
@@ -469,7 +463,7 @@ public class PlayerController : MonoBehaviour
         return true;
 
     }
-    bool IsAttacking(int x) //anim event passes 1 when attack starts, passes 0 to end it
+    bool IsAttacking(int x) //anim event passes 1 when attack starts, passes 0 when it ends
     {
 
 
@@ -530,7 +524,8 @@ public class PlayerController : MonoBehaviour
                     audioS.Play();
                     puppet.pinDistanceFalloff += 0.40f;
                     Debug.Log(limbs[x].name + " Damage Check found a hit");
-                    DamageFlash();
+                    gameObject.SendMessage("DamageFlash");
+                    
 
                     limbs[x].magnitude += attackBonus;
 
@@ -569,25 +564,6 @@ public class PlayerController : MonoBehaviour
 
     }
 
-    void DamageFlash() //Player flashes red when taking a hit.
-    {
-
-       
-        shadowRecoverRate = 0.05f;
-        normalShadowSize = 0.25f;
-        finalShadowSize = 1f;
-
-        rend.material.SetColor("Color_C2BC5537", Color.red); //changes toon shading to red.
-        rend.material.SetFloat("Vector1_9AB3F732", finalShadowSize); //sets character to all red (max setting).
-        currentShadowSize = rend.material.GetFloat("Vector1_9AB3F732");
-
-        
-
-
-    }
-
-    void Die()
-    {
-        
-    }
+    
+    
 }
