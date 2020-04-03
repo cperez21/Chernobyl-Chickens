@@ -2791,6 +2791,8 @@ MonoBehaviour:
     type: 3}
   stunAmount: 0.8
   rend: {fileID: 5163448266168340294}
+  radLossRate: 0.005
+  radCooldownTime: 1
   slapSwing: {fileID: 8300000, guid: 5a1405c2d8754ae448f7037c979766fb, type: 3}
   slap1: {fileID: 8300000, guid: e39ec4189bbf35c47982ff1330fb977c, type: 3}
   slap2: {fileID: 8300000, guid: 3c4ab27d753caea42afb54a87a0744d6, type: 3}
@@ -2810,6 +2812,7 @@ MonoBehaviour:
   radiationCount: 0
   supersized: 0
   i_movement: {x: 0, y: 0, z: 0}
+  radState: 0
   character: 0
   state: 0
 --- !u!82 &5163448266319291450

@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
 public class PlayerController : MonoBehaviour
 {
     public int playerNumber; //The GameManager script sets this value.
@@ -15,6 +16,9 @@ public class PlayerController : MonoBehaviour
     private float dirZ;
     public float stunAmount;
     public Renderer rend;
+    public float radLossRate;
+    public float radCooldownTime;
+   
 
    
 
@@ -67,6 +71,12 @@ public class PlayerController : MonoBehaviour
     //ceasar added for new controls
     public Vector3 i_movement;
     
+    IEnumerator RadCooldown()
+    {
+        yield return new WaitForSeconds(1f);
+        Debug.Log("rad cooldown coroutine ended");
+        radState = RadiationState.LOSING;
+    }
 
     IEnumerator Stunned()
     {
@@ -93,9 +103,17 @@ public class PlayerController : MonoBehaviour
         
 
         yield return new WaitUntil(() => canJump == true);
+        
         state = PlayerState.STUNNED;
     }
 
+    public enum RadiationState
+    {
+        DEFAULT,
+        GAINING,
+        LOSING,
+        COOLDOWN
+    }
 
     public enum PlayerState
     {
@@ -114,14 +132,14 @@ public class PlayerController : MonoBehaviour
         TSO
     }
 
-
+    public RadiationState radState;
     public PlayerCharacter character;
     public PlayerState state;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+      radCooldownTime = 1.0f;
         startOrientation = transform.rotation.eulerAngles;
         audioS = GetComponent<AudioSource>();
         state = PlayerState.DEFAULT;
@@ -163,13 +181,18 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Move();
-       
-
+        //This must be at start of update to prevent actions after death
         if (state == PlayerState.DEAD) //skips Update logic if player is dead. (prevents further damage from being taken and sounds)
         {
             return;
         }
+
+
+
+        Move();
+
+        
+       
         
         //combat Attackcooldown. Referenced in OntriggerStay
         Attackcooldown += Time.deltaTime;
@@ -191,9 +214,6 @@ public class PlayerController : MonoBehaviour
         }
 
        
-       
-      
-
 
         //when health is 0, set playerstate to DEAD
         if (health <= 0)
@@ -299,6 +319,52 @@ public class PlayerController : MonoBehaviour
              willHurt = false;
          }
  */
+        
+        switch (radState)
+        {
+            case RadiationState.DEFAULT:
+                {
+                    //Do nothing, does not have any radiation
+                    break;
+                }
+
+            case RadiationState.GAINING:
+                {
+                    //gaining radiation from the RadiationScript on the effect plane
+                    break;
+                }
+
+            case RadiationState.COOLDOWN:
+                {
+                    //cannot gain rads in this state. Once the cooldown coroutine finishes, state will be switched to losing
+
+                    break;
+                }
+
+            case RadiationState.LOSING:
+                {
+                    //After cooldown, start to lose radiation
+                    if(radiationCount > 0)
+                    {
+                        LoseRads();
+                    }
+                    else
+                    {
+                        radiationCount = 0f;
+                        radState = RadiationState.DEFAULT;
+                    }
+
+                    break;
+                }
+
+
+        }
+        
+        
+        
+        
+        
+        
         //state switch system
         switch (state)
         {
@@ -354,9 +420,7 @@ public class PlayerController : MonoBehaviour
         //Ceasar added - scaling for radiation
         if (radiationCount >= 1f && supersized == false) //changed to 1. Makes it easier to work with shader 0.00 - 1.00 settings. -cullen
         {
-            this.transform.parent.position += Vector3.up * 10;
-            this.transform.parent.localScale += new Vector3(2, 2, 2);
-            supersized = true;
+            SuperSize();
         }
 
     }
@@ -556,14 +620,19 @@ public class PlayerController : MonoBehaviour
                 }
 
             }
-
-
         }
-
-
-
+        
     }
 
+    void SuperSize()
+    {
+        this.transform.parent.position += Vector3.up * 10;
+        this.transform.parent.localScale += new Vector3(2, 2, 2);
+        supersized = true;
+    }
     
-    
+    void LoseRads()
+    {
+        radiationCount -= radLossRate;
+    }
 }
