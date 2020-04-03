@@ -15,6 +15,7 @@ public class CharacterSelectorScript : MonoBehaviour
     public GameObject CharacterCell;
     public GameObject Player;
     public GameObject Portrait;
+    public Text ReadyText;
     public int CharacterCount;
     public int CharacterVal;
     void Start()
@@ -28,16 +29,18 @@ public class CharacterSelectorScript : MonoBehaviour
         }
         CurrentCharacter = characters[0];
         CharacterVal = 0;
-        
+        ReadyText.text = "JOIN";
     }
 
     void Update()
     {
         Player = GameObject.Find("Player" + CharacterSelectNum);
-        if (Player !=null)
+        if (Player !=null && ReadyText.text != "READY!")
         {
             CharacterCell.SetActive(true);
+            ReadyText.text = "SELECT";
         }
+
         Image icon = Portrait.transform.GetComponent<Image>();
         icon.sprite = CurrentCharacter.characterSprite;
     }
@@ -76,5 +79,11 @@ public class CharacterSelectorScript : MonoBehaviour
     {
         Player.SendMessage("SetCharacter", CurrentCharacter);
         Debug.Log(CurrentCharacter);
+        ReadyText.text = "READY!";
+    }
+
+    void UnSelectChar()
+    {
+        ReadyText.text = "SELECT";
     }
 }

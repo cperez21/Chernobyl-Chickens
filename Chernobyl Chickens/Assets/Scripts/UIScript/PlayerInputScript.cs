@@ -5,7 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
-public class PlayerInput : MonoBehaviour
+public class PlayerInputScript : MonoBehaviour
 {
     //sets gamemanager and script
     public GameObject GameManager;
@@ -127,6 +127,7 @@ public class PlayerInput : MonoBehaviour
         if (CurrentScene == "CharacterSelect" && ready == true)
         {
             ready = false;
+            CharacterSelector.SendMessage("UnSelectChar");
         }
     }
 

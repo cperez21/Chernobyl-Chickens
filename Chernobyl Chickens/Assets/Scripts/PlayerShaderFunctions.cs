@@ -5,11 +5,12 @@ using UnityEngine;
 public class PlayerShaderFunctions : MonoBehaviour
 {
     public Renderer rend;
-    public float shadowRecoverRate;
+    public Color radiationColor;
+    public float shadowRecoverRate; //This is just used for damage, recommended 0.05f
+    [Header("These values will read out, do not change")]
     public float targetShadowSize; //used as the target value to recover back to.
     public float startShadowSize; // the original, standard cell shading value.
     public float currentRadiationSize;
-    public Color radiationColor;
     private float finalShadowSize = 1f;
     private float currentShadowSize;
     //shader references have funky names. I tried to change them but it broke a lot of stuff, so I made strings so they can be addressed more easily. -Cullen
@@ -37,9 +38,10 @@ public class PlayerShaderFunctions : MonoBehaviour
             rend.material.SetColor(shadowColor, radiationColor); //sets it green
             targetShadowSize = currentRadiationSize;
         }
-        else if(currentRadiationSize < startShadowSize && rend.material.GetColor(shadowColor) != Color.red)
+        else if(currentRadiationSize < startShadowSize && rend.material.GetColor(shadowColor) != Color.red) //if your radiation is lower than the standard black shading
         {
-            targetShadowSize = startShadowSize;
+            targetShadowSize = startShadowSize; //reset cell shading to normal
+            rend.material.SetColor(shadowColor, Color.black); //reset cell shading back to black
         }
 
         //Damage Flash Recovery begin
@@ -69,11 +71,6 @@ public class PlayerShaderFunctions : MonoBehaviour
     void DamageFlash() //Player flashes red when taking a hit.
     {
 
-
-       // shadowRecoverRate = 0.05f;
-       // targetShadowSize = 0.25f;
-       // finalShadowSize = 1f;
-
         rend.material.SetColor(shadowColor, Color.red); //changes toon shading to red.
         rend.material.SetFloat(shadowSize, finalShadowSize); //sets character to all red (max setting).
         currentShadowSize = rend.material.GetFloat(shadowSize);
@@ -81,5 +78,8 @@ public class PlayerShaderFunctions : MonoBehaviour
 
     }
 
-
+    void SetShaderColor(Color color)
+    {
+        rend.material.SetColor(shadowColor, color);
+    }
 }
