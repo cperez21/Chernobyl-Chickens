@@ -324,6 +324,8 @@ MonoBehaviour:
     type: 3}
   stunAmount: 0.8
   rend: {fileID: 2493229315209398362}
+  radLossRate: 0
+  radCooldownTime: 0
   slapSwing: {fileID: 8300000, guid: 5a1405c2d8754ae448f7037c979766fb, type: 3}
   slap1: {fileID: 8300000, guid: e39ec4189bbf35c47982ff1330fb977c, type: 3}
   slap2: {fileID: 8300000, guid: 3c4ab27d753caea42afb54a87a0744d6, type: 3}
@@ -343,6 +345,7 @@ MonoBehaviour:
   radiationCount: 0
   supersized: 0
   i_movement: {x: 0, y: 0, z: 0}
+  radState: 0
   character: 3
   state: 0
 --- !u!82 &2045918556
@@ -454,11 +457,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rend: {fileID: 2493229315209398362}
+  radiationColor: {r: 0, g: 0, b: 0, a: 0}
   shadowRecoverRate: 0.05
   targetShadowSize: 0
   startShadowSize: 0
   currentRadiationSize: 0
-  radiationColor: {r: 0, g: 0, b: 0, a: 0}
 --- !u!1 &2493229314475604948
 GameObject:
   m_ObjectHideFlags: 0
@@ -1240,6 +1243,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2493229316028045408}
   - component: {fileID: -1802085764258313182}
+  - component: {fileID: 7325482833821028117}
   m_Layer: 0
   m_Name: Jerry_Current_Root
   m_TagString: Untagged
@@ -1277,11 +1281,61 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rend: {fileID: 0}
+  radiationColor: {r: 0, g: 0, b: 0, a: 0}
   shadowRecoverRate: 0
   targetShadowSize: 0
   startShadowSize: 0
   currentRadiationSize: 0
-  radiationColor: {r: 0, g: 0, b: 0, a: 0}
+--- !u!137 &7325482833821028117
+SkinnedMeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2493229316028045415}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: fa901b874b4ae60408c71728430a74b6, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  serializedVersion: 2
+  m_Quality: 0
+  m_UpdateWhenOffscreen: 0
+  m_SkinnedMotionVectors: 1
+  m_Mesh: {fileID: 0}
+  m_Bones: []
+  m_BlendShapeWeights: []
+  m_RootBone: {fileID: 0}
+  m_AABB:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  m_DirtyAABB: 1
 --- !u!1 &2493229316047090072
 GameObject:
   m_ObjectHideFlags: 0
