@@ -404,7 +404,7 @@ public class PlayerController : MonoBehaviour
             case PlayerState.STUNNED:
                 Recover(0.2f); //currently only affecting ragdoll mechanics
                 haveControls = false;
-                puppet.targetRoot.position = new Vector3(getUpPosition.transform.position.x, puppet.targetRoot.position.y, getUpPosition.transform.position.z);
+                puppet.targetRoot.position = new Vector3(getUpPosition.transform.position.x, getUpPosition.transform.position.y, getUpPosition.transform.position.z);
 
                 if (!isStunned && canJump)
                 {

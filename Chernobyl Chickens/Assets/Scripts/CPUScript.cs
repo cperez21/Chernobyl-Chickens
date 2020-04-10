@@ -34,7 +34,7 @@ public class CPUScript : MonoBehaviour //This Script accessess the PlayerControl
             Move(Vector3.zero);
         //}
 
-        yield return new WaitForSeconds(0.25f);
+        yield return new WaitForSeconds(0.5f);
 
         state = CPUState.Default;
 
