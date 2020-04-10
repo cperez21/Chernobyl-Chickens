@@ -11,7 +11,8 @@ public class PersistentGameManagerScript : MonoBehaviour
     PersistentGameManagerScript gameManager;
     public string LoadedScene;
     public string SelectedMap;
-    PlayerController[] players;
+    public PlayerController[] players;
+    private bool firstFrame = true;
 
     private void Awake()
     {
@@ -22,11 +23,25 @@ public class PersistentGameManagerScript : MonoBehaviour
             SceneManager.LoadSceneAsync((int)SceneIndexes.MenuScene, LoadSceneMode.Additive);
         }
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<PersistentGameManagerScript>();
-        players = GameObject.FindObjectsOfType<PlayerController>();
+        
+
     }
 
     private void Update()
     {
+      
+           
+       
+
+
+
+           
+           
+        
+
+
+
+
         for (int x = 0; x < players.Length; x++)
         {
             if (players[x].state == PlayerController.PlayerState.DEAD)
