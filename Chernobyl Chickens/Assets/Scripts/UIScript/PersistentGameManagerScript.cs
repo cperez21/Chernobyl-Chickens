@@ -15,6 +15,7 @@ public class PersistentGameManagerScript : MonoBehaviour
 
     private void Awake()
     {
+        LoadedScene = "MenuScene";
         instance = this;
         Scene scene = SceneManager.GetActiveScene();
         if (!scene.name.Contains("Test")) // I put this in so I can still use my testbed without complications. -Cullen 3/31
