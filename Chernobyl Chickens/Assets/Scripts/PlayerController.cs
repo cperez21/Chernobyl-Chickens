@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     public int playerNumber; //The GameManager script sets this value.
     RootMotion.Dynamics.PuppetMaster puppet;
+    public float pinDistanceFalloff; //to set value for all characters rather than doing it twice for each character
     LimbDamage[] limbs;
     public ParticleSystem feathers;
     private Rigidbody[] rbPuppet;
@@ -15,12 +16,14 @@ public class PlayerController : MonoBehaviour
     private float dirX;
     private float dirZ;
     public float stunAmount;
+    public float maxStunAmount = 15f;
     public Renderer rend;
     public float radLossRate;
     public float radCooldownTime;
     private CPUScript cpu;
     private bool isHuman = false;
     private bool isStunned;
+    
     
 
    
@@ -41,6 +44,7 @@ public class PlayerController : MonoBehaviour
 
     private bool recoverEnabled; //called every frame to slowly recover the floppiness and anim/movespeed slow down from being stunned.
     public bool canHurt;
+    public bool canPush;
     public bool isPlayer2; //currently used for 2 player only prototype
     public bool haveControls; //Currently used for testing
    public Vector3 movement;
@@ -127,6 +131,7 @@ public class PlayerController : MonoBehaviour
     {
         DEFAULT,
         ATTACKING,
+        PUSHING,
         HURT,
         STUNNED,
         DEAD
@@ -147,6 +152,8 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     void Awake()
     {
+        
+        
         haveControls = true;
         radCooldownTime = 1.0f;
         startOrientation = transform.rotation.eulerAngles;
@@ -154,6 +161,8 @@ public class PlayerController : MonoBehaviour
         state = PlayerState.DEFAULT;
         rb = gameObject.GetComponent<Rigidbody>();
         puppet = transform.parent.GetChild(1).GetComponent<RootMotion.Dynamics.PuppetMaster>(); //Good god
+        pinDistanceFalloff = 2f;
+        puppet.pinDistanceFalloff = pinDistanceFalloff;
         limbs = transform.parent.GetChild(1).GetComponentsInChildren<LimbDamage>();
         //rbPuppet = transform.parent.GetChild(1).GetComponentsInChildren<Rigidbody>(); //rbPuppet[7] is the head.
         anim = GetComponent<Animator>();
@@ -197,19 +206,24 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
+        
         //This must be at start of update to prevent actions after death
         if (state == PlayerState.DEAD) //skips Update logic if player is dead. (prevents further damage from being taken and sounds)
         {
             return;
         }
 
-        if(puppet.state == RootMotion.Dynamics.PuppetMaster.State.Dead)
+        Mathf.Clamp(health, 0, 150);
+
+        //covering a flesh wound with a band aid
+        if (puppet.state == RootMotion.Dynamics.PuppetMaster.State.Dead)
         {
             state = PlayerState.STUNNED;
         }
 
-        Recover(0.05f); //default recovery amount, method only does something if pinfalloff distance is 5>. MUST be a postive number entered here.
-        if (puppet.pinDistanceFalloff > 7f)
+        Recover(0.02f); //default recovery amount, method only does something if pinfalloff distance is 5>. MUST be a postive number entered here.
+        if (stunAmount > maxStunAmount)
         {
             StartCoroutine(Stunned());
 
@@ -217,10 +231,15 @@ public class PlayerController : MonoBehaviour
 
 
 
+        Debug.Log(gameObject.transform.parent.name + "velocity is " + rb.velocity);
+
         Move();
 
         
-       
+       if(rb.velocity.y > 5f)
+        {
+            rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+        }
         
         //combat Attackcooldown. Referenced in OntriggerStay
         Attackcooldown += Time.deltaTime;
@@ -231,17 +250,32 @@ public class PlayerController : MonoBehaviour
             DamageCheck(enabled);
 
         //checks for jumping ability
-        if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Vector3.down, out hit, 1.50f, groundLayer))
+        if (!supersized)
         {
-            canJump = true;
-            
-        }
-        else
-        {
-            canJump = false;
-        }
+            //Normal jump
+            if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Vector3.down, out hit, 2.5f, groundLayer))
+            {
+                canJump = true;
 
-       
+            }
+            else
+            {
+                canJump = false;
+            }
+        }
+       else
+        {
+            //extra long raycast because of larger player size when supersized
+            if (Physics.Raycast(new Vector3(transform.position.x, transform.position.y + 1, transform.position.z), Vector3.down, out hit, 5.5f, groundLayer))
+            {
+                canJump = true;
+
+            }
+            else
+            {
+                canJump = false;
+            }
+        }
 
         //when health is 0, set playerstate to DEAD
         if (health <= 0)
@@ -408,8 +442,10 @@ public class PlayerController : MonoBehaviour
 
                 if (!isStunned && canJump)
                 {
-                    puppet.state = RootMotion.Dynamics.PuppetMaster.State.Alive;
+                    stunAmount = 0f;
                     puppet.targetRoot.position = new Vector3(getUpPosition.transform.position.x, getUpPosition.transform.position.y, getUpPosition.transform.position.z);
+
+                    puppet.state = RootMotion.Dynamics.PuppetMaster.State.Alive;
 
                     haveControls = true;
                     state = PlayerState.DEFAULT;
@@ -419,10 +455,11 @@ public class PlayerController : MonoBehaviour
                 break;
 
             case PlayerState.ATTACKING:
+                
 
+                break;
 
-
-
+            case PlayerState.PUSHING:
 
                 break;
             case PlayerState.HURT: //This is probably not needed
@@ -436,6 +473,7 @@ public class PlayerController : MonoBehaviour
                 haveControls = false;
 
                 DamageCheck(false);
+                audioS.volume = 0.50f;
                 audioS.clip = death;
                 audioS.Play();
                 break;
@@ -499,7 +537,7 @@ public class PlayerController : MonoBehaviour
             {
                 anim.SetTrigger("Idle");
                 anim.ResetTrigger("Walk");
-                // anim.ResetTrigger("Jump");
+                
             }
 
         }
@@ -509,6 +547,18 @@ public class PlayerController : MonoBehaviour
         }
 
 
+    }
+
+    public void Push()
+    {
+        if(haveControls)
+        {
+            anim.SetTrigger("Push");
+        }
+        else
+        {
+            return;
+        }
     }
 
     public void Attack()
@@ -546,7 +596,7 @@ public class PlayerController : MonoBehaviour
             return;
         }
     }
-    private void JumpPrep()
+    public void JumpPrep()
     {
       
         if(haveControls)
@@ -574,15 +624,11 @@ public class PlayerController : MonoBehaviour
     }
     private void Jump()
     {
-        if (haveControls)
-        {
+        Debug.Log("jumped");
+      
             anim.SetTrigger("Jump");
             rb.AddForce(Vector3.up * jumpForce);
-        }
-        else
-        {
-            return;
-        }
+       
     }
 
 
@@ -623,19 +669,39 @@ public class PlayerController : MonoBehaviour
 
 
     }
-   
+   void IsPushAttacking(int x)
+    {
+        if (x == 1) //beginning of attack animation
+        {
+            audioS.clip = slapSwing;
+            audioS.Play();
+            state = PlayerState.PUSHING;
+            canPush = true;
+            canHurt = true;
+            //returns true when called so damage can be given. returns false at end of attacking playerstate
+            //return true;
+        }
+        else //x == 0, end of attack animation
+        {
+           
+            state = PlayerState.DEFAULT;
+            canPush = false;
+            canHurt = false;
+            //return false;
+        }
+    }
 
     void Recover(float x)
     {
 
         //Stun recovery. Snaps the character back into shape over time.
-        if (puppet.pinDistanceFalloff >= 5f)
+        if (stunAmount > pinDistanceFalloff)
         {
-            puppet.pinDistanceFalloff -= x;
+            stunAmount -= x;
         }
         else
         {
-            puppet.pinDistanceFalloff = 5f;
+            stunAmount = pinDistanceFalloff;
             
         }
         
@@ -652,13 +718,13 @@ public class PlayerController : MonoBehaviour
             {
                 if (limbs[x].gotHit && state != PlayerState.STUNNED)
                 {
-                    
 
+                   
 
                     AudioClip[] slapArray = { slap1, slap2, slap3};
                     audioS.clip = slapArray[Random.Range(0, 2)];
                     audioS.Play();
-                    puppet.pinDistanceFalloff += 0.40f;
+                    stunAmount += 0.5f;
                     Debug.Log(limbs[x].name + " Damage Check found a hit");
                     gameObject.SendMessage("DamageFlash");
                     
@@ -667,9 +733,6 @@ public class PlayerController : MonoBehaviour
 
                     health -= (int)limbs[x].totalNormalizedDamage;
 
-
-
-
                     if (!canJump)
                     {
                         StartCoroutine(AirStunned());
@@ -677,7 +740,8 @@ public class PlayerController : MonoBehaviour
 
                     if (limbs[x].magnitude > 8.0f)
                     {
-                        puppet.pinDistanceFalloff += 1.0f;
+                        Debug.Log(limbs[x].name + " sent my flying with a magnitude of " + limbs[x].magnitude);
+                        stunAmount += 1.0f;
                         Vector3 featherSpawn = limbs[x].transform.position;
                         featherSpawn.y = limbs[x].transform.position.y + 2f;
                         featherSpawn.z = limbs[x].transform.position.z + 2f;
@@ -689,6 +753,15 @@ public class PlayerController : MonoBehaviour
                     }
                     limbs[x].gotHit = false;
                     enabled = false;
+                    //return;
+                    if (limbs[x].gotPushed)
+                    {
+                        //stunAmount += 3f;
+                        return;
+                    }
+
+
+
                 }
 
             }
@@ -698,8 +771,17 @@ public class PlayerController : MonoBehaviour
 
     void SuperSize()
     {
-        this.transform.parent.position += Vector3.up * 10;
+        Debug.Log(transform.parent.name + " got supersized");
+        this.transform.position += Vector3.up * 5;
+        //this.transform.localScale += new Vector3(1f, 1f, 1f);
         this.transform.parent.localScale += new Vector3(1f, 1f, 1f);
+
+        Rigidbody[] bones = puppet.gameObject.GetComponentsInChildren<Rigidbody>();
+        foreach(Rigidbody rbs in bones)
+        {
+            rbs.mass *= 2;
+        }
+
         supersized = true;
     }
     

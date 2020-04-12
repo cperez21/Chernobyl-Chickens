@@ -494,6 +494,8 @@ MonoBehaviour:
   bodyPart: 
   hurtOnly: 0
   gotHit: 0
+  gotPushed: 0
+  canPush: 0
   canHurt: 0
   selfController: {fileID: 8018932788421929109}
   baseDamage: 0
@@ -1883,6 +1885,8 @@ MonoBehaviour:
   bodyPart: 
   hurtOnly: 0
   gotHit: 0
+  gotPushed: 0
+  canPush: 0
   canHurt: 0
   selfController: {fileID: 8018932788421929109}
   baseDamage: 0
@@ -2225,6 +2229,8 @@ MonoBehaviour:
   bodyPart: 
   hurtOnly: 0
   gotHit: 0
+  gotPushed: 0
+  canPush: 0
   canHurt: 0
   selfController: {fileID: 8018932788421929109}
   baseDamage: 0
@@ -2410,6 +2416,7 @@ MonoBehaviour:
   movementCPU: {x: 0, y: 0, z: 0}
   target: {fileID: 0}
   maxRadAttempts: 1
+  radAttempts: 0
   players: []
   state: 0
 --- !u!114 &8018932788421929109
@@ -2425,9 +2432,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNumber: 0
+  pinDistanceFalloff: 2
   feathers: {fileID: 6497170728889403077, guid: 5d015548a7a42aa4db726c08dfdd9cc7,
     type: 3}
   stunAmount: 0.8
+  maxStunAmount: 15
   rend: {fileID: 8018932789180264147}
   radLossRate: 0
   radCooldownTime: 0
@@ -2442,6 +2451,7 @@ MonoBehaviour:
   jumpForce: 150
   health: 100
   canHurt: 0
+  canPush: 0
   isPlayer2: 0
   haveControls: 1
   movement: {x: 0, y: 0, z: 0}

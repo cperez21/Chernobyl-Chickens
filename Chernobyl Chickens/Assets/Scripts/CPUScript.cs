@@ -10,7 +10,7 @@ public class CPUScript : MonoBehaviour //This Script accessess the PlayerControl
     public GameObject target; //The object (player or radiation pool) the CPU will move at
     [Tooltip("Max number of times the CPU will make attempts to move to the radpool.")]
     public int maxRadAttempts = 1; //the amount of times the cpu will move to the rad pool.
-    readonly public int radAttempts;
+    public int radAttempts;
     private Vector3 targetDirection;
     //public PlayerController[] players;
     public List<PlayerController> players;
@@ -25,7 +25,7 @@ public class CPUScript : MonoBehaviour //This Script accessess the PlayerControl
         Debug.Log("attack coroutine started");
         Move(targetDirection * 0.25f);
         self.Attack();
-        yield return new WaitForSeconds(0.3f);
+        yield return new WaitForSeconds(0.2f);
         
 
         
@@ -34,13 +34,18 @@ public class CPUScript : MonoBehaviour //This Script accessess the PlayerControl
             Move(Vector3.zero);
         //}
 
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(Random.Range(0.75f,1f)); //amount of time before going to default and executing next attack
 
         state = CPUState.Default;
 
     }
 
-
+    //small delay between moving to target so they don't track you immediatly
+    IEnumerator MoveDelay()
+    {
+        yield return new WaitForSeconds(0.5f);
+        state = CPUState.MoveToTarget;
+    }
 
     public enum CPUState
     {
@@ -48,7 +53,8 @@ public class CPUScript : MonoBehaviour //This Script accessess the PlayerControl
         MoveToTarget,
         Attack,
         MoveToRads,
-        Radiating
+        Radiating,
+        Nothing
 
     }
 
@@ -69,20 +75,22 @@ public class CPUScript : MonoBehaviour //This Script accessess the PlayerControl
     // Update is called once per frame
     void Update()
     {
-      
+        Debug.Log(this.name + " Distance to target is " + proximity);
 
-        if(target != null)
-        targetDirection = target.transform.position - gameObject.transform.position;
+        if (target != null)
+        targetDirection = (target.transform.position - gameObject.transform.position) * 0.75f;
 
         switch (state)
         {
             case CPUState.Default:
 
-                if(self.health < 50f && radAttempts < maxRadAttempts)
+                Move(Vector3.zero);
+                if (self.health < 50f && radAttempts < maxRadAttempts)
                 {
-                    var radPools = GameObject.FindGameObjectsWithTag("Radiation"); 
+                    radAttempts++;
+                    var radPools = GameObject.FindGameObjectsWithTag("Radiation");
                     var radPoolz = radPools.ToList(); //lol
-                   target = TargetClosestObject(radPoolz);
+                    target = TargetClosestObject(radPoolz);
                     state = CPUState.MoveToRads;
                 }
 
@@ -91,11 +99,11 @@ public class CPUScript : MonoBehaviour //This Script accessess the PlayerControl
                 players = player.ToList();
 
                 //players = Object.FindObjectsOfType<PlayerController>().Where(f => f.GetInstanceID() != gameObject.GetInstanceID()).ToArray(); //what the fuck
-                
 
-                Move(Vector3.zero);
 
-                for(int x = 0; x < players.Count; x++)
+
+
+                for (int x = 0; x < players.Count; x++)
                 {
                     proximity = Vector3.Distance(players[x].transform.position, gameObject.transform.position);
                     if (proximity == 0 || players[x].state == PlayerController.PlayerState.DEAD)
@@ -104,30 +112,30 @@ public class CPUScript : MonoBehaviour //This Script accessess the PlayerControl
                         players.RemoveAt(x);
                         continue;
                     }
-                  
-                        
 
-                        if (x == 0)
-                        {
-                            closestProximity = proximity;
-                            target = players[x].gameObject;
-                        }
-                        else if (proximity < closestProximity)
-                        {
-                            target = players[x].gameObject;
+
+
+                    if (x == 0)
+                    {
                         closestProximity = proximity;
-                        }
+                        target = players[x].gameObject;
+                    }
+                    else if (proximity < closestProximity)
+                    {
+                        target = players[x].gameObject;
+                        closestProximity = proximity;
+                    }
 
 
                 }
                 attackCollider.enabled = true;
-                state = CPUState.MoveToTarget;
+                StartCoroutine("MoveDelay"); //switches to moveToTarget state with minor delay.
 
                 break;
 
             case CPUState.MoveToTarget:
 
-                Move(targetDirection);
+                Move(targetDirection * 0.4f);
 
                 break;
 
@@ -138,18 +146,16 @@ public class CPUScript : MonoBehaviour //This Script accessess the PlayerControl
                     StartCoroutine("StandardAttack");
                     attackCollider.enabled = false;
                 }
-                else
-                {
-                    state = CPUState.Default;
-                }
+
 
                 break;
 
             case CPUState.MoveToRads:
 
+                Debug.Log("moving to rads");
                 proximity = Vector3.Distance(target.transform.position, gameObject.transform.position);
                 Move(targetDirection);
-                if(proximity < 1f)
+                if (proximity < 1f)
                 {
                     state = CPUState.Radiating;
                 }
@@ -167,8 +173,14 @@ public class CPUScript : MonoBehaviour //This Script accessess the PlayerControl
 
                 break;
 
+            case CPUState.Nothing:
+                {
+                    Move(Vector3.zero);
+
+                    break;
+
+                }
         }
-        
     }
 
     private void OnTriggerEnter(Collider other)

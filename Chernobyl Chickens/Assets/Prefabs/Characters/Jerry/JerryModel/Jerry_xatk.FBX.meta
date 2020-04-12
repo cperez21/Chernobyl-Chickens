@@ -1,20 +1,11 @@
 fileFormatVersion: 2
-guid: 2c2c1159997e61e499a06b4cbbdaaab4
+guid: 9e87bbb50780c914288225b9be9dd1f2
 ModelImporter:
   serializedVersion: 26
   internalIDToNameTable:
   - first:
       74: 1827226128182048838
-    second: Walk
-  - first:
-      74: -3100369314251171874
-    second: Idle
-  - first:
-      74: -1364335860820117453
-    second: Kick Flip
-  - first:
-      74: 5539831331247536789
-    second: Jump
+    second: Jerry Push Attack
   externalObjects: {}
   materials:
     importMaterials: 1
@@ -35,7 +26,7 @@ ModelImporter:
     animationDoRetargetingWarnings: 0
     importAnimatedCustomProperties: 0
     importConstraints: 0
-    animationCompression: 3
+    animationCompression: 1
     animationRotationError: 0.5
     animationPositionError: 0.5
     animationScaleError: 0.5
@@ -44,119 +35,11 @@ ModelImporter:
     extraUserProperties: []
     clipAnimations:
     - serializedVersion: 16
-      name: Walk
+      name: Jerry Push Attack
       takeName: Take 001
       internalID: 0
-      firstFrame: 0
-      lastFrame: 16
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves:
-      - name: GravityWeight
-        curve:
-          serializedVersion: 2
-          curve:
-          - serializedVersion: 3
-            time: 0
-            value: 1
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          - serializedVersion: 3
-            time: 1.0125122
-            value: 1
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          preInfinity: 3
-          postInfinity: 3
-          rotationOrder: 4
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Idle
-      takeName: Take 001
-      internalID: 0
-      firstFrame: 40
-      lastFrame: 70
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 1
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves:
-      - name: GravityWeight
-        curve:
-          serializedVersion: 2
-          curve:
-          - serializedVersion: 3
-            time: 0
-            value: 1
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          - serializedVersion: 3
-            time: 1
-            value: 1
-            inSlope: 0
-            outSlope: 0
-            tangentMode: 0
-            weightedMode: 0
-            inWeight: 0
-            outWeight: 0
-          preInfinity: 3
-          postInfinity: 3
-          rotationOrder: 4
-      events: []
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Kick Flip
-      takeName: Take 001
-      internalID: 0
-      firstFrame: 75
-      lastFrame: 111
+      firstFrame: 115
+      lastFrame: 130
       wrapMode: 0
       orientationOffsetY: 0
       level: 0
@@ -176,49 +59,20 @@ ModelImporter:
       bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
       curves: []
       events:
-      - time: 0.5821206
-        functionName: IsAttacking
+      - time: 0.30994162
+        functionName: IsPushAttacking
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
         intParameter: 1
         messageOptions: 0
-      - time: 0.8558399
-        functionName: IsAttacking
+      - time: 0.5438597
+        functionName: IsPushAttacking
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
-        intParameter: 0
+        intParameter: 1
         messageOptions: 0
-      transformMask: []
-      maskType: 3
-      maskSource: {instanceID: 0}
-      additiveReferencePoseFrame: 0
-    - serializedVersion: 16
-      name: Jump
-      takeName: Take 001
-      internalID: 0
-      firstFrame: 125
-      lastFrame: 133
-      wrapMode: 0
-      orientationOffsetY: 0
-      level: 0
-      cycleOffset: 0
-      loop: 0
-      hasAdditiveReferencePose: 0
-      loopTime: 0
-      loopBlend: 0
-      loopBlendOrientation: 0
-      loopBlendPositionY: 0
-      loopBlendPositionXZ: 0
-      keepOriginalOrientation: 0
-      keepOriginalPositionY: 1
-      keepOriginalPositionXZ: 0
-      heightFromFeet: 0
-      mirror: 0
-      bodyMask: 01000000010000000100000001000000010000000100000001000000010000000100000001000000010000000100000001000000
-      curves: []
-      events: []
       transformMask: []
       maskType: 3
       maskSource: {instanceID: 0}
@@ -226,7 +80,7 @@ ModelImporter:
     isReadable: 0
   meshes:
     lODScreenPercentages: []
-    globalScale: 17
+    globalScale: 1
     meshCompression: 0
     addColliders: 0
     useSRGBMaterialColor: 1
@@ -261,7 +115,7 @@ ModelImporter:
     normalSmoothingSource: 0
   referencedClips: []
   importAnimation: 1
-  copyAvatar: 0
+  copyAvatar: 1
   humanDescription:
     serializedVersion: 3
     human:
@@ -434,161 +288,146 @@ ModelImporter:
         length: 0
         modified: 0
     skeleton:
-    - name: Legolas_NEWER(Clone)
+    - name: Jerry_final(Clone)
       parentName: 
       position: {x: 0, y: 0, z: 0}
-      rotation: {x: 0.0003978065, y: 0.000015252144, z: 0.035186093, w: 0.9993807}
+      rotation: {x: 0.055632047, y: 0.0048191375, z: -0.00026823865, w: 0.99843967}
       scale: {x: 1, y: 1, z: 1}
-    - name: Lego
-      parentName: Legolas_NEWER(Clone)
+    - name: Abomination
+      parentName: Jerry_final(Clone)
       position: {x: -0, y: 0, z: 0}
       rotation: {x: -0.7071068, y: 0, z: -0, w: 0.7071068}
       scale: {x: 1, y: 1, z: 1}
     - name: Bip001
-      parentName: Legolas_NEWER(Clone)
-      position: {x: -0, y: 1.6740239, z: -0.031173797}
-      rotation: {x: -0.50000024, y: 0.49999976, z: 0.49999976, w: 0.50000024}
-      scale: {x: 0.99999994, y: 0.99999994, z: 0.99999994}
+      parentName: Jerry_final(Clone)
+      position: {x: -0.00014144075, y: 0.5364514, z: 0.03422974}
+      rotation: {x: -0.50000036, y: 0.49999967, z: 0.49999967, w: 0.50000036}
+      scale: {x: 0.9999999, y: 0.9999999, z: 0.99999994}
     - name: Bip001 Footsteps
       parentName: Bip001
-      position: {x: -0, y: 0, z: -1.6835744}
-      rotation: {x: 0, y: -0, z: -0.7071065, w: 0.7071071}
+      position: {x: -0, y: 0, z: -0.47407678}
+      rotation: {x: 0, y: -0, z: -0.7071063, w: 0.70710725}
       scale: {x: 1, y: 1, z: 1}
     - name: Bip001 Pelvis
       parentName: Bip001
-      position: {x: 0.00003786735, y: -0.1969562, z: 0.047938235}
+      position: {x: 0.022841137, y: 0.013268711, z: 0.20317812}
       rotation: {x: 0.5, y: -0.5, z: -0.5, w: -0.5}
-      scale: {x: 1, y: 1, z: 1}
+      scale: {x: 1.0000004, y: 1.0000002, z: 1.0000002}
     - name: Bip001 Spine
       parentName: Bip001 Pelvis
-      position: {x: -0.2497849, y: -0.00021432403, z: 0.00000023561833}
+      position: {x: -0.07094088, y: -0.00012967053, z: -0.012508685}
       rotation: {x: 0, y: 0, z: 0, w: 1}
-      scale: {x: 1.0000005, y: 1.0000005, z: 1.0000007}
+      scale: {x: 0.9999999, y: 0.9999999, z: 1.0000002}
     - name: Bip001 Spine1
       parentName: Bip001 Spine
-      position: {x: -0.26926392, y: -0.00043997247, z: 0.000000051474572}
+      position: {x: -0.16286173, y: -0.00012968565, z: 0.000000014228839}
       rotation: {x: 0, y: 0, z: 0, w: 1}
-      scale: {x: 1.0000001, y: 1.0000004, z: 1}
+      scale: {x: 1.0000004, y: 1.0000005, z: 1.0000006}
     - name: Bip001 Neck
       parentName: Bip001 Spine1
-      position: {x: -0.55254084, y: -0.00038950486, z: 0.000000051474572}
+      position: {x: -0.25384042, y: -0.000104850675, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
-      scale: {x: 0.99999994, y: 1, z: 0.9999998}
+      scale: {x: 1.0000005, y: 1.0000002, z: 1.0000005}
     - name: Bip001 Head
       parentName: Bip001 Neck
-      position: {x: -0.4891567, y: 0, z: -0.000000102949144}
+      position: {x: -0.046979398, y: -0.00000004844666, z: 0.000000012111665}
       rotation: {x: 0, y: 0, z: 0, w: 1}
-      scale: {x: 1.0000001, y: 0.9999999, z: 1}
+      scale: {x: 1.0000006, y: 1.0000001, z: 1.0000002}
     - name: Bip001 HeadNub
       parentName: Bip001 Head
-      position: {x: -0.7900311, y: 0, z: -0.000000102949144}
+      position: {x: -0.14720225, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
       scale: {x: 1, y: 1, z: 1}
     - name: Bip001 R Clavicle
       parentName: Bip001 Neck
-      position: {x: 0.01878266, y: 0.00040476708, z: -0.09688379}
+      position: {x: 0.07884215, y: -0.04539835, z: -0.073668554}
       rotation: {x: 0.7071068, y: -0.000000030908623, z: 0.7071068, w: -0.000000030908623}
-      scale: {x: 1.0000015, y: 1.000001, z: 1.0000007}
+      scale: {x: 1.0000015, y: 1.0000006, z: 1.0000002}
     - name: Bip001 R UpperArm
       parentName: Bip001 R Clavicle
-      position: {x: -0.45520622, y: -0.0000000032171608, z: -0.00000020589829}
+      position: {x: -0.08143096, y: 0.0000000030279161, z: -0.00000009689332}
       rotation: {x: 0, y: 0, z: 0, w: 1}
-      scale: {x: 1.0000013, y: 1.000001, z: 1.0000004}
+      scale: {x: 1.0000005, y: 1.0000012, z: 1.0000026}
     - name: Bip001 R Forearm
       parentName: Bip001 R UpperArm
-      position: {x: -0.20882867, y: 0.0000000064343215, z: 0}
+      position: {x: -0.20591478, y: 0.00000004844666, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
-      scale: {x: 1.0000023, y: 1.0000013, z: 1.0000015}
+      scale: {x: 0.9999996, y: 1.0000002, z: 1.0000002}
     - name: Bip001 R Hand
       parentName: Bip001 R Forearm
-      position: {x: -0.15520945, y: -0.000000019302965, z: 0}
+      position: {x: -0.20545223, y: -0.00000004844666, z: 0}
       rotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
-      scale: {x: 1.0000006, y: 1.0000011, z: 0.9999995}
+      scale: {x: 1.0000004, y: 1.0000007, z: 1.0000006}
     - name: Bip001 L Clavicle
       parentName: Bip001 Neck
-      position: {x: -0.018783484, y: 0.0003742298, z: 0.09688358}
+      position: {x: 0.07884205, y: -0.045398735, z: 0.073668316}
       rotation: {x: 0.7071068, y: -0.000000030908623, z: -0.7071068, w: 0.000000030908623}
-      scale: {x: 1.0000005, y: 1.0000012, z: 1.0000007}
+      scale: {x: 1, y: 1.0000006, z: 1.0000002}
     - name: Bip001 L UpperArm
       parentName: Bip001 L Clavicle
-      position: {x: -0.45520613, y: 0, z: 0}
+      position: {x: -0.08143096, y: -0.0000000030279161, z: -0.00000009689332}
       rotation: {x: 0, y: 0, z: 0, w: 1}
-      scale: {x: 1, y: 1, z: 1.0000005}
+      scale: {x: 1.0000002, y: 1.0000011, z: 1.0000008}
     - name: Bip001 L Forearm
       parentName: Bip001 L UpperArm
-      position: {x: -0.20882863, y: 0, z: 0}
+      position: {x: -0.2059148, y: -0.000000012111665, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
-      scale: {x: 1.0000001, y: 1, z: 1.0000002}
+      scale: {x: 1.0000013, y: 1.0000007, z: 1.0000007}
     - name: Bip001 L Hand
       parentName: Bip001 L Forearm
-      position: {x: -0.15520942, y: 0.000000025737286, z: 0}
+      position: {x: -0.20545222, y: 0, z: -0.00000009689332}
       rotation: {x: 0.7071068, y: 0, z: 0, w: -0.7071068}
-      scale: {x: 0.9999999, y: 1.0000001, z: 1.0000007}
+      scale: {x: 1.0000008, y: 1.0000011, z: 1.0000001}
     - name: Bip001 R Thigh
       parentName: Bip001 Spine
-      position: {x: 0.30333388, y: 0.0004563156, z: -0.13250852}
+      position: {x: 0.06115785, y: 0.00017855318, z: -0.061687607}
       rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
-      scale: {x: 1.0000008, y: 1.0000002, z: 1.0000006}
+      scale: {x: 1.0000006, y: 1, z: 1.000001}
     - name: Bip001 R Calf
       parentName: Bip001 R Thigh
-      position: {x: -0.70733124, y: 0, z: 0}
+      position: {x: -0.31319612, y: 0, z: 0.000000012111665}
       rotation: {x: 0, y: 0, z: 0, w: 1}
-      scale: {x: 0.9999999, y: 1.000001, z: 1.0000002}
+      scale: {x: 1.0000002, y: 1.0000006, z: 1.0000002}
     - name: Bip001 R Foot
       parentName: Bip001 R Calf
-      position: {x: -0.7339354, y: 0, z: 0.000000025737286}
+      position: {x: -0.31319612, y: -0.00000009689332, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
-      scale: {x: 1.0000002, y: 1.0000006, z: 1.0000005}
+      scale: {x: 1.0000001, y: 1.0000001, z: 0.9999999}
     - name: Bip001 R Toe0
       parentName: Bip001 R Foot
-      position: {x: -0.24978463, y: 0.32146212, z: -0.000000025737286}
+      position: {x: -0.079026416, y: 0.092706025, z: -0.0000000060558323}
       rotation: {x: 0, y: 0, z: 0.7071068, w: -0.7071068}
-      scale: {x: 1.0000002, y: 0.9999995, z: 1.0000002}
+      scale: {x: 1.0000006, y: 1.0000002, z: 1.0000005}
     - name: Bip001 R Toe0Nub
       parentName: Bip001 R Toe0
-      position: {x: -0.032580603, y: 0.000000012868643, z: 0.000000025737286}
+      position: {x: -0.0093958415, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
-      scale: {x: 1, y: 1, z: 1}
-    - name: Bip001 Tail
-      parentName: Bip001 Spine
-      position: {x: -0.2351482, y: -0.2571398, z: -0.073807284}
-      rotation: {x: 0, y: 0, z: 0, w: 1}
-      scale: {x: 1.0000007, y: 1.0000001, z: 1.0000001}
-    - name: Bip001 Tail1
-      parentName: Bip001 Tail
-      position: {x: -0.41519865, y: -0.00034261475, z: -0.000000035760284}
-      rotation: {x: 0, y: 0, z: 0, w: 1}
-      scale: {x: 1.0000012, y: 0.99999994, z: 1.0000008}
-    - name: Bip001 TailNub
-      parentName: Bip001 Tail1
-      position: {x: -0.44081464, y: 0, z: 0}
-      rotation: {x: 0, y: 0, z: 0, w: 1}
-      scale: {x: 1.0000001, y: 0.99999994, z: 1}
+      scale: {x: 1.0000001, y: 1.0000001, z: 1}
     - name: Bip001 L Thigh
       parentName: Bip001 Spine
-      position: {x: 0.17334577, y: 0.00035173862, z: 0.28199533}
+      position: {x: 0.08291224, y: 0.00019553071, z: 0.061687607}
       rotation: {x: 0, y: 1, z: 0, w: -0.00000004371139}
-      scale: {x: 1.0000004, y: 1.0000001, z: 1.0000002}
+      scale: {x: 1.0000007, y: 1.0000006, z: 1.0000007}
     - name: Bip001 L Calf
       parentName: Bip001 L Thigh
-      position: {x: -0.7073311, y: 0.0000000064343215, z: 0}
+      position: {x: -0.31319615, y: -0.0000000060558323, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
-      scale: {x: 1.0000001, y: 1.0000007, z: 1.0000004}
+      scale: {x: 1, y: 1.0000007, z: 0.99999976}
     - name: Bip001 L Foot
       parentName: Bip001 L Calf
-      position: {x: -0.7339354, y: 0.0000000064343215, z: 0}
+      position: {x: -0.31319612, y: 0, z: 0}
       rotation: {x: 0, y: 0, z: 0, w: 1}
-      scale: {x: 1.0000002, y: 1.0000001, z: 1.0000005}
+      scale: {x: 1.0000006, y: 1.0000005, z: 1.0000007}
     - name: Bip001 L Toe0
       parentName: Bip001 L Foot
-      position: {x: -0.24978463, y: 0.3214621, z: 0.000000025737286}
+      position: {x: -0.079026386, y: 0.09270598, z: 0}
       rotation: {x: 0, y: 0, z: 0.7071068, w: -0.7071068}
-      scale: {x: 1.0000002, y: 0.9999996, z: 1.0000002}
+      scale: {x: 1.0000012, y: 1.0000002, z: 1.0000008}
     - name: Bip001 L Toe0Nub
       parentName: Bip001 L Toe0
-      position: {x: -0.0325806, y: 0, z: -0.000000025737286}
+      position: {x: -0.00939589, y: 0, z: -0.0000000060558323}
       rotation: {x: 0, y: 0, z: 0, w: 1}
-      scale: {x: -0.99999994, y: -0.99999994, z: -1}
+      scale: {x: -1, y: -1, z: -1}
     armTwist: 0.5
     foreArmTwist: 0.5
     upperLegTwist: 0.5
@@ -596,12 +435,13 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 17
+    globalScale: 1
     rootMotionBoneName: 
     hasTranslationDoF: 1
     hasExtraRoot: 1
     skeletonHasParents: 1
-  lastHumanDescriptionAvatarSource: {instanceID: 0}
+  lastHumanDescriptionAvatarSource: {fileID: 9000000, guid: 1885bf625dd975c4f86307ea85d526e0,
+    type: 3}
   animationType: 3
   humanoidOversampling: 1
   additionalBone: 0

@@ -2713,9 +2713,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNumber: 1
+  pinDistanceFalloff: 2
   feathers: {fileID: 6497170728889403077, guid: 5d015548a7a42aa4db726c08dfdd9cc7,
     type: 3}
   stunAmount: 0.8
+  maxStunAmount: 15
   rend: {fileID: 3769228558958760457}
   radLossRate: 0
   radCooldownTime: 0
@@ -2730,6 +2732,7 @@ MonoBehaviour:
   jumpForce: 150
   health: 100
   canHurt: 0
+  canPush: 0
   isPlayer2: 0
   haveControls: 1
   movement: {x: 0, y: 0, z: 0}
@@ -2882,7 +2885,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rend: {fileID: 3769228558958760457}
-  radiationColor: {r: 0, g: 0, b: 0, a: 0}
+  radiationColor: {r: 0.109910935, g: 0.8962264, b: 0.080322154, a: 0}
   shadowRecoverRate: 0.05
   targetShadowSize: 0
   startShadowSize: 0

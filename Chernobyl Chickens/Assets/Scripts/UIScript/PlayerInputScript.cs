@@ -143,6 +143,11 @@ public class PlayerInputScript : MonoBehaviour
         
     }
 
+    void OnPush()
+    {
+        Player.SendMessage("Push");
+    }
+
     void OnAttack()
     {
         Player.SendMessage("Attack");

@@ -335,6 +335,8 @@ MonoBehaviour:
   bodyPart: 
   hurtOnly: 0
   gotHit: 0
+  gotPushed: 0
+  canPush: 0
   canHurt: 0
   selfController: {fileID: 8020005545295361898}
   baseDamage: 0
@@ -2238,10 +2240,10 @@ ConfigurableJoint:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6578782053887498937}
-  m_ConnectedBody: {fileID: 0}
+  m_ConnectedBody: {fileID: 8020005545295361813}
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
-  m_AutoConfigureConnectedAnchor: 1
+  m_AutoConfigureConnectedAnchor: 0
   m_ConnectedAnchor: {x: 5.7162323, y: 1.0159681, z: 19.635353}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
@@ -2355,6 +2357,8 @@ MonoBehaviour:
   bodyPart: 
   hurtOnly: 0
   gotHit: 0
+  gotPushed: 0
+  canPush: 0
   canHurt: 0
   selfController: {fileID: 8020005545295361898}
   baseDamage: 0
@@ -3305,7 +3309,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8020005545143571548}
-  - component: {fileID: -5765915078973048741}
   - component: {fileID: 3660699164810501679}
   m_Layer: 0
   m_Name: Tso_Current_Root
@@ -3322,7 +3325,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8020005545143571551}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.713561, y: 0.6704929, z: 19.663658}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 8020005544387956329}
@@ -3331,24 +3334,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-5765915078973048741
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8020005545143571551}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dea0eb1244d621b49994e000085df562, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rend: {fileID: 0}
-  radiationColor: {r: 0, g: 0, b: 0, a: 0}
-  shadowRecoverRate: 0
-  targetShadowSize: 0
-  startShadowSize: 0
-  currentRadiationSize: 0
 --- !u!137 &3660699164810501679
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
@@ -3501,16 +3486,18 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNumber: 0
+  pinDistanceFalloff: 2
   feathers: {fileID: 6497170728889403077, guid: 5d015548a7a42aa4db726c08dfdd9cc7,
     type: 3}
-  stunAmount: 0.8
+  stunAmount: 0
+  maxStunAmount: 15
   rend: {fileID: 8020005544481673872}
   radLossRate: 0
   radCooldownTime: 0
   slapSwing: {fileID: 8300000, guid: 5a1405c2d8754ae448f7037c979766fb, type: 3}
-  slap1: {fileID: 8300000, guid: fe3954a9d5669b842b936e491278c0ba, type: 3}
-  slap2: {fileID: 8300000, guid: 74e8d947950d05f41ab7aa27d59f1eb2, type: 3}
-  slap3: {fileID: 8300000, guid: 39891d63ee3f3e542951da3482187263, type: 3}
+  slap1: {fileID: 8300000, guid: 3c4ab27d753caea42afb54a87a0744d6, type: 3}
+  slap2: {fileID: 8300000, guid: de86538ae086a2b479ddc1ab43dd5995, type: 3}
+  slap3: {fileID: 8300000, guid: e39ec4189bbf35c47982ff1330fb977c, type: 3}
   death: {fileID: 8300000, guid: 72ad07237f83a5a4cbf291569bb0f55c, type: 3}
   getUpPosition: {fileID: 8020005544655895564}
   canJump: 0
@@ -3518,13 +3505,16 @@ MonoBehaviour:
   jumpForce: 150
   health: 100
   canHurt: 0
+  canPush: 0
   isPlayer2: 1
   haveControls: 1
+  movement: {x: 0, y: 0, z: 0}
   groundLayer:
     serializedVersion: 2
     m_Bits: 1
   radiationCount: 0
   supersized: 0
+  superSizeMultiplier: 0
   i_movement: {x: 0, y: 0, z: 0}
   radState: 0
   character: 4
@@ -3668,7 +3658,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rend: {fileID: 8020005544481673872}
-  radiationColor: {r: 0, g: 0, b: 0, a: 0}
+  radiationColor: {r: 0.109910935, g: 0.8962264, b: 0.080322154, a: 0}
   shadowRecoverRate: 0.05
   targetShadowSize: 0
   startShadowSize: 0
@@ -4375,6 +4365,8 @@ MonoBehaviour:
   bodyPart: 
   hurtOnly: 0
   gotHit: 0
+  gotPushed: 0
+  canPush: 0
   canHurt: 0
   selfController: {fileID: 8020005545295361898}
   baseDamage: 0
