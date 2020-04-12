@@ -86,17 +86,19 @@ public class PlayerInputScript : MonoBehaviour
         if (spawnPoint != null && spawned == false)
         {
             //GameObject NewPlayer =
+            spawned = true;
             GameObject plyr = Instantiate(PlayerCharacter, spawnPoint.transform.position, Quaternion.identity, ThisObject.transform);
+            plyr.name = ("PlayerObject" + PlayerCount);
             Player = plyr.transform.Find("Model").gameObject;
             PlayerScript = Player.GetComponent<PlayerController>();
             //NewPlayer.transform.parent = ThisObject.transform;
-            spawned = true;
+            
         }
 
         //finds playercell in BattleUI
         if (BattleUIPlayerCell == null)
         {
-            Debug.Log("procc");
+            //Debug.Log("procc");
             BattleUIPlayerCell = GameObject.Find("PlayerCell" + PlayerCount);
             if (BattleUIPlayerCell != null)
             {

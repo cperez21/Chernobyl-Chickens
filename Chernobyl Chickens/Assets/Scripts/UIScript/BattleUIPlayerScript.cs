@@ -10,6 +10,20 @@ public class BattleUIPlayerScript : MonoBehaviour
     public GameObject Portrait;
     public GameObject BattleUIPlayerCell;
 
+    //healtbarstuff
+    public Image RadBar;
+    public Image HpBar;
+    public int maxHealth;
+    public float percentageHealth;
+    public int currentHealth;
+
+    public float maxRad;
+    public float percentageRad;
+    public float currentRad;
+    //finds the controller
+    public GameObject PlayerObject;
+    public PlayerController ControllerScript; 
+
     //Calls PlayerInput Object, which exists in PersistentScene
     public GameObject Player;
 
@@ -17,7 +31,9 @@ public class BattleUIPlayerScript : MonoBehaviour
     void Start()
     {
         BattleUIPlayerCell.name = "PlayerCell" + Playernum;
-
+        //set this to player max health in Player Controller
+        maxHealth = 100;
+        maxRad = 1.0f;
     }
 
     // Update is called once per frame
@@ -39,6 +55,27 @@ public class BattleUIPlayerScript : MonoBehaviour
 
         Image icon = Portrait.transform.GetComponent<Image>();
         icon.sprite = PlayerCharacterSerializable.characterSprite;
+
+        if (PlayerObject == null)
+        {
+            PlayerObject = GameObject.Find("PlayerObject" + Playernum);
+
+            ControllerScript = PlayerObject.transform.Find("Model").gameObject.GetComponent<PlayerController>();
+        }
+        else if (PlayerObject != null)
+        {
+            currentHealth = ControllerScript.health;
+            percentageHealth = (float)currentHealth / (float)maxHealth;
+            HpBar.fillAmount = percentageHealth;
+
+            currentRad = ControllerScript.radiationCount;
+            percentageRad = (float)currentRad / (float)maxRad;
+            RadBar.fillAmount = percentageRad;
+
+        }
+       
+        
+
     }
 
     void SetCharacterUI(Character character)
@@ -46,4 +83,6 @@ public class BattleUIPlayerScript : MonoBehaviour
         PlayerCharacterSerializable = character;
 
     }
+
+
 }
