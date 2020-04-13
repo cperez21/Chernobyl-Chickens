@@ -2077,6 +2077,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3769228558102646192}
+  - component: {fileID: 8066789237877004524}
+  - component: {fileID: 3860711797136097558}
   m_Layer: 0
   m_Name: Cosplay_Current_Root
   m_TagString: Untagged
@@ -2101,6 +2103,74 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8066789237877004524
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3769228558102646195}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dea0eb1244d621b49994e000085df562, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rend: {fileID: 0}
+  radiationColor: {r: 0, g: 0, b: 0, a: 0}
+  shadowRecoverRate: 0
+  targetShadowSize: 0
+  startShadowSize: 0
+  currentRadiationSize: 0
+--- !u!137 &3860711797136097558
+SkinnedMeshRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3769228558102646195}
+  m_Enabled: 1
+  m_CastShadows: 1
+  m_ReceiveShadows: 1
+  m_DynamicOccludee: 1
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RenderingLayerMask: 1
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 2100000, guid: 3b3bd68520aace94bbeeca71f0108149, type: 2}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 3
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 0
+  serializedVersion: 2
+  m_Quality: 0
+  m_UpdateWhenOffscreen: 0
+  m_SkinnedMotionVectors: 1
+  m_Mesh: {fileID: 0}
+  m_Bones: []
+  m_BlendShapeWeights: []
+  m_RootBone: {fileID: 0}
+  m_AABB:
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
+  m_DirtyAABB: 1
 --- !u!1 &3769228558169985907
 GameObject:
   m_ObjectHideFlags: 0
@@ -2713,11 +2783,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNumber: 1
-  pinDistanceFalloff: 2
   feathers: {fileID: 6497170728889403077, guid: 5d015548a7a42aa4db726c08dfdd9cc7,
     type: 3}
+<<<<<<< HEAD
   stunAmount: 0
   maxStunAmount: 15
+=======
+  stunAmount: 0.8
+>>>>>>> 0bb3f9782ce4b637c0acb7102c07b760d7e89641
   rend: {fileID: 3769228558958760457}
   radLossRate: 0
   radCooldownTime: 0
@@ -2732,16 +2805,13 @@ MonoBehaviour:
   jumpForce: 150
   health: 100
   canHurt: 0
-  canPush: 0
   isPlayer2: 0
   haveControls: 1
-  movement: {x: 0, y: 0, z: 0}
   groundLayer:
     serializedVersion: 2
     m_Bits: 1
   radiationCount: 0
   supersized: 0
-  superSizeMultiplier: 0
   i_movement: {x: 0, y: 0, z: 0}
   radState: 0
   character: 2
@@ -2885,7 +2955,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rend: {fileID: 3769228558958760457}
-  radiationColor: {r: 0.109910935, g: 0.8962264, b: 0.080322154, a: 0}
+  radiationColor: {r: 0, g: 0, b: 0, a: 0}
   shadowRecoverRate: 0.05
   targetShadowSize: 0
   startShadowSize: 0

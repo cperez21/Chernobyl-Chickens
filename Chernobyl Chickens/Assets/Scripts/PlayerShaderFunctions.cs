@@ -6,7 +6,6 @@ public class PlayerShaderFunctions : MonoBehaviour
 {
     public Renderer rend;
     public Color radiationColor;
-    private Color targetColor;
     public float shadowRecoverRate; //This is just used for damage, recommended 0.05f
     [Header("These values will read out, do not change")]
     public float targetShadowSize; //used as the target value to recover back to.
@@ -33,88 +32,39 @@ public class PlayerShaderFunctions : MonoBehaviour
     { //this is a hot mess -cullen
        
         currentRadiationSize = gameObject.GetComponent<PlayerController>().radiationCount;
-        currentShadowSize = rend.material.GetFloat(shadowSize);
-
-        //Damage Flash Recovery begin
-        if (rend.material.GetColor(shadowColor) == Color.red) //this is a gross about of ifs and elses
-        {
-            if (currentShadowSize > targetShadowSize)
-            {
-                //Shadow size begins to recover back to target
-                rend.material.SetFloat(shadowSize, currentShadowSize - shadowRecoverRate);
-            }
-            else
-            {
-                if (currentRadiationSize > startShadowSize) //irradiated you go back to green
-                {
-                    rend.material.SetColor(shadowColor, Color.green);
-                }
-                else
-                {
-                    rend.material.SetColor(shadowColor, Color.black); //non-irradiated you go back to black
-                }
-
-                rend.material.SetFloat(shadowSize, targetShadowSize);
-            }
-        }
-
-
-
 
         if (currentRadiationSize > startShadowSize && rend.material.GetColor(shadowColor) != Color.red) //if radiated and you are not red from damage
         {
             rend.material.SetColor(shadowColor, radiationColor); //sets it green
             targetShadowSize = currentRadiationSize;
         }
-        if (currentRadiationSize < startShadowSize && rend.material.GetColor(shadowColor) != Color.red) //if your radiation is lower than the standard black shading
+        else if(currentRadiationSize < startShadowSize && rend.material.GetColor(shadowColor) != Color.red) //if your radiation is lower than the standard black shading
         {
             targetShadowSize = startShadowSize; //reset cell shading to normal
-                                                //rend.material.SetColor(shadowColor, Color.black); //reset cell shading back to black
+            rend.material.SetColor(shadowColor, Color.black); //reset cell shading back to black
         }
 
-        
-
-
-        /*
-        if (currentRadiationSize > startShadowSize) //establishes what color cell shading resets to after damage
+        //Damage Flash Recovery begin
+        if (rend.material.GetColor(shadowColor) == Color.red && rend.material.GetFloat(shadowSize) >= targetShadowSize) 
         {
-            targetColor = radiationColor; //if irradiated
-            rend.material.SetColor(shadowColor, targetColor);
-            targetShadowSize = currentRadiationSize;
+            currentShadowSize = rend.material.GetFloat(shadowSize); //Shadow size begins to recover back to target
+            rend.material.SetFloat(shadowSize, currentShadowSize - shadowRecoverRate);
+
         }
         else
         {
-            targetColor = Color.black; //if radiation is lower than normal cell shading
-            targetShadowSize = startShadowSize;
+            if (currentRadiationSize > startShadowSize) //irradiated you go back to green
+            {
+                rend.material.SetColor(shadowColor, Color.green);
+            }
+            else
+            {
+                rend.material.SetColor(shadowSize, Color.black); //non-irradiated you go back to black
+            }
+
+                rend.material.SetFloat(shadowSize, targetShadowSize); //sets 
+
         }
-
-
-      if(currentShadowSize > startShadowSize)//Starts resetting back to normal
-        {
-            rend.material.SetFloat(shadowSize, currentShadowSize - shadowRecoverRate); //recovering back to target
-        }
-        else // reached target
-        {
-            rend.material.SetFloat(shadowSize, targetShadowSize);
-            rend.material.SetColor(shadowColor, targetColor);
-        }
-        */
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         //Damage Flash Recovery End
     }
 
@@ -123,7 +73,7 @@ public class PlayerShaderFunctions : MonoBehaviour
 
         rend.material.SetColor(shadowColor, Color.red); //changes toon shading to red.
         rend.material.SetFloat(shadowSize, finalShadowSize); //sets character to all red (max setting).
-        
+        currentShadowSize = rend.material.GetFloat(shadowSize);
 
 
     }

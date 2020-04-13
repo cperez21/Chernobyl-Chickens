@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: -7940754747588275469}
   - component: {fileID: 5237941602870607959}
   m_Layer: 0
-  m_Name: Player
+  m_Name: TestPlayerContainer
   m_TagString: PlayerContainer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -142,9 +142,10 @@ MonoBehaviour:
   p_joined: 0
   ready: 0
   CharacterSelector: {fileID: 0}
-  SelectedCharacter: {fileID: 0}
+  SelectedCharacter: {fileID: 11400000, guid: b1664712d47b1d34d80e1d17098eb819, type: 2}
   spawned: 0
   ThisObject: {fileID: 0}
-  PlayerCharacter: {fileID: 0}
+  PlayerCharacter: {fileID: 5163448265112163936, guid: ec03b9dfd421da14d8433a24ff2711b0,
+    type: 3}
   Player: {fileID: 0}
   spawnPoint: {fileID: 0}
