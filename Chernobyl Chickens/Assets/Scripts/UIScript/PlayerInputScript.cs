@@ -81,11 +81,10 @@ public class PlayerInputScript : MonoBehaviour
         //used to spawn player
         if (spawnPoint == null)
         {
-            spawnPoint = GameObject.Find("SpawnPoint");
+            spawnPoint = GameObject.Find("SpawnPoint" + PlayerCount);
         }
         if (spawnPoint != null && spawned == false)
         {
-            //GameObject NewPlayer =
             spawned = true;
             GameObject plyr = Instantiate(PlayerCharacter, spawnPoint.transform.position, Quaternion.identity, ThisObject.transform);
             plyr.name = ("PlayerObject" + PlayerCount);
@@ -162,7 +161,7 @@ public class PlayerInputScript : MonoBehaviour
             movement = value.Get<Vector2>();
             PlayerScript.i_movement = movement;
             //Player.SendMessage("Move", i_movement);
-            Debug.Log("imove = " + movement);
+            //Debug.Log("imove = " + movement);
         }
         
     }

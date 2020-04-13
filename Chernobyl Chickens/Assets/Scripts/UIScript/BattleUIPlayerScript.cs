@@ -5,27 +5,32 @@ using UnityEngine.UI;
 
 public class BattleUIPlayerScript : MonoBehaviour
 {
+    //player, the character, the portrait, and the object itself.
     public int Playernum;
     public Character PlayerCharacterSerializable;
     public GameObject Portrait;
     public GameObject BattleUIPlayerCell;
 
-    //healtbarstuff
+    //healthbar and radbar values
     public Image RadBar;
     public Image HpBar;
     public int maxHealth;
     public float percentageHealth;
     public int currentHealth;
-
     public float maxRad;
     public float percentageRad;
     public float currentRad;
+
     //finds the controller
     public GameObject PlayerObject;
     public PlayerController ControllerScript; 
 
     //Calls PlayerInput Object, which exists in PersistentScene
     public GameObject Player;
+
+    //USED FOR AI
+    public GameObject spawnPoint;
+    public GameObject CPUCharacter;
 
     // Start is called before the first frame update
     void Start()
@@ -34,11 +39,13 @@ public class BattleUIPlayerScript : MonoBehaviour
         //set this to player max health in Player Controller
         maxHealth = 100;
         maxRad = 1.0f;
+        spawnPoint = GameObject.Find("SpawnPoint" + Playernum);
     }
 
     // Update is called once per frame
     void Update()
     {
+        //if Player isn't filled, find a Player based on PlayerNum, and request the character for information
         if (Player == null)
         {
             Player = GameObject.Find("Player" + Playernum);
@@ -46,22 +53,30 @@ public class BattleUIPlayerScript : MonoBehaviour
             {
                 Player.SendMessage("SendCharacter");
             }
+            else if (Player == null)
+            {
+                SpawnAI();
+            }
         }
 
+
+        //once player is found, set active. sets the portrait to true
         if (Player != null)
         {
             BattleUIPlayerCell.SetActive(true);
+            Image icon = Portrait.transform.GetComponent<Image>();
+            icon.sprite = PlayerCharacterSerializable.characterSprite;
         }
+        
 
-        Image icon = Portrait.transform.GetComponent<Image>();
-        icon.sprite = PlayerCharacterSerializable.characterSprite;
-
+        //Find the Players Character in the Scene, and get the controller.
         if (PlayerObject == null)
         {
             PlayerObject = GameObject.Find("PlayerObject" + Playernum);
 
             ControllerScript = PlayerObject.transform.Find("Model").gameObject.GetComponent<PlayerController>();
         }
+        //if player exists, these values show their health and rad
         else if (PlayerObject != null)
         {
             currentHealth = ControllerScript.health;
@@ -84,5 +99,25 @@ public class BattleUIPlayerScript : MonoBehaviour
 
     }
 
+    void SpawnAI()
+    {
+        Debug.Log("AIspawned");
+        //GameObject plyr = Instantiate(CPUCharacter, spawnPoint.transform.position, Quaternion.identity, ThisObject.transform);
+        GameObject plyr = Instantiate(CPUCharacter, spawnPoint.transform.position, Quaternion.identity);
+        plyr.name = ("Player" + Playernum);
+        PlayerObject = plyr.transform.Find("PlayerObject").gameObject;
+        ControllerScript = PlayerObject.transform.Find("Model").gameObject.GetComponent<PlayerController>();
 
+
+
+
+        //PlayerObject = Player.transform.find("PlayerObject").gameObject;
+        //Player = plyr;
+        //ControllerScript = PlayerObject.transform.Find("Model").gameObject.GetComponent<PlayerController>();
+
+        //Player.name = ("Player" + Playernum);
+        //PlayerObject.name = ("PlayerObject" + Playernum);
+
+
+    }
 }
