@@ -742,9 +742,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNumber: 2
+  pinDistanceFalloff: 0
   feathers: {fileID: 6497170728889403077, guid: 5d015548a7a42aa4db726c08dfdd9cc7,
     type: 3}
   stunAmount: 0
+  maxStunAmount: 15
   rend: {fileID: 313119977055444417}
   radLossRate: 0
   radCooldownTime: 0
@@ -759,13 +761,16 @@ MonoBehaviour:
   jumpForce: 150
   health: 100
   canHurt: 0
+  canPush: 0
   isPlayer2: 1
   haveControls: 1
+  movement: {x: 0, y: 0, z: 0}
   groundLayer:
     serializedVersion: 2
     m_Bits: 1
   radiationCount: 0
   supersized: 0
+  superSizeMultiplier: 0
   i_movement: {x: 0, y: 0, z: 0}
   radState: 0
   character: 1
@@ -1534,6 +1539,8 @@ MonoBehaviour:
   bodyPart: 
   hurtOnly: 0
   gotHit: 0
+  gotPushed: 0
+  canPush: 0
   canHurt: 0
   selfController: {fileID: 313119976900696716}
   baseDamage: 50
@@ -2976,6 +2983,8 @@ MonoBehaviour:
   bodyPart: 
   hurtOnly: 0
   gotHit: 0
+  gotPushed: 0
+  canPush: 0
   canHurt: 0
   selfController: {fileID: 313119976900696716}
   baseDamage: 50
@@ -4254,8 +4263,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.90982157, y: 2.035192, z: 1.2221752}
-  m_Center: {x: -0.49032182, y: -0.2538691, z: 0.02799816}
+  m_Size: {x: 1.3230019, y: 2.035192, z: 1.2221752}
+  m_Center: {x: -0.69691247, y: -0.25386906, z: 0.027998157}
 --- !u!153 &9095736896573091648
 ConfigurableJoint:
   m_ObjectHideFlags: 0
@@ -4366,6 +4375,8 @@ MonoBehaviour:
   bodyPart: 
   hurtOnly: 0
   gotHit: 0
+  gotPushed: 0
+  canPush: 0
   canHurt: 0
   selfController: {fileID: 313119976900696716}
   baseDamage: 50
