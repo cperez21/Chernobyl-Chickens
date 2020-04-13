@@ -491,8 +491,6 @@ MonoBehaviour:
   bodyPart: 
   hurtOnly: 0
   gotHit: 0
-  gotPushed: 0
-  canPush: 0
   canHurt: 0
   selfController: {fileID: 4738321634265808891}
   baseDamage: 50
@@ -1883,8 +1881,6 @@ MonoBehaviour:
   bodyPart: 
   hurtOnly: 0
   gotHit: 0
-  gotPushed: 0
-  canPush: 0
   canHurt: 0
   selfController: {fileID: 4738321634265808891}
   baseDamage: 50
@@ -2301,6 +2297,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4738321633217247146}
+  - component: {fileID: 3437576459855750634}
   - component: {fileID: -1133002329162043903}
   m_Layer: 0
   m_Name: Legolas_Current_Root
@@ -2326,6 +2323,24 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -130.59601, z: 0}
+--- !u!114 &3437576459855750634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4738321633217247147}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dea0eb1244d621b49994e000085df562, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rend: {fileID: 0}
+  radiationColor: {r: 0, g: 0, b: 0, a: 0}
+  shadowRecoverRate: 0
+  targetShadowSize: 0
+  startShadowSize: 0
+  currentRadiationSize: 0
 --- !u!137 &-1133002329162043903
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0
@@ -2898,11 +2913,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNumber: 2
-  pinDistanceFalloff: 0
   feathers: {fileID: 6497170728889403077, guid: 5d015548a7a42aa4db726c08dfdd9cc7,
     type: 3}
   stunAmount: 0.8
-  maxStunAmount: 15
   rend: {fileID: 4738321634480322742}
   radLossRate: 0
   radCooldownTime: 0
@@ -2917,16 +2930,13 @@ MonoBehaviour:
   jumpForce: 150
   health: 100
   canHurt: 0
-  canPush: 0
   isPlayer2: 1
   haveControls: 1
-  movement: {x: 0, y: 0, z: 0}
   groundLayer:
     serializedVersion: 2
     m_Bits: 1
   radiationCount: 0
   supersized: 0
-  superSizeMultiplier: 0
   i_movement: {x: 0, y: 0, z: 0}
   radState: 0
   character: 1
@@ -3449,8 +3459,6 @@ MonoBehaviour:
   bodyPart: 
   hurtOnly: 0
   gotHit: 0
-  gotPushed: 0
-  canPush: 0
   canHurt: 0
   selfController: {fileID: 4738321634265808891}
   baseDamage: 50

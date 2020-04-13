@@ -15,6 +15,7 @@ public class CharacterSelectorScript : MonoBehaviour
     public GameObject CharacterCell;
     public GameObject Player;
     public GameObject Portrait;
+    public Text PlayerName;
     public Text ReadyText;
     public int CharacterCount;
     public int CharacterVal;
@@ -30,6 +31,7 @@ public class CharacterSelectorScript : MonoBehaviour
         CurrentCharacter = characters[0];
         CharacterVal = 0;
         ReadyText.text = "JOIN";
+        PlayerName.text = "Player " + CharacterSelectNum;
     }
 
     void Update()

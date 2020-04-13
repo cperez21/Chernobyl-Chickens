@@ -136,6 +136,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GameManager: {fileID: 0}
-  SelectedCharacter: {fileID: 0}
+  CurrentScene: 
   players: []
   PlayerCount: 0
+  p_joined: 0
+  ready: 0
+  CharacterSelector: {fileID: 0}
+  SelectedCharacter: {fileID: 0}
+  spawned: 0
+  ThisObject: {fileID: 0}
+  PlayerCharacter: {fileID: 0}
+  Player: {fileID: 0}
+  spawnPoint: {fileID: 0}
