@@ -8,6 +8,8 @@ public class LimbDamage : MonoBehaviour
     [Header("Do not adjust these settings. For Debug only.")]
     public bool hurtOnly = false; //Will prevent limb from taking damage and only giving damage. Ex: limbs you want to attack only with like fists, feet, etc.
     public bool gotHit = false;
+    public bool gotPushed;
+    public bool canPush = false; //canPush version for the limbs.
     public bool canHurt = false; //canHurt version for the limbs. Playercontroller object does not physically collide with the limbs.
     public PlayerController selfController;
     public float baseDamage = 0f;
@@ -54,6 +56,14 @@ public class LimbDamage : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(selfController.canPush)
+        {
+            canPush = true;
+        }
+        else
+        {
+            canPush = false;
+        }
         if (selfController.canHurt) //if player is in attacking state
             canHurt = true;
         else
@@ -67,9 +77,20 @@ public class LimbDamage : MonoBehaviour
         }
         else
         {
+            //hit by push attack
+            if (collision.gameObject.GetComponent<LimbDamage>().canPush)
+            {
+                gotPushed = true;
+                Vector3 dir = collision.GetContact(0).point - transform.position;
+                dir = -dir.normalized;
+                selfController.gameObject.GetComponent<Rigidbody>().AddForce(dir * 500f);
+            }
+
 
             if (collision.gameObject.GetComponent<LimbDamage>().canHurt) //checks if the opponenet is actually attacking and limbs take damage
             {
+
+
                 magnitude = collision.relativeVelocity.magnitude;
 
                 if (magnitude <= magnitudeThreshold)
@@ -93,7 +114,8 @@ public class LimbDamage : MonoBehaviour
     }
      void OnCollisionExit(Collision collision)
     {
-        gotHit = false;    
+        gotHit = false;
+        gotPushed = false;
     }
 
 

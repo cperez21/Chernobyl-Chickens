@@ -15,9 +15,8 @@ public class PlayerInputScript : MonoBehaviour
     //setsplayername
     public GameObject[] players;
     public int PlayerCount;
-    
-    // may not be needed
-    //public bool p_joined;
+
+    public bool p_joined;
 
 
     //for character selectorscreen
@@ -34,7 +33,6 @@ public class PlayerInputScript : MonoBehaviour
     public GameObject Player;
     PlayerController PlayerScript;
     public GameObject spawnPoint;
-    public GameObject BattleUIPlayerCell;
 
     void Start()
     {
@@ -48,7 +46,7 @@ public class PlayerInputScript : MonoBehaviour
         }
         this.name = "Player" + PlayerCount;
         ThisObject = GameObject.Find("Player" + PlayerCount);
-        //p_joined = false;
+        p_joined = false;
         ready = false;
 
 
@@ -58,57 +56,36 @@ public class PlayerInputScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //If Current Scene isn't actual scene, then sets current scene. 
+        //If Current Scene isn't actual scene, then sets current scene.
         if (CurrentScene != GameManagerScript.LoadedScene)
         {
             CurrentScene = GameManagerScript.LoadedScene;
             //Debug.Log(CurrentScene);
         }
 
-        //If in character select, sets character selector to correct panel. 
+        //If in character select, sets character selector to correct panel.
         if (CurrentScene == "CharacterSelect")
         {
             CharacterSelector = GameObject.Find("PlayerCharacterSelect" + PlayerCount);
-            
+
         }
 
         //Sets p_Joined to TRUE
-        //if (p_joined == false && CurrentScene == "CharacterSelect")
-        //{
-        //    p_joined = true;
-        //}
-
-        //used to spawn player
-        if (spawnPoint == null)
+        if (p_joined == false && CurrentScene == "CharacterSelect")
         {
             spawnPoint = GameObject.Find("SpawnPoint" + PlayerCount);
         }
-        if (spawnPoint != null && spawned == false)
+
+        spawnPoint = GameObject.Find("SpawnPoint");
+        if(spawnPoint != null && spawned == false)
         {
             spawned = true;
             GameObject plyr = Instantiate(PlayerCharacter, spawnPoint.transform.position, Quaternion.identity, ThisObject.transform);
-            plyr.name = ("PlayerObject" + PlayerCount);
             Player = plyr.transform.Find("Model").gameObject;
             PlayerScript = Player.GetComponent<PlayerController>();
             //NewPlayer.transform.parent = ThisObject.transform;
-            
+            spawned = true;
         }
-
-        //finds playercell in BattleUI
-        if (BattleUIPlayerCell == null)
-        {
-            //Debug.Log("procc");
-            BattleUIPlayerCell = GameObject.Find("PlayerCell" + PlayerCount);
-            if (BattleUIPlayerCell != null)
-            {
-                Debug.Log("procc2");
-                BattleUIPlayerCell.SendMessage("SetCharacterUI", SelectedCharacter);
-            }
-
-        }
-
-        
-        
 
     }
     //CONTROLS----------------------------------------------------------------------------------------------------------------------------
@@ -119,7 +96,7 @@ public class PlayerInputScript : MonoBehaviour
             //Debug.Log(CharacterSelector);
             CharacterSelector.SendMessage("CharacterToggleLeft");
         }
-        
+
     }
 
     void OnRight()
@@ -132,7 +109,7 @@ public class PlayerInputScript : MonoBehaviour
     }
     void OnPlayerSelect()
     {
-        
+
         if (CurrentScene == "CharacterSelect" && ready == false)
         {
             //Debug.Log(CharacterSelector);
@@ -140,8 +117,7 @@ public class PlayerInputScript : MonoBehaviour
         }
         else if (CurrentScene == "CharacterSelect" && ready == true)
         {
-            //GameManagerScript.SendMessage("GoToMapSelect");
-            GameManagerScript.SendMessage("GoToChernobyl");
+            GameManagerScript.SendMessage("GoToMapSelect");
         }
     }
 
@@ -163,7 +139,12 @@ public class PlayerInputScript : MonoBehaviour
             //Player.SendMessage("Move", i_movement);
             //Debug.Log("imove = " + movement);
         }
-        
+
+    }
+
+    void OnPush()
+    {
+        Player.SendMessage("Push");
     }
 
     void OnAttack()
@@ -184,5 +165,8 @@ public class PlayerInputScript : MonoBehaviour
         ready = true;
     }
 
-    
+    void SpawnCharacter()
+    {
+
+    }
 }
