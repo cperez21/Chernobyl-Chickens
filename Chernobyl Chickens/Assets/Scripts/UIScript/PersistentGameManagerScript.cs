@@ -69,6 +69,14 @@ public class PersistentGameManagerScript : MonoBehaviour
 
     }
 
+    //USED FOR TESTINGONLY
+    public void GoToChernobyl()
+    {
+        SceneManager.UnloadSceneAsync(LoadedScene);
+        SceneManager.LoadSceneAsync((int)SceneIndexes.ChernobylWhiteBox, LoadSceneMode.Additive);
+        LoadedScene = "ChernobylWhiteBox";
+    }
+
     public void QuitGame()
     {
         Application.Quit();

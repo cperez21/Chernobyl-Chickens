@@ -8,7 +8,7 @@ public enum SceneIndexes
   MenuScene = 1,
   CharSelect = 2,
   MapSelect = 3,
-  Chernobyl = 4,
+  ChernobylWhiteBox = 4,
   Oslo = 5,
   Town = 6,
   Yucca = 7,

@@ -141,7 +141,8 @@ public class PlayerInputScript : MonoBehaviour
         }
         else if (CurrentScene == "CharacterSelect" && ready == true)
         {
-            GameManagerScript.SendMessage("GoToMapSelect");
+            //GameManagerScript.SendMessage("GoToMapSelect");
+            GameManagerScript.SendMessage("GoToChernobyl");
         }
     }
 
