@@ -1778,11 +1778,11 @@ ConfigurableJoint:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4297285178456246837}
-  m_ConnectedBody: {fileID: 0}
+  m_ConnectedBody: {fileID: 4738321634265808885}
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -12.989513, y: 2.3445148, z: 1.6302855}
+  m_ConnectedAnchor: {x: -0.00000020768493, y: 1.6740239, z: -0.0311741}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 2
@@ -2297,7 +2297,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4738321633217247146}
-  - component: {fileID: 3437576459855750634}
   - component: {fileID: -1133002329162043903}
   m_Layer: 0
   m_Name: Legolas_Current_Root
@@ -2323,24 +2322,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: -130.59601, z: 0}
---- !u!114 &3437576459855750634
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4738321633217247147}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dea0eb1244d621b49994e000085df562, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  rend: {fileID: 0}
-  radiationColor: {r: 0, g: 0, b: 0, a: 0}
-  shadowRecoverRate: 0
-  targetShadowSize: 0
-  startShadowSize: 0
-  currentRadiationSize: 0
 --- !u!137 &-1133002329162043903
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 0

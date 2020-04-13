@@ -391,11 +391,11 @@ ConfigurableJoint:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1525058444672357342}
-  m_ConnectedBody: {fileID: 0}
+  m_ConnectedBody: {fileID: 8018932788421929111}
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 14.385604, y: 4.1858053, z: 15.05176}
+  m_ConnectedAnchor: {x: -0.00014138222, y: 0.53645134, z: 0.034229755}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 2
@@ -494,8 +494,6 @@ MonoBehaviour:
   bodyPart: 
   hurtOnly: 0
   gotHit: 0
-  gotPushed: 0
-  canPush: 0
   canHurt: 0
   selfController: {fileID: 8018932788421929109}
   baseDamage: 0
@@ -1885,8 +1883,6 @@ MonoBehaviour:
   bodyPart: 
   hurtOnly: 0
   gotHit: 0
-  gotPushed: 0
-  canPush: 0
   canHurt: 0
   selfController: {fileID: 8018932788421929109}
   baseDamage: 0
@@ -2229,8 +2225,6 @@ MonoBehaviour:
   bodyPart: 
   hurtOnly: 0
   gotHit: 0
-  gotPushed: 0
-  canPush: 0
   canHurt: 0
   selfController: {fileID: 8018932788421929109}
   baseDamage: 0
@@ -2432,11 +2426,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerNumber: 0
-  pinDistanceFalloff: 2
   feathers: {fileID: 6497170728889403077, guid: 5d015548a7a42aa4db726c08dfdd9cc7,
     type: 3}
   stunAmount: 0.8
-  maxStunAmount: 15
   rend: {fileID: 8018932789180264147}
   radLossRate: 0
   radCooldownTime: 0
@@ -2451,16 +2443,13 @@ MonoBehaviour:
   jumpForce: 150
   health: 100
   canHurt: 0
-  canPush: 0
   isPlayer2: 0
   haveControls: 1
-  movement: {x: 0, y: 0, z: 0}
   groundLayer:
     serializedVersion: 2
     m_Bits: 1
   radiationCount: 0
   supersized: 0
-  superSizeMultiplier: 0
   i_movement: {x: 0, y: 0, z: 0}
   radState: 0
   character: 3
