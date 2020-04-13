@@ -83,7 +83,7 @@ public class CPUScript : MonoBehaviour //This Script accessess the PlayerControl
         switch (state)
         {
             case CPUState.Default:
-                attackCollider.enabled = true;
+
                 Move(Vector3.zero);
                 if (self.health < 50f && radAttempts < maxRadAttempts)
                 {
@@ -96,15 +96,7 @@ public class CPUScript : MonoBehaviour //This Script accessess the PlayerControl
 
 
                 var player = GameObject.FindObjectsOfType<PlayerController>();
-                if(player == null)
-                {
-                    state = CPUState.Nothing;
-                }
-                else
-                {
-                    players = player.ToList();
-                }
-               
+                players = player.ToList();
 
                 //players = Object.FindObjectsOfType<PlayerController>().Where(f => f.GetInstanceID() != gameObject.GetInstanceID()).ToArray(); //what the fuck
 
@@ -130,21 +122,20 @@ public class CPUScript : MonoBehaviour //This Script accessess the PlayerControl
                     }
                     else if (proximity < closestProximity)
                     {
-                        
-                        closestProximity = proximity;
                         target = players[x].gameObject;
+                        closestProximity = proximity;
                     }
 
 
                 }
-               
+                attackCollider.enabled = true;
                 StartCoroutine("MoveDelay"); //switches to moveToTarget state with minor delay.
 
                 break;
 
             case CPUState.MoveToTarget:
 
-                Move(targetDirection * 0.2f);
+                Move(targetDirection * 0.4f);
 
                 break;
 

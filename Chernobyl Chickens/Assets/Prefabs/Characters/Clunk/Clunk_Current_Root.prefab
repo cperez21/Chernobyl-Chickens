@@ -1739,11 +1739,11 @@ ConfigurableJoint:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4452547819091482939}
-  m_ConnectedBody: {fileID: 5163448266319291448}
+  m_ConnectedBody: {fileID: 0}
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 1, y: 0, z: 0}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: 0.00000023841858, y: 1.2642201, z: 0.36917508}
+  m_ConnectedAnchor: {x: 12.395642, y: 1.934713, z: 20.696262}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 2
@@ -2746,7 +2746,13 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
-  m_WarningMessage: 
+  m_WarningMessage: "\nBinding warning: Some generic clip(s) animate transforms that
+    are already bound by a Humanoid avatar. These transforms can only be changed by
+    Humanoid clips.\n\tTransform 'Bip001 Spine'\n\tTransform 'Bip001 R Thigh'\n\tTransform
+    'Bip001'\n\tTransform 'Bip001 L Thigh'\n\tTransform 'Bip001 R Forearm'\n\tTransform
+    'Bip001 L Forearm'\n\tTransform 'Bip001 L UpperArm'\n\tTransform 'Bip001 R UpperArm'\n\tTransform
+    'Bip001 R Foot'\n\tTransform 'Bip001 Head'\n\tand more ...\n\tFrom animation clip
+    'PushAttack'"
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
