@@ -7,8 +7,19 @@ public class RadiationScript : MonoBehaviour
     [Header("All of these values are executed at a frame by frame rate")]
     
     public int addHealthAmount;
+    public bool giveHealth;
+    private bool addHealthEnabled = true;
     [SerializeField, Range(0.001f,0.005f)] public float addRadsAmount; //value has to be small because 1.0 is max
 
+   IEnumerator AddHealth()
+    {
+        addHealthEnabled = false;
+        yield return new WaitForSeconds(1f);
+        giveHealth = true;
+        addHealthEnabled = true;
+    }
+    
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +45,20 @@ public class RadiationScript : MonoBehaviour
                
                 player.radState = PlayerController.RadiationState.GAINING;
                 player.radiationCount += addRadsAmount; //Changed to public variables for ez modifying
-                player.health += addHealthAmount;
+
+                //To prevent coroutine from being spammed every frame
+                if (addHealthEnabled)
+                {
+                    StartCoroutine("AddHealth");
+
+                }
+                //because I cant reference the player
+                if (giveHealth)
+                {
+                    player.health += addHealthAmount;
+                    giveHealth = false;
+                }
+                
               
             }
             

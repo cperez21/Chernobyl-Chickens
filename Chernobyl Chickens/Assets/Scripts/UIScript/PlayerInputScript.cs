@@ -16,8 +16,7 @@ public class PlayerInputScript : MonoBehaviour
     public GameObject[] players;
     public int PlayerCount;
     
-    // may not be needed
-    //public bool p_joined;
+    public bool p_joined;
 
 
     //for character selectorscreen
@@ -34,7 +33,6 @@ public class PlayerInputScript : MonoBehaviour
     public GameObject Player;
     PlayerController PlayerScript;
     public GameObject spawnPoint;
-    public GameObject BattleUIPlayerCell;
 
     void Start()
     {
@@ -48,7 +46,7 @@ public class PlayerInputScript : MonoBehaviour
         }
         this.name = "Player" + PlayerCount;
         ThisObject = GameObject.Find("Player" + PlayerCount);
-        //p_joined = false;
+        p_joined = false;
         ready = false;
 
 
@@ -73,43 +71,22 @@ public class PlayerInputScript : MonoBehaviour
         }
 
         //Sets p_Joined to TRUE
-        //if (p_joined == false && CurrentScene == "CharacterSelect")
-        //{
-        //    p_joined = true;
-        //}
-
-        //used to spawn player
-        if (spawnPoint == null)
+        if (p_joined == false && CurrentScene == "CharacterSelect")
         {
-            spawnPoint = GameObject.Find("SpawnPoint");
+            //Debug.Log("WE IN FAM");
+            p_joined = true;
         }
-        if (spawnPoint != null && spawned == false)
+
+        spawnPoint = GameObject.Find("SpawnPoint");
+        if(spawnPoint != null && spawned == false)
         {
             //GameObject NewPlayer =
-            spawned = true;
             GameObject plyr = Instantiate(PlayerCharacter, spawnPoint.transform.position, Quaternion.identity, ThisObject.transform);
-            plyr.name = ("PlayerObject" + PlayerCount);
             Player = plyr.transform.Find("Model").gameObject;
             PlayerScript = Player.GetComponent<PlayerController>();
             //NewPlayer.transform.parent = ThisObject.transform;
-            
+            spawned = true;
         }
-
-        //finds playercell in BattleUI
-        if (BattleUIPlayerCell == null)
-        {
-            //Debug.Log("procc");
-            BattleUIPlayerCell = GameObject.Find("PlayerCell" + PlayerCount);
-            if (BattleUIPlayerCell != null)
-            {
-                Debug.Log("procc2");
-                BattleUIPlayerCell.SendMessage("SetCharacterUI", SelectedCharacter);
-            }
-
-        }
-
-        
-        
 
     }
     //CONTROLS----------------------------------------------------------------------------------------------------------------------------
@@ -141,8 +118,7 @@ public class PlayerInputScript : MonoBehaviour
         }
         else if (CurrentScene == "CharacterSelect" && ready == true)
         {
-            //GameManagerScript.SendMessage("GoToMapSelect");
-            GameManagerScript.SendMessage("GoToChernobyl");
+            GameManagerScript.SendMessage("GoToMapSelect");
         }
     }
 
@@ -167,6 +143,11 @@ public class PlayerInputScript : MonoBehaviour
         
     }
 
+    void OnPush()
+    {
+        Player.SendMessage("Push");
+    }
+
     void OnAttack()
     {
         Player.SendMessage("Attack");
@@ -185,5 +166,8 @@ public class PlayerInputScript : MonoBehaviour
         ready = true;
     }
 
-    
+    void SpawnCharacter()
+    {
+
+    }
 }

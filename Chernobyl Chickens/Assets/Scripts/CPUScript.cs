@@ -25,7 +25,7 @@ public class CPUScript : MonoBehaviour //This Script accessess the PlayerControl
         Debug.Log("attack coroutine started");
         Move(targetDirection * 0.25f);
         self.Attack();
-        yield return new WaitForSeconds(0.2f);
+        yield return new WaitForSeconds(0.1f);
         
 
         

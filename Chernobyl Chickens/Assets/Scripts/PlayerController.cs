@@ -473,7 +473,8 @@ public class PlayerController : MonoBehaviour
                 haveControls = false;
 
                 DamageCheck(false);
-                audioS.volume = 0.50f;
+                
+                audioS.volume = 0.25f;
                 audioS.clip = death;
                 audioS.Play();
                 break;
