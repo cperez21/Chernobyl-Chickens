@@ -34,7 +34,7 @@ public class RadiationScript : MonoBehaviour
 
     void OnTriggerStay(Collider other)
     {
-        Debug.Log(other);
+        //Debug.Log(other);
         if (other.gameObject.tag == "Player")
         {
             PlayerController player = other.gameObject.GetComponent<PlayerController>();

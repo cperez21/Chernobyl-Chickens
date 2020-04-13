@@ -516,7 +516,7 @@ public class PlayerController : MonoBehaviour
                 movement = cpu.movementCPU;
 
 
-            Debug.Log("move = " + movement);
+            //Debug.Log("move = " + movement);
             //transform.Translate(movement);
 
 

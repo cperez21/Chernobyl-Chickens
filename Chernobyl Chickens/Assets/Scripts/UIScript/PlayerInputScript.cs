@@ -16,7 +16,7 @@ public class PlayerInputScript : MonoBehaviour
     public GameObject[] players;
     public int PlayerCount;
 
-    public bool p_joined;
+    //public bool p_joined;
 
 
     //for character selectorscreen
@@ -46,7 +46,7 @@ public class PlayerInputScript : MonoBehaviour
         }
         this.name = "Player" + PlayerCount;
         ThisObject = GameObject.Find("Player" + PlayerCount);
-        p_joined = false;
+        //p_joined = false;
         ready = false;
 
 
@@ -71,16 +71,17 @@ public class PlayerInputScript : MonoBehaviour
         }
 
         //Sets p_Joined to TRUE
-        if (p_joined == false && CurrentScene == "CharacterSelect")
-        {
-            spawnPoint = GameObject.Find("SpawnPoint" + PlayerCount);
-        }
+        //if (p_joined == false && CurrentScene == "CharacterSelect")
+        //{
+        //    spawnPoint = GameObject.Find("SpawnPoint" + PlayerCount);
+        //}
 
-        spawnPoint = GameObject.Find("SpawnPoint");
+        spawnPoint = GameObject.Find("SpawnPoint" + PlayerCount);
         if(spawnPoint != null && spawned == false)
         {
             spawned = true;
             GameObject plyr = Instantiate(PlayerCharacter, spawnPoint.transform.position, Quaternion.identity, ThisObject.transform);
+            plyr.name = ("PlayerObject" + PlayerCount);
             Player = plyr.transform.Find("Model").gameObject;
             PlayerScript = Player.GetComponent<PlayerController>();
             //NewPlayer.transform.parent = ThisObject.transform;
@@ -117,7 +118,7 @@ public class PlayerInputScript : MonoBehaviour
         }
         else if (CurrentScene == "CharacterSelect" && ready == true)
         {
-            GameManagerScript.SendMessage("GoToMapSelect");
+            GameManagerScript.SendMessage("GoToChernobyl");
         }
     }
 
@@ -153,7 +154,36 @@ public class PlayerInputScript : MonoBehaviour
     }
     void OnJump()
     {
-        Player.SendMessage("JumpPrep");
+        if (CurrentScene == "CharacterSelect" )
+        {
+
+        }
+        else if (CurrentScene == "MenuScene" )
+        {
+
+        }
+        else
+        {
+            Player.SendMessage("JumpPrep");
+        }
+
+        
+    }
+
+    void OnPause()
+    {
+        Debug.Log("buttonpressed");
+        if (CurrentScene == "CharacterSelect" || CurrentScene == "MenuScene")
+        {
+            //Debug.Log("badscene");
+        }
+        else
+        {
+            //Debug.Log("sending");
+            GameObject.Find("PlayerCell" + PlayerCount).SendMessage("PauseToggle");
+            //Debug.Log("sent");
+        }
+
     }
 
     //MISC FUNCTIONS -----------------------------------------------------------------------------------------------------------------------
@@ -163,6 +193,11 @@ public class PlayerInputScript : MonoBehaviour
         SelectedCharacter = character;
         PlayerCharacter = character.characterModel;
         ready = true;
+    }
+
+    void SendCharacter()
+    {
+        GameObject.Find("PlayerCell" + PlayerCount).SendMessage("SetCharacterUI", SelectedCharacter);
     }
 
     void SpawnCharacter()

@@ -24,6 +24,7 @@ public class PersistentGameManagerScript : MonoBehaviour
         }
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<PersistentGameManagerScript>();
         players = GameObject.FindObjectsOfType<PlayerController>();
+
     }
 
     private void Update()
@@ -55,14 +56,14 @@ public class PersistentGameManagerScript : MonoBehaviour
     public void GoToMenuScene()
     {
         SceneManager.UnloadSceneAsync(LoadedScene);
-        SceneManager.LoadSceneAsync((int)SceneIndexes.MenuScene, LoadSceneMode.Additive);
+        SceneManager.LoadSceneAsync("MenuScene", LoadSceneMode.Additive);
         LoadedScene = "MenuScene";
     }
     //ONLY REFERENCE WHEN GOING TO MAPS. will spawn characters
     public void ChangeScene(string sceneName)
     {
 
-        SceneManager.UnloadSceneAsync(LoadedScene);
+        //SceneManager.UnloadSceneAsync(LoadedScene);
         SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
         LoadedScene = sceneName;
 
