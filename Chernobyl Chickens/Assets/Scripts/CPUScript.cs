@@ -18,6 +18,7 @@ public class CPUScript : MonoBehaviour //This Script accessess the PlayerControl
     private float proximity; //proximity to other players when looking for a target
     private int frameCount;
     private SphereCollider attackCollider;
+    private float attackTimeOut;
     
 
     IEnumerator StandardAttack()
@@ -84,7 +85,7 @@ public class CPUScript : MonoBehaviour //This Script accessess the PlayerControl
         {
             case CPUState.Default:
                 attackCollider.enabled = true;
-                Move(Vector3.zero);
+               // Move(Vector3.zero);
                 if (self.health < 50f && radAttempts < maxRadAttempts)
                 {
                     radAttempts++;
@@ -144,19 +145,30 @@ public class CPUScript : MonoBehaviour //This Script accessess the PlayerControl
 
             case CPUState.MoveToTarget:
 
-                Move(targetDirection * 0.2f);
+                Move(targetDirection * 0.5f);
 
                 break;
 
             case CPUState.Attack:
+                attackTimeOut += Time.deltaTime;
 
+                Move(Vector3.zero);
                 if (attackCollider.enabled)
                 {
+                    
                     StartCoroutine("StandardAttack");
                     attackCollider.enabled = false;
                 }
+                if(proximity >2)
+                {
+                    state = CPUState.Default;
 
-
+                }
+                if(attackTimeOut > 2f)
+                {
+                    state = CPUState.Default;
+                    attackTimeOut = 0f;
+                }
                 break;
 
             case CPUState.MoveToRads:
@@ -196,6 +208,7 @@ public class CPUScript : MonoBehaviour //This Script accessess the PlayerControl
     {
         if(other.gameObject.tag == "Player")
         {
+            Debug.Log("I collided with " + other.gameObject.name);
             state = CPUState.Attack;
             
         }
