@@ -1,10 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 
 public class PlayerController : MonoBehaviour
 {
+    private InputAction sprintAction;
+    public PlayerInput pi;
     public int playerNumber; //The GameManager script sets this value.
     RootMotion.Dynamics.PuppetMaster puppet;
     public float pinDistanceFalloff; //to set value for all characters rather than doing it twice for each character
@@ -23,7 +26,7 @@ public class PlayerController : MonoBehaviour
     private CPUScript cpu;
     private bool isHuman = false;
     private bool isStunned;
-    
+    public bool sprintKeyPressed;
     
 
    
@@ -119,6 +122,15 @@ public class PlayerController : MonoBehaviour
        
     }
 
+    public enum MoveState
+    {
+        STAND,
+        WALK,
+        SPRINT
+        
+    }
+
+
     public enum RadiationState
     {
         DEFAULT,
@@ -148,12 +160,13 @@ public class PlayerController : MonoBehaviour
     public RadiationState radState;
     public PlayerCharacter character;
     public PlayerState state;
+    public MoveState moveState;
 
     // Start is called before the first frame update
     void Awake()
     {
-        
-        
+
+       
         haveControls = true;
         radCooldownTime = 1.0f;
         startOrientation = transform.rotation.eulerAngles;
@@ -170,7 +183,16 @@ public class PlayerController : MonoBehaviour
         cpu = gameObject.GetComponent<CPUScript>();
         if(cpu == null)
         {
-             isHuman = true;
+
+            
+
+
+            pi = gameObject.GetComponentInParent<PlayerInput>();
+            sprintAction = pi.actions["Sprint"];
+            isHuman = true;
+
+
+            
         }
 
 
@@ -206,12 +228,26 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+       // Debug.Log("Sprint phase is " + pi.actions["Sprint"].phase);
+       
         
         //This must be at start of update to prevent actions after death
         if (state == PlayerState.DEAD) //skips Update logic if player is dead. (prevents further damage from being taken and sounds)
         {
             return;
+        }
+
+        //Logic for checking if the sprint button is pressed / released.
+        if (pi != null)
+        {
+            Debug.Log("devices are "+ pi.devices[0]);
+            sprintAction.started += whatever => sprintKeyPressed = true;
+
+            sprintAction.canceled +=
+                context =>
+                {
+                    sprintKeyPressed = false;
+                };
         }
 
         Mathf.Clamp(health, 0, 150);
@@ -285,103 +321,23 @@ public class PlayerController : MonoBehaviour
         }
 
 
+        switch (moveState)
+        {
+            case MoveState.STAND:
+                {
 
-        //if (haveControls)
-        //{
-        //    //controls for moving left and right
-        //    dirX = Input.GetAxisRaw(HorizontalControl) * moveSpeed;
-        //    dirZ = Input.GetAxisRaw(VerticalControl) * moveSpeed;
-        //    moveInput = new Vector3(dirX, 0, dirZ);
-        //    moveVelocity = moveInput.normalized * moveSpeed;
+                    break;
+                }
+            case MoveState.WALK:
 
-        //    //sets to walk animation when moving
-        //    if (moveInput != Vector3.zero)
-        //    {
+                break;
 
-        //        rb.MovePosition(rb.position + moveVelocity * Time.deltaTime);
-        //        transform.rotation = Quaternion.LookRotation(moveInput);
+            case MoveState.SPRINT:
 
-        //        anim.SetTrigger("Walk");
-        //        anim.ResetTrigger("Idle");
-        //    }
-        //    //else sets to idle
-        //    else
-        //    {
-
-        //        anim.SetTrigger("Idle");
-        //        anim.ResetTrigger("Walk");
-        //    }
+                break;
+        }
 
 
-        //    //Jump controls
-        //    if (Input.GetButtonDown(JumpControl))
-        //    {
-
-        //        Debug.DrawRay(transform.position, Vector3.down, Color.blue, Mathf.Infinity);
-        //        if (canJump && moveInput == Vector3.zero)
-        //        {
-        //            Debug.Log("raycast hit " + hit.collider.name);
-
-        //            Jump();
-
-
-        //        }
-        //        else if(canJump && moveInput != Vector3.zero)
-        //        {
-        //            rb.AddForce(moveInput * 5);
-        //            Jump();
-        //        }
-
-
-
-        //    }
-        //    else if(Input.GetButtonDown(JumpControl) && moveInput != Vector3.zero)
-        //    {
-        //        Jump();
-        //    }
-        //    //ATTACK
-        //    if (Input.GetButtonDown(StrikeControl))
-        //    {
-
-        //        if (character == PlayerCharacter.LEGOLAS)
-        //        {
-        //            //Used for Legolas's jump kick. Adds force upwards because he kept going b o n k
-        //            if (Attackcooldown >= 1.0f)
-        //            {
-        //                rb.AddForce(Vector3.up * 300); //the perfect amount of force on the first try fuck yes -cullen 8:09am
-        //                anim.SetTrigger("Strike");
-        //                Attackcooldown = 0f;
-        //            }
-        //            else
-        //            {
-        //                return;
-        //            }
-        //        }
-        //        //Regular strike for other characters
-        //        else
-        //        {
-        //            anim.SetTrigger("Strike");
-        //        }
-
-
-
-
-
-        //    }
-        //}
-
-        /* //CEASAR MOVED THIS FROM UNDER PlayerState.Strike, it was causing willHurt to not switch repeatedly.
-         if (anim.GetCurrentAnimatorStateInfo(0).IsName("Strike"))
-         {
-             willHurt = true;
-         }
-         else
-         {
-            // state = PlayerState.DEFAULT;
-             willHurt = false;
-         }
- */
-        
         switch (radState)
         {
             case RadiationState.DEFAULT:
@@ -524,10 +480,25 @@ public class PlayerController : MonoBehaviour
             //dirX = i_movement.x;
             //dirZ = i_movement.y;
             moveVelocity = movement.normalized * moveSpeed;
-            //sets to walk animation when moving
-            if (movement != Vector3.zero)
+
+           
+
+            //Sprinting
+            if (movement != Vector3.zero && sprintKeyPressed)
             {
 
+                moveState = MoveState.SPRINT;
+                anim.speed = 1.5f;
+                rb.MovePosition(rb.position + (1.5f *moveVelocity) * Time.deltaTime);
+                transform.rotation = Quaternion.LookRotation(movement);
+                anim.SetTrigger("Walk");
+                anim.ResetTrigger("Idle");
+            }
+            //Walking
+            else if(movement != Vector3.zero)
+            {
+                anim.speed = 1f;
+                moveState = MoveState.WALK;
                 rb.MovePosition(rb.position + moveVelocity * Time.deltaTime);
                 transform.rotation = Quaternion.LookRotation(movement);
                 anim.SetTrigger("Walk");
@@ -536,6 +507,8 @@ public class PlayerController : MonoBehaviour
             //else sets to idle
             else
             {
+                anim.speed = 1f;
+                moveState = MoveState.STAND;
                 anim.SetTrigger("Idle");
                 anim.ResetTrigger("Walk");
                 
@@ -548,6 +521,14 @@ public class PlayerController : MonoBehaviour
         }
 
 
+    }
+
+    public void Sprint()
+    {
+        if(haveControls)
+        {
+            sprintKeyPressed = true;
+        }
     }
 
     public void Push()

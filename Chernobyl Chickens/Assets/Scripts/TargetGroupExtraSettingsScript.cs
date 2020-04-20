@@ -33,8 +33,8 @@ public class TargetGroupExtraSettingsScript : MonoBehaviour //This is used to ac
     void Awake()
     {
         //targetGroup1 has to be in the same scene as the players in order to find them. This moves the gameObject over to persistant scene unless if it is a testbed. -Cullen 3/31
-        //if (SceneManager.GetActiveScene().name != "PersistantScene" && !SceneManager.GetActiveScene().name.Contains("Test")) //
-       // SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetSceneByName("PersistentScene"));
+        if (SceneManager.GetActiveScene().name != "PersistantScene" && !SceneManager.GetActiveScene().name.Contains("Test")) //
+        SceneManager.MoveGameObjectToScene(gameObject, SceneManager.GetSceneByName("PersistentScene"));
         
     }
 

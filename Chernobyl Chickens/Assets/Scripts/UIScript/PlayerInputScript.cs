@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
 
+
 public class PlayerInputScript : MonoBehaviour
 {
     //sets gamemanager and script
@@ -141,6 +142,11 @@ public class PlayerInputScript : MonoBehaviour
             //Debug.Log("imove = " + movement);
         }
 
+    }
+
+    void OnSprint()
+    {
+        Player.SendMessage("Sprint");
     }
 
     void OnPush()

@@ -1,0 +1,96 @@
+
+        //if (haveControls)
+        //{
+        //    //controls for moving left and right
+        //    dirX = Input.GetAxisRaw(HorizontalControl) * moveSpeed;
+        //    dirZ = Input.GetAxisRaw(VerticalControl) * moveSpeed;
+        //    moveInput = new Vector3(dirX, 0, dirZ);
+        //    moveVelocity = moveInput.normalized * moveSpeed;
+
+        //    //sets to walk animation when moving
+        //    if (moveInput != Vector3.zero)
+        //    {
+
+        //        rb.MovePosition(rb.position + moveVelocity * Time.deltaTime);
+        //        transform.rotation = Quaternion.LookRotation(moveInput);
+
+        //        anim.SetTrigger("Walk");
+        //        anim.ResetTrigger("Idle");
+        //    }
+        //    //else sets to idle
+        //    else
+        //    {
+
+        //        anim.SetTrigger("Idle");
+        //        anim.ResetTrigger("Walk");
+        //    }
+
+
+        //    //Jump controls
+        //    if (Input.GetButtonDown(JumpControl))
+        //    {
+
+        //        Debug.DrawRay(transform.position, Vector3.down, Color.blue, Mathf.Infinity);
+        //        if (canJump && moveInput == Vector3.zero)
+        //        {
+        //            Debug.Log("raycast hit " + hit.collider.name);
+
+        //            Jump();
+
+
+        //        }
+        //        else if(canJump && moveInput != Vector3.zero)
+        //        {
+        //            rb.AddForce(moveInput * 5);
+        //            Jump();
+        //        }
+
+
+
+        //    }
+        //    else if(Input.GetButtonDown(JumpControl) && moveInput != Vector3.zero)
+        //    {
+        //        Jump();
+        //    }
+        //    //ATTACK
+        //    if (Input.GetButtonDown(StrikeControl))
+        //    {
+
+        //        if (character == PlayerCharacter.LEGOLAS)
+        //        {
+        //            //Used for Legolas's jump kick. Adds force upwards because he kept going b o n k
+        //            if (Attackcooldown >= 1.0f)
+        //            {
+        //                rb.AddForce(Vector3.up * 300); //the perfect amount of force on the first try fuck yes -cullen 8:09am
+        //                anim.SetTrigger("Strike");
+        //                Attackcooldown = 0f;
+        //            }
+        //            else
+        //            {
+        //                return;
+        //            }
+        //        }
+        //        //Regular strike for other characters
+        //        else
+        //        {
+        //            anim.SetTrigger("Strike");
+        //        }
+
+
+
+
+
+        //    }
+        //}
+
+        /* //CEASAR MOVED THIS FROM UNDER PlayerState.Strike, it was causing willHurt to not switch repeatedly.
+         if (anim.GetCurrentAnimatorStateInfo(0).IsName("Strike"))
+         {
+             willHurt = true;
+         }
+         else
+         {
+            // state = PlayerState.DEFAULT;
+             willHurt = false;
+         }
+ */
