@@ -95,10 +95,15 @@ public class PersistentGameManagerScript : MonoBehaviour
         MenuManager.SendMessage("SwitchToMainMenu");
     }
 
+    public void CharSelReadyUp()
+    {
+        MenuManager.SendMessage("SwitchToMapSel");
+    }
+
     //USED FOR TESTINGONLY
     public void GoToChernobyl()
     {
-        SceneManager.UnloadSceneAsync(LoadedScene);
+        SceneManager.UnloadSceneAsync("MenuScene");
         SceneManager.LoadSceneAsync((int)SceneIndexes.ChernobylWhiteBox, LoadSceneMode.Additive);
         LoadedScene = "ChernobylWhiteBox";
     }
