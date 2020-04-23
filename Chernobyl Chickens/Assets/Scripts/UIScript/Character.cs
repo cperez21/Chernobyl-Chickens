@@ -9,6 +9,7 @@ public class Character : ScriptableObject
     public string characterName;
     public Sprite characterSprite;
     public Sprite characterIcon;
+    public Sprite bossIcon;
     public float zoom = 1;
     public GameObject characterModel;
 }

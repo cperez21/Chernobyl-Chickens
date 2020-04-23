@@ -39,6 +39,8 @@ public class PlayerInputScript : MonoBehaviour
     {
         GameManager = GameObject.FindWithTag("GameManager");
         GameManagerScript = GameManager.GetComponent<PersistentGameManagerScript>();
+        
+
 
         players = GameObject.FindGameObjectsWithTag("PlayerContainer");
         foreach (GameObject PlayerContainer in players)
@@ -47,6 +49,7 @@ public class PlayerInputScript : MonoBehaviour
         }
         this.name = "Player" + PlayerCount;
         ThisObject = GameObject.Find("Player" + PlayerCount);
+        GameManagerScript.SendMessage("PlayerJoin", ThisObject);
         //p_joined = false;
         ready = false;
 

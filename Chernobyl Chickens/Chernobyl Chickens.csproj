@@ -713,6 +713,39 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\FeathersScript.cs" />
+    <Compile Include="Assets\LeanTween\Examples\Archived\OldGUIExamplesCS.cs" />
+    <Compile Include="Assets\LeanTween\Examples\Archived\TestingPunch.cs" />
+    <Compile Include="Assets\LeanTween\Examples\Archived\TestingRigidbodyCS.cs" />
+    <Compile Include="Assets\LeanTween\Examples\Scripts\Following.cs" />
+    <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralAdvancedTechniques.cs" />
+    <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralBasic.cs" />
+    <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralBasics2d.cs" />
+    <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralCameraShake.cs" />
+    <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralEasingTypes.cs" />
+    <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralEventsListeners.cs" />
+    <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralSequencer.cs" />
+    <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralSimpleUI.cs" />
+    <Compile Include="Assets\LeanTween\Examples\Scripts\GeneralUISpace.cs" />
+    <Compile Include="Assets\LeanTween\Examples\Scripts\LogoCinematic.cs" />
+    <Compile Include="Assets\LeanTween\Examples\Scripts\PathBezier.cs" />
+    <Compile Include="Assets\LeanTween\Examples\Scripts\PathBezier2d.cs" />
+    <Compile Include="Assets\LeanTween\Examples\Scripts\PathSpline.cs" />
+    <Compile Include="Assets\LeanTween\Examples\Scripts\PathSpline2d.cs" />
+    <Compile Include="Assets\LeanTween\Examples\Scripts\PathSplineEndless.cs" />
+    <Compile Include="Assets\LeanTween\Examples\Scripts\PathSplinePerformance.cs" />
+    <Compile Include="Assets\LeanTween\Examples\Scripts\PathSplines.cs" />
+    <Compile Include="Assets\LeanTween\Examples\Scripts\PathSplineTrack.cs" />
+    <Compile Include="Assets\LeanTween\Examples\Scripts\TestingUnitTests.cs" />
+    <Compile Include="Assets\LeanTween\Examples\Scripts\TestingZLegacy.cs" />
+    <Compile Include="Assets\LeanTween\Examples\Scripts\TestingZLegacyExt.cs" />
+    <Compile Include="Assets\LeanTween\Framework\LeanAudio.cs" />
+    <Compile Include="Assets\LeanTween\Framework\LeanSmooth.cs" />
+    <Compile Include="Assets\LeanTween\Framework\LeanTest.cs" />
+    <Compile Include="Assets\LeanTween\Framework\LeanTween.cs" />
+    <Compile Include="Assets\LeanTween\Framework\LeanTweenExt.cs" />
+    <Compile Include="Assets\LeanTween\Framework\LTDescr.cs" />
+    <Compile Include="Assets\LeanTween\Framework\LTDescrOptional.cs" />
+    <Compile Include="Assets\LeanTween\Framework\LTSeq.cs" />
     <Compile Include="Assets\MenuLoadScript.cs" />
     <Compile Include="Assets\Models\Map Assets\Oslo\Oslo Clouds\LowPolyClouds.cs" />
     <Compile Include="Assets\Samples\Input System\1.0.0-preview.5\Simple Multiplayer\SimpleMultiplayerPlayer.cs" />
@@ -738,14 +771,17 @@
     <Compile Include="Assets\Scripts\UIScript\Map.cs" />
     <Compile Include="Assets\Scripts\UIScript\MapCellScript.cs" />
     <Compile Include="Assets\Scripts\UIScript\MapSelectorScript.cs" />
+    <Compile Include="Assets\Scripts\UIScript\MenuManagerScript.cs" />
     <Compile Include="Assets\Scripts\UIScript\MenuScript.cs" />
     <Compile Include="Assets\Scripts\UIScript\PersistentGameManagerScript.cs" />
     <Compile Include="Assets\Scripts\UIScript\PlayerInputScript.cs" />
     <Compile Include="Assets\Scripts\UIScript\PlayerManagerScript.cs" />
     <Compile Include="Assets\Scripts\UIScript\SceneIndexes.cs" />
-    <Compile Include="Assets\shader\GetJointComponents.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Assets\LeanTween\Examples\Archived\2dUnlitWithFade.shader" />
+    <None Include="Assets\LeanTween\License.txt" />
+    <None Include="Assets\LeanTween\ReadMe.txt" />
     <None Include="Assets\Models\Map Assets\Chernobyl\Cartoony Spruces\Shaders\AlphaTest-Diffuse.shader" />
     <None Include="Assets\Models\Map Assets\Chernobyl\Cartoony Spruces\Shaders\AlphaTest-Glossy.shader" />
     <None Include="Assets\Models\Map Assets\Chernobyl\Cartoony Spruces\Shaders\Standard.shader" />
@@ -753,10 +789,7 @@
     <None Include="Assets\Samples\Input System\1.0.0-preview.5\Input Recorder\Unity.InputSystem.Recorder.asmdef" />
     <None Include="Assets\Samples\Input System\1.0.0-preview.5\Rebinding UI\Unity.InputSystem.RebindingUI.asmdef" />
     <None Include="Assets\Samples\Input System\1.0.0-preview.5\Visualizers\Unity.InputSystem.Visualizers.asmdef" />
-    <None Include="Assets\shader\mainlight.hlsl" />
-    <None Include="Assets\shader\mainlight.hlsl (1).txt" />
-    <None Include="Assets\shader\mainlight.txt" />
-    <None Include="Assets\shader\mainlight_foo.hlsl" />
+    <None Include="Assets\Toon.shader" />
     <None Include="Packages\com.unity.cinemachine\Editor\Resources\CMWaveform.compute" />
     <None Include="Packages\com.unity.cinemachine\Editor\Resources\CMWaveform.shader" />
     <None Include="Packages\com.unity.cinemachine\Editor\Resources\StdLib.hlsl" />
