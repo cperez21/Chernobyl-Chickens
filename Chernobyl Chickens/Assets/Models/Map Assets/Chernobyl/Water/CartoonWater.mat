@@ -8,8 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: CartoonWater
-  m_Shader: {fileID: -6465566751694194690, guid: f02260e7711012641a3bc87def1c0b5c,
-    type: 3}
+  m_Shader: {fileID: 4800000, guid: 0717917ee9a78eb4491cd021efe50ae9, type: 3}
   m_ShaderKeywords: 
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
@@ -19,12 +18,23 @@ Material:
   disabledShaderPasses: []
   m_SavedProperties:
     serializedVersion: 3
-    m_TexEnvs: []
+    m_TexEnvs:
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: 1c8de2dd9ea50194c812efb00ce54170, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
     m_Floats:
     - Vector1_2786EEDB: 32.54
     - Vector1_3A8485E2: 2
     - Vector1_413BC867: 0.1
     - Vector1_D0570C58: 4
+    - _Glossiness: 32
+    - _RimAmount: 0.716
+    - _RimThreshold: 0.1
     m_Colors:
     - Color_630D2086: {r: 0, g: 2.389466, b: 3.184314, a: 0}
     - Color_B27988D: {r: 0.0244749, g: 0.4716981, b: 0.4716981, a: 0}
+    - _AmbientColor: {r: 0.4, g: 0.4, b: 0.4, a: 1}
+    - _Color: {r: 0.5, g: 0.65, b: 1, a: 1}
+    - _RimColor: {r: 1, g: 1, b: 1, a: 1}
+    - _SpecularColor: {r: 0.9, g: 0.9, b: 0.9, a: 1}
