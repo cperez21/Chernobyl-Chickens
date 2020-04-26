@@ -123,7 +123,8 @@ public class PlayerInputScript : MonoBehaviour
         else if (CurrentScene == "CharacterSelect" && ready == true)
         {
             //GameManagerScript.SendMessage("CharSelReadyUp");
-            GameManagerScript.SendMessage("GoToChernobyl");
+            //GameManagerScript.SendMessage("GoToChernobyl");
+            GameManagerScript.SendMessage("GoToMapSelect");
         }
     }
 

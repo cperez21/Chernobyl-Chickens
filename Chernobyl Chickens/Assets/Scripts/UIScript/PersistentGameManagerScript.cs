@@ -67,7 +67,8 @@ public class PersistentGameManagerScript : MonoBehaviour
 
     public void GoToMapSelect()
     {
-        SceneManager.UnloadSceneAsync(LoadedScene);
+        SceneManager.UnloadSceneAsync("MenuScene");
+        //SceneManager.UnloadSceneAsync(LoadedScene);
         SceneManager.LoadSceneAsync((int)SceneIndexes.MapSelect, LoadSceneMode.Additive);
         LoadedScene = "MapSelect";
     }
@@ -78,11 +79,12 @@ public class PersistentGameManagerScript : MonoBehaviour
         SceneManager.LoadSceneAsync("MenuScene", LoadSceneMode.Additive);
         LoadedScene = "MenuScene";
     }
+    
     //ONLY REFERENCE WHEN GOING TO MAPS. will spawn characters
     public void ChangeScene(string sceneName)
     {
 
-        //SceneManager.UnloadSceneAsync(LoadedScene);
+        SceneManager.UnloadSceneAsync(LoadedScene);
         SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
         LoadedScene = sceneName;
 
@@ -94,7 +96,7 @@ public class PersistentGameManagerScript : MonoBehaviour
     {
         MenuManager.SendMessage("SwitchToMainMenu");
     }
-
+        //may be obsolete - might be covered under something else
     public void CharSelReadyUp()
     {
         MenuManager.SendMessage("SwitchToMapSel");

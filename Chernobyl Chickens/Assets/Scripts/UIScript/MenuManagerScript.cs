@@ -85,29 +85,32 @@ public class MenuManagerScript : MonoBehaviour
         GameManagerScript.LoadedScene = "CharacterSelect";
     }
 
+
+    //may be redundant. currently being handled in playerinputsript under playerselect
     public void SwitchToMapSel()
     {
-        //Should only occur once when game starts
-        if (UIBeforePlayersContainer.activeSelf == true)
-        {
-            UIBeforePlayersContainer.SetActive(false);
-        }
-        //For Character Select 
-        if (UICharacterSelect.activeSelf == true)
-        {
-            UICharacterSelect.SetActive(false);
-        }
-        //For Map Select - ACTIVATED
-        if (UIMapSelect.activeSelf == false)
-        {
-            UIMapSelect.SetActive(true);
-        }
-        //For Main Menus
-        if (UIMainMenuContainer.activeSelf == true)
-        {
-            UIMainMenuContainer.SetActive(false);
-        }
-        GameManagerScript.LoadedScene = "MapSelect";
+        GameManagerScript.SendMessage("GoToMapSelect");
+        ////Should only occur once when game starts
+        //if (UIBeforePlayersContainer.activeSelf == true)
+        //{
+        //    UIBeforePlayersContainer.SetActive(false);
+        //}
+        ////For Character Select 
+        //if (UICharacterSelect.activeSelf == true)
+        //{
+        //    UICharacterSelect.SetActive(false);
+        //}
+        ////For Map Select - ACTIVATED
+        //if (UIMapSelect.activeSelf == false)
+        //{
+        //    UIMapSelect.SetActive(true);
+        //}
+        ////For Main Menus
+        //if (UIMainMenuContainer.activeSelf == true)
+        //{
+        //    UIMainMenuContainer.SetActive(false);
+        //}
+        //GameManagerScript.LoadedScene = "MapSelect";
     }
 
 

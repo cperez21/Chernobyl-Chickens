@@ -7,6 +7,8 @@ using UnityEngine;
 public class Map : ScriptableObject
 {
     public string mapName;
+    //MUST MATCH WITH BUTTON IN MAPSELECT
+    public string mapRef;
     public Sprite mapSprite;
     public Sprite mapIcon;
     public string sceneToLoad;
