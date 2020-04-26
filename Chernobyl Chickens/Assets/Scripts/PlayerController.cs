@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Users;
+
 
 
 public class PlayerController : MonoBehaviour
@@ -13,6 +15,8 @@ public class PlayerController : MonoBehaviour
     public float pinDistanceFalloff; //to set value for all characters rather than doing it twice for each character
     LimbDamage[] limbs;
     public ParticleSystem feathers;
+    public GameObject sprintTrailFX;
+    private bool hasTrail;
     private Rigidbody[] rbPuppet;
     private Rigidbody rb;
     private float timer;
@@ -183,9 +187,9 @@ public class PlayerController : MonoBehaviour
         cpu = gameObject.GetComponent<CPUScript>();
         if(cpu == null)
         {
-
+           // InputSystem.AddDevice<Mouse>("mouse");
             
-
+            
 
             pi = gameObject.GetComponentInParent<PlayerInput>();
             sprintAction = pi.actions["Sprint"];
@@ -240,12 +244,45 @@ public class PlayerController : MonoBehaviour
         //Logic for checking if the sprint button is pressed / released.
         if (pi != null)
         {
-            Debug.Log("devices are "+ pi.devices[0]);
-            sprintAction.started += whatever => sprintKeyPressed = true;
+            if(pi.devices[0].name.Contains("Keyboard"))
+            {
+                var user = pi.user;
+                
+                Debug.Log("I am keyboard");
+                //Mouse controls for attack/push
+                if (Input.GetKeyDown(KeyCode.B)) //0 is left click
+                {
+                    Debug.Log("I pressed B to attack");
+                    Attack();
+                }
+                if(Input.GetMouseButtonDown(1)) //1 is right click
+                {
+                    Push();
+                }
 
+            }
+
+
+
+            Debug.Log("devices are "+ pi.devices[0]);
+            sprintAction.started += whatever =>
+            {
+                if(!hasTrail)
+                {
+                    var trailSpawn = gameObject.transform.Find("SprintTrailSpawnPoint");
+                    GameObject trail = GameObject.Instantiate(sprintTrailFX, trailSpawn.transform.position, Quaternion.identity, gameObject.transform);
+                    trail.name = gameObject.name + " trail";
+                    hasTrail = true;
+                }
+                
+                sprintKeyPressed = true;
+            };
             sprintAction.canceled +=
                 context =>
                 {
+                    GameObject trail = GameObject.Find(name + " trail");
+                    DestroyImmediate(trail,true);
+                    hasTrail = false;
                     sprintKeyPressed = false;
                 };
         }
@@ -486,7 +523,8 @@ public class PlayerController : MonoBehaviour
             //Sprinting
             if (movement != Vector3.zero && sprintKeyPressed)
             {
-
+              
+                
                 moveState = MoveState.SPRINT;
                 anim.speed = 1.5f;
                 rb.MovePosition(rb.position + (1.5f *moveVelocity) * Time.deltaTime);
@@ -497,6 +535,7 @@ public class PlayerController : MonoBehaviour
             //Walking
             else if(movement != Vector3.zero)
             {
+                
                 anim.speed = 1f;
                 moveState = MoveState.WALK;
                 rb.MovePosition(rb.position + moveVelocity * Time.deltaTime);
@@ -507,6 +546,7 @@ public class PlayerController : MonoBehaviour
             //else sets to idle
             else
             {
+                
                 anim.speed = 1f;
                 moveState = MoveState.STAND;
                 anim.SetTrigger("Idle");

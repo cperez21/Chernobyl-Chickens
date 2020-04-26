@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.InputSystem.Users;
 
 
 public class PlayerInputScript : MonoBehaviour
@@ -24,6 +25,8 @@ public class PlayerInputScript : MonoBehaviour
     public bool ready;
     public GameObject CharacterSelector;
     public Character SelectedCharacter;
+    private bool hasKeyboard, hasMouse;
+    private PlayerInput pInput;
 
 
     //for gameplay
@@ -39,8 +42,8 @@ public class PlayerInputScript : MonoBehaviour
     {
         GameManager = GameObject.FindWithTag("GameManager");
         GameManagerScript = GameManager.GetComponent<PersistentGameManagerScript>();
-        
 
+        pInput = GetComponent<PlayerInput>();
 
         players = GameObject.FindGameObjectsWithTag("PlayerContainer");
         foreach (GameObject PlayerContainer in players)
@@ -52,6 +55,31 @@ public class PlayerInputScript : MonoBehaviour
         GameManagerScript.SendMessage("PlayerJoin", ThisObject);
         //p_joined = false;
         ready = false;
+
+        //Checks if controller has mouse or keyboard
+        if(pInput.devices[0].name.Contains("Keyboard"))
+        {
+            hasKeyboard = true;
+        }
+        if(pInput.devices[0].name.Contains("Mouse"))
+        {
+            hasMouse = true;
+        }
+
+
+        //adds the mouse or keyboard to the existing keyboard/mouse player.
+        if(hasKeyboard && !hasMouse)
+        {
+            InputDevice mouse = InputSystem.GetDevice<Mouse>();
+
+            InputUser.PerformPairingWithDevice(mouse, pInput.user);
+        }
+        if(hasMouse && !hasKeyboard)
+        {
+            InputDevice keys = InputSystem.GetDevice<Keyboard>();
+
+            InputUser.PerformPairingWithDevice(keys, pInput.user);
+        }
 
 
         //CSS = GameObject.Find("PlayerCharacterSelect" + PlayerCount)
