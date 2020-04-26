@@ -40,7 +40,7 @@ public class ScreenScript : MonoBehaviour
         {
             if (maps[i].name == selMapName)
             {
-                Debug.Log("newscreeenn");
+                //Debug.Log("newscreeenn");
                 currentMap = maps[i];
 
                 break;

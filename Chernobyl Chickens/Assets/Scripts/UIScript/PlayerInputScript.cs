@@ -52,7 +52,7 @@ public class PlayerInputScript : MonoBehaviour
         }
         this.name = "Player" + PlayerCount;
         ThisObject = GameObject.Find("Player" + PlayerCount);
-        GameManagerScript.SendMessage("PlayerJoin", ThisObject);
+        GameManagerScript.SendMessage("SwitchMM", ThisObject);
         //p_joined = false;
         ready = false;
 
@@ -142,7 +142,7 @@ public class PlayerInputScript : MonoBehaviour
     }
     void OnPlayerSelect()
     {
-
+        
         if (CurrentScene == "CharacterSelect" && ready == false)
         {
             //Debug.Log(CharacterSelector);
@@ -156,6 +156,7 @@ public class PlayerInputScript : MonoBehaviour
         }
     }
 
+    //DEPRECIATED- update
     void OnPlayerBack()
     {
         if (CurrentScene == "CharacterSelect" && ready == true)
@@ -179,21 +180,33 @@ public class PlayerInputScript : MonoBehaviour
 
     void OnSprint()
     {
-        Player.SendMessage("Sprint");
+        if (Player != null)
+        {
+            Player.SendMessage("Sprint");
+        }
+        
     }
 
     void OnPush()
     {
-        Player.SendMessage("Push");
+        if (Player != null)
+        {
+            Player.SendMessage("Push");
+        }
+        
     }
 
     void OnAttack()
     {
-        Player.SendMessage("Attack");
+        if (Player != null)
+        {
+            Player.SendMessage("Attack");
+        }
+        
     }
     void OnJump()
     {
-        if (CurrentScene == "CharacterSelect" )
+        if (CurrentScene == "MapSelect" )
         {
 
         }
@@ -203,7 +216,11 @@ public class PlayerInputScript : MonoBehaviour
         }
         else
         {
-            Player.SendMessage("JumpPrep");
+            if (Player != null)
+            {
+                Player.SendMessage("JumpPrep");
+            }
+            
         }
 
         
@@ -223,6 +240,23 @@ public class PlayerInputScript : MonoBehaviour
             //Debug.Log("sent");
         }
 
+    }
+
+    //USED FOR UI 
+    void OnPlayerCancel()
+    {
+        Debug.Log("clicked");
+
+        if (GameManagerScript.LoadedScene == "CharacterSelect")
+        {
+            GameManagerScript.SendMessage("SwitchMM");
+        }
+        if (GameManagerScript.LoadedScene == "MapSelect")
+        {
+            //Debug.Log(CharacterSelector);
+            GameManagerScript.SendMessage("GoToMenuScene");
+
+        }
     }
 
     //MISC FUNCTIONS -----------------------------------------------------------------------------------------------------------------------
