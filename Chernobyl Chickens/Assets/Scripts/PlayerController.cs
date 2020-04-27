@@ -290,16 +290,16 @@ public class PlayerController : MonoBehaviour
         Mathf.Clamp(health, 0, 150);
 
         //covering a flesh wound with a band aid
-        if (puppet.state == RootMotion.Dynamics.PuppetMaster.State.Dead)
-        {
-            state = PlayerState.STUNNED;
-        }
+       // if (puppet.state == RootMotion.Dynamics.PuppetMaster.State.Dead)
+        //{
+         //   state = PlayerState.STUNNED;
+        //}
 
         Recover(0.02f); //default recovery amount, method only does something if pinfalloff distance is 5>. MUST be a postive number entered here.
         if (stunAmount > maxStunAmount)
         {
             StartCoroutine(Stunned());
-
+            Debug.Break();
         }
 
 
@@ -309,9 +309,10 @@ public class PlayerController : MonoBehaviour
         Move();
 
         
-       if(rb.velocity.y > 5f)
+       if(rb.velocity.y > 2f)
         {
-            rb.velocity = new Vector3(rb.velocity.x, 0f, rb.velocity.z);
+           //  rb.velocity = Vector3.zero;
+            //Debug.Break();
         }
         
         //combat Attackcooldown. Referenced in OntriggerStay
@@ -757,7 +758,7 @@ public class PlayerController : MonoBehaviour
 
                     if (!canJump)
                     {
-                        StartCoroutine(AirStunned());
+                 //       StartCoroutine(AirStunned());
                     }
 
                     if (limbs[x].magnitude > 8.0f)

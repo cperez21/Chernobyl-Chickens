@@ -13,9 +13,9 @@ public class CPUScript : MonoBehaviour //This Script accessess the PlayerControl
     public int radAttempts;
     private Vector3 targetDirection;
     //public PlayerController[] players;
+    private float proximity;
     public List<PlayerController> players;
     private float closestProximity =1000; //set stupid high because players keep targeting themselves.
-    private float proximity; //proximity to other players when looking for a target
     private int frameCount;
     private SphereCollider attackCollider;
     private float attackTimeOut;
@@ -95,49 +95,7 @@ public class CPUScript : MonoBehaviour //This Script accessess the PlayerControl
                     state = CPUState.MoveToRads;
                 }
 
-
-                var player = GameObject.FindObjectsOfType<PlayerController>();
-                if(player == null)
-                {
-                    state = CPUState.Nothing;
-                }
-                else
-                {
-                    players = player.ToList();
-                }
-               
-
-                //players = Object.FindObjectsOfType<PlayerController>().Where(f => f.GetInstanceID() != gameObject.GetInstanceID()).ToArray(); //what the fuck
-
-
-
-
-                for (int x = 0; x < players.Count; x++)
-                {
-                    proximity = Vector3.Distance(players[x].transform.position, gameObject.transform.position);
-                    if (proximity == 0 || players[x].state == PlayerController.PlayerState.DEAD)
-                    {
-                        proximity = closestProximity;
-                        players.RemoveAt(x);
-                        continue;
-                    }
-
-
-
-                    if (x == 0)
-                    {
-                        closestProximity = proximity;
-                        target = players[x].gameObject;
-                    }
-                    else if (proximity < closestProximity)
-                    {
-                        
-                        closestProximity = proximity;
-                        target = players[x].gameObject;
-                    }
-
-
-                }
+                TargetnewPlayer();
                
                 StartCoroutine("MoveDelay"); //switches to moveToTarget state with minor delay.
 
@@ -256,4 +214,45 @@ public class CPUScript : MonoBehaviour //This Script accessess the PlayerControl
         movementCPU = movement;
     }
 
+
+    void TargetnewPlayer() //Finds new player to attack based on who is closer.
+    {
+
+        var player = GameObject.FindObjectsOfType<PlayerController>();
+        if (player == null)
+        {
+            state = CPUState.Nothing; //game end (all characters are def
+        }
+        else
+        {
+            players = player.ToList();
+        }
+        
+        for(int x = 0; x < players.Count; x++)
+        {
+            proximity = Vector3.Distance(players[x].transform.position, gameObject.transform.position);
+
+            if (proximity == 0 || players[x].state == PlayerController.PlayerState.DEAD)
+            {
+                continue; //proximity is zero because it is the self player
+            }
+            
+          
+
+            
+            if (x == 0)
+            {
+                closestProximity = proximity;
+                target = players[x].gameObject;
+            }
+            else if (proximity < closestProximity)
+            {
+
+                closestProximity = proximity;
+                target = players[x].gameObject;
+            }
+            
+
+        }
+    }
 }
