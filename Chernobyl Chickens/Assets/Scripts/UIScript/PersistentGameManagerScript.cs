@@ -10,7 +10,7 @@ public class PersistentGameManagerScript : MonoBehaviour
     public static PersistentGameManagerScript instance;
     PersistentGameManagerScript gameManager;
 
-    MenuManagerScript MenuManager;
+    public MenuManagerScript MenuManager;
 
     public string LoadedScene;
     public string SelectedMap;
@@ -38,9 +38,7 @@ public class PersistentGameManagerScript : MonoBehaviour
     {
         if(LoadedScene == "MenuScene" && MenuManager == null)
         {
-            Debug.Log("FindingMenuManager");
             MenuManager = GameObject.Find("MenuManager").GetComponent<MenuManagerScript>();
-            Debug.Log("FoundMenuManager");
         }
 
         //if (players.Length < MaxPlayers)
@@ -67,7 +65,9 @@ public class PersistentGameManagerScript : MonoBehaviour
 
     public void GoToMapSelect()
     {
-        SceneManager.UnloadSceneAsync(LoadedScene);
+        MenuManager = null;
+        SceneManager.UnloadSceneAsync("MenuScene");
+        //SceneManager.UnloadSceneAsync(LoadedScene);
         SceneManager.LoadSceneAsync((int)SceneIndexes.MapSelect, LoadSceneMode.Additive);
         LoadedScene = "MapSelect";
     }
@@ -78,27 +78,54 @@ public class PersistentGameManagerScript : MonoBehaviour
         SceneManager.LoadSceneAsync("MenuScene", LoadSceneMode.Additive);
         LoadedScene = "MenuScene";
     }
+    
     //ONLY REFERENCE WHEN GOING TO MAPS. will spawn characters
     public void ChangeScene(string sceneName)
     {
 
-        //SceneManager.UnloadSceneAsync(LoadedScene);
+        SceneManager.UnloadSceneAsync(LoadedScene);
         SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
         LoadedScene = sceneName;
 
 
     }
 
-    //Used by MenuManager
-    public void PlayerJoin()
+    //Used by MenuManager MM switches to Main Menu, CS swithces to Character Select Canvas. Back to Menu Scene is used to return from map select
+    public void SwitchMM()
     {
+        PlayersJoined = true;
         MenuManager.SendMessage("SwitchToMainMenu");
+        LoadedScene = "MenuScene";
     }
+    //public void BackToMenuScene()
+    //{
+    //    SceneManager.UnloadSceneAsync(LoadedScene);
+    //    SceneManager.LoadSceneAsync("MenuScene", LoadSceneMode.Additive);
+    //    LoadedScene = "MenuScene";
+    //    if (LoadedScene == "MenuScene" && MenuManager == null)
+    //    {
+    //        Debug.Log("FindingMenuManager");
+    //        MenuManager = GameObject.Find("MenuManager").GetComponent<MenuManagerScript>();
+    //        Debug.Log("FoundMenuManager");
+    //        SwitchCS();
+    //    }
+    //    else
+    //    {
+    //        SwitchCS();
+    //    }
+        
+    //}
+    //public void SwitchCS()
+    //{
+    //    MenuManager.SendMessage("SwitchToCharSel");
+    //    LoadedScene = "CharacterSelect";
+    //}
 
-    public void CharSelReadyUp()
-    {
-        MenuManager.SendMessage("SwitchToMapSel");
-    }
+
+
+
+
+
 
     //USED FOR TESTINGONLY
     public void GoToChernobyl()
