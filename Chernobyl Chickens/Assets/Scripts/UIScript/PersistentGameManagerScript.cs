@@ -55,13 +55,13 @@ public class PersistentGameManagerScript : MonoBehaviour
         //}
     }
 
-    public void GoToCharSelect()
-    {
-        Debug.Log("Gone");
-        SceneManager.UnloadSceneAsync((int)SceneIndexes.MenuScene);
-        SceneManager.LoadSceneAsync((int)SceneIndexes.CharSelect, LoadSceneMode.Additive);
-        LoadedScene = "CharacterSelect";
-    }
+    //public void GoToCharSelect()
+    //{
+
+    //    SceneManager.UnloadSceneAsync((int)SceneIndexes.MenuScene);
+    //    SceneManager.LoadSceneAsync((int)SceneIndexes.CharSelect, LoadSceneMode.Additive);
+    //    LoadedScene = "CharacterSelect";
+    //}
 
     public void GoToMapSelect()
     {

@@ -6,31 +6,33 @@ using UnityEngine.InputSystem.Users;
 
 public class PlayerManagerScript : MonoBehaviour
 {
+    //sets gamemanager and script
+    public GameObject GameManager;
+    PersistentGameManagerScript GameManagerScript;
 
-    PlayerInputManager inputManager;
-    PlayerInput[] pInput;
-    InputUser iUser;
-    int numOfUsers;
-    
-    
+    public GameObject[] players;
+
     // Start is called before the first frame update
     void Start()
     {
-      //  inputManager = GetComponent<PlayerInputManager>();
-        
+        GameManager = GameObject.FindWithTag("GameManager");
+        GameManagerScript = GameManager.GetComponent<PersistentGameManagerScript>();
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(pInput != null)
+        if (players.Length < 4)
         {
-
+            SearchForPlayers();
         }
-       // pInput = GameObject.FindObjectsOfType<PlayerInput>();
-       
         
             
-            
+    }
+
+    void SearchForPlayers()
+    {
+        players = GameObject.FindGameObjectsWithTag("PlayerContainer");
     }
 }
