@@ -15,6 +15,8 @@ public class PersistentGameManagerScript : MonoBehaviour
     public string LoadedScene;
     public string SelectedMap;
 
+
+    public bool AllPlayersReady;
     public bool PlayersJoined;
 
     private void Awake()
@@ -93,9 +95,14 @@ public class PersistentGameManagerScript : MonoBehaviour
     //Used by MenuManager MM switches to Main Menu, CS swithces to Character Select Canvas. Back to Menu Scene is used to return from map select
     public void SwitchMM()
     {
-        PlayersJoined = true;
-        MenuManager.SendMessage("SwitchToMainMenu");
-        LoadedScene = "MenuScene";
+        
+        if(PlayersJoined == false)
+        {
+            MenuManager.SendMessage("SwitchToMainMenu");
+            LoadedScene = "MenuScene";
+            PlayersJoined = true;
+        }
+        
     }
     //public void BackToMenuScene()
     //{
@@ -140,7 +147,17 @@ public class PersistentGameManagerScript : MonoBehaviour
         Application.Quit();
     }
 
-    
+
+    //used to check whether or not players are ready
+    public void ReadyUp()
+    {
+       AllPlayersReady = GameObject.Find("PlayerManager").GetComponent<PlayerManagerScript>().AllReadyUp;
+
+        if (AllPlayersReady == true)
+        {
+            GoToMapSelect();
+        }
+    }
 
 }
 

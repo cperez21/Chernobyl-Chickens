@@ -8,16 +8,22 @@ public class MenuManagerScript : MonoBehaviour
     //sets gamemanager and script
     public GameObject GameManager;
     PersistentGameManagerScript GameManagerScript;
+    //sets playermanager script
+    PlayerManagerScript PManagerScript;
 
     public GameObject UIBeforePlayersContainer;
     public GameObject UIMainMenuContainer;
     public GameObject UICharacterSelect;
-    public GameObject UIMapSelect;
+    public GameObject ReadyUpBar;
+
     // Start is called before the first frame update
     void Start()
     {
         GameManager = GameObject.FindWithTag("GameManager");
         GameManagerScript = GameManager.GetComponent<PersistentGameManagerScript>();
+
+        PManagerScript = GameObject.Find("PlayerManager").GetComponent<PlayerManagerScript>();
+
         if (GameManagerScript.PlayersJoined == true)
         {
             SwitchToMainMenu();
@@ -31,7 +37,7 @@ public class MenuManagerScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        CheckForReadyUp();
     }
 
     public void SwitchToMainMenu()
@@ -78,7 +84,17 @@ public class MenuManagerScript : MonoBehaviour
         GameManagerScript.LoadedScene = "CharacterSelect";
     }
 
-
+    void CheckForReadyUp()
+    {
+        if (PManagerScript.AllReadyUp == true)
+        {
+            ReadyUpBar.SetActive(true);
+        }
+        else
+        {
+            ReadyUpBar.SetActive(false);
+        }
+    }
     //may be redundant. currently being handled in playerinputsript under playerselect
     //public void SwitchToMapSel()
     //{

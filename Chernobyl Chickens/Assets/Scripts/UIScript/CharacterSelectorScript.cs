@@ -19,6 +19,7 @@ public class CharacterSelectorScript : MonoBehaviour
     public Text ReadyText;
     public int CharacterCount;
     public int CharacterVal;
+
     void Start()
     {
         foreach(Character character in characters)

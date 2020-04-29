@@ -152,7 +152,7 @@ public class PlayerInputScript : MonoBehaviour
         {
             //GameManagerScript.SendMessage("CharSelReadyUp");
             //GameManagerScript.SendMessage("GoToChernobyl");
-            GameManagerScript.SendMessage("GoToMapSelect");
+            GameManagerScript.SendMessage("ReadyUp");
         }
     }
 
