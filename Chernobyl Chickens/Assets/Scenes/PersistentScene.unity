@@ -254,8 +254,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: edfedd9736366cf4ab0bf512fadc665e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  MenuManager: {fileID: 0}
   LoadedScene: 
   SelectedMap: 
+  AllPlayersReady: 0
   PlayersJoined: 0
 --- !u!1 &833913714
 GameObject:
@@ -519,6 +521,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e761155589e8c7c4b985b18e0149eca3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GameManager: {fileID: 0}
+  players: []
+  AllReadyUp: 0
 --- !u!4 &2011788894
 Transform:
   m_ObjectHideFlags: 0

@@ -277,4 +277,9 @@ public class PlayerInputScript : MonoBehaviour
     {
 
     }
+
+    public void ReadyFalse()
+    {
+        ready = false;
+    }
 }

@@ -16,7 +16,10 @@ public class CharacterSelectorScript : MonoBehaviour
     public GameObject Player;
     public GameObject Portrait;
     public Text PlayerName;
+
     public Text ReadyText;
+    public GameObject ReadyBox;
+
     public int CharacterCount;
     public int CharacterVal;
 
@@ -48,7 +51,7 @@ public class CharacterSelectorScript : MonoBehaviour
         icon.sprite = CurrentCharacter.characterSprite;
     }
 
-    private void CharacterToggleLeft()
+    public void CharacterToggleLeft()
     {
         Debug.Log("Left");
         if (CharacterVal == 0)
@@ -63,7 +66,7 @@ public class CharacterSelectorScript : MonoBehaviour
         }
 
     }
-    private void CharacterToggleRight()
+    public void CharacterToggleRight()
     {
         Debug.Log("Right");
         if (CharacterVal == 4)
@@ -83,10 +86,26 @@ public class CharacterSelectorScript : MonoBehaviour
         Player.SendMessage("SetCharacter", CurrentCharacter);
         Debug.Log(CurrentCharacter);
         ReadyText.text = "READY!";
+        ReadyBox.GetComponent<Image>().color = new Color32(255, 134, 20, 219);
     }
 
     void UnSelectChar()
     {
         ReadyText.text = "SELECT";
+        ReadyBox.GetComponent<Image>().color = new Color32(60, 60, 60, 219);
+    }
+
+    //used by ready button
+    public void SelectToggle()
+    {
+        if(ReadyText.text == "SELECT")
+        {
+            SelectChar();
+        }
+        else if (ReadyText.text == "READY!")
+        {
+            UnSelectChar();
+            Player.SendMessage("ReadyFalse");
+        }
     }
 }
