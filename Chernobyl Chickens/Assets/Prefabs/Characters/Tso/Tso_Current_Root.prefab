@@ -3521,27 +3521,26 @@ MonoBehaviour:
   pinDistanceFalloff: 2
   feathers: {fileID: 6497170728889403077, guid: 5d015548a7a42aa4db726c08dfdd9cc7,
     type: 3}
-  sprintTrailFX: {fileID: 3541273454559552748, guid: a7e7b5829360abe448237a817e940283,
+  sprintTrailFX: {fileID: 3541273454559552748, guid: b5b67d5847f3f0444bb6d52e74b4f6cb,
     type: 3}
   stunAmount: 0
   maxStunAmount: 15
   rend: {fileID: 8020005544481673872}
   radLossRate: 0
   radCooldownTime: 0
-  sprintKeyPressed: 0
   slapSwing: {fileID: 8300000, guid: 5a1405c2d8754ae448f7037c979766fb, type: 3}
   slap1: {fileID: 8300000, guid: 3c4ab27d753caea42afb54a87a0744d6, type: 3}
   slap2: {fileID: 8300000, guid: de86538ae086a2b479ddc1ab43dd5995, type: 3}
   slap3: {fileID: 8300000, guid: e39ec4189bbf35c47982ff1330fb977c, type: 3}
   death: {fileID: 8300000, guid: 72ad07237f83a5a4cbf291569bb0f55c, type: 3}
   getUpPosition: {fileID: 8020005544655895564}
-  canJump: 0
   moveSpeed: 10
   jumpForce: 150
   health: 100
+  attackCooldownTime: 0
+  pushCooldownTime: 0
   canHurt: 0
   canPush: 0
-  isPlayer2: 1
   haveControls: 1
   movement: {x: 0, y: 0, z: 0}
   groundLayer:
