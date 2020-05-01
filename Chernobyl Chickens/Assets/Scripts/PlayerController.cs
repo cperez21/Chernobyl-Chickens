@@ -30,7 +30,7 @@ public class PlayerController : MonoBehaviour
     private CPUScript cpu;
     private bool isHuman = false;
     private bool isStunned;
-    public bool sprintKeyPressed;
+     bool sprintKeyPressed;
     
 
    
@@ -42,7 +42,7 @@ public class PlayerController : MonoBehaviour
     private AudioSource audioS;
     [Tooltip("this should be bip01 Pelvis under the Non-Puppet master")]
     public GameObject getUpPosition;
-    public bool canJump = false;
+     bool canJump = false;
     Vector3 moveInput;
     Vector3 startOrientation;
     public float moveSpeed, jumpForce;
@@ -50,9 +50,13 @@ public class PlayerController : MonoBehaviour
     private float healthF = 1.0f;
 
     private bool recoverEnabled; //called every frame to slowly recover the floppiness and anim/movespeed slow down from being stunned.
-    public bool canHurt;
+    public float attackCooldownTime; //How long before you can do another attack
+    public float pushCooldownTime; //How long before you can do another push
+    bool canUseAttack = true;
+    bool canUsePush = true;
+  public  bool canHurt;
     public bool canPush;
-    public bool isPlayer2; //currently used for 2 player only prototype
+     bool isPlayer2; //currently used for 2 player only prototype
     public bool haveControls; //Currently used for testing
    public Vector3 movement;
     public LayerMask groundLayer; //needs to stay set to the ground layer.
@@ -86,7 +90,24 @@ public class PlayerController : MonoBehaviour
     private string StrikeControl;
     //ceasar added for new controls
     public Vector3 i_movement;
-    
+
+    IEnumerator AttackCooldown()
+    {
+        canUseAttack = false;
+
+        yield return new WaitForSeconds(attackCooldownTime);
+        canUseAttack = true;
+    }
+
+    IEnumerator PushCoolDown()
+    {
+        canUsePush = false;
+
+        yield return new WaitForSeconds(pushCooldownTime);
+
+        canUseAttack = true;
+    }
+
     IEnumerator RadCooldown()
     {
         yield return new WaitForSeconds(1f);
@@ -576,6 +597,7 @@ public class PlayerController : MonoBehaviour
     {
         if(haveControls)
         {
+            if(canUsePush)
             anim.SetTrigger("Push");
         }
         else
@@ -588,31 +610,31 @@ public class PlayerController : MonoBehaviour
     {
 
         if(haveControls)
-        { 
-       // if (state != PlayerState.ATTACKING)
-        //{
-
-            Debug.Log("attack ");
-            if (character == PlayerCharacter.LEGOLAS)
+        {
+            if (canUseAttack)
             {
-                //Used for Legolas's jump kick. Adds force upwards because he kept going b o n k
-                if (Attackcooldown >= 1.0f)
+
+                Debug.Log("attack ");
+                if (character == PlayerCharacter.LEGOLAS)
                 {
-                    rb.AddForce(Vector3.up * 300); //the perfect amount of force on the first try fuck yes -cullen 8:09am
-                    anim.SetTrigger("Strike");
-                    Attackcooldown = 0f;
+                    //Used for Legolas's jump kick. Adds force upwards because he kept going b o n k
+                    if (Attackcooldown >= 1.0f)
+                    {
+                        rb.AddForce(Vector3.up * 300); //the perfect amount of force on the first try fuck yes -cullen 8:09am
+                        anim.SetTrigger("Strike");
+                        Attackcooldown = 0f;
+                    }
+                    else
+                    {
+                        return;
+                    }
                 }
+                //Regular strike for other characters
                 else
                 {
-                    return;
+                    anim.SetTrigger("Strike");
                 }
             }
-            //Regular strike for other characters
-            else
-            {
-                anim.SetTrigger("Strike");
-            }
-
         }
         else
         {
@@ -673,6 +695,7 @@ public class PlayerController : MonoBehaviour
 
         if (x == 1) //beginning of attack animation
         {
+            //StartCoroutine("AttackCooldown");
             audioS.clip = slapSwing;
             audioS.Play();
             state = PlayerState.ATTACKING;
