@@ -70,7 +70,15 @@ public class PersistentGameManagerScript : MonoBehaviour
     public void GoToMapSelect()
     {
         MenuManager = null;
-        SceneManager.UnloadSceneAsync("MenuScene");
+        if (LoadedScene == "MenuScene" || LoadedScene == "CharacterSelect")
+        {
+            SceneManager.UnloadSceneAsync("MenuScene");
+        }
+        else
+        {
+            SceneManager.UnloadSceneAsync(LoadedScene);
+        }
+        
         //SceneManager.UnloadSceneAsync(LoadedScene);
         SceneManager.LoadSceneAsync((int)SceneIndexes.MapSelect, LoadSceneMode.Additive);
         LoadedScene = "MapSelect";

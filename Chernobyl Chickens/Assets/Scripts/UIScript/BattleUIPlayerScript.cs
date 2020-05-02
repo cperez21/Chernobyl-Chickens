@@ -17,13 +17,14 @@ public class BattleUIPlayerScript : MonoBehaviour
     public Image RadBar;
     public Image HpBar;
 
-    //healthbar and radbar values
+    //healthbar and radbar values, and death
     public int maxHealth;
     public float percentageHealth;
     public int currentHealth;
     public float maxRad;
     public float percentageRad;
     public float currentRad;
+    public bool death;
     
     //finds the controller and battleUIScript
 
@@ -50,6 +51,7 @@ public class BattleUIPlayerScript : MonoBehaviour
         maxHealth = 100;
         maxRad = 1.0f;
         spawnPoint = GameObject.Find("SpawnPoint" + Playernum);
+        death = false;
 
     }
 
@@ -68,15 +70,22 @@ public class BattleUIPlayerScript : MonoBehaviour
             {
                 SpawnAI();
             }
+            else
+            {
+                death = true;
+                BUIScript.SendMessage("CharDeath" + Playernum);
+            }
         }
 
 
         //once player is found, set active. sets the portrait to true
-        if (Player != null)
+        if (Player != null && BattleUIPlayerCell.activeSelf == false)
         {
             BattleUIPlayerCell.SetActive(true);
             Image icon = Portrait.transform.GetComponent<Image>();
             icon.sprite = PlayerCharacterSerializable.characterSprite;
+            death = false;
+
         }
         
 
@@ -98,10 +107,11 @@ public class BattleUIPlayerScript : MonoBehaviour
             percentageRad = (float)currentRad / (float)maxRad;
             RadBar.fillAmount = percentageRad;
 
+            CheckForDeath();
         }
-       
-        
 
+        
+        
     }
 
     void SetCharacterUI(Character character)
@@ -161,13 +171,18 @@ public class BattleUIPlayerScript : MonoBehaviour
         }
     }
 
-    //public void Resume()
-    //{
-        
-    //}
+    public void CheckForDeath()
+    {
+        //if (PlayerObject != null && currentHealth <= 0 && death == false)
+        if (currentHealth <= 0 && death == false)
+        {
+            death = true;
+            BUIScript.SendMessage("CharDeath" + Playernum);
+        }
+    }
 
     //public void Pause()
     //{
-        
+
     //}
 }

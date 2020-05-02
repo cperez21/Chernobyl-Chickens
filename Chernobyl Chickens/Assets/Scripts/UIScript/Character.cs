@@ -12,4 +12,5 @@ public class Character : ScriptableObject
     public Sprite bossIcon;
     public float zoom = 1;
     public GameObject characterModel;
+    public string vicText;
 }
