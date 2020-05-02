@@ -81,9 +81,11 @@ public class LimbDamage : MonoBehaviour
             if (collision.gameObject.GetComponent<LimbDamage>().canPush)
             {
                 gotPushed = true;
-                Vector3 dir = collision.GetContact(0).point - transform.position;
+                //Vector3 dir = collision.GetContact(0).point - transform.position;
+                Vector3 dir = collision.transform.position - selfController.transform.position;
+                dir.Set(dir.x, 0f, dir.z);
                 dir = -dir.normalized;
-                selfController.gameObject.GetComponent<Rigidbody>().AddForce(dir * 500f);
+                selfController.gameObject.GetComponent<Rigidbody>().AddForce(dir * 600f);
             }
 
 
@@ -103,7 +105,12 @@ public class LimbDamage : MonoBehaviour
                 if (totalNormalizedDamage >= 1f)
                 {
                     gotHit = true;
-
+                    //small knockback
+                    //Vector3 dir = collision.GetContact(0).point - transform.position;
+                    Vector3 dir = collision.transform.position - selfController.transform.position;
+                    dir.Set(dir.x, 0f, dir.z);
+                    dir = -dir.normalized;
+                    selfController.gameObject.GetComponent<Rigidbody>().AddForce(dir * 200f);
 
                 }
             }

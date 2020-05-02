@@ -52,8 +52,8 @@ public class PlayerController : MonoBehaviour
     private bool recoverEnabled; //called every frame to slowly recover the floppiness and anim/movespeed slow down from being stunned.
     public float attackCooldownTime; //How long before you can do another attack
     public float pushCooldownTime; //How long before you can do another push
-    bool canUseAttack = true;
-    bool canUsePush = true;
+   public bool canUseAttack = true;
+    public bool canUsePush = true;
   public  bool canHurt;
     public bool canPush;
      bool isPlayer2; //currently used for 2 player only prototype
@@ -99,13 +99,13 @@ public class PlayerController : MonoBehaviour
         canUseAttack = true;
     }
 
-    IEnumerator PushCoolDown()
+    IEnumerator PushCooldown()
     {
         canUsePush = false;
 
         yield return new WaitForSeconds(pushCooldownTime);
 
-        canUseAttack = true;
+        canUsePush = true;
     }
 
     IEnumerator RadCooldown()
@@ -320,7 +320,7 @@ public class PlayerController : MonoBehaviour
         if (stunAmount > maxStunAmount)
         {
             StartCoroutine(Stunned());
-            Debug.Break();
+           // Debug.Break();
         }
 
 
@@ -597,8 +597,11 @@ public class PlayerController : MonoBehaviour
     {
         if(haveControls)
         {
-            if(canUsePush)
-            anim.SetTrigger("Push");
+            if (canUsePush)
+            {
+                anim.SetTrigger("Push");
+                StartCoroutine("PushCooldown");
+            }
         }
         else
         {
@@ -613,7 +616,7 @@ public class PlayerController : MonoBehaviour
         {
             if (canUseAttack)
             {
-
+                StartCoroutine("AttackCooldown");
                 Debug.Log("attack ");
                 if (character == PlayerCharacter.LEGOLAS)
                 {

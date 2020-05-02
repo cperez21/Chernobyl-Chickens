@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5163448266068540713}
   - component: {fileID: 5163448266068540716}
   - component: {fileID: 5163448266068540715}
+  - component: {fileID: 2201645180528184992}
   m_Layer: 9
   m_Name: Bip001 L UpperArm
   m_TagString: Untagged
@@ -26,8 +27,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 50412043792237905}
-  m_LocalRotation: {x: 0.53266865, y: -0.39220637, z: -0.5353022, w: -0.5252522}
-  m_LocalPosition: {x: -0.46213654, y: 0.00000083446525, z: 0.6363732}
+  m_LocalRotation: {x: 0.5326686, y: -0.39220637, z: -0.53530216, w: -0.5252522}
+  m_LocalPosition: {x: -0.4621365, y: 0.0000010430815, z: 0.6363735}
   m_LocalScale: {x: 1.0000012, y: 1.0000017, z: 1.0000011}
   m_Children:
   - {fileID: 2025239129862321080}
@@ -159,6 +160,30 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &2201645180528184992
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 50412043792237905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ee2fd5be091f024ba259f77820156e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyPart: 
+  hurtOnly: 0
+  gotHit: 0
+  gotPushed: 0
+  canPush: 0
+  canHurt: 0
+  selfController: {fileID: 5163448266319291446}
+  baseDamage: 0
+  magnitude: 0
+  magnitudeThreshold: 1
+  totalDamage: 0
+  totalNormalizedDamage: 0
 --- !u!1 &554362278320971859
 GameObject:
   m_ObjectHideFlags: 0
@@ -185,8 +210,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 554362278320971859}
-  m_LocalRotation: {x: 0.0000000018626449, y: -0.0000000372529, z: 0.4940693, w: 0.8694225}
-  m_LocalPosition: {x: -0.50616825, y: -0.00000020896543, z: 0.00000019371505}
+  m_LocalRotation: {x: -0.000000034924593, y: -0.000000055879347, z: 0.4940693, w: 0.86942255}
+  m_LocalPosition: {x: -0.5061681, y: -0.0000007799824, z: -0.0000006631015}
   m_LocalScale: {x: 1, y: 1.0000001, z: 1}
   m_Children:
   - {fileID: 4394170464913644901}
@@ -347,7 +372,7 @@ Transform:
   m_GameObject: {fileID: 1356663468348907582}
   m_LocalRotation: {x: -0.0000021308656, y: 0.0000007003544, z: 0.00000068545324,
     w: 1}
-  m_LocalPosition: {x: -0.8315572, y: 0.0643837, z: 0.00000093877304}
+  m_LocalPosition: {x: -0.8315574, y: 0.06438328, z: 0.00000082701433}
   m_LocalScale: {x: 1.000001, y: 1.0000006, z: 1.0000008}
   m_Children: []
   m_Father: {fileID: 6073609909765484859}
@@ -528,8 +553,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2219188849454686833}
-  m_LocalRotation: {x: -0.046865452, y: 0.998159, z: -0.019578503, w: 0.033150706}
-  m_LocalPosition: {x: 0.000000208617, y: -0.00000004604821, z: 0.20505403}
+  m_LocalRotation: {x: -0.046865463, y: 0.99815905, z: -0.019578502, w: 0.033150703}
+  m_LocalPosition: {x: 0.00000026822087, y: 0.00000054388784, z: 0.20505428}
   m_LocalScale: {x: 1.0000011, y: 1.0000002, z: 1.0000007}
   m_Children:
   - {fileID: 6163400837202073258}
@@ -687,8 +712,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2315001464816108188}
-  m_LocalRotation: {x: -0.04686536, y: 0.998159, z: 0.019577205, w: -0.033152223}
-  m_LocalPosition: {x: -0.00000032782611, y: -0.00000004335892, z: -0.20505403}
+  m_LocalRotation: {x: -0.046865325, y: 0.99815893, z: 0.019577203, w: -0.03315228}
+  m_LocalPosition: {x: -0.00000038743016, y: -0.000000543888, z: -0.20505428}
   m_LocalScale: {x: 1.0000007, y: 1.0000004, z: 1.0000002}
   m_Children:
   - {fileID: 8381382674420076371}
@@ -832,6 +857,7 @@ GameObject:
   - component: {fileID: 5163448266068540764}
   - component: {fileID: 5163448266068540705}
   - component: {fileID: 5163448266068540767}
+  - component: {fileID: 4416141877409546257}
   m_Layer: 9
   m_Name: Bip001 R Forearm
   m_TagString: Untagged
@@ -846,8 +872,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3339844801966034885}
-  m_LocalRotation: {x: -0.000000027939677, y: -0.000000039115548, z: 0.6557394, w: 0.75498736}
-  m_LocalPosition: {x: -1.1741124, y: -0.00000034272617, z: 0}
+  m_LocalRotation: {x: 0.00000003539025, y: -0.00000007450579, z: 0.65573937, w: 0.7549874}
+  m_LocalPosition: {x: -1.174113, y: -0.000000044703413, z: 0.00000047683616}
   m_LocalScale: {x: 0.9999999, y: 1, z: 1}
   m_Children:
   - {fileID: 4300685571110028961}
@@ -895,7 +921,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -0, y: -0, z: -1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -1.1741122, y: -0.00000065565, z: -0.0000007152542}
+  m_ConnectedAnchor: {x: -1.1741123, y: -0.00000065565, z: -0.00000071525426}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 0
@@ -979,6 +1005,30 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &4416141877409546257
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3339844801966034885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ee2fd5be091f024ba259f77820156e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyPart: 
+  hurtOnly: 0
+  gotHit: 0
+  gotPushed: 0
+  canPush: 0
+  canHurt: 0
+  selfController: {fileID: 5163448266319291446}
+  baseDamage: 0
+  magnitude: 0
+  magnitudeThreshold: 1
+  totalDamage: 0
+  totalNormalizedDamage: 0
 --- !u!1 &3785748006977954934
 GameObject:
   m_ObjectHideFlags: 0
@@ -1042,7 +1092,7 @@ MonoBehaviour:
   mappingWeight: 1
   pinWeight: 1
   muscleWeight: 1
-  muscleSpring: 100
+  muscleSpring: 50
   muscleDamper: 0
   pinPow: 4
   pinDistanceFalloff: 2
@@ -1544,8 +1594,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3955446779172458636}
-  m_LocalRotation: {x: -0.000000031315725, y: -0.000000018626453, z: 0.4940693, w: 0.86942255}
-  m_LocalPosition: {x: -0.5061677, y: 0.00000033550887, z: 0.0000005587932}
+  m_LocalRotation: {x: -0.000000016298145, y: 0.000000018626451, z: 0.49406934, w: 0.86942255}
+  m_LocalPosition: {x: -0.5061679, y: -0.00000070512743, z: 0.0000002756713}
   m_LocalScale: {x: 1.0000001, y: 1.0000001, z: 1}
   m_Children:
   - {fileID: 566866514076484426}
@@ -1704,8 +1754,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4452547819091482939}
-  m_LocalRotation: {x: -0.500001, y: 0.5000003, z: 0.49999964, w: -0.499999}
-  m_LocalPosition: {x: 0.00000023841858, y: 1.2642201, z: 0.36917508}
+  m_LocalRotation: {x: -0.500001, y: 0.50000036, z: 0.4999997, w: -0.49999902}
+  m_LocalPosition: {x: 0, y: 1.2642201, z: 0.36917496}
   m_LocalScale: {x: 1.0000002, y: 0.9999998, z: 1.0000001}
   m_Children:
   - {fileID: 631105281043670778}
@@ -2816,6 +2866,8 @@ MonoBehaviour:
   health: 100
   attackCooldownTime: 0
   pushCooldownTime: 0
+  canUseAttack: 1
+  canUsePush: 1
   canHurt: 0
   canPush: 0
   haveControls: 1
@@ -3228,6 +3280,7 @@ GameObject:
   - component: {fileID: 5163448266068540711}
   - component: {fileID: 5163448266068540710}
   - component: {fileID: 5163448266068540708}
+  - component: {fileID: 188188897773887772}
   m_Layer: 9
   m_Name: Bip001 L Hand
   m_TagString: Untagged
@@ -3243,7 +3296,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5808600839682616914}
   m_LocalRotation: {x: 0.94238615, y: 0.14815862, z: 0.040778484, w: -0.29714382}
-  m_LocalPosition: {x: -1.2861484, y: 0.00000035762793, z: 0.00000011936433}
+  m_LocalPosition: {x: -1.2861485, y: 0.0000004768372, z: 0.0000014100757}
   m_LocalScale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
   m_Children: []
   m_Father: {fileID: 2025239129862321080}
@@ -3290,7 +3343,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -1.2861489, y: 0, z: 0.0000008346191}
+  m_ConnectedAnchor: {x: -1.2861491, y: 0.0000001192093, z: 0.0000008346191}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: -1, z: 0}
   m_XMotion: 0
@@ -3374,6 +3427,30 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &188188897773887772
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5808600839682616914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ee2fd5be091f024ba259f77820156e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyPart: 
+  hurtOnly: 1
+  gotHit: 0
+  gotPushed: 0
+  canPush: 0
+  canHurt: 0
+  selfController: {fileID: 5163448266319291446}
+  baseDamage: 0
+  magnitude: 0
+  magnitudeThreshold: 1
+  totalDamage: 0
+  totalNormalizedDamage: 0
 --- !u!1 &5838010722476021301
 GameObject:
   m_ObjectHideFlags: 0
@@ -3386,6 +3463,7 @@ GameObject:
   - component: {fileID: 5163448266068540704}
   - component: {fileID: 5163448266068540707}
   - component: {fileID: 5163448266068540706}
+  - component: {fileID: 5630390018191913506}
   m_Layer: 9
   m_Name: Bip001 R UpperArm
   m_TagString: Untagged
@@ -3400,8 +3478,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5838010722476021301}
-  m_LocalRotation: {x: 0.5326686, y: -0.3922048, z: 0.535302, w: 0.5252536}
-  m_LocalPosition: {x: -0.46213832, y: -0.0000015199188, z: -0.6363725}
+  m_LocalRotation: {x: 0.53266865, y: -0.39220482, z: 0.535302, w: 0.52525365}
+  m_LocalPosition: {x: -0.46213853, y: -0.00000044703495, z: -0.63637257}
   m_LocalScale: {x: 1.0000026, y: 1.0000017, z: 1.0000021}
   m_Children:
   - {fileID: 6923101912108637523}
@@ -3533,6 +3611,30 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &5630390018191913506
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5838010722476021301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ee2fd5be091f024ba259f77820156e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyPart: 
+  hurtOnly: 0
+  gotHit: 0
+  gotPushed: 0
+  canPush: 0
+  canHurt: 0
+  selfController: {fileID: 5163448266319291446}
+  baseDamage: 0
+  magnitude: 0
+  magnitudeThreshold: 1
+  totalDamage: 0
+  totalNormalizedDamage: 0
 --- !u!1 &6128005118944649099
 GameObject:
   m_ObjectHideFlags: 0
@@ -3560,7 +3662,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6128005118944649099}
   m_LocalRotation: {x: -0.025533605, y: -0.02881574, z: 0.26838067, w: 0.96254325}
-  m_LocalPosition: {x: -0.44458547, y: -0.00000046193594, z: -0.00000093895807}
+  m_LocalPosition: {x: -0.4445838, y: 0.00000074505795, z: 0.00000048979143}
   m_LocalScale: {x: 1.0000001, y: 1.0000001, z: 1.0000001}
   m_Children: []
   m_Father: {fileID: 8381382674420076371}
@@ -3606,7 +3708,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -0, y: -0, z: -1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.4445849, y: 0.0000000745058, z: -0.0000003429118}
+  m_ConnectedAnchor: {x: -0.44458494, y: 0.00000013411044, z: -0.0000003429118}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 0
@@ -3717,7 +3819,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6229345590345449146}
   m_LocalRotation: {x: 0.025533522, y: 0.028815713, z: 0.26838064, w: 0.96254325}
-  m_LocalPosition: {x: -0.4445861, y: -0.00000056624407, z: -0.00000033463388}
+  m_LocalPosition: {x: -0.44458547, y: -0.00000008940695, z: 0.000000671344}
   m_LocalScale: {x: 1.0000001, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6163400837202073258}
@@ -3763,7 +3865,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -0, y: -0, z: -1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.44458598, y: -0.00000043213362, z: -0.00000008131433}
+  m_ConnectedAnchor: {x: -0.444586, y: -0.00000038743013, z: -0.0000000813143}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 0
@@ -3859,6 +3961,7 @@ GameObject:
   - component: {fileID: 5163448266068540766}
   - component: {fileID: 5163448266068540765}
   - component: {fileID: 5163448266068540763}
+  - component: {fileID: 1172788471065208519}
   m_Layer: 9
   m_Name: Bip001 R Hand
   m_TagString: Untagged
@@ -3874,7 +3977,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6626460149470279002}
   m_LocalRotation: {x: 0.94238615, y: 0.14815862, z: -0.040778473, w: 0.29714382}
-  m_LocalPosition: {x: -1.2861477, y: -0.00000059604645, z: -0.000000090372154}
+  m_LocalPosition: {x: -1.2861482, y: 0.00000071525574, z: 0.00000091964307}
   m_LocalScale: {x: 1, y: 1.0000002, z: 1}
   m_Children: []
   m_Father: {fileID: 6923101912108637523}
@@ -3921,7 +4024,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -1.2861477, y: -0.0000009536743, z: 0.00000062488203}
+  m_ConnectedAnchor: {x: -1.2861478, y: -0.000000834465, z: 0.00000062488203}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: -1, z: 0}
   m_XMotion: 0
@@ -4005,6 +4108,30 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &1172788471065208519
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6626460149470279002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ee2fd5be091f024ba259f77820156e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyPart: 
+  hurtOnly: 1
+  gotHit: 0
+  gotPushed: 0
+  canPush: 0
+  canHurt: 0
+  selfController: {fileID: 5163448266319291446}
+  baseDamage: 0
+  magnitude: 0
+  magnitudeThreshold: 1
+  totalDamage: 0
+  totalNormalizedDamage: 0
 --- !u!1 &7562763182181609144
 GameObject:
   m_ObjectHideFlags: 0
@@ -4017,6 +4144,7 @@ GameObject:
   - component: {fileID: 5163448266068540709}
   - component: {fileID: 5163448266068540714}
   - component: {fileID: 5163448266068540712}
+  - component: {fileID: 6455686969145159144}
   m_Layer: 9
   m_Name: Bip001 L Forearm
   m_TagString: Untagged
@@ -4031,8 +4159,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7562763182181609144}
-  m_LocalRotation: {x: -0.00000008754432, y: 0.00000010803342, z: 0.6557393, w: 0.7549875}
-  m_LocalPosition: {x: -1.1741154, y: 0.000000044703413, z: -0.00000095367335}
+  m_LocalRotation: {x: -0.0000000912696, y: 0.000000054016702, z: 0.65573937, w: 0.75498736}
+  m_LocalPosition: {x: -1.1741147, y: -0.00000020861592, z: -0.0000013113008}
   m_LocalScale: {x: 0.9999999, y: 0.99999994, z: 1}
   m_Children:
   - {fileID: 399258443217952180}
@@ -4080,7 +4208,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -0, y: -0, z: -1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -1.1741148, y: 0.00000014901136, z: -0.0000011920916}
+  m_ConnectedAnchor: {x: -1.174115, y: 0.00000014901137, z: -0.0000011920916}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 0
@@ -4164,6 +4292,30 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &6455686969145159144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7562763182181609144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ee2fd5be091f024ba259f77820156e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyPart: 
+  hurtOnly: 0
+  gotHit: 0
+  gotPushed: 0
+  canPush: 0
+  canHurt: 0
+  selfController: {fileID: 5163448266319291446}
+  baseDamage: 0
+  magnitude: 0
+  magnitudeThreshold: 1
+  totalDamage: 0
+  totalNormalizedDamage: 0
 --- !u!1 &8762122592449445479
 GameObject:
   m_ObjectHideFlags: 0

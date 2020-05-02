@@ -14,8 +14,8 @@ public class PlayerShaderFunctions : MonoBehaviour
     private float finalShadowSize = 1f;
     private float currentShadowSize;
     //shader references have funky names. I tried to change them but it broke a lot of stuff, so I made strings so they can be addressed more easily. -Cullen
-    private string shadowSize = "Vector1_9AB3F732";
-    private string shadowColor = "Color_C2BC5537";
+    private string shadowSize = "Rim Amount";
+    private string shadowColor = "Color";
 
     // Start is called before the first frame update
     void Start()

@@ -3456,20 +3456,21 @@ MonoBehaviour:
   rend: {fileID: 7493598385369353008}
   radLossRate: 0.005
   radCooldownTime: 1
-  sprintKeyPressed: 0
   slapSwing: {fileID: 8300000, guid: 5a1405c2d8754ae448f7037c979766fb, type: 3}
   slap1: {fileID: 8300000, guid: e39ec4189bbf35c47982ff1330fb977c, type: 3}
   slap2: {fileID: 8300000, guid: 3c4ab27d753caea42afb54a87a0744d6, type: 3}
   slap3: {fileID: 8300000, guid: de86538ae086a2b479ddc1ab43dd5995, type: 3}
   death: {fileID: 8300000, guid: 8ac643484a1434140b1f6bd68a0e650e, type: 3}
   getUpPosition: {fileID: 7493598384116097128}
-  canJump: 0
   moveSpeed: 10
   jumpForce: 150
   health: 100
+  attackCooldownTime: 0.75
+  pushCooldownTime: 0.75
+  canUseAttack: 1
+  canUsePush: 1
   canHurt: 0
   canPush: 0
-  isPlayer2: 1
   haveControls: 1
   movement: {x: 0, y: 0, z: 0}
   groundLayer:
