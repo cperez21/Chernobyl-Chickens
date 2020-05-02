@@ -917,6 +917,7 @@ MonoBehaviour:
   currentRad: 0
   PlayerObject: {fileID: 0}
   ControllerScript: {fileID: 0}
+  BUIScript: {fileID: 0}
   Player: {fileID: 0}
   spawnPoint: {fileID: 0}
   CPUCharacter: {fileID: 7493598384313176598, guid: da81388dfb9e4bc4181957ef5cf9b5ff,
@@ -1550,11 +1551,12 @@ MonoBehaviour:
   currentRad: 0
   PlayerObject: {fileID: 0}
   ControllerScript: {fileID: 0}
+  BUIScript: {fileID: 0}
   Player: {fileID: 0}
   spawnPoint: {fileID: 0}
   CPUCharacter: {fileID: 7493598384313176598, guid: da81388dfb9e4bc4181957ef5cf9b5ff,
     type: 3}
-  allowAI: 1
+  allowAI: 0
 --- !u!1 &3183053489859504199
 GameObject:
   m_ObjectHideFlags: 0
@@ -1787,6 +1789,7 @@ MonoBehaviour:
   currentRad: 0
   PlayerObject: {fileID: 0}
   ControllerScript: {fileID: 0}
+  BUIScript: {fileID: 0}
   Player: {fileID: 0}
   spawnPoint: {fileID: 0}
   CPUCharacter: {fileID: 7493598384313176598, guid: da81388dfb9e4bc4181957ef5cf9b5ff,
@@ -3791,11 +3794,12 @@ MonoBehaviour:
   currentRad: 0
   PlayerObject: {fileID: 0}
   ControllerScript: {fileID: 0}
+  BUIScript: {fileID: 0}
   Player: {fileID: 0}
   spawnPoint: {fileID: 0}
   CPUCharacter: {fileID: 7493598384313176598, guid: da81388dfb9e4bc4181957ef5cf9b5ff,
     type: 3}
-  allowAI: 1
+  allowAI: 0
 --- !u!1 &7085261702528462760
 GameObject:
   m_ObjectHideFlags: 0
@@ -4366,22 +4370,18 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7972790521590904628}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 63a6cc3d3af6a7548948e3ef2f58d3e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  currentHealth1: 0
-  player1: {fileID: 0}
-  healthText1: {fileID: 0}
-  currentHealth2: 0
-  player2: {fileID: 0}
-  healthText2: {fileID: 0}
-  winMenu: {fileID: 3528729587892489676}
-  victory1: {fileID: 0}
-  victory2: {fileID: 0}
-  pauseMenu: {fileID: 1249552328809883179}
-  uiBoxes: {fileID: 0}
+  pauseContinue: {fileID: 4945389238123770368}
+  winButton: {fileID: 965409664969221154}
+  UI1: {fileID: 2011131119676915437}
+  UI2: {fileID: 3237254835412150829}
+  UI3: {fileID: 7069358682268369322}
+  UI4: {fileID: 3087079182700041300}
+  GameManager: {fileID: 0}
 --- !u!1 &8160363848617185071
 GameObject:
   m_ObjectHideFlags: 0

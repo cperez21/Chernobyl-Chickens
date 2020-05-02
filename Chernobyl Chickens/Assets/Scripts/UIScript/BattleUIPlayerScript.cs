@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class BattleUIPlayerScript : MonoBehaviour
 {
@@ -13,10 +14,10 @@ public class BattleUIPlayerScript : MonoBehaviour
     public GameObject BattleUIPlayerCell;
     public GameObject pauseMenu;
     public bool GamePaused;
-
-    //healthbar and radbar values
     public Image RadBar;
     public Image HpBar;
+
+    //healthbar and radbar values
     public int maxHealth;
     public float percentageHealth;
     public int currentHealth;
@@ -24,12 +25,15 @@ public class BattleUIPlayerScript : MonoBehaviour
     public float percentageRad;
     public float currentRad;
     
-    //finds the controller
+    //finds the controller and battleUIScript
+
     public GameObject PlayerObject;
-    public PlayerController ControllerScript; 
+    public PlayerController ControllerScript;
+    public BattleUI BUIScript;
 
     //Calls PlayerInput Object, which exists in PersistentScene
     public GameObject Player;
+
 
     //USED FOR AI
     public GameObject spawnPoint;
@@ -40,6 +44,7 @@ public class BattleUIPlayerScript : MonoBehaviour
     void Start()
     {
 
+        BUIScript = GameObject.Find("BattleUICanvas").GetComponent<BattleUI>();
         BattleUIPlayerCell.name = "PlayerCell" + Playernum;
         //set this to player max health in Player Controller
         maxHealth = 100;
@@ -105,6 +110,11 @@ public class BattleUIPlayerScript : MonoBehaviour
 
     }
 
+    public void SetAIMode(bool AIbool)
+    {
+        allowAI = AIbool;
+    }
+
     void SpawnAI()
     {
         Debug.Log("AIspawned");
@@ -137,6 +147,7 @@ public class BattleUIPlayerScript : MonoBehaviour
             //Pause();
             pauseMenu.SetActive(true);
             Time.timeScale = 0f;
+            BUIScript.SendMessage("TargetPauseMenu");
 
         }
         else if (GamePaused == true)

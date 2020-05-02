@@ -19,6 +19,8 @@ public class PersistentGameManagerScript : MonoBehaviour
     public bool AllPlayersReady;
     public bool PlayersJoined;
 
+    public bool AI1, AI2, AI3, AI4;
+
     private void Awake()
     {
         LoadedScene = "MenuScene";
@@ -157,6 +159,35 @@ public class PersistentGameManagerScript : MonoBehaviour
         {
             GoToMapSelect();
         }
+    }
+
+    public void toggleAI1()
+    {
+        AI1 = !AI1;
+
+        //if (AI1 == false)
+        //{ 
+
+        //    AI1 = true;
+
+        //}
+        //else if (AI1 == true)
+        //{
+
+        //    AI1 = false;
+        //}
+    }
+    public void toggleAI2()
+    {
+        AI2 = !AI2;
+    }
+    public void toggleAI3()
+    {
+        AI3 = !AI3;
+    }
+    public void toggleAI4()
+    {
+        AI4 = !AI4;
     }
 
 }

@@ -23,9 +23,21 @@ public class CharacterSelectorScript : MonoBehaviour
     public int CharacterCount;
     public int CharacterVal;
 
+    public bool AIMode;
+
+    //sets gamemanager and script
+    public GameObject GameManager;
+    public string AInum;
+    PersistentGameManagerScript GameManagerScript;
+
+
     void Start()
     {
-        foreach(Character character in characters)
+        GameManager = GameObject.FindWithTag("GameManager");
+        GameManagerScript = GameManager.GetComponent<PersistentGameManagerScript>();
+
+
+        foreach (Character character in characters)
         {
             CharacterCount += 1;
             //CharacterToggle(character);
@@ -34,13 +46,18 @@ public class CharacterSelectorScript : MonoBehaviour
         }
         CurrentCharacter = characters[0];
         CharacterVal = 0;
-        ReadyText.text = "JOIN";
+        ReadyText.text = "JOIN/Set AI";
         PlayerName.text = "Player " + CharacterSelectNum;
+        AIMode = false;
     }
 
     void Update()
     {
-        Player = GameObject.Find("Player" + CharacterSelectNum);
+        if (Player == null)
+        {
+            Player = GameObject.Find("Player" + CharacterSelectNum);
+        }
+        
         if (Player !=null && ReadyText.text != "READY!")
         {
             CharacterCell.SetActive(true);
@@ -50,6 +67,7 @@ public class CharacterSelectorScript : MonoBehaviour
         Image icon = Portrait.transform.GetComponent<Image>();
         icon.sprite = CurrentCharacter.characterSprite;
     }
+
 
     public void CharacterToggleLeft()
     {
@@ -88,7 +106,6 @@ public class CharacterSelectorScript : MonoBehaviour
         ReadyText.text = "READY!";
         ReadyBox.GetComponent<Image>().color = new Color32(255, 134, 20, 219);
     }
-
     void UnSelectChar()
     {
         ReadyText.text = "SELECT";
@@ -108,4 +125,28 @@ public class CharacterSelectorScript : MonoBehaviour
             Player.SendMessage("ReadyFalse");
         }
     }
+
+    //sets AI
+    public void SelectAI()
+    {
+
+        if (Player == null && AIMode == false)
+        {
+            
+
+
+            ReadyText.text = "AI MODE";
+            ReadyBox.GetComponent<Image>().color = new Color32(60, 215, 60, 219);
+            AIMode = true;
+            GameManagerScript.SendMessage("toggle" + AInum);
+        }
+        else if (Player == null && AIMode == true)
+        {
+            ReadyText.text = "JOIN/Set AI";
+            ReadyBox.GetComponent<Image>().color = new Color32(60, 60, 60, 219);
+            GameManagerScript.SendMessage("toggle" + AInum);
+        }
+
+    }
+
 }
