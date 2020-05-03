@@ -76,7 +76,7 @@ public class CPUScript : MonoBehaviour //This Script accessess the PlayerControl
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(this.name + " Distance to target is " + proximity);
+        //Debug.Log(this.name + " Distance to target is " + proximity);
 
         if (target != null)
         targetDirection = (target.transform.position - gameObject.transform.position) * 0.75f;

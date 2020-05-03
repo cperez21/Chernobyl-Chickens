@@ -27,6 +27,10 @@ public class BattleUI : MonoBehaviour
 
     void Start()
     {
+        Time.timeScale = 1f;
+        GamePaused = false;
+        GameOver = false;
+
         GameManager = GameObject.FindWithTag("GameManager");
         GameManagerScript = GameManager.GetComponent<PersistentGameManagerScript>();
 
@@ -131,6 +135,7 @@ public class BattleUI : MonoBehaviour
                 GameOver = true;
                 Winner = UI1;
                 WinActions();
+                
             }
             else if (Alive2 == true)
             {
@@ -165,19 +170,40 @@ public class BattleUI : MonoBehaviour
         winChar = WinnerScript.PlayerCharacterSerializable;
 
         Image icon = WinnerPortrait.transform.GetComponent<Image>();
-        icon.sprite = winChar.characterSprite;
+        icon.sprite = winChar.bossIcon;
 
         WinnerTag.text = winChar.vicText;
 
+
+
         winMenu.SetActive(true);
 
+        //UI1.SendMessage("DestroyAIPlayer");
+        //UI2.SendMessage("DestroyAIPlayer");
+        //UI3.SendMessage("DestroyAIPlayer");
+        //UI4.SendMessage("DestroyAIPlayer");
+
     }
+
+    //button actions maybe
+    public void PauseGoToMenu()
+    {
+        
+        GameManagerScript.SendMessage("GoToMenuScene");
+        GameManagerScript.SendMessage("ResetPlayers");
+
+    }
+    public void PauseGoToMapSel()
+    {
+        GameManagerScript.SendMessage("GoToMapSelect");
+    }
+    
 
     //void CheckForNull()
     //{
 
     //}
-    
+
 
 
 }

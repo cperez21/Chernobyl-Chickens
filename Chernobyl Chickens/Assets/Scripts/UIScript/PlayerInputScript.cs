@@ -107,11 +107,14 @@ public class PlayerInputScript : MonoBehaviour
         //{
         //    spawnPoint = GameObject.Find("SpawnPoint" + PlayerCount);
         //}
-
-        spawnPoint = GameObject.Find("SpawnPoint" + PlayerCount);
+        if (CurrentScene != "CharacterSelect" && CurrentScene != "MenuScene" && CurrentScene != "MapSelect")
+        {
+            spawnPoint = GameObject.Find("SpawnPoint" + PlayerCount);
+        }
+        
         if(spawnPoint != null && spawned == false)
         {
-            spawned = true;
+            Debug.Log("spawning");
             GameObject plyr = Instantiate(PlayerCharacter, spawnPoint.transform.position, Quaternion.identity, ThisObject.transform);
             plyr.name = ("PlayerObject" + PlayerCount);
             Player = plyr.transform.Find("Model").gameObject;
@@ -282,4 +285,29 @@ public class PlayerInputScript : MonoBehaviour
     {
         ready = false;
     }
+
+    public void ResetChar()
+    {
+        SelectedCharacter = null;
+        PlayerCharacter = null;
+        ready = false;
+        spawned = false;
+
+        //Debug.Log("RESETOOO");
+        foreach (Transform child in transform)
+        {
+
+            Destroy(child.gameObject);
+            Debug.Log("childdestroyed");
+        }
+        
+
+
+
+
+
+    }
+
+    
+
 }

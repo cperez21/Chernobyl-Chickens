@@ -334,6 +334,8 @@ MonoBehaviour:
   bodyPart: 
   hurtOnly: 1
   gotHit: 0
+  gotPushed: 0
+  canPush: 0
   canHurt: 0
   selfController: {fileID: 7493598384983564352}
   baseDamage: 0
@@ -1217,6 +1219,8 @@ MonoBehaviour:
   bodyPart: 
   hurtOnly: 0
   gotHit: 0
+  gotPushed: 0
+  canPush: 0
   canHurt: 0
   selfController: {fileID: 7493598384983564352}
   baseDamage: 0
@@ -1399,6 +1403,8 @@ MonoBehaviour:
   bodyPart: 
   hurtOnly: 0
   gotHit: 0
+  gotPushed: 0
+  canPush: 0
   canHurt: 0
   selfController: {fileID: 7493598384983564352}
   baseDamage: 0
@@ -1740,6 +1746,8 @@ MonoBehaviour:
   bodyPart: 
   hurtOnly: 0
   gotHit: 0
+  gotPushed: 0
+  canPush: 0
   canHurt: 0
   selfController: {fileID: 7493598384983564352}
   baseDamage: 0
@@ -2114,6 +2122,8 @@ MonoBehaviour:
   bodyPart: 
   hurtOnly: 1
   gotHit: 0
+  gotPushed: 0
+  canPush: 0
   canHurt: 0
   selfController: {fileID: 7493598384983564352}
   baseDamage: 0
@@ -2198,6 +2208,8 @@ MonoBehaviour:
   bodyPart: 
   hurtOnly: 1
   gotHit: 0
+  gotPushed: 0
+  canPush: 0
   canHurt: 0
   selfController: {fileID: 7493598384983564352}
   baseDamage: 0
@@ -2499,6 +2511,8 @@ MonoBehaviour:
   bodyPart: 
   hurtOnly: 1
   gotHit: 0
+  gotPushed: 0
+  canPush: 0
   canHurt: 0
   selfController: {fileID: 7493598384983564352}
   baseDamage: 0
@@ -2735,7 +2749,7 @@ GameObject:
   - component: {fileID: 7493598384313176599}
   m_Layer: 0
   m_Name: CPU_Clunk
-  m_TagString: Untagged
+  m_TagString: PlayerContainer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3259,6 +3273,8 @@ MonoBehaviour:
   bodyPart: 
   hurtOnly: 1
   gotHit: 0
+  gotPushed: 0
+  canPush: 0
   canHurt: 0
   selfController: {fileID: 7493598384983564352}
   baseDamage: 0
@@ -3429,10 +3445,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 25d6e6ceb4fee6c41af6511f21ee8f08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  pi: {fileID: 0}
   playerNumber: 1
+  pinDistanceFalloff: 0
   feathers: {fileID: 6497170728889403077, guid: 5d015548a7a42aa4db726c08dfdd9cc7,
     type: 3}
+  sprintTrailFX: {fileID: 0}
   stunAmount: 0.8
+  maxStunAmount: 15
   rend: {fileID: 7493598385369353008}
   radLossRate: 0.005
   radCooldownTime: 1
@@ -3442,22 +3462,28 @@ MonoBehaviour:
   slap3: {fileID: 8300000, guid: de86538ae086a2b479ddc1ab43dd5995, type: 3}
   death: {fileID: 8300000, guid: 8ac643484a1434140b1f6bd68a0e650e, type: 3}
   getUpPosition: {fileID: 7493598384116097128}
-  canJump: 0
   moveSpeed: 10
   jumpForce: 150
   health: 100
+  attackCooldownTime: 0
+  pushCooldownTime: 0
+  canUseAttack: 1
+  canUsePush: 1
   canHurt: 0
-  isPlayer2: 1
+  canPush: 0
   haveControls: 1
+  movement: {x: 0, y: 0, z: 0}
   groundLayer:
     serializedVersion: 2
     m_Bits: 1
   radiationCount: 0
   supersized: 0
+  superSizeMultiplier: 0
   i_movement: {x: 0, y: 0, z: 0}
   radState: 0
   character: 0
   state: 0
+  moveState: 0
 --- !u!82 &7493598384983564364
 AudioSource:
   m_ObjectHideFlags: 0
@@ -3746,6 +3772,8 @@ MonoBehaviour:
   bodyPart: 
   hurtOnly: 1
   gotHit: 0
+  gotPushed: 0
+  canPush: 0
   canHurt: 0
   selfController: {fileID: 7493598384983564352}
   baseDamage: 0
@@ -4184,6 +4212,8 @@ MonoBehaviour:
   bodyPart: 
   hurtOnly: 0
   gotHit: 0
+  gotPushed: 0
+  canPush: 0
   canHurt: 0
   selfController: {fileID: 7493598384983564352}
   baseDamage: 0

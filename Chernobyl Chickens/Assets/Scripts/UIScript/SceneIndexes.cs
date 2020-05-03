@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum SceneIndexes
 {
-  Persistent = 0,
+  PersistentScene = 0,
   MenuScene = 1,
   //CharSelect = 2,
   MapSelect = 2,

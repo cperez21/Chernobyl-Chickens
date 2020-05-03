@@ -20,6 +20,9 @@ public class PersistentGameManagerScript : MonoBehaviour
     public bool PlayersJoined;
 
     public bool AI1, AI2, AI3, AI4;
+    public GameObject[] players;
+
+    public GameObject TGroup;
 
     private void Awake()
     {
@@ -27,11 +30,13 @@ public class PersistentGameManagerScript : MonoBehaviour
         instance = this;
         
 
-        Scene scene = SceneManager.GetActiveScene();
-        if (!scene.name.Contains("Test")) // I put this in so I can still use my testbed without complications. -Cullen 3/31
-        {
-            SceneManager.LoadSceneAsync((int)SceneIndexes.MenuScene, LoadSceneMode.Additive);
-        }
+        
+        SceneManager.LoadSceneAsync((int)SceneIndexes.MenuScene, LoadSceneMode.Additive);
+
+        //if (!scene.name.Contains("Test")) // I put this in so I can still use my testbed without complications. -Cullen 3/31
+        //{
+        //    SceneManager.LoadSceneAsync((int)SceneIndexes.MenuScene, LoadSceneMode.Additive);
+        //}
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<PersistentGameManagerScript>();
         //players = GameObject.FindObjectsOfType<PlayerController>();
         PlayersJoined = false;
@@ -45,18 +50,12 @@ public class PersistentGameManagerScript : MonoBehaviour
             MenuManager = GameObject.Find("MenuManager").GetComponent<MenuManagerScript>();
         }
 
-        //if (players.Length < MaxPlayers)
+        //if (LoadedScene == "MenuScene" || LoadedScene == "CharacterSelect")
         //{
-        //    players = GameObject.FindObjectsOfType<PlayerController>();
+            
         //}
+        players = GameObject.FindGameObjectsWithTag("PlayerContainer");
 
-        //for (int x = 0; x < players.Length; x++)
-        //{
-        //    if (players[x].state == PlayerController.PlayerState.DEAD)
-        //    {
-        //        gameManager.SendMessage("GoToMenuScene");
-        //    }
-        //}
     }
 
     //public void GoToCharSelect()
@@ -86,6 +85,7 @@ public class PersistentGameManagerScript : MonoBehaviour
 
     public void GoToMenuScene()
     {
+        Debug.Log(LoadedScene);
         SceneManager.UnloadSceneAsync(LoadedScene);
         SceneManager.LoadSceneAsync("MenuScene", LoadSceneMode.Additive);
         LoadedScene = "MenuScene";
@@ -94,15 +94,16 @@ public class PersistentGameManagerScript : MonoBehaviour
     //ONLY REFERENCE WHEN GOING TO MAPS. will spawn characters
     public void ChangeScene(string sceneName)
     {
-        Debug.Log(LoadedScene);
+        //
+        //Debug.Log(sceneName);
         SceneManager.UnloadSceneAsync(LoadedScene);
         SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
         LoadedScene = sceneName;
+        Debug.Log("Changed = " + LoadedScene);
 
 
     }
 
-    //Used by MenuManager MM switches to Main Menu, CS swithces to Character Select Canvas. Back to Menu Scene is used to return from map select
     public void SwitchMM()
     {
         
@@ -114,44 +115,15 @@ public class PersistentGameManagerScript : MonoBehaviour
         }
         
     }
-    //public void BackToMenuScene()
-    //{
-    //    SceneManager.UnloadSceneAsync(LoadedScene);
-    //    SceneManager.LoadSceneAsync("MenuScene", LoadSceneMode.Additive);
-    //    LoadedScene = "MenuScene";
-    //    if (LoadedScene == "MenuScene" && MenuManager == null)
-    //    {
-    //        Debug.Log("FindingMenuManager");
-    //        MenuManager = GameObject.Find("MenuManager").GetComponent<MenuManagerScript>();
-    //        Debug.Log("FoundMenuManager");
-    //        SwitchCS();
-    //    }
-    //    else
-    //    {
-    //        SwitchCS();
-    //    }
-        
-    //}
-    //public void SwitchCS()
-    //{
-    //    MenuManager.SendMessage("SwitchToCharSel");
-    //    LoadedScene = "CharacterSelect";
-    //}
-
-
-
-
-
-
+  
 
     //USED FOR TESTINGONLY
     public void GoToChernobyl()
     {
-        SceneManager.UnloadSceneAsync("MenuScene");
+        SceneManager.UnloadSceneAsync(LoadedScene);
         SceneManager.LoadSceneAsync((int)SceneIndexes.ChernobylWhiteBox, LoadSceneMode.Additive);
         LoadedScene = "ChernobylWhiteBox";
     }
-
     public void QuitGame()
     {
         Application.Quit();
@@ -198,5 +170,49 @@ public class PersistentGameManagerScript : MonoBehaviour
         AI4 = !AI4;
     }
 
+    public void ResetPlayers()
+    {
+        TGroup = GameObject.Find("TargetGroup1");
+        Destroy(TGroup);
+        foreach (GameObject player in players)
+        {
+            
+            
+            if (player.name == "AIPlayer")
+            {
+                Destroy(player);
+            }
+            else
+            {
+                player.SendMessage("ResetChar");
+            }
+            
+        }
+
+
+        GameObject[] Feathers;
+        Feathers = GameObject.FindGameObjectsWithTag("feathers");
+        foreach (GameObject feather in Feathers)
+        {
+            Destroy(feather);
+        }
+        if (AI1 == true)
+        {
+            AI1 = false;
+        }
+        if (AI2 == true)
+        {
+            AI2 = false;
+        }
+        if (AI3 == true)
+        {
+            AI3 = false;
+        }
+        if (AI4 == true)
+        {
+            AI4 = false;
+        }
+
+    }
 }
 

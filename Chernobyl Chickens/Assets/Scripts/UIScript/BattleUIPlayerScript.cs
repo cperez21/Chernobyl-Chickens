@@ -127,10 +127,14 @@ public class BattleUIPlayerScript : MonoBehaviour
 
     void SpawnAI()
     {
-        Debug.Log("AIspawned");
+        //Debug.Log("AIspawned");
         //GameObject plyr = Instantiate(CPUCharacter, spawnPoint.transform.position, Quaternion.identity, ThisObject.transform);
         GameObject plyr = Instantiate(CPUCharacter, spawnPoint.transform.position, Quaternion.identity);
-        plyr.name = ("Player" + Playernum);
+        //plyr.name = ("Player" + Playernum);
+
+        plyr.name = ("AIPlayer");
+        Player = plyr;
+
         PlayerObject = plyr.transform.Find("PlayerObject").gameObject;
         PlayerObject.name = ("PlayerObject" + Playernum);
         ControllerScript = PlayerObject.transform.Find("Model").gameObject.GetComponent<PlayerController>();
@@ -148,11 +152,26 @@ public class BattleUIPlayerScript : MonoBehaviour
 
     }
 
+
+    //public void DestroyAIPlayer()
+    //{
+    //    if(allowAI == true)
+    //    {
+    //        Destroy(Player);
+
+    //        //GameObject PlayerToDestroy = GameObject.Find("Player" + Playernum);
+    //        //Destroy(PlayerToDestroy);
+    //    }
+
+        
+        
+    //}
+
     //public void PauseToggle()
     //{
     //    if (GamePaused == false)
     //    {
-            
+
     //        GamePaused = true;
     //        //Pause();
     //        pauseMenu.SetActive(true);

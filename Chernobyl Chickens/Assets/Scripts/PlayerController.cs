@@ -708,7 +708,7 @@ public class PlayerController : MonoBehaviour
         }
         else //x == 0, end of attack animation
         {
-            Debug.Log("attack to default");
+            //Debug.Log("attack to default");
             state = PlayerState.DEFAULT;
             canHurt = false;
             //return false;
@@ -789,7 +789,7 @@ public class PlayerController : MonoBehaviour
 
                     if (limbs[x].magnitude > 8.0f)
                     {
-                        Debug.Log(limbs[x].name + " sent my flying with a magnitude of " + limbs[x].magnitude);
+                        //Debug.Log(limbs[x].name + " sent my flying with a magnitude of " + limbs[x].magnitude);
                         stunAmount += 1.0f;
                         Vector3 featherSpawn = limbs[x].transform.position;
                         featherSpawn.y = limbs[x].transform.position.y + 2f;
