@@ -228,15 +228,15 @@ public class PlayerInputScript : MonoBehaviour
 
     void OnPause()
     {
-        Debug.Log("buttonpressed");
-        if (CurrentScene == "CharacterSelect" || CurrentScene == "MenuScene")
+        //Debug.Log("buttonpressed");
+        if (CurrentScene == "CharacterSelect" || CurrentScene == "MenuScene" || CurrentScene == "MapSelect" || CurrentScene == null)
         {
             //Debug.Log("badscene");
         }
         else
         {
-            //Debug.Log("sending");
-            GameObject.Find("PlayerCell" + PlayerCount).SendMessage("PauseToggle");
+            Debug.Log("sending");
+            GameObject.Find("BattleUICanvas").SendMessage("PauseToggle");
             //Debug.Log("sent");
         }
 

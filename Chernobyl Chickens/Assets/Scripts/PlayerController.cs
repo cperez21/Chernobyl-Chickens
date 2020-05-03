@@ -269,11 +269,11 @@ public class PlayerController : MonoBehaviour
             {
                 var user = pi.user;
                 
-                Debug.Log("I am keyboard");
+                //Debug.Log("I am keyboard");
                 //Mouse controls for attack/push
                 if (Input.GetKeyDown(KeyCode.B)) //0 is left click
                 {
-                    Debug.Log("I pressed B to attack");
+                    //Debug.Log("I pressed B to attack");
                     Attack();
                 }
                 if(Input.GetMouseButtonDown(1)) //1 is right click
@@ -285,7 +285,7 @@ public class PlayerController : MonoBehaviour
 
 
 
-            Debug.Log("devices are "+ pi.devices[0]);
+            //Debug.Log("devices are "+ pi.devices[0]);
             sprintAction.started += whatever =>
             {
                 if(!hasTrail)
@@ -325,7 +325,7 @@ public class PlayerController : MonoBehaviour
 
 
 
-        Debug.Log(gameObject.transform.parent.name + "velocity is " + rb.velocity);
+        //Debug.Log(gameObject.transform.parent.name + "velocity is " + rb.velocity);
 
         Move();
 

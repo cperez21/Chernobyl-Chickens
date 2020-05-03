@@ -94,7 +94,7 @@ public class PersistentGameManagerScript : MonoBehaviour
     //ONLY REFERENCE WHEN GOING TO MAPS. will spawn characters
     public void ChangeScene(string sceneName)
     {
-
+        Debug.Log(LoadedScene);
         SceneManager.UnloadSceneAsync(LoadedScene);
         SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
         LoadedScene = sceneName;

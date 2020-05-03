@@ -593,7 +593,7 @@ RectTransform:
   m_Children:
   - {fileID: 770748923144084358}
   m_Father: {fileID: 189200042521959453}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -917,8 +917,6 @@ MonoBehaviour:
   PlayerCharacterSerializable: {fileID: 0}
   Portrait: {fileID: 4739556874396672037}
   BattleUIPlayerCell: {fileID: 1740552377396792782}
-  pauseMenu: {fileID: 1249552328809883179}
-  GamePaused: 0
   RadBar: {fileID: 811262039485895818}
   HpBar: {fileID: 2064973898855190198}
   maxHealth: 0
@@ -1552,8 +1550,6 @@ MonoBehaviour:
     type: 2}
   Portrait: {fileID: 5095075333485154932}
   BattleUIPlayerCell: {fileID: 8515096009698427377}
-  pauseMenu: {fileID: 1249552328809883179}
-  GamePaused: 0
   RadBar: {fileID: 1077525582833013411}
   HpBar: {fileID: 1244612756836279580}
   maxHealth: 0
@@ -1791,8 +1787,6 @@ MonoBehaviour:
     type: 2}
   Portrait: {fileID: 4969127184381575409}
   BattleUIPlayerCell: {fileID: 509613068219634982}
-  pauseMenu: {fileID: 1249552328809883179}
-  GamePaused: 0
   RadBar: {fileID: 2816320248976306657}
   HpBar: {fileID: 8174382181468106384}
   maxHealth: 0
@@ -2036,7 +2030,7 @@ RectTransform:
   - {fileID: 7149926830810959274}
   - {fileID: 3610980012260122796}
   m_Father: {fileID: 189200042521959453}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -2149,7 +2143,7 @@ Transform:
   - {fileID: 5486800717340191081}
   - {fileID: 3986265632549344913}
   m_Father: {fileID: 189200042521959453}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4093829248003738798
 GameObject:
@@ -2634,7 +2628,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 6462244014455847604}
+      - m_Target: {fileID: 8305517908025928362}
         m_MethodName: PauseToggle
         m_Mode: 1
         m_Arguments:
@@ -3809,8 +3803,6 @@ MonoBehaviour:
     type: 2}
   Portrait: {fileID: 5694666450734347177}
   BattleUIPlayerCell: {fileID: 3493725879331559493}
-  pauseMenu: {fileID: 1249552328809883179}
-  GamePaused: 0
   RadBar: {fileID: 8347767733430955599}
   HpBar: {fileID: 3969309136707801761}
   maxHealth: 0
@@ -4293,7 +4285,7 @@ RectTransform:
   - {fileID: 5919720239647761929}
   - {fileID: 7436280010432775661}
   m_Father: {fileID: 189200042521959453}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -4331,10 +4323,10 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
+  - {fileID: 6687171366409686009}
   - {fileID: 7503722409591675853}
   - {fileID: 8768938677962960444}
   - {fileID: 8345263411968195613}
-  - {fileID: 6687171366409686009}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -4418,6 +4410,7 @@ MonoBehaviour:
   pauseContinue: {fileID: 4945389238123770368}
   winButton: {fileID: 965409664969221154}
   winMenu: {fileID: 3528729587892489676}
+  pauseMenu: {fileID: 1249552328809883179}
   UI1: {fileID: 2011131119676915437}
   UI2: {fileID: 3237254835412150829}
   UI3: {fileID: 7069358682268369322}
@@ -4427,6 +4420,7 @@ MonoBehaviour:
   Alive3: 0
   Alive4: 0
   GameOver: 0
+  GamePaused: 0
   Winner: {fileID: 0}
   WinnerScript: {fileID: 0}
   winChar: {fileID: 0}

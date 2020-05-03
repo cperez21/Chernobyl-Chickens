@@ -12,8 +12,8 @@ public class BattleUIPlayerScript : MonoBehaviour
     public Character PlayerCharacterSerializable;
     public GameObject Portrait;
     public GameObject BattleUIPlayerCell;
-    public GameObject pauseMenu;
-    public bool GamePaused;
+    //public GameObject pauseMenu;
+    //public bool GamePaused;
     public Image RadBar;
     public Image HpBar;
 
@@ -148,28 +148,28 @@ public class BattleUIPlayerScript : MonoBehaviour
 
     }
 
-    public void PauseToggle()
-    {
-        if (GamePaused == false)
-        {
+    //public void PauseToggle()
+    //{
+    //    if (GamePaused == false)
+    //    {
             
-            GamePaused = true;
-            //Pause();
-            pauseMenu.SetActive(true);
-            Time.timeScale = 0f;
-            BUIScript.SendMessage("TargetPauseMenu");
+    //        GamePaused = true;
+    //        //Pause();
+    //        pauseMenu.SetActive(true);
+    //        Time.timeScale = 0f;
+    //        BUIScript.SendMessage("TargetPauseMenu");
 
-        }
-        else if (GamePaused == true)
-        {
-            Debug.Log("resumed");
-            GamePaused = false;
-            // Resume();
-            pauseMenu.SetActive(false);
-            Time.timeScale = 1f;
+    //    }
+    //    else if (GamePaused == true)
+    //    {
+    //        Debug.Log("resumed");
+    //        GamePaused = false;
+    //        // Resume();
+    //        pauseMenu.SetActive(false);
+    //        Time.timeScale = 1f;
 
-        }
-    }
+    //    }
+    //}
 
     public void CheckForDeath()
     {

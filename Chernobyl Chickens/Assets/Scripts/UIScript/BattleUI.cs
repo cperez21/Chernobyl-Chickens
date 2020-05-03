@@ -6,10 +6,11 @@ using UnityEngine.EventSystems;
 
 public class BattleUI : MonoBehaviour
 {
-    public GameObject pauseContinue, winButton, winMenu;
+    public GameObject pauseContinue, winButton, winMenu, pauseMenu;
     public GameObject UI1, UI2, UI3, UI4;
     public bool Alive1, Alive2, Alive3, Alive4;
     public bool GameOver;
+    public bool GamePaused;
 
 
     //winner data
@@ -64,6 +65,28 @@ public class BattleUI : MonoBehaviour
 
     }
 
+    public void PauseToggle()
+    {
+        if (GamePaused == false)
+        {
+
+            GamePaused = true;
+            //Pause();
+            pauseMenu.SetActive(true);
+            Time.timeScale = 0f;
+            TargetPauseMenu();
+
+        }
+        else if (GamePaused == true)
+        {
+            Debug.Log("resumed");
+            GamePaused = false;
+            // Resume();
+            pauseMenu.SetActive(false);
+            Time.timeScale = 1f;
+
+        }
+    }
 
     public void TargetPauseMenu()
     {
@@ -98,7 +121,7 @@ public class BattleUI : MonoBehaviour
 
     void CheckForWin() 
     {
-        Debug.Log("Win" + ((Alive1 ? 1 : 0) + (Alive2 ? 1 : 0) + (Alive3 ? 1 : 0) + (Alive4 ? 1 : 0)));
+        //Debug.Log("Win" + ((Alive1 ? 1 : 0) + (Alive2 ? 1 : 0) + (Alive3 ? 1 : 0) + (Alive4 ? 1 : 0)));
         if (((Alive1 ? 1 : 0) + (Alive2 ? 1 : 0) + (Alive3 ? 1 : 0) + (Alive4 ? 1 : 0)) == 1)
         {
             Debug.Log("Winning");
