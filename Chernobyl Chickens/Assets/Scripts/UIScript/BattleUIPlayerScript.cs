@@ -108,10 +108,9 @@ public class BattleUIPlayerScript : MonoBehaviour
             RadBar.fillAmount = percentageRad;
 
             CheckForDeath();
+            CheckForBoss();
         }
 
-        
-        
     }
 
     void SetCharacterUI(Character character)
@@ -152,44 +151,6 @@ public class BattleUIPlayerScript : MonoBehaviour
 
     }
 
-
-    //public void DestroyAIPlayer()
-    //{
-    //    if(allowAI == true)
-    //    {
-    //        Destroy(Player);
-
-    //        //GameObject PlayerToDestroy = GameObject.Find("Player" + Playernum);
-    //        //Destroy(PlayerToDestroy);
-    //    }
-
-        
-        
-    //}
-
-    //public void PauseToggle()
-    //{
-    //    if (GamePaused == false)
-    //    {
-
-    //        GamePaused = true;
-    //        //Pause();
-    //        pauseMenu.SetActive(true);
-    //        Time.timeScale = 0f;
-    //        BUIScript.SendMessage("TargetPauseMenu");
-
-    //    }
-    //    else if (GamePaused == true)
-    //    {
-    //        Debug.Log("resumed");
-    //        GamePaused = false;
-    //        // Resume();
-    //        pauseMenu.SetActive(false);
-    //        Time.timeScale = 1f;
-
-    //    }
-    //}
-
     public void CheckForDeath()
     {
         //if (PlayerObject != null && currentHealth <= 0 && death == false)
@@ -200,8 +161,5 @@ public class BattleUIPlayerScript : MonoBehaviour
         }
     }
 
-    //public void Pause()
-    //{
 
-    //}
 }
