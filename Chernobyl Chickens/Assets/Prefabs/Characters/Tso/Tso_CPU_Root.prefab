@@ -1,5 +1,18 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!135 &2079782394
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8510874361787390676}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 1.35
+  m_Center: {x: 0, y: 1.58, z: 0}
 --- !u!114 &2079782395
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -18,19 +31,6 @@ MonoBehaviour:
   radAttempts: 0
   players: []
   state: 0
---- !u!135 &2079782394
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8510874361787390676}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 1
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 1.35
-  m_Center: {x: 0, y: 1.58, z: 0}
 --- !u!1001 &1824093838515318210
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -42,6 +42,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Tso_CPU_Root
+      objectReference: {fileID: 0}
+    - target: {fileID: 8020005545143571551, guid: cffb412159b740c4dae16f3c8ce6df34,
+        type: 3}
+      propertyPath: m_TagString
+      value: PlayerContainer
       objectReference: {fileID: 0}
     - target: {fileID: 8020005545143571548, guid: cffb412159b740c4dae16f3c8ce6df34,
         type: 3}
