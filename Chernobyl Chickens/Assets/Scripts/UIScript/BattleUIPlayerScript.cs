@@ -16,6 +16,7 @@ public class BattleUIPlayerScript : MonoBehaviour
     //public bool GamePaused;
     public Image RadBar;
     public Image HpBar;
+    public GameObject PlayerText;
 
     //healthbar and radbar values, and death
     public int maxHealth;
@@ -82,6 +83,7 @@ public class BattleUIPlayerScript : MonoBehaviour
         if (Player != null && BattleUIPlayerCell.activeSelf == false)
         {
             BattleUIPlayerCell.SetActive(true);
+            PlayerText.SetActive(true);
             Image icon = Portrait.transform.GetComponent<Image>();
             icon.sprite = PlayerCharacterSerializable.characterSprite;
             death = false;
@@ -161,5 +163,13 @@ public class BattleUIPlayerScript : MonoBehaviour
         }
     }
 
+    public void CheckForBoss()
+    {
+        //Debug.Log(ControllerScript.radiationCount);
+        if (ControllerScript.radiationCount >= maxRad)
+        {
+            Debug.Log("BOSSMOOOOOODDEEE");
+        }
+    }
 
 }
