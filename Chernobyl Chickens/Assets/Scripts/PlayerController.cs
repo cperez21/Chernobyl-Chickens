@@ -485,7 +485,7 @@ public class PlayerController : MonoBehaviour
             case PlayerState.DEAD:
                 haveControls = false;
                 puppet.state = RootMotion.Dynamics.PuppetMaster.State.Dead;
-                haveControls = false;
+                //haveControls = false;
 
                 DamageCheck(false);
                 
