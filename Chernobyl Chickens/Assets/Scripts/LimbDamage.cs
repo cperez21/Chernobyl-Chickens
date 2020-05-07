@@ -24,7 +24,7 @@ public class LimbDamage : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        selfController = gameObject.transform.root.GetComponentInChildren<PlayerController>();
         
         bodyPart = gameObject.name;
 
@@ -85,7 +85,7 @@ public class LimbDamage : MonoBehaviour
                 Vector3 dir = collision.transform.position - selfController.transform.position;
                 dir.Set(dir.x, 0f, dir.z);
                 dir = -dir.normalized;
-                selfController.gameObject.GetComponent<Rigidbody>().AddForce(dir * 600f);
+                selfController.gameObject.GetComponent<Rigidbody>().AddForce(dir * 250f);
             }
 
 
@@ -110,7 +110,7 @@ public class LimbDamage : MonoBehaviour
                     Vector3 dir = collision.transform.position - selfController.transform.position;
                     dir.Set(dir.x, 0f, dir.z);
                     dir = -dir.normalized;
-                    selfController.gameObject.GetComponent<Rigidbody>().AddForce(dir * 200f);
+                    selfController.gameObject.GetComponent<Rigidbody>().AddForce(dir * 100f);
 
                 }
             }

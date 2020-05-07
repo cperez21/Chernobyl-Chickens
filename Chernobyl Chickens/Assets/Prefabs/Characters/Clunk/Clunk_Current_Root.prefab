@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5163448266068540713}
   - component: {fileID: 5163448266068540716}
   - component: {fileID: 5163448266068540715}
+  - component: {fileID: 2928132678699723689}
   m_Layer: 9
   m_Name: Bip001 L UpperArm
   m_TagString: Untagged
@@ -159,6 +160,30 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &2928132678699723689
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 50412043792237905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ee2fd5be091f024ba259f77820156e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyPart: 
+  hurtOnly: 0
+  gotHit: 0
+  gotPushed: 0
+  canPush: 0
+  canHurt: 0
+  selfController: {fileID: 0}
+  baseDamage: 0
+  magnitude: 0
+  magnitudeThreshold: 1
+  totalDamage: 0
+  totalNormalizedDamage: 0
 --- !u!1 &554362278320971859
 GameObject:
   m_ObjectHideFlags: 0
@@ -330,6 +355,7 @@ GameObject:
   - component: {fileID: 5163448266068540719}
   - component: {fileID: 5163448266068540718}
   - component: {fileID: 5163448266068540717}
+  - component: {fileID: 8978298751710187710}
   m_Layer: 9
   m_Name: Bip001 Head
   m_TagString: Untagged
@@ -477,6 +503,30 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &8978298751710187710
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1356663468348907582}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ee2fd5be091f024ba259f77820156e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyPart: 
+  hurtOnly: 0
+  gotHit: 0
+  gotPushed: 0
+  canPush: 0
+  canHurt: 0
+  selfController: {fileID: 0}
+  baseDamage: 0
+  magnitude: 0
+  magnitudeThreshold: 1
+  totalDamage: 0
+  totalNormalizedDamage: 0
 --- !u!1 &2219188849454686833
 GameObject:
   m_ObjectHideFlags: 0
@@ -807,6 +857,7 @@ GameObject:
   - component: {fileID: 5163448266068540764}
   - component: {fileID: 5163448266068540705}
   - component: {fileID: 5163448266068540767}
+  - component: {fileID: 7456962008506717574}
   m_Layer: 9
   m_Name: Bip001 R Forearm
   m_TagString: Untagged
@@ -870,7 +921,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -0, y: -0, z: -1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -1.174114, y: 0.000000059604545, z: 0.00000023841807}
+  m_ConnectedAnchor: {x: -1.1741141, y: 0.00000005960455, z: 0.00000023841808}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 0
@@ -954,6 +1005,30 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &7456962008506717574
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3339844801966034885}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ee2fd5be091f024ba259f77820156e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyPart: 
+  hurtOnly: 0
+  gotHit: 0
+  gotPushed: 0
+  canPush: 0
+  canHurt: 0
+  selfController: {fileID: 0}
+  baseDamage: 0
+  magnitude: 0
+  magnitudeThreshold: 1
+  totalDamage: 0
+  totalNormalizedDamage: 0
 --- !u!1 &3785748006977954934
 GameObject:
   m_ObjectHideFlags: 0
@@ -2050,7 +2125,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -0, y: -0, z: -1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.5061683, y: 0.00000020372677, z: 0.0000000149011505}
+  m_ConnectedAnchor: {x: -0.5061683, y: 0.00000020372677, z: 0.000000014901151}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 0
@@ -2146,6 +2221,7 @@ GameObject:
   - component: {fileID: 5163448266068540729}
   - component: {fileID: 1163566394781623443}
   - component: {fileID: 5163448266068540753}
+  - component: {fileID: 3415289209319147559}
   m_Layer: 9
   m_Name: Bip001 Pelvis
   m_TagString: Untagged
@@ -2296,6 +2372,30 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &3415289209319147559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4452547819091482939}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ee2fd5be091f024ba259f77820156e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyPart: 
+  hurtOnly: 0
+  gotHit: 0
+  gotPushed: 0
+  canPush: 0
+  canHurt: 0
+  selfController: {fileID: 5163448266319291446}
+  baseDamage: 0
+  magnitude: 0
+  magnitudeThreshold: 1
+  totalDamage: 0
+  totalNormalizedDamage: 0
 --- !u!1 &5163448265083606452
 GameObject:
   m_ObjectHideFlags: 0
@@ -2548,7 +2648,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -0, y: -0, z: -1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.44458607, y: 0.0000006705522, z: -0.00000020782385}
+  m_ConnectedAnchor: {x: -0.4445861, y: 0.0000007152556, z: -0.00000020782386}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 0
@@ -2688,6 +2788,7 @@ GameObject:
   - component: {fileID: 6625076785014786624}
   - component: {fileID: 6625076785014786631}
   - component: {fileID: 6625076785014786630}
+  - component: {fileID: 5263905515052357009}
   m_Layer: 9
   m_Name: Bip001 R Hand
   m_TagString: Untagged
@@ -2750,7 +2851,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -1.2861491, y: 0.0000009536743, z: -0.0000008684924}
+  m_ConnectedAnchor: {x: -1.2861493, y: 0.0000009536743, z: -0.00000086849235}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: -1, z: 0}
   m_XMotion: 0
@@ -2834,6 +2935,30 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &5263905515052357009
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5163448265707885230}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ee2fd5be091f024ba259f77820156e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyPart: 
+  hurtOnly: 1
+  gotHit: 0
+  gotPushed: 0
+  canPush: 0
+  canHurt: 0
+  selfController: {fileID: 0}
+  baseDamage: 0
+  magnitude: 0
+  magnitudeThreshold: 1
+  totalDamage: 0
+  totalNormalizedDamage: 0
 --- !u!1 &5163448265712561061
 GameObject:
   m_ObjectHideFlags: 0
@@ -3497,6 +3622,7 @@ GameObject:
   - component: {fileID: 5163448266068540711}
   - component: {fileID: 5163448266068540710}
   - component: {fileID: 5163448266068540708}
+  - component: {fileID: 2760701642608465580}
   m_Layer: 9
   m_Name: Bip001 L Hand
   m_TagString: Untagged
@@ -3559,7 +3685,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: 0, y: 0, z: 1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -1.2861489, y: 0.0000009536744, z: -0.0000012125261}
+  m_ConnectedAnchor: {x: -1.286149, y: 0.0000010728837, z: -0.0000012125262}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: -1, z: 0}
   m_XMotion: 0
@@ -3643,6 +3769,30 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &2760701642608465580
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5808600839682616914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ee2fd5be091f024ba259f77820156e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyPart: 
+  hurtOnly: 1
+  gotHit: 0
+  gotPushed: 0
+  canPush: 0
+  canHurt: 0
+  selfController: {fileID: 0}
+  baseDamage: 0
+  magnitude: 0
+  magnitudeThreshold: 1
+  totalDamage: 0
+  totalNormalizedDamage: 0
 --- !u!1 &5838010722476021301
 GameObject:
   m_ObjectHideFlags: 0
@@ -3655,6 +3805,7 @@ GameObject:
   - component: {fileID: 5163448266068540704}
   - component: {fileID: 5163448266068540707}
   - component: {fileID: 5163448266068540706}
+  - component: {fileID: 2915928265793583252}
   m_Layer: 9
   m_Name: Bip001 R UpperArm
   m_TagString: Untagged
@@ -3802,6 +3953,30 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &2915928265793583252
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5838010722476021301}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ee2fd5be091f024ba259f77820156e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyPart: 
+  hurtOnly: 0
+  gotHit: 0
+  gotPushed: 0
+  canPush: 0
+  canHurt: 0
+  selfController: {fileID: 0}
+  baseDamage: 0
+  magnitude: 0
+  magnitudeThreshold: 1
+  totalDamage: 0
+  totalNormalizedDamage: 0
 --- !u!1 &6128005118944649099
 GameObject:
   m_ObjectHideFlags: 0
@@ -3862,7 +4037,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -0, y: -0, z: -1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -0.44458532, y: -0.00000041723246, z: -0.000000046650264}
+  m_ConnectedAnchor: {x: -0.44458535, y: -0.0000003576278, z: -0.000000046650257}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 0
@@ -3972,6 +4147,7 @@ GameObject:
   - component: {fileID: 5163448266068540709}
   - component: {fileID: 5163448266068540714}
   - component: {fileID: 5163448266068540712}
+  - component: {fileID: 8003612077142927187}
   m_Layer: 9
   m_Name: Bip001 L Forearm
   m_TagString: Untagged
@@ -4035,7 +4211,7 @@ ConfigurableJoint:
   m_Anchor: {x: 0, y: 0, z: 0}
   m_Axis: {x: -0, y: -0, z: -1}
   m_AutoConfigureConnectedAnchor: 1
-  m_ConnectedAnchor: {x: -1.1741148, y: -0.0000005364409, z: 0.00000047683665}
+  m_ConnectedAnchor: {x: -1.174115, y: -0.00000053644095, z: 0.00000047683668}
   serializedVersion: 2
   m_SecondaryAxis: {x: 0, y: 1, z: 0}
   m_XMotion: 0
@@ -4119,6 +4295,30 @@ ConfigurableJoint:
   m_EnablePreprocessing: 1
   m_MassScale: 1
   m_ConnectedMassScale: 1
+--- !u!114 &8003612077142927187
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7562763182181609144}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2ee2fd5be091f024ba259f77820156e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  bodyPart: 
+  hurtOnly: 1
+  gotHit: 0
+  gotPushed: 0
+  canPush: 0
+  canHurt: 0
+  selfController: {fileID: 0}
+  baseDamage: 0
+  magnitude: 0
+  magnitudeThreshold: 1
+  totalDamage: 0
+  totalNormalizedDamage: 0
 --- !u!1 &8762122592449445479
 GameObject:
   m_ObjectHideFlags: 0
@@ -4156,11 +4356,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5163448266319291445}
     m_Modifications:
-    - target: {fileID: 1354994477608929491, guid: 73f6131e945587d4e95919b22591f148,
-        type: 3}
-      propertyPath: m_Name
-      value: TextTarget
-      objectReference: {fileID: 0}
     - target: {fileID: 1211574282016161975, guid: 73f6131e945587d4e95919b22591f148,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4215,6 +4410,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1354994477608929491, guid: 73f6131e945587d4e95919b22591f148,
+        type: 3}
+      propertyPath: m_Name
+      value: TextTarget
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 73f6131e945587d4e95919b22591f148, type: 3}
