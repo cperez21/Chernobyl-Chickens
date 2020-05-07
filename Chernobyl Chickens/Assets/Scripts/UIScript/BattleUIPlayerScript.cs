@@ -83,10 +83,15 @@ public class BattleUIPlayerScript : MonoBehaviour
         if (Player != null && BattleUIPlayerCell.activeSelf == false)
         {
             BattleUIPlayerCell.SetActive(true);
-            PlayerText.SetActive(true);
+            
             Image icon = Portrait.transform.GetComponent<Image>();
             icon.sprite = PlayerCharacterSerializable.characterSprite;
             death = false;
+
+            if(allowAI == false)
+            {
+                PlayerText.SetActive(true);
+            }
 
         }
         

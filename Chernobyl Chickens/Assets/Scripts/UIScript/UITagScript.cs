@@ -30,8 +30,12 @@ public class UITagScript : MonoBehaviour
     public void SetUpText()
     {
         // = transform.root;
-        PIS = transform.root.GetComponent<PlayerInputScript>();
-        PlayerCount = PIS.PlayerCount;
+        if(PlayerCount == null || PlayerCount == 0)
+        {
+            PIS = transform.root.GetComponent<PlayerInputScript>();
+            PlayerCount = PIS.PlayerCount;
+        }
+        
 
         //BUI = GameObject.Find("BattleUICanvas");
 
