@@ -141,10 +141,10 @@ public class BattleUIPlayerScript : MonoBehaviour
         plyr.name = ("AIPlayer");
         Player = plyr;
 
-        PlayerObject = plyr.transform.Find("PlayerObject").gameObject;
+        PlayerObject = plyr.transform.Find("Model").gameObject;
         PlayerObject.name = ("PlayerObject" + Playernum);
-        ControllerScript = PlayerObject.transform.Find("Model").gameObject.GetComponent<PlayerController>();
-
+        //ControllerScript = PlayerObject.transform.Find("Model").gameObject.GetComponent<PlayerController>();
+        ControllerScript = PlayerObject.GetComponent<PlayerController>();
 
 
 
