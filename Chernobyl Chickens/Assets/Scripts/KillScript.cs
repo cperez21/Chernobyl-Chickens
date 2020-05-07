@@ -50,9 +50,10 @@ public class KillScript : MonoBehaviour
     void OnTriggerEnter(Collider other)
     {
         Debug.Log(other);
-        if (other.gameObject.tag == "Player")
+        if (other.name == "Model")
         {
             other.gameObject.GetComponent<PlayerController>().health = 0;
+            other.gameObject.GetComponent<PlayerController>().state = PlayerController.PlayerState.DEAD;
             
         }
     }

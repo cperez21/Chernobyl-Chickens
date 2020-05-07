@@ -22,7 +22,7 @@ public class WaterParticleEffectSpawn : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag == "Player")
+        if(other.name == "Model")
         {
             ParticleSystem waterSploosh = Instantiate(sploosh, other.transform.position,Quaternion.identity);
         }
