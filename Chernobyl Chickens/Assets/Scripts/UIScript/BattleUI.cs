@@ -6,11 +6,13 @@ using UnityEngine.EventSystems;
 
 public class BattleUI : MonoBehaviour
 {
-    public GameObject pauseContinue, winButton, winMenu, pauseMenu;
+    //general data
+    public GameObject pauseContinue, winButton, winMenu, pauseMenu, BossOverlay;
     public GameObject UI1, UI2, UI3, UI4;
     public bool Alive1, Alive2, Alive3, Alive4;
     public bool GameOver;
     public bool GamePaused;
+    public bool BossMode;
 
 
     //winner data
@@ -30,7 +32,7 @@ public class BattleUI : MonoBehaviour
         Time.timeScale = 1f;
         GamePaused = false;
         GameOver = false;
-
+        BossMode = false;
         GameManager = GameObject.FindWithTag("GameManager");
         GameManagerScript = GameManager.GetComponent<PersistentGameManagerScript>();
 
@@ -65,7 +67,15 @@ public class BattleUI : MonoBehaviour
         }
 
         //CheckForNullUI();
-        
+
+        if (BossOverlay.active)
+        {
+            BossMode = true;
+        }
+        else
+        {
+            BossMode = false;
+        }
 
     }
 
@@ -198,6 +208,13 @@ public class BattleUI : MonoBehaviour
         GameManagerScript.SendMessage("GoToMapSelect");
     }
     
+
+    public void BossModeActivate()
+    {
+        BossOverlay.SetActive(true);
+        BossMode = true;
+        //Time.timeScale = 0.5f;
+    }
 
     //void CheckForNull()
     //{

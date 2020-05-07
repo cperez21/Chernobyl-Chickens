@@ -166,9 +166,10 @@ public class BattleUIPlayerScript : MonoBehaviour
     public void CheckForBoss()
     {
         //Debug.Log(ControllerScript.radiationCount);
-        if (ControllerScript.radiationCount >= maxRad)
+        if (ControllerScript.radiationCount >= maxRad && BUIScript.BossMode == false)
         {
-            Debug.Log("BOSSMOOOOOODDEEE");
+            BUIScript.SendMessage("BossModeActivate");
+            //Debug.Log("BOSSMOOOOOODDEEE");
         }
     }
 

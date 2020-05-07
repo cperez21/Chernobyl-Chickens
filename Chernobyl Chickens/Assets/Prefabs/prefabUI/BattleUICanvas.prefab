@@ -2071,7 +2071,7 @@ MonoBehaviour:
   m_FontData:
     m_Font: {fileID: 12800000, guid: 5bceb29e03ad9f84bb5f5bff333b2638, type: 3}
     m_FontSize: 72
-    m_FontStyle: 0
+    m_FontStyle: 2
     m_BestFit: 0
     m_MinSize: 7
     m_MaxSize: 72
@@ -2321,6 +2321,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7503722409591675853}
+  - component: {fileID: 6891271488052206837}
   m_Layer: 0
   m_Name: BossModeOverlay
   m_TagString: Untagged
@@ -2344,6 +2345,23 @@ Transform:
   m_Father: {fileID: 189200042521959453}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6891271488052206837
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3947030384797231139}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2fc0bd74593223249af274fd5406fd7d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  RedOverlay: {fileID: 7729567393373467850}
+  BossOverlay: {fileID: 3947030384797231139}
+  duration: 0.75
+  opacity: 0.1
+  easeType: 0
 --- !u!1 &4093829248003738798
 GameObject:
   m_ObjectHideFlags: 0
@@ -4569,7 +4587,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 1980, y: 1124}
+  m_SizeDelta: {x: 1980, y: 1024}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5973798935445511433
 CanvasRenderer:
@@ -4592,14 +4610,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 0.8207547, g: 0, b: 0, a: 0.7764706}
+  m_Color: {r: 0.8207547, g: 0, b: 0, a: 0.5882353}
   m_RaycastTarget: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 2a0b7d49cd0887a4d86ae3ae9a1dc57f, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -4768,6 +4786,7 @@ MonoBehaviour:
   winButton: {fileID: 965409664969221154}
   winMenu: {fileID: 3528729587892489676}
   pauseMenu: {fileID: 1249552328809883179}
+  BossOverlay: {fileID: 3947030384797231139}
   UI1: {fileID: 2011131119676915437}
   UI2: {fileID: 3237254835412150829}
   UI3: {fileID: 7069358682268369322}
@@ -4778,6 +4797,7 @@ MonoBehaviour:
   Alive4: 0
   GameOver: 0
   GamePaused: 0
+  BossMode: 0
   Winner: {fileID: 0}
   WinnerScript: {fileID: 0}
   winChar: {fileID: 0}
