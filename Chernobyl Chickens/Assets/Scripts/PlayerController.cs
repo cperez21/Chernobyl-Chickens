@@ -549,7 +549,8 @@ public class PlayerController : MonoBehaviour
                 
                 moveState = MoveState.SPRINT;
                 anim.speed = 1.5f;
-                rb.MovePosition(rb.position + (1.5f *moveVelocity) * Time.deltaTime);
+                //rb.MovePosition(rb.position + (1.5f *moveVelocity) * Time.deltaTime);
+                rb.AddForce(moveVelocity);
                 transform.rotation = Quaternion.LookRotation(movement);
                 anim.SetTrigger("Walk");
                 anim.ResetTrigger("Idle");
@@ -560,7 +561,8 @@ public class PlayerController : MonoBehaviour
                 
                 anim.speed = 1f;
                 moveState = MoveState.WALK;
-                rb.MovePosition(rb.position + moveVelocity * Time.deltaTime);
+                // rb.MovePosition(rb.position + moveVelocity * Time.deltaTime);
+                rb.AddForce(moveVelocity);
                 transform.rotation = Quaternion.LookRotation(movement);
                 anim.SetTrigger("Walk");
                 anim.ResetTrigger("Idle");

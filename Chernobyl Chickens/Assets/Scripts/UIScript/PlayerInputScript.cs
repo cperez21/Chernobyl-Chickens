@@ -33,7 +33,9 @@ public class PlayerInputScript : MonoBehaviour
     public bool spawned;
     Vector2 movement;
     public GameObject ThisObject;
+    [Tooltip("The_Root gameobject of the player")]
     public GameObject PlayerCharacter;
+    [Tooltip("The Model gameobject of the player")]
     public GameObject Player;
     PlayerController PlayerScript;
     public GameObject spawnPoint;
@@ -102,16 +104,12 @@ public class PlayerInputScript : MonoBehaviour
 
         }
 
-        //Sets p_Joined to TRUE
-        //if (p_joined == false && CurrentScene == "CharacterSelect")
-        //{
-        //    spawnPoint = GameObject.Find("SpawnPoint" + PlayerCount);
-        //}
+       //If the current scene is NOT a menu screen
         if (CurrentScene != "CharacterSelect" && CurrentScene != "MenuScene" && CurrentScene != "MapSelect")
         {
             spawnPoint = GameObject.Find("SpawnPoint" + PlayerCount);
         }
-        
+        //Spawn logic once game has started
         if(spawnPoint != null && spawned == false)
         {
             Debug.Log("spawning");
@@ -263,6 +261,8 @@ public class PlayerInputScript : MonoBehaviour
     }
 
     //MISC FUNCTIONS -----------------------------------------------------------------------------------------------------------------------
+
+        //Used in menu selection
     void SetCharacter(Character character)
     {
         Debug.Log(character);

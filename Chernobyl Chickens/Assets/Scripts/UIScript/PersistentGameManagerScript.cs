@@ -28,15 +28,12 @@ public class PersistentGameManagerScript : MonoBehaviour
     {
         LoadedScene = "MenuScene";
         instance = this;
-        
 
-        
-        SceneManager.LoadSceneAsync((int)SceneIndexes.MenuScene, LoadSceneMode.Additive);
 
-        //if (!scene.name.Contains("Test")) // I put this in so I can still use my testbed without complications. -Cullen 3/31
-        //{
-        //    SceneManager.LoadSceneAsync((int)SceneIndexes.MenuScene, LoadSceneMode.Additive);
-        //}
+        if (!SceneManager.GetActiveScene().name.Contains("Test")) //Prevents menu from being spawned in test bed
+        {
+            SceneManager.LoadSceneAsync((int)SceneIndexes.MenuScene, LoadSceneMode.Additive);
+        }
         gameManager = GameObject.FindWithTag("GameManager").GetComponent<PersistentGameManagerScript>();
         //players = GameObject.FindObjectsOfType<PlayerController>();
         PlayersJoined = false;
@@ -107,12 +104,12 @@ public class PersistentGameManagerScript : MonoBehaviour
     public void SwitchMM()
     {
         
-        if(PlayersJoined == false)
-        {
+        //if(PlayersJoined == false)
+        //{
             MenuManager.SendMessage("SwitchToMainMenu");
             LoadedScene = "MenuScene";
             PlayersJoined = true;
-        }
+        //}
         
     }
   
